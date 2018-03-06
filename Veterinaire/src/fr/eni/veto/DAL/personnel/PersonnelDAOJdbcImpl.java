@@ -39,4 +39,26 @@ public class PersonnelDAOJdbcImpl extends DAO{
 		}
 		return listPers;
 	}
+	
+	public void modification() throws DALException{
+		Connection connec = super.getConnection();
+		Statement stmt = null;
+		
+		try {
+			stmt = connec.createStatement();
+			ResultSet rs = stmt.executeQuery("UPDATE Personnels SET Nom = ?, Role = ? WHERE CodePers = ?");
+
+		}catch (SQLException e) {
+			throw new DALException("Erreur connexion");
+		}finally {
+			try{
+				if(stmt != null) {
+					stmt.close();
+				}
+				closeConnection(connec);
+			}catch(Exception ex) {
+				throw new DALException("Erreur fermeture connexion");
+			}
+		}
+	}
 }
