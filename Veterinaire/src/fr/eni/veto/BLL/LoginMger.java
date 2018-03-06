@@ -13,6 +13,7 @@ public class LoginMger {
 		try {
 			 res = co.authentification(login, mdp);
 		} catch (DALException e) {
+
 		}
 		
 		return res;

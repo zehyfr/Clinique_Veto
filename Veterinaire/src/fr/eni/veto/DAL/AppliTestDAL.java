@@ -1,18 +1,16 @@
 package fr.eni.veto.DAL;
 
-import fr.eni.veto.DAL.jdbc.ConnexionDAOJdbcImpl;
+import fr.eni.veto.DAL.Client.ClientsDAOImpl;
 
 public class AppliTestDAL {
 	
 	public static void main(String[] args) {
 		
-		ConnexionDAOJdbcImpl coDAO = new ConnexionDAOJdbcImpl();
-		String res = "NOPE";
-		try {
-			res = coDAO.authentification(1, "22TEST22");
-		}catch(DALException d) {
-			System.out.println(d.getMessage());
+		ClientsDAOImpl cliCo = new ClientsDAOImpl();
+		try{
+			System.out.println(cliCo.selectClients(1).toString());
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		System.out.println(res);
 	}
 }

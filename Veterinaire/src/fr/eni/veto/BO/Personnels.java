@@ -71,6 +71,6 @@ public class Personnels {
 	@Override
 	public String toString() {
 		return CodePers + " - " + Nom;
-	}
 
+	}
 }

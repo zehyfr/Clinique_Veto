@@ -9,7 +9,7 @@ public class Clients {
 	private String Adresse2;
 	private String CodePostal;
 	private String Ville;
-	private int NumTel;
+	private String NumTel;
 	private String Assurance;
 	private String Email;
 	private String Remarque;
@@ -17,10 +17,19 @@ public class Clients {
 	
 	public Clients()
 	{
+		
+	}
+	
+	public Clients(String nomClient, String prenomClient, boolean archive)
+	{
+		super();
+		NomClient = nomClient;
+		PrenomClient = prenomClient;
+		Archive = archive;
 	}
 
 	public Clients(int codeClient, String nomClient, String prenomClient, String adresse1, String adresse2,
-			String codePostal, String ville, int numTel, String assurance, String email, String remarque,
+			String codePostal, String ville, String numTel, String assurance, String email, String remarque,
 			boolean archive) {
 		super();
 		CodeClient = codeClient;
@@ -93,11 +102,11 @@ public class Clients {
 		Ville = ville;
 	}
 
-	public int getNumTel() {
+	public String getNumTel() {
 		return NumTel;
 	}
 
-	public void setNumTel(int numTel) {
+	public void setNumTel(String numTel) {
 		NumTel = numTel;
 	}
 
