@@ -1,23 +1,22 @@
 package fr.eni.veto.IHM;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Paint;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -39,8 +38,10 @@ public class MainView {
 	private JTextField nomTxt;
 	private JTextField identifiantTxt;
 	private Controler ctrl;
-	
+
 	private int index;
+
+	private JFrame frmArchiver;
 
 	/**
 	 * Create the application.
@@ -162,14 +163,15 @@ public class MainView {
 		gbc_idPanel.gridy = 2;
 		panel_1.add(idPanel, gbc_idPanel);
 		GridBagLayout gbl_idPanel = new GridBagLayout();
-		gbl_idPanel.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
+		gbl_idPanel.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0 };
 		gbl_idPanel.rowHeights = new int[] { 28, 0, 16, 0, 17, 0, 25, 0, 87, 14, 0 };
-		gbl_idPanel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_idPanel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_idPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		idPanel.setLayout(gbl_idPanel);
 
 		JLabel spaceBoundlbl = new JLabel("");
 		GridBagConstraints gbc_spaceBoundlbl = new GridBagConstraints();
+		gbc_spaceBoundlbl.gridwidth = 2;
 		gbc_spaceBoundlbl.insets = new Insets(0, 0, 5, 5);
 		gbc_spaceBoundlbl.gridx = 0;
 		gbc_spaceBoundlbl.gridy = 0;
@@ -178,6 +180,7 @@ public class MainView {
 		JLabel identifiantLbl = new JLabel("Identifiant :");
 		identifiantLbl.setForeground(new Color(0, 51, 153));
 		GridBagConstraints gbc_identifiantLbl = new GridBagConstraints();
+		gbc_identifiantLbl.gridwidth = 2;
 		gbc_identifiantLbl.anchor = GridBagConstraints.EAST;
 		gbc_identifiantLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_identifiantLbl.gridx = 0;
@@ -191,7 +194,7 @@ public class MainView {
 		gbc_identifiantTxt.gridwidth = 3;
 		gbc_identifiantTxt.insets = new Insets(0, 0, 5, 5);
 		gbc_identifiantTxt.fill = GridBagConstraints.HORIZONTAL;
-		gbc_identifiantTxt.gridx = 1;
+		gbc_identifiantTxt.gridx = 2;
 		gbc_identifiantTxt.gridy = 1;
 		idPanel.add(identifiantTxt, gbc_identifiantTxt);
 		identifiantTxt.setColumns(10);
@@ -199,6 +202,7 @@ public class MainView {
 
 		JLabel label = new JLabel("");
 		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.gridwidth = 2;
 		gbc_label.insets = new Insets(0, 0, 5, 5);
 		gbc_label.gridx = 0;
 		gbc_label.gridy = 2;
@@ -207,6 +211,7 @@ public class MainView {
 		JLabel nomLbl = new JLabel("Nom :");
 		nomLbl.setForeground(new Color(0, 51, 153));
 		GridBagConstraints gbc_nomLbl = new GridBagConstraints();
+		gbc_nomLbl.gridwidth = 2;
 		gbc_nomLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_nomLbl.anchor = GridBagConstraints.EAST;
 		gbc_nomLbl.gridx = 0;
@@ -220,13 +225,14 @@ public class MainView {
 		gbc_nomTxt.gridwidth = 3;
 		gbc_nomTxt.insets = new Insets(0, 0, 5, 5);
 		gbc_nomTxt.fill = GridBagConstraints.HORIZONTAL;
-		gbc_nomTxt.gridx = 1;
+		gbc_nomTxt.gridx = 2;
 		gbc_nomTxt.gridy = 3;
 		idPanel.add(nomTxt, gbc_nomTxt);
 		nomTxt.setColumns(10);
 
 		JLabel label_1 = new JLabel("");
 		GridBagConstraints gbc_label_1 = new GridBagConstraints();
+		gbc_label_1.gridwidth = 2;
 		gbc_label_1.insets = new Insets(0, 0, 5, 5);
 		gbc_label_1.gridx = 0;
 		gbc_label_1.gridy = 4;
@@ -235,6 +241,7 @@ public class MainView {
 		JLabel roleLbl = new JLabel("R\u00F4le :");
 		roleLbl.setForeground(new Color(0, 51, 153));
 		GridBagConstraints gbc_roleLbl = new GridBagConstraints();
+		gbc_roleLbl.gridwidth = 2;
 		gbc_roleLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_roleLbl.anchor = GridBagConstraints.EAST;
 		gbc_roleLbl.gridx = 0;
@@ -246,7 +253,7 @@ public class MainView {
 		rdbtnSec.setForeground(new Color(0, 51, 153));
 		GridBagConstraints gbc_rdbtnSec = new GridBagConstraints();
 		gbc_rdbtnSec.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnSec.gridx = 1;
+		gbc_rdbtnSec.gridx = 2;
 		gbc_rdbtnSec.gridy = 5;
 		idPanel.add(rdbtnSec, gbc_rdbtnSec);
 
@@ -255,7 +262,7 @@ public class MainView {
 		rdbtnVet.setForeground(new Color(0, 51, 153));
 		GridBagConstraints gbc_rdbtnVet = new GridBagConstraints();
 		gbc_rdbtnVet.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnVet.gridx = 2;
+		gbc_rdbtnVet.gridx = 3;
 		gbc_rdbtnVet.gridy = 5;
 		idPanel.add(rdbtnVet, gbc_rdbtnVet);
 
@@ -264,36 +271,30 @@ public class MainView {
 		rdbtnAdm.setForeground(new Color(0, 51, 153));
 		GridBagConstraints gbc_rdbtnAdm = new GridBagConstraints();
 		gbc_rdbtnAdm.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnAdm.gridx = 3;
+		gbc_rdbtnAdm.gridx = 4;
 		gbc_rdbtnAdm.gridy = 5;
 		idPanel.add(rdbtnAdm, gbc_rdbtnAdm);
 
-		JButton btnArchiver = new JButton("Archiver");
-		btnArchiver.setIcon(null);
-		btnArchiver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		
 		JLabel spaceBoundlbl5 = new JLabel("");
 		GridBagConstraints gbc_spaceBoundlbl5 = new GridBagConstraints();
+		gbc_spaceBoundlbl5.gridwidth = 2;
 		gbc_spaceBoundlbl5.insets = new Insets(0, 0, 5, 5);
 		gbc_spaceBoundlbl5.gridx = 0;
 		gbc_spaceBoundlbl5.gridy = 6;
 		idPanel.add(spaceBoundlbl5, gbc_spaceBoundlbl5);
-		
+
 		JButton btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setBackground(new Color(255, 255, 255));
 		btnAnnuler.setFont(new Font("Gisha", Font.PLAIN, 12));
 		btnAnnuler.setForeground(new Color(0, 51, 153));
 		GridBagConstraints gbc_btnAnnuler = new GridBagConstraints();
-		gbc_btnAnnuler.anchor = GridBagConstraints.EAST;
+		gbc_btnAnnuler.anchor = GridBagConstraints.WEST;
 		gbc_btnAnnuler.gridwidth = 2;
 		gbc_btnAnnuler.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAnnuler.gridx = 0;
+		gbc_btnAnnuler.gridx = 1;
 		gbc_btnAnnuler.gridy = 7;
 		idPanel.add(btnAnnuler, gbc_btnAnnuler);
-		
+
 		JButton btnValider = new JButton("Valider");
 		btnValider.setBackground(new Color(255, 255, 255));
 		btnValider.setForeground(new Color(0, 51, 153));
@@ -302,25 +303,96 @@ public class MainView {
 		gbc_btnValider.anchor = GridBagConstraints.EAST;
 		gbc_btnValider.gridwidth = 2;
 		gbc_btnValider.insets = new Insets(0, 0, 5, 5);
-		gbc_btnValider.gridx = 2;
+		gbc_btnValider.gridx = 3;
 		gbc_btnValider.gridy = 7;
 		idPanel.add(btnValider, gbc_btnValider);
 
 		JLabel spaceBoundLbl4 = new JLabel("");
 		GridBagConstraints gbc_spaceBoundLbl4 = new GridBagConstraints();
+		gbc_spaceBoundLbl4.gridwidth = 2;
 		gbc_spaceBoundLbl4.insets = new Insets(0, 0, 5, 5);
 		gbc_spaceBoundLbl4.gridx = 0;
 		gbc_spaceBoundLbl4.gridy = 8;
 		idPanel.add(spaceBoundLbl4, gbc_spaceBoundLbl4);
+
+		JButton btnArchiver = new JButton("");
+		btnArchiver.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash.png")));
+		btnArchiver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+			}
+		});
 		btnArchiver.setForeground(new Color(0, 51, 153));
 		btnArchiver.setBackground(new Color(255, 255, 255));
 		GridBagConstraints gbc_btnArchiver = new GridBagConstraints();
-		gbc_btnArchiver.anchor = GridBagConstraints.EAST;
 		gbc_btnArchiver.gridwidth = 2;
+		gbc_btnArchiver.anchor = GridBagConstraints.WEST;
 		gbc_btnArchiver.insets = new Insets(0, 0, 0, 5);
-		gbc_btnArchiver.gridx = 2;
+		gbc_btnArchiver.gridx = 1;
 		gbc_btnArchiver.gridy = 9;
 		idPanel.add(btnArchiver, gbc_btnArchiver);
+
+		// BOUTON ARCHIVER
+		btnArchiver.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frmArchiver = new JFrame();
+				frmArchiver.setTitle("Archiver ?");
+				frmArchiver.setIconImage(
+						Toolkit.getDefaultToolkit().getImage(test.class.getResource("/ressources/ico_veto.png")));
+				frmArchiver.setBounds(100, 100, 350, 145);
+
+				JPanel panel = new JPanel();
+				panel.setBackground(Color.WHITE);
+				frmArchiver.getContentPane().add(panel, BorderLayout.CENTER);
+				GridBagLayout gbl_panel = new GridBagLayout();
+				gbl_panel.columnWidths = new int[] { 135, 5, 0, 0 };
+				gbl_panel.rowHeights = new int[] { 24, 0, 0, 0 };
+				gbl_panel.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+				gbl_panel.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+				panel.setLayout(gbl_panel);
+
+				JLabel label = new JLabel("");
+				GridBagConstraints gbc_label = new GridBagConstraints();
+				gbc_label.insets = new Insets(0, 0, 5, 5);
+				gbc_label.gridx = 1;
+				gbc_label.gridy = 0;
+				panel.add(label, gbc_label);
+
+				JLabel lblNewLabel = new JLabel("Etes-vous s\u00FBr de vouloir archiver cette personne ?");
+				lblNewLabel.setForeground(new Color(0, 51, 153));
+				lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+				gbc_lblNewLabel.gridwidth = 3;
+				gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+				gbc_lblNewLabel.gridx = 0;
+				gbc_lblNewLabel.gridy = 1;
+				panel.add(lblNewLabel, gbc_lblNewLabel);
+
+				JButton validerModalBtn = new JButton("Oui");
+				validerModalBtn.setForeground(new Color(0, 51, 153));
+				validerModalBtn.setFont(new Font("Gisha", Font.PLAIN, 11));
+				validerModalBtn.setBackground(new Color(255, 255, 255));
+				GridBagConstraints gbc_validerModalBtn = new GridBagConstraints();
+				gbc_validerModalBtn.insets = new Insets(0, 0, 0, 5);
+				gbc_validerModalBtn.anchor = GridBagConstraints.WEST;
+				gbc_validerModalBtn.gridx = 1;
+				gbc_validerModalBtn.gridy = 2;
+				panel.add(validerModalBtn, gbc_validerModalBtn);
+				validerModalBtn.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						
+						frmArchiver.setVisible(false);
+						ctrl.archive(listModel.get(index).getCodePers());
+
+					}
+
+				});
+
+				frmArchiver.setVisible(true);
+			}
+		});
 
 		JLabel spaceBoundLbl2 = new JLabel("");
 		GridBagConstraints gbc_spaceBoundLbl2 = new GridBagConstraints();
@@ -368,75 +440,92 @@ public class MainView {
 				}
 			}
 		});
-		
-		rdbtnAdm.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-            	if (rdbtnAdm.isSelected()) {
-            		rdbtnSec.setSelected(false);
-            		rdbtnVet.setSelected(false);
-            	}
+
+		rdbtnAdm.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (rdbtnAdm.isSelected()) {
+					rdbtnSec.setSelected(false);
+					rdbtnVet.setSelected(false);
+				}
 			}
-        });
-		
-		rdbtnSec.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-            	if (rdbtnSec.isSelected()) {
-            		rdbtnAdm.setSelected(false);
-            		rdbtnVet.setSelected(false);
-            	}
+		});
+
+		rdbtnSec.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (rdbtnSec.isSelected()) {
+					rdbtnAdm.setSelected(false);
+					rdbtnVet.setSelected(false);
+				}
 			}
-        });
-		
-		rdbtnVet.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-            	if (rdbtnVet.isSelected()) {
-            		rdbtnSec.setSelected(false);
-            		rdbtnAdm.setSelected(false);
-            	}
+		});
+
+		rdbtnVet.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (rdbtnVet.isSelected()) {
+					rdbtnSec.setSelected(false);
+					rdbtnAdm.setSelected(false);
+				}
 			}
-        });
-		
-		//BOUTON VALIDER
-		btnValider.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-            	String newCode = null;
-            	listModel.get(index).setNom(nomTxt.getText());
-            	if(rdbtnAdm.isSelected())
-            	{
-            		newCode = "ADM";
-            	}else if(rdbtnSec.isSelected())
-            	{
-            		newCode = "SEC";
-            	}else if(rdbtnVet.isSelected())
-            	{
-            		newCode = "VET";
-            	}
-            	listModel.get(index).setRole(newCode);
-            	
-            	
+		});
+
+		// BOUTON VALIDER
+		btnValider.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String newCode = null;
+				listModel.get(index).setNom(nomTxt.getText());
+				if (rdbtnAdm.isSelected()) {
+					newCode = "ADM";
+				} else if (rdbtnSec.isSelected()) {
+					newCode = "SEC";
+				} else if (rdbtnVet.isSelected()) {
+					newCode = "VET";
+				}
+				listModel.get(index).setRole(newCode);
+
+				ctrl.update(listModel.get(index).getNom(), listModel.get(index).getRole(),
+						listModel.get(index).getCodePers());
 			}
-        });
-		
-		//BOUTON ANNULER
-		btnAnnuler.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-            	
+		});
+
+		// BOUTON ANNULER
+		btnAnnuler.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				index = list.getSelectedIndex();
+				identifiantTxt.setText(Integer.toString(listModel.get(index).getCodePers()));
+				nomTxt.setText(listModel.get(index).getNom());
+				switch (listModel.get(index).getRole()) {
+				case "VET":
+					rdbtnVet.setSelected(true);
+					rdbtnSec.setSelected(false);
+					rdbtnAdm.setSelected(false);
+					break;
+
+				case "ADM":
+					rdbtnVet.setSelected(false);
+					rdbtnSec.setSelected(false);
+					rdbtnAdm.setSelected(true);
+					break;
+
+				case "SEC":
+					rdbtnVet.setSelected(false);
+					rdbtnSec.setSelected(true);
+					rdbtnAdm.setSelected(false);
+					break;
+
+				default:
+					break;
+				}
+				listModel.get(index).getRole();
+
 			}
-        });
-		
-		//BOUTON ARCHIVER
-		btnArchiver.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-            	
-			}
-        });
-		
+		});
+
 		frmGestion.setVisible(true);
 	}
 

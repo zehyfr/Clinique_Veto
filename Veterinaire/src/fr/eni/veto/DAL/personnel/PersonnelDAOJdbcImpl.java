@@ -1,6 +1,7 @@
 package fr.eni.veto.DAL.personnel;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +20,7 @@ public class PersonnelDAOJdbcImpl extends DAO{
 		
 		try {
 			stmt = connec.createStatement();
-			ResultSet rs = stmt.executeQuery("select CodePers, Nom, Role from Personnels");
+			ResultSet rs = stmt.executeQuery("select CodePers, Nom, Role from Personnels WHERE Archive = 0");
 			while(rs.next())
 			{
 				Personnels pers= new Personnels(rs.getInt("CodePers"), rs.getString("Nom"), rs.getString("Role"));
@@ -40,13 +41,39 @@ public class PersonnelDAOJdbcImpl extends DAO{
 		return listPers;
 	}
 	
-	public void modification() throws DALException{
+	public void modification(String aNom, String aRole, int aCodePers) throws DALException{
 		Connection connec = super.getConnection();
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		
 		try {
-			stmt = connec.createStatement();
-			ResultSet rs = stmt.executeQuery("UPDATE Personnels SET Nom = ?, Role = ? WHERE CodePers = ?");
+			stmt = connec.prepareStatement("UPDATE Personnels SET Nom = ?, Role = ? WHERE CodePers = ?");
+			stmt.setString(1, aNom);
+			stmt.setString(2, aRole);
+			stmt.setInt(3, aCodePers);
+			stmt.execute();
+
+		}catch (SQLException e) {
+			throw new DALException("Erreur connexion");
+		}finally {
+			try{
+				if(stmt != null) {
+					stmt.close();
+				}
+				closeConnection(connec);
+			}catch(Exception ex) {
+				throw new DALException("Erreur fermeture connexion");
+			}
+		}
+	}
+	
+	public void archivage(int aCodePers) throws DALException{
+		Connection connec = super.getConnection();
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = connec.prepareStatement("UPDATE Personnels SET Archive = 1 WHERE CodePers = ?");
+			stmt.setInt(1, aCodePers);
+			stmt.execute();
 
 		}catch (SQLException e) {
 			throw new DALException("Erreur connexion");

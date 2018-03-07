@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import fr.eni.veto.BLL.LoginMger;
 import fr.eni.veto.BLL.PersonnelsMger;
+import fr.eni.veto.BLL.PersonnelsUpdateMger;
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.IHM.Authentification;
 import fr.eni.veto.IHM.MainView;
@@ -31,6 +32,20 @@ public class Controler {
 		}
 		return res;
 	}
+	
+	public void update(String aNom, String aRole, int aCodePers){
+		PersonnelsUpdateMger PUM = new PersonnelsUpdateMger();
+		
+		PUM.update(aNom, aRole, aCodePers);
+	}
+	
+	public void archive(int aCodePers){
+		PersonnelsUpdateMger PUM = new PersonnelsUpdateMger();
+		
+		PUM.archive(aCodePers);
+	}
+	
+	
 
 	public void acces() {
 		
