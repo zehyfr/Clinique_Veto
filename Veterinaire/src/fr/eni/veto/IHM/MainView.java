@@ -24,6 +24,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -51,7 +52,7 @@ public class MainView {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialize
 	 */
 	private void initialize() {
 		frmGestion = new JFrame();
@@ -401,6 +402,12 @@ public class MainView {
 						
 						frmArchiver.setVisible(false);
 						ctrl.archive(listModel.get(index).getCodePers());
+						listModel.remove(list.getSelectedIndex());
+						int indexActual = list.getSelectedIndex();
+						list.setSelectedIndex(indexActual+1);
+						index = list.getSelectedIndex();
+						identifiantTxt.setText(Integer.toString(listModel.get(index).getCodePers()));
+						nomTxt.setText(listModel.get(index).getNom());
 					}
 				});
 				
@@ -410,7 +417,6 @@ public class MainView {
 						frmArchiver.setVisible(false);
 					}
 				});
-
 
 				frmArchiver.setVisible(true);
 			}
