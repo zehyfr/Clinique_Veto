@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.eni.veto.BO.Clients;
 import fr.eni.veto.DAL.DALException;
@@ -79,11 +78,11 @@ public class ClientsDAOImpl extends JdbcTools{
 		}
 	}
 	
-	public List<Clients> selectAllClients() throws DALException{
+	public ArrayList<Clients> selectAllClients() throws DALException{
 		Connection connec = null;
 		Statement stmt = null;
 		String requete = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients;";
-		List<Clients> all = new ArrayList<Clients>();
+		ArrayList<Clients> all = new ArrayList<Clients>();
 		try {
 			connec = getConnection();
 			stmt = connec.createStatement();

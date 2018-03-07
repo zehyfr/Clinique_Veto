@@ -144,10 +144,7 @@ public class Clients {
 
 	@Override
 	public String toString() {
-		return "Client [CodeClient=" + CodeClient + ", NomClient=" + NomClient + ", PrenomClient=" + PrenomClient
-				+ ", Adresse1=" + Adresse1 + ", Adresse2=" + Adresse2 + ", CodePostal=" + CodePostal + ", Ville="
-				+ Ville + ", NumTel=" + NumTel + ", Assurance=" + Assurance + ", Email=" + Email + ", Remarque="
-				+ Remarque + ", Archive=" + Archive + "]";
+		return getCodeClient() + " - " + getNomClient() +" " + getPrenomClient();
 	}
 	
 }

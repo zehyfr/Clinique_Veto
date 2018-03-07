@@ -2,9 +2,12 @@ package fr.eni.veto.CTRL;
 
 import java.util.ArrayList;
 
+import fr.eni.veto.BLL.ClientMger;
 import fr.eni.veto.BLL.LoginMger;
+import fr.eni.veto.BLL.PersonnelsAjoutMger;
 import fr.eni.veto.BLL.PersonnelsMger;
 import fr.eni.veto.BLL.PersonnelsUpdateMger;
+import fr.eni.veto.BO.Clients;
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.IHM.Authentification;
 import fr.eni.veto.IHM.MainView;
@@ -45,8 +48,6 @@ public class Controler {
 		PUM.archive(aCodePers);
 	}
 	
-	
-
 	public void acces() {
 		
 		this.main = new MainView(this);
@@ -57,5 +58,16 @@ public class Controler {
 		PersonnelsMger list = new PersonnelsMger();
 		return list.getPersonnels();
 	}
-
+	
+	public void create(String aNom, String aRole)
+	{
+		PersonnelsAjoutMger createAdd = new PersonnelsAjoutMger();
+		createAdd.create(aNom, aRole);
+	}
+	
+	public ArrayList<Clients> getAllClients()
+	{
+		ClientMger clientGetAll = new ClientMger();
+		return clientGetAll.getAllClients();
+	}
 }

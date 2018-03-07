@@ -82,4 +82,28 @@ public class PersonnelDAOJdbcImpl extends JdbcTools{
 			}
 		}
 	}
+	
+	public void create(String aNom, String aRole) throws DALException{
+		Connection connec = null;
+		PreparedStatement stmt = null;
+		String requete = "INSERT INTO Personnels (Nom, MotPasse, Role, Archive) values(?,?,?,?)";
+		try {
+			connec = getConnection();
+			stmt = connec.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, aNom);
+			stmt.setString(2, "123");
+			stmt.setString(3, aRole);
+			stmt.setBoolean(4, false);
+			
+			stmt.executeUpdate();
+		}catch (SQLException e) {
+			throw new DALException("Insertion non effectuee");
+		}finally {
+			try{
+				closeAll(connec, stmt);
+			}catch(Exception ex) {
+				throw new DALException("Erreur fermeture connexion");
+			}
+		}
+	}
 }
