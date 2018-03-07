@@ -338,37 +338,38 @@ public class MainView {
 			public void mouseClicked(MouseEvent e) {
 				frmArchiver = new JFrame();
 				frmArchiver.setTitle("Archiver ?");
-				frmArchiver.setIconImage(
-						Toolkit.getDefaultToolkit().getImage(test.class.getResource("/ressources/ico_veto.png")));
+				frmArchiver.setIconImage(Toolkit.getDefaultToolkit().getImage(test.class.getResource("/ressources/ico_veto.png")));
 				frmArchiver.setBounds(100, 100, 350, 145);
-
+				frmArchiver.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				
 				JPanel panel = new JPanel();
 				panel.setBackground(Color.WHITE);
 				frmArchiver.getContentPane().add(panel, BorderLayout.CENTER);
 				GridBagLayout gbl_panel = new GridBagLayout();
-				gbl_panel.columnWidths = new int[] { 135, 5, 0, 0 };
-				gbl_panel.rowHeights = new int[] { 24, 0, 0, 0 };
-				gbl_panel.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
-				gbl_panel.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+				gbl_panel.columnWidths = new int[]{98, 5, 29, 5, 0, 0};
+				gbl_panel.rowHeights = new int[]{24, 0, 0, 0};
+				gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+				gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 				panel.setLayout(gbl_panel);
-
+				
 				JLabel label = new JLabel("");
 				GridBagConstraints gbc_label = new GridBagConstraints();
+				gbc_label.gridwidth = 3;
 				gbc_label.insets = new Insets(0, 0, 5, 5);
 				gbc_label.gridx = 1;
 				gbc_label.gridy = 0;
 				panel.add(label, gbc_label);
-
+				
 				JLabel lblNewLabel = new JLabel("Etes-vous s\u00FBr de vouloir archiver cette personne ?");
 				lblNewLabel.setForeground(new Color(0, 51, 153));
 				lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-				gbc_lblNewLabel.gridwidth = 3;
+				gbc_lblNewLabel.gridwidth = 5;
 				gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
 				gbc_lblNewLabel.gridx = 0;
 				gbc_lblNewLabel.gridy = 1;
 				panel.add(lblNewLabel, gbc_lblNewLabel);
-
+				
 				JButton validerModalBtn = new JButton("Oui");
 				validerModalBtn.setForeground(new Color(0, 51, 153));
 				validerModalBtn.setFont(new Font("Gisha", Font.PLAIN, 11));
@@ -379,16 +380,39 @@ public class MainView {
 				gbc_validerModalBtn.gridx = 1;
 				gbc_validerModalBtn.gridy = 2;
 				panel.add(validerModalBtn, gbc_validerModalBtn);
+				
+				JLabel label_1 = new JLabel("");
+				GridBagConstraints gbc_label_1 = new GridBagConstraints();
+				gbc_label_1.insets = new Insets(0, 0, 0, 5);
+				gbc_label_1.gridx = 2;
+				gbc_label_1.gridy = 2;
+				panel.add(label_1, gbc_label_1);
+				
+				JButton btnNon = new JButton("Non");
+				btnNon.setForeground(new Color(0, 51, 153));
+				btnNon.setFont(new Font("Gisha", Font.PLAIN, 11));
+				btnNon.setBackground(Color.WHITE);
+				GridBagConstraints gbc_btnNon = new GridBagConstraints();
+				gbc_btnNon.insets = new Insets(0, 0, 0, 5);
+				gbc_btnNon.gridx = 3;
+				gbc_btnNon.gridy = 2;
+				panel.add(btnNon, gbc_btnNon);
 				validerModalBtn.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						
 						frmArchiver.setVisible(false);
 						ctrl.archive(listModel.get(index).getCodePers());
-
 					}
-
 				});
+				
+				btnNon.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						frmArchiver.setVisible(false);
+					}
+				});
+
 
 				frmArchiver.setVisible(true);
 			}
