@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -338,9 +337,8 @@ public class MainView {
 			public void mouseClicked(MouseEvent e) {
 				frmArchiver = new JFrame();
 				frmArchiver.setTitle("Archiver ?");
-				frmArchiver.setIconImage(Toolkit.getDefaultToolkit().getImage(test.class.getResource("/ressources/ico_veto.png")));
-				frmArchiver.setBounds(100, 100, 350, 145);
-				frmArchiver.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frmArchiver.setIconImage(Toolkit.getDefaultToolkit().getImage("/ressources/ico_veto.png"));
+				frmArchiver.setBounds(200, 200, 350, 145);
 				
 				JPanel panel = new JPanel();
 				panel.setBackground(Color.WHITE);
