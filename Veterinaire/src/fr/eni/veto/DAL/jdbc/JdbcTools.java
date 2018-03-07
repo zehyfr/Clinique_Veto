@@ -3,6 +3,7 @@ package fr.eni.veto.DAL.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
@@ -31,6 +32,15 @@ public class JdbcTools {
 		DriverManager.registerDriver(new SQLServerDriver());
 		c = (DriverManager.getConnection(urldb, userdb, passworddb));
 		return c;
+	}
+	
+	public static void closeAll(Connection c, Statement s) throws SQLException{
+		if(s != null) {
+			s.close();
+		}
+		if(c != null) {
+		c.close();
+		}
 	}
 }
 

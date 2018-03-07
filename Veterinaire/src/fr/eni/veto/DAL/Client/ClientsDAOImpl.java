@@ -12,14 +12,14 @@ import fr.eni.veto.BO.Clients;
 import fr.eni.veto.DAL.DALException;
 import fr.eni.veto.DAL.jdbc.JdbcTools;
 
-public class ClientsDAOImpl {
+public class ClientsDAOImpl extends JdbcTools{
 
 	public void createClient(Clients c) throws DALException{
 		Connection connec = null;
 		PreparedStatement stmt = null;
 		String requete = "INSERT INTO Clients (NomClient, PrenomClient, Adresse1, Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive) values(?,?,?,?,?,?,?,?,?,?,?);";
 		try {
-			connec = JdbcTools.getConnection();
+			connec = getConnection();
 			stmt = connec.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, c.getNomClient());
 			stmt.setString(2, c.getPrenomClient());
@@ -53,7 +53,7 @@ public class ClientsDAOImpl {
 		PreparedStatement stmt = null;
 		String requete = "UPDATE Clients set NomClient = ?, PrenomClient = ?, Adresse1 = ?, Adresse2 = ?, CodePostal = ?, Ville = ?, NumTel = ?, Assurance = ?, Email = ?, Remarque = ?, Archive = ? where CodeClient = ?;";
 		try {
-			connec = JdbcTools.getConnection();
+			connec = getConnection();
 			stmt = connec.prepareStatement(requete);
 			stmt.setString(1, c.getNomClient());
 			stmt.setString(2, c.getPrenomClient());
@@ -85,7 +85,7 @@ public class ClientsDAOImpl {
 		String requete = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients;";
 		List<Clients> all = new ArrayList<Clients>();
 		try {
-			connec = JdbcTools.getConnection();
+			connec = getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery(requete);
 			while(rs.next()) {
@@ -109,7 +109,7 @@ public class ClientsDAOImpl {
 		String requete = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients where CodeClient = " + code + ";";
 		Clients result = null;
 		try {
-			connec = JdbcTools.getConnection();
+			connec = getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery(requete);
 			rs.next();
@@ -132,7 +132,7 @@ public class ClientsDAOImpl {
 		Statement stmt = null;
 		String requete = "DELETE FROM Clients where CodeClient = " + code + ";";
 		try {
-			connec = JdbcTools.getConnection();
+			connec = getConnection();
 			stmt = connec.createStatement();
 			stmt.executeUpdate(requete);
 		}catch (SQLException e) {
@@ -143,15 +143,6 @@ public class ClientsDAOImpl {
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
-		}
-	}
-	
-	public void closeAll(Connection c, Statement s) throws SQLException{
-		if(s != null) {
-			s.close();
-		}
-		if(c != null) {
-		c.close();
 		}
 	}
 }

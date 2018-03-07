@@ -9,7 +9,7 @@ import fr.eni.veto.DAL.ConnexionDAO;
 import fr.eni.veto.DAL.DALException;
 
 
-public class ConnexionDAOJdbcImpl implements ConnexionDAO{
+public class ConnexionDAOJdbcImpl extends JdbcTools implements ConnexionDAO {
 
 	public String authentification(int id, String pass) throws DALException{
 		Connection connec = null;
@@ -17,7 +17,7 @@ public class ConnexionDAOJdbcImpl implements ConnexionDAO{
 		String role = "nul";
 		
 		try {
-			connec = JdbcTools.getConnection();
+			connec = getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery("select Role from Personnels");
 			while(rs.next()) {
@@ -33,14 +33,5 @@ public class ConnexionDAOJdbcImpl implements ConnexionDAO{
 			}
 		}
 		return role;
-	}
-	
-	public void closeAll(Connection c, Statement s) throws SQLException{
-		if(s != null) {
-			s.close();
-		}
-		if(c != null) {
-		c.close();
-		}
 	}
 }

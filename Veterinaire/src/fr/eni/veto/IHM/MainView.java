@@ -316,7 +316,7 @@ public class MainView {
 		idPanel.add(spaceBoundLbl4, gbc_spaceBoundLbl4);
 
 		JButton btnArchiver = new JButton("");
-		btnArchiver.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash.png")));
+		btnArchiver.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash2.png")));
 		btnArchiver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -331,6 +331,30 @@ public class MainView {
 		gbc_btnArchiver.gridx = 1;
 		gbc_btnArchiver.gridy = 9;
 		idPanel.add(btnArchiver, gbc_btnArchiver);
+		
+		JButton addButon = new JButton("");
+		addButon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				identifiantTxt.setText("");
+				nomTxt.setText("");
+				rdbtnAdm.setSelected(false);
+				rdbtnSec.setSelected(false);
+				rdbtnVet.setSelected(false);
+				listModel.add(new Personnels();
+				
+				
+			}
+		});
+		addButon.setIcon(new ImageIcon(MainView.class.getResource("/ressources/blue.png")));
+		addButon.setForeground(new Color(0, 51, 153));
+		addButon.setBackground(Color.WHITE);
+		GridBagConstraints gbc_addButon = new GridBagConstraints();
+		gbc_addButon.anchor = GridBagConstraints.EAST;
+		gbc_addButon.insets = new Insets(0, 0, 0, 5);
+		gbc_addButon.gridx = 4;
+		gbc_addButon.gridy = 9;
+		idPanel.add(addButon, gbc_addButon);
 
 		// BOUTON ARCHIVER
 		btnArchiver.addMouseListener(new MouseAdapter() {
