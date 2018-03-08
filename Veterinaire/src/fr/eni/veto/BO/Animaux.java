@@ -13,10 +13,24 @@ public class Animaux {
 	private String Antecedant;
 	private boolean Archive;
 	
-	public Animaux()
-	{
+	public Animaux() {
+		super();
 	}
-
+	
+	public Animaux(String nomAnimal, String sexe, String couleur, String race, String espece,
+			int codeClient, String tatouage, String antecedant, boolean archive) {
+		super();
+		NomAnimal = nomAnimal;
+		Sexe = sexe;
+		Couleur = couleur;
+		Race = race;
+		Espece = espece;
+		CodeClient = codeClient;
+		Tatouage = tatouage;
+		Antecedant = antecedant;
+		Archive = archive;
+	}
+	
 	public Animaux(int codeAnimal, String nomAnimal, String sexe, String couleur, String race, String espece,
 			int codeClient, String tatouage, String antecedant, boolean archive) {
 		super();
