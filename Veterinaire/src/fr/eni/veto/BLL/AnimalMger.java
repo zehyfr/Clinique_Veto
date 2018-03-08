@@ -21,5 +21,11 @@ ArrayList<Animaux> res = new ArrayList<Animaux>();
 		
 		return res;
 	}
+	
+	public void insertAnimal(Animaux animal) throws DALException
+	{
+		AnimauxDAOImpl insertAnimal = new AnimauxDAOImpl();
+		insertAnimal.insertAnimal(animal);
+	}
 
 }

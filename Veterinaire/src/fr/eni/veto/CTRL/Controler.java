@@ -13,6 +13,7 @@ import fr.eni.veto.BLL.PersonnelsUpdateMger;
 import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.BO.Clients;
 import fr.eni.veto.BO.Personnels;
+import fr.eni.veto.DAL.DALException;
 import fr.eni.veto.IHM.Authentification;
 import fr.eni.veto.IHM.MainView;
 
@@ -128,6 +129,17 @@ public class Controler {
 	{
 		AnimalMger ani = new AnimalMger();
 		return ani.getAllAnimaux(aClient);
+	}
+	
+	/**
+	 * Ajoute un nouvel animal
+	 * @param animal
+	 * @throws DALException
+	 */
+	public void insertAnimal(Animaux animal) throws DALException
+	{
+		AnimalMger insertAni = new AnimalMger();
+		insertAni.insertAnimal(animal);
 	}
 	
 }

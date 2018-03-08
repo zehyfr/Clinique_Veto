@@ -36,6 +36,7 @@ import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.BO.Clients;
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.CTRL.Controler;
+import fr.eni.veto.DAL.DALException;
 
 public class MainView {
 
@@ -897,7 +898,13 @@ public class MainView {
 				ajouterAnimalBtn.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
+						Animaux newAnimal = new Animaux(nomAnimalTxt.getText(), sexeAnimalTxt.getText(), couleurAnimalTxt.getText(), raceAnimalTxt.getText(), especeAnimalTxt.getText(), listModelClient.get(indexClient).getCodeClient() ,tatouageAnimalTxt.getText(), antecedantAnimalTxt.getText(), false);
+						try {
+							ctrl.insertAnimal(newAnimal);
+						} catch (DALException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 				
