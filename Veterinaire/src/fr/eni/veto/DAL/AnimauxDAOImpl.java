@@ -6,17 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.DAL.jdbc.JdbcTools;
 
 public class AnimauxDAOImpl extends JdbcTools{
 	
-	public List<Animaux> selectByCodeClient(int code) throws DALException{
+	public ArrayList<Animaux> selectByCodeClient(int code) throws DALException{
 		Connection connec = null;
 		Statement stmt = null;
-		List<Animaux> res= new ArrayList<Animaux>();
+		ArrayList<Animaux> res= new ArrayList<Animaux>();
 		String sql = "Select CodeAnimal, NomAnimal, Sexe, Couleur, Race, Espece, Tatouage, Antecedents, Archive FROM Animaux where CodeClient = " + code + " ;";
 		try {
 			connec = getConnection();

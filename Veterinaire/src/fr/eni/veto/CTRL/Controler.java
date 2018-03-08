@@ -2,6 +2,7 @@ package fr.eni.veto.CTRL;
 
 import java.util.ArrayList;
 
+import fr.eni.veto.BLL.AnimalMger;
 import fr.eni.veto.BLL.ClientAjoutMger;
 import fr.eni.veto.BLL.ClientMger;
 import fr.eni.veto.BLL.ClientUpdateMger;
@@ -9,6 +10,7 @@ import fr.eni.veto.BLL.LoginMger;
 import fr.eni.veto.BLL.PersonnelsAjoutMger;
 import fr.eni.veto.BLL.PersonnelsMger;
 import fr.eni.veto.BLL.PersonnelsUpdateMger;
+import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.BO.Clients;
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.IHM.Authentification;
@@ -116,6 +118,16 @@ public class Controler {
 	{
 		ClientUpdateMger archive = new ClientUpdateMger();
 		archive.archive(aCodeClient);
+	}
+	
+	/**
+	 * Recupère liste d'animaux d'un client
+	 */
+	
+	public ArrayList<Animaux> getAllAnimaux(int aClient)
+	{
+		AnimalMger ani = new AnimalMger();
+		return ani.getAllAnimaux(aClient);
 	}
 	
 }
