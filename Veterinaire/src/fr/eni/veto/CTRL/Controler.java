@@ -2,7 +2,9 @@ package fr.eni.veto.CTRL;
 
 import java.util.ArrayList;
 
+import fr.eni.veto.BLL.ClientAjoutMger;
 import fr.eni.veto.BLL.ClientMger;
+import fr.eni.veto.BLL.ClientUpdateMger;
 import fr.eni.veto.BLL.LoginMger;
 import fr.eni.veto.BLL.PersonnelsAjoutMger;
 import fr.eni.veto.BLL.PersonnelsMger;
@@ -25,6 +27,10 @@ public class Controler {
 		this.auth = new Authentification(this);
 	}
 
+	/**
+	 * Connection personnel
+	 * @param aNom, aRole, aCodePers
+	 */
 	public boolean validation(String login, String mdp) {
 		LoginMger log = new LoginMger();
 		int loginInt = Integer.parseInt(login);
@@ -36,38 +42,80 @@ public class Controler {
 		return res;
 	}
 	
+	/**
+	 * Modifier du personnel
+	 * @param aNom, aRole, aCodePers
+	 */
 	public void update(String aNom, String aRole, int aCodePers){
 		PersonnelsUpdateMger PUM = new PersonnelsUpdateMger();
 		
 		PUM.update(aNom, aRole, aCodePers);
 	}
 	
+	/**
+	 * Archiver du personnel
+	 * @param aCodePers
+	 */
 	public void archive(int aCodePers){
 		PersonnelsUpdateMger PUM = new PersonnelsUpdateMger();
 		
 		PUM.archive(aCodePers);
 	}
 	
+	/**
+	 * Contrôle d'accès
+	 */
 	public void acces() {
-		
 		this.main = new MainView(this);
 	}
 	
+	/**
+	 * Récupérer la liste du personnel
+	 */
 	public ArrayList<Personnels> getListPersonnel()
 	{
 		PersonnelsMger list = new PersonnelsMger();
 		return list.getPersonnels();
 	}
 	
+	/**
+	 * Créer du personnel
+	 * @param aNom, aRole
+	 */
 	public void create(String aNom, String aRole)
 	{
 		PersonnelsAjoutMger createAdd = new PersonnelsAjoutMger();
 		createAdd.create(aNom, aRole);
 	}
 	
+	/**
+	 * Récupérer la liste des clients
+	 */
+	
 	public ArrayList<Clients> getAllClients()
 	{
 		ClientMger clientGetAll = new ClientMger();
 		return clientGetAll.getAllClients();
 	}
+	
+	/**
+	 * Ajouter un client
+	 * @param c
+	 */
+	public void ajouterClient(Clients c)
+	{
+		ClientAjoutMger createAdd = new ClientAjoutMger();
+		createAdd.ajoutClient(c);
+	}
+	
+	/**
+	 * Archiver un client
+	 */
+	
+	public void archivage(int aCodeClient)
+	{
+		ClientUpdateMger archive = new ClientUpdateMger();
+		archive.archive(aCodeClient);
+	}
+	
 }

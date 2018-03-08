@@ -47,6 +47,12 @@ public class ClientsDAOImpl extends JdbcTools{
 		}
 	}
 	
+	/**
+	 * Modifier un client
+	 * @param c
+	 * @throws DALException
+	 */
+	
 	public void updateClient(Clients c) throws DALException{
 		Connection connec = null;
 		PreparedStatement stmt = null;
@@ -78,10 +84,15 @@ public class ClientsDAOImpl extends JdbcTools{
 		}
 	}
 	
+	/**
+	 * Retourne la liste des clients
+	 * @return
+	 * @throws DALException
+	 */
 	public ArrayList<Clients> selectAllClients() throws DALException{
 		Connection connec = null;
 		Statement stmt = null;
-		String requete = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients;";
+		String requete = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients WHERE Archive = 0;";
 		ArrayList<Clients> all = new ArrayList<Clients>();
 		try {
 			connec = getConnection();
@@ -101,6 +112,13 @@ public class ClientsDAOImpl extends JdbcTools{
 		}
 		return all;
 	}
+	
+	/**
+	 * Selectionner un client
+	 * @param code
+	 * @return
+	 * @throws DALException
+	 */
 	
 	public Clients selectClients(int code) throws DALException{
 		Connection connec = null;
@@ -126,16 +144,24 @@ public class ClientsDAOImpl extends JdbcTools{
 		return result;
 	}
 	
-	public void deleteClients(int code) throws DALException{
+	/**
+	 * Supprimer client
+	 * @param aCodeClient
+	 * @throws DALException
+	 */
+	
+	public void deleteClients(int aCodeClient) throws DALException{
 		Connection connec = null;
-		Statement stmt = null;
-		String requete = "DELETE FROM Clients where CodeClient = " + code + ";";
+		PreparedStatement stmt = null;
+		
 		try {
 			connec = getConnection();
-			stmt = connec.createStatement();
-			stmt.executeUpdate(requete);
+			stmt = connec.prepareStatement("UPDATE Clients SET Archive = 1 WHERE CodeClient = ?");
+			stmt.setInt(1, aCodeClient);
+			stmt.execute();
+
 		}catch (SQLException e) {
-			throw new DALException("Delete non effectuee");
+			throw new DALException("Archivage non effectuee");
 		}finally {
 			try{
 				closeAll(connec, stmt);

@@ -45,6 +45,23 @@ public class Clients {
 		Remarque = remarque;
 		Archive = archive;
 	}
+	
+	public Clients(String nomClient, String prenomClient, String adresse1, String adresse2,
+			String codePostal, String ville, String numTel, String assurance, String email, String remarque,
+			boolean archive) {
+		super();
+		NomClient = nomClient;
+		PrenomClient = prenomClient;
+		Adresse1 = adresse1;
+		Adresse2 = adresse2;
+		CodePostal = codePostal;
+		Ville = ville;
+		NumTel = numTel;
+		Assurance = assurance;
+		Email = email;
+		Remarque = remarque;
+		Archive = archive;
+	}
 
 	public int getCodeClient() {
 		return CodeClient;
