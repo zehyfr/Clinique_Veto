@@ -2,6 +2,7 @@ package fr.eni.veto.CTRL;
 
 import java.util.ArrayList;
 
+import fr.eni.veto.BLL.ClientAjoutMger;
 import fr.eni.veto.BLL.ClientMger;
 import fr.eni.veto.BLL.LoginMger;
 import fr.eni.veto.BLL.PersonnelsAjoutMger;
@@ -49,7 +50,6 @@ public class Controler {
 	}
 	
 	public void acces() {
-		
 		this.main = new MainView(this);
 	}
 	
@@ -70,4 +70,11 @@ public class Controler {
 		ClientMger clientGetAll = new ClientMger();
 		return clientGetAll.getAllClients();
 	}
+	
+	public void ajouterClient(Clients c)
+	{
+		ClientAjoutMger createAdd = new ClientAjoutMger();
+		createAdd.ajoutClient(c);
+	}
+	
 }
