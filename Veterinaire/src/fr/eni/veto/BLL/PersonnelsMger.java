@@ -17,7 +17,6 @@ public class PersonnelsMger {
 		try {
 			 res = getListPersonnels.getListPersonnels();
 		} catch (DALException e) {
-			e.printStackTrace();
 		}
 		
 		return res;

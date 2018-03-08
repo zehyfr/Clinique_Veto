@@ -70,6 +70,7 @@ public class Authentification {
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		frmIdentification.getContentPane().setLayout(gridBagLayout);
+		frmIdentification.setLocationRelativeTo(null);
 		
 		JLabel iconeImage = new JLabel("");
 		iconeImage.setIcon(new ImageIcon("src/ressources/logo.jpg"));
