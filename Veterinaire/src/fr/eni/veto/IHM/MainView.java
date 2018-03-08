@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -25,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -167,7 +169,7 @@ public class MainView {
 		liste.setLayoutOrientation(JList.VERTICAL);
 		liste.setForeground(new Color(0, 51, 153));
 		liste.setFont(new Font("Levenim MT", Font.PLAIN, 14));
-		liste.setBorder(new MatteBorder(0, 0, 0, 3, (Color) new Color(0, 51, 153)));
+		liste.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 51, 153)));
 		GridBagConstraints gbc_listeClient = new GridBagConstraints();
 		gbc_listeClient.gridwidth = 2;
 		gbc_listeClient.insets = new Insets(0, 0, 0, 5);
@@ -231,10 +233,14 @@ public class MainView {
 			}
 		});
 
+		/**
+		 * INFORMATION CLIENT ET SON ANIMAL
+		 * 
+		 */
+		
 		JButton buttonPlus = new JButton("Voir les informations");
 		buttonPlus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				frmInformationsClient = new JFrame();
 				frmInformationsClient.getContentPane().setFont(new Font("Gisha", Font.PLAIN, 13));
 				frmInformationsClient.getContentPane().setForeground(new Color(0, 51, 153));
@@ -242,15 +248,16 @@ public class MainView {
 				frmInformationsClient.setTitle("Informations client");
 				frmInformationsClient.setIconImage(Toolkit.getDefaultToolkit().getImage(test.class.getResource("/ressources/ico_veto.png")));
 				frmInformationsClient.getContentPane().setBackground(Color.WHITE);
-				frmInformationsClient.setBounds(100, 100, 435, 432);
+				frmInformationsClient.setBounds(100, 100, 870, 388);
 				frmInformationsClient.setLocationRelativeTo(null);
 				GridBagLayout gridBagLayout = new GridBagLayout();
-				gridBagLayout.columnWidths = new int[]{589, 0};
+				gridBagLayout.columnWidths = new int[]{832, 0};
 				gridBagLayout.rowHeights = new int[]{338, 0};
 				gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 				gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 				frmInformationsClient.getContentPane().setLayout(gridBagLayout);
 				
+				//Panel global
 				JPanel panel = new JPanel();
 				panel.setBackground(Color.WHITE);
 				GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -259,12 +266,13 @@ public class MainView {
 				gbc_panel.gridy = 0;
 				frmInformationsClient.getContentPane().add(panel, gbc_panel);
 				GridBagLayout gbl_panel = new GridBagLayout();
-				gbl_panel.columnWidths = new int[]{49, 83, 106, 0, 0, 0, 0};
-				gbl_panel.rowHeights = new int[]{17, 0, 29, 0, 20, 0, 23, 0, 20, 0, 19, 0, 25, 0, 0, 0};
-				gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-				gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				gbl_panel.columnWidths = new int[]{49, 83, 112, 70, 28, 28, 332, 23, 0};
+				gbl_panel.rowHeights = new int[]{17, 0, 29, 20, 20, 0, 23, 0, 20, 0, 19, 0, 20, 0, 25, 0, 0};
+				gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+				gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 				panel.setLayout(gbl_panel);
 				
+				//titre de la vue
 				JLabel titlteInfoClientlbl = new JLabel("Informations client");
 				titlteInfoClientlbl.setForeground(new Color(0, 51, 153));
 				titlteInfoClientlbl.setFont(new Font("Gisha", Font.BOLD, 18));
@@ -276,6 +284,7 @@ public class MainView {
 				gbc_titlteInfoClientlbl.gridy = 1;
 				panel.add(titlteInfoClientlbl, gbc_titlteInfoClientlbl);
 				
+				//logo de la vue
 				JLabel imageTitle = new JLabel("");
 				imageTitle.setIcon(new ImageIcon(test.class.getResource("/ressources/info icon.png")));
 				GridBagConstraints gbc_imageTitle = new GridBagConstraints();
@@ -285,6 +294,13 @@ public class MainView {
 				gbc_imageTitle.gridy = 1;
 				panel.add(imageTitle, gbc_imageTitle);
 				
+				JLabel spaceBoundInfo7 = new JLabel("");
+				GridBagConstraints gbc_spaceBoundInfo7 = new GridBagConstraints();
+				gbc_spaceBoundInfo7.insets = new Insets(0, 0, 5, 0);
+				gbc_spaceBoundInfo7.gridx = 7;
+				gbc_spaceBoundInfo7.gridy = 1;
+				panel.add(spaceBoundInfo7, gbc_spaceBoundInfo7);
+				
 				JLabel spaceBoundinfo6 = new JLabel("");
 				GridBagConstraints gbc_spaceBoundinfo6 = new GridBagConstraints();
 				gbc_spaceBoundinfo6.insets = new Insets(0, 0, 5, 5);
@@ -292,6 +308,7 @@ public class MainView {
 				gbc_spaceBoundinfo6.gridy = 2;
 				panel.add(spaceBoundinfo6, gbc_spaceBoundinfo6);
 				
+				//Nom du client 
 				JLabel nomInfoLbl = new JLabel("Nom : ");
 				nomInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				nomInfoLbl.setForeground(new Color(0, 51, 153));
@@ -312,6 +329,7 @@ public class MainView {
 				gbc_nomInfoTxt.gridy = 3;
 				panel.add(nomInfoTxt, gbc_nomInfoTxt);
 				
+				//prenom du client
 				JLabel prenomInfoLbl = new JLabel("Pr\u00E9nom : ");
 				prenomInfoLbl.setForeground(new Color(0, 51, 153));
 				prenomInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
@@ -332,6 +350,215 @@ public class MainView {
 				gbc_prenomInfoTxt.gridy = 3;
 				panel.add(prenomInfoTxt, gbc_prenomInfoTxt);
 				
+				//panel info de l'animal
+				JPanel panelAnimal = new JPanel();
+				panelAnimal.setBackground(new Color(250, 250, 255));
+				panelAnimal.setBorder(new TitledBorder(new MatteBorder(2, 0, 0, 0, (Color) new Color(0, 51, 153)), "Animal du client", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 51, 153)));
+				GridBagConstraints gbc_panelAnimal = new GridBagConstraints();
+				gbc_panelAnimal.gridheight = 12;
+				gbc_panelAnimal.insets = new Insets(0, 0, 5, 5);
+				gbc_panelAnimal.fill = GridBagConstraints.BOTH;
+				gbc_panelAnimal.gridx = 6;
+				gbc_panelAnimal.gridy = 2;
+				panel.add(panelAnimal, gbc_panelAnimal);
+				GridBagLayout gbl_panelAnimal = new GridBagLayout();
+				gbl_panelAnimal.columnWidths = new int[]{0, 23, 89, 19, 44, 99, 0, 0};
+				gbl_panelAnimal.rowHeights = new int[]{13, 0, 21, 0, 22, 22, 19, 0, 0};
+				gbl_panelAnimal.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+				gbl_panelAnimal.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+				panelAnimal.setLayout(gbl_panelAnimal);
+				
+				JLabel spaceAnimal = new JLabel("");
+				GridBagConstraints gbc_spaceAnimal = new GridBagConstraints();
+				gbc_spaceAnimal.insets = new Insets(0, 0, 5, 5);
+				gbc_spaceAnimal.gridx = 1;
+				gbc_spaceAnimal.gridy = 0;
+				panelAnimal.add(spaceAnimal, gbc_spaceAnimal);
+				
+				//numero de l'animal
+				JLabel numeroAnimalLbl = new JLabel("N\u00B0 : ");
+				numeroAnimalLbl.setForeground(new Color(0, 51, 153));
+				numeroAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_numeroAnimalLbl = new GridBagConstraints();
+				gbc_numeroAnimalLbl.anchor = GridBagConstraints.WEST;
+				gbc_numeroAnimalLbl.insets = new Insets(0, 0, 5, 5);
+				gbc_numeroAnimalLbl.gridx = 1;
+				gbc_numeroAnimalLbl.gridy = 1;
+				panelAnimal.add(numeroAnimalLbl, gbc_numeroAnimalLbl);
+				
+				JTextField numeroAnimalTxt;
+				numeroAnimalTxt = new JTextField();
+				GridBagConstraints gbc_numeroAnimalTxt = new GridBagConstraints();
+				gbc_numeroAnimalTxt.insets = new Insets(0, 0, 5, 5);
+				gbc_numeroAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
+				gbc_numeroAnimalTxt.gridx = 2;
+				gbc_numeroAnimalTxt.gridy = 1;
+				panelAnimal.add(numeroAnimalTxt, gbc_numeroAnimalTxt);
+				numeroAnimalTxt.setColumns(10);
+				
+				JLabel nomAnimalLbl = new JLabel("Nom : ");
+				nomAnimalLbl.setForeground(new Color(0, 51, 153));
+				nomAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_nomAnimalLbl = new GridBagConstraints();
+				gbc_nomAnimalLbl.anchor = GridBagConstraints.WEST;
+				gbc_nomAnimalLbl.insets = new Insets(0, 0, 5, 5);
+				gbc_nomAnimalLbl.gridx = 4;
+				gbc_nomAnimalLbl.gridy = 1;
+				panelAnimal.add(nomAnimalLbl, gbc_nomAnimalLbl);
+				
+				JTextField nomAnimalTxt;
+				nomAnimalTxt = new JTextField();
+				GridBagConstraints gbc_nomAnimalTxt = new GridBagConstraints();
+				gbc_nomAnimalTxt.insets = new Insets(0, 0, 5, 5);
+				gbc_nomAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
+				gbc_nomAnimalTxt.gridx = 5;
+				gbc_nomAnimalTxt.gridy = 1;
+				panelAnimal.add(nomAnimalTxt, gbc_nomAnimalTxt);
+				nomAnimalTxt.setColumns(10);
+				
+				JLabel label = new JLabel("");
+				GridBagConstraints gbc_label = new GridBagConstraints();
+				gbc_label.insets = new Insets(0, 0, 5, 5);
+				gbc_label.gridx = 1;
+				gbc_label.gridy = 2;
+				panelAnimal.add(label, gbc_label);
+				
+				JLabel sexeAnimalLbl = new JLabel("Sexe : ");
+				sexeAnimalLbl.setForeground(new Color(0, 51, 153));
+				sexeAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_sexeAnimalLbl = new GridBagConstraints();
+				gbc_sexeAnimalLbl.anchor = GridBagConstraints.WEST;
+				gbc_sexeAnimalLbl.insets = new Insets(0, 0, 5, 5);
+				gbc_sexeAnimalLbl.gridx = 1;
+				gbc_sexeAnimalLbl.gridy = 3;
+				panelAnimal.add(sexeAnimalLbl, gbc_sexeAnimalLbl);
+				
+				JTextField sexeAnimalTxt;
+				sexeAnimalTxt = new JTextField();
+				GridBagConstraints gbc_sexeAnimalTxt = new GridBagConstraints();
+				gbc_sexeAnimalTxt.insets = new Insets(0, 0, 5, 5);
+				gbc_sexeAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
+				gbc_sexeAnimalTxt.gridx = 2;
+				gbc_sexeAnimalTxt.gridy = 3;
+				panelAnimal.add(sexeAnimalTxt, gbc_sexeAnimalTxt);
+				sexeAnimalTxt.setColumns(10);
+				
+				JLabel couleurAnimalLbl = new JLabel("Couleur : ");
+				couleurAnimalLbl.setForeground(new Color(0, 51, 153));
+				couleurAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_couleurAnimalLbl = new GridBagConstraints();
+				gbc_couleurAnimalLbl.anchor = GridBagConstraints.WEST;
+				gbc_couleurAnimalLbl.insets = new Insets(0, 0, 5, 5);
+				gbc_couleurAnimalLbl.gridx = 4;
+				gbc_couleurAnimalLbl.gridy = 3;
+				panelAnimal.add(couleurAnimalLbl, gbc_couleurAnimalLbl);
+				
+				JTextField couleurAnimalTxt;
+				couleurAnimalTxt = new JTextField();
+				couleurAnimalTxt.setText("");
+				GridBagConstraints gbc_couleurAnimalTxt = new GridBagConstraints();
+				gbc_couleurAnimalTxt.insets = new Insets(0, 0, 5, 5);
+				gbc_couleurAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
+				gbc_couleurAnimalTxt.gridx = 5;
+				gbc_couleurAnimalTxt.gridy = 3;
+				panelAnimal.add(couleurAnimalTxt, gbc_couleurAnimalTxt);
+				couleurAnimalTxt.setColumns(10);
+				
+				JLabel label_1 = new JLabel("");
+				GridBagConstraints gbc_label_1 = new GridBagConstraints();
+				gbc_label_1.insets = new Insets(0, 0, 5, 5);
+				gbc_label_1.gridx = 1;
+				gbc_label_1.gridy = 4;
+				panelAnimal.add(label_1, gbc_label_1);
+				
+				JLabel raceAnimalLbl = new JLabel("Race : ");
+				raceAnimalLbl.setForeground(new Color(0, 51, 153));
+				raceAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_raceAnimalLbl = new GridBagConstraints();
+				gbc_raceAnimalLbl.anchor = GridBagConstraints.WEST;
+				gbc_raceAnimalLbl.insets = new Insets(0, 0, 5, 5);
+				gbc_raceAnimalLbl.gridx = 1;
+				gbc_raceAnimalLbl.gridy = 5;
+				panelAnimal.add(raceAnimalLbl, gbc_raceAnimalLbl);
+				
+				JTextField raceAnimalTxt;
+				raceAnimalTxt = new JTextField();
+				GridBagConstraints gbc_raceAnimalTxt = new GridBagConstraints();
+				gbc_raceAnimalTxt.insets = new Insets(0, 0, 5, 5);
+				gbc_raceAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
+				gbc_raceAnimalTxt.gridx = 2;
+				gbc_raceAnimalTxt.gridy = 5;
+				panelAnimal.add(raceAnimalTxt, gbc_raceAnimalTxt);
+				raceAnimalTxt.setColumns(10);
+				
+				JLabel especeAnimalLbl = new JLabel("Esp\u00E8ce : ");
+				especeAnimalLbl.setForeground(new Color(0, 51, 153));
+				especeAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_especeAnimalLbl = new GridBagConstraints();
+				gbc_especeAnimalLbl.anchor = GridBagConstraints.WEST;
+				gbc_especeAnimalLbl.insets = new Insets(0, 0, 5, 5);
+				gbc_especeAnimalLbl.gridx = 4;
+				gbc_especeAnimalLbl.gridy = 5;
+				panelAnimal.add(especeAnimalLbl, gbc_especeAnimalLbl);
+				
+				JTextField especeAnimalTxt;
+				especeAnimalTxt = new JTextField();
+				GridBagConstraints gbc_especeAnimalTxt = new GridBagConstraints();
+				gbc_especeAnimalTxt.insets = new Insets(0, 0, 5, 5);
+				gbc_especeAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
+				gbc_especeAnimalTxt.gridx = 5;
+				gbc_especeAnimalTxt.gridy = 5;
+				panelAnimal.add(especeAnimalTxt, gbc_especeAnimalTxt);
+				especeAnimalTxt.setColumns(10);
+				
+				JLabel label_2 = new JLabel("");
+				GridBagConstraints gbc_label_2 = new GridBagConstraints();
+				gbc_label_2.insets = new Insets(0, 0, 5, 5);
+				gbc_label_2.gridx = 1;
+				gbc_label_2.gridy = 6;
+				panelAnimal.add(label_2, gbc_label_2);
+				
+				JLabel tatouageAnimalLbl = new JLabel("Tatouage : ");
+				tatouageAnimalLbl.setForeground(new Color(0, 51, 153));
+				tatouageAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_tatouageAnimalLbl = new GridBagConstraints();
+				gbc_tatouageAnimalLbl.anchor = GridBagConstraints.WEST;
+				gbc_tatouageAnimalLbl.insets = new Insets(0, 0, 0, 5);
+				gbc_tatouageAnimalLbl.gridx = 1;
+				gbc_tatouageAnimalLbl.gridy = 7;
+				panelAnimal.add(tatouageAnimalLbl, gbc_tatouageAnimalLbl);
+				
+				JTextField tatouageAnimalTxt;
+				tatouageAnimalTxt = new JTextField();
+				GridBagConstraints gbc_tatouageAnimalTxt = new GridBagConstraints();
+				gbc_tatouageAnimalTxt.anchor = GridBagConstraints.NORTH;
+				gbc_tatouageAnimalTxt.insets = new Insets(0, 0, 0, 5);
+				gbc_tatouageAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
+				gbc_tatouageAnimalTxt.gridx = 2;
+				gbc_tatouageAnimalTxt.gridy = 7;
+				panelAnimal.add(tatouageAnimalTxt, gbc_tatouageAnimalTxt);
+				tatouageAnimalTxt.setColumns(10);
+				
+				JLabel antecedantAnimalLbl = new JLabel("Antec\u00E9dants : ");
+				antecedantAnimalLbl.setForeground(new Color(0, 51, 153));
+				antecedantAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_antecedantAnimalLbl = new GridBagConstraints();
+				gbc_antecedantAnimalLbl.anchor = GridBagConstraints.WEST;
+				gbc_antecedantAnimalLbl.insets = new Insets(0, 0, 0, 5);
+				gbc_antecedantAnimalLbl.gridx = 4;
+				gbc_antecedantAnimalLbl.gridy = 7;
+				panelAnimal.add(antecedantAnimalLbl, gbc_antecedantAnimalLbl);
+				
+				JTextField antecedantAnimalTxt;
+				antecedantAnimalTxt = new JTextField();
+				GridBagConstraints gbc_antecedantAnimalTxt = new GridBagConstraints();
+				gbc_antecedantAnimalTxt.insets = new Insets(0, 0, 0, 5);
+				gbc_antecedantAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
+				gbc_antecedantAnimalTxt.gridx = 5;
+				gbc_antecedantAnimalTxt.gridy = 7;
+				panelAnimal.add(antecedantAnimalTxt, gbc_antecedantAnimalTxt);
+				antecedantAnimalTxt.setColumns(10);
+				
 				JLabel spaceBoundinfo = new JLabel("");
 				GridBagConstraints gbc_spaceBoundinfo = new GridBagConstraints();
 				gbc_spaceBoundinfo.insets = new Insets(0, 0, 5, 5);
@@ -339,6 +566,7 @@ public class MainView {
 				gbc_spaceBoundinfo.gridy = 4;
 				panel.add(spaceBoundinfo, gbc_spaceBoundinfo);
 				
+				//retour aux infos clients
 				JLabel adresseInfoLbl = new JLabel("Adresse 1 : ");
 				adresseInfoLbl.setForeground(new Color(0, 51, 153));
 				adresseInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
@@ -520,28 +748,34 @@ public class MainView {
 				gbc_commentaireInfoTxt.anchor = GridBagConstraints.WEST;
 				panel.add(commentaireInfoTxt, gbc_commentaireInfoTxt);
 				
+				JLabel spaceBoundinfo8 = new JLabel("");
+				GridBagConstraints gbc_spaceBoundinfo8 = new GridBagConstraints();
+				gbc_spaceBoundinfo8.insets = new Insets(0, 0, 5, 5);
+				gbc_spaceBoundinfo8.gridx = 0;
+				gbc_spaceBoundinfo8.gridy = 12;
+				panel.add(spaceBoundinfo8, gbc_spaceBoundinfo8);
+				
 				JLabel spaceBoundinfo5 = new JLabel("");
 				GridBagConstraints gbc_spaceBoundinfo5 = new GridBagConstraints();
 				gbc_spaceBoundinfo5.insets = new Insets(0, 0, 5, 5);
 				gbc_spaceBoundinfo5.gridx = 1;
-				gbc_spaceBoundinfo5.gridy = 12;
+				gbc_spaceBoundinfo5.gridy = 14;
 				panel.add(spaceBoundinfo5, gbc_spaceBoundinfo5);
 				
-				JButton btnAnimal = new JButton("Animal");
-				btnAnimal.setForeground(new Color(0, 51, 153));
-				btnAnimal.setFont(new Font("Gisha", Font.PLAIN, 12));
-				btnAnimal.setBackground(new Color(255, 255, 255));
-				GridBagConstraints gbc_btnAnimal = new GridBagConstraints();
-				gbc_btnAnimal.anchor = GridBagConstraints.WEST;
-				gbc_btnAnimal.gridwidth = 2;
-				gbc_btnAnimal.insets = new Insets(0, 0, 5, 5);
-				gbc_btnAnimal.gridx = 3;
-				gbc_btnAnimal.gridy = 13;
-				panel.add(btnAnimal, gbc_btnAnimal);
-				frmInformationsClient.setVisible(true);
+				JComboBox animalCmb = new JComboBox();
+				GridBagConstraints gbc_animalCmb = new GridBagConstraints();
+				gbc_animalCmb.gridwidth = 2;
+				gbc_animalCmb.insets = new Insets(0, 0, 5, 5);
+				gbc_animalCmb.fill = GridBagConstraints.HORIZONTAL;
+				gbc_animalCmb.gridx = 1;
+				gbc_animalCmb.gridy = 13;
+				panel.add(animalCmb, gbc_animalCmb);
 				
+				//TODO
+				//animalCmb.add()
+				
+				frmInformationsClient.setVisible(true);
 			}
-			
 		});
 		buttonPlus.setForeground(new Color(0, 51, 153));
 		buttonPlus.setFont(new Font("Gisha", Font.PLAIN, 12));
@@ -999,7 +1233,7 @@ public class MainView {
 		panelPersonnels.setBackground(new Color(255, 255, 255));
 		vetoPane.setViewportView(panelPersonnels);
 		GridBagLayout gbl_panelPersonnels = new GridBagLayout();
-		gbl_panelPersonnels.columnWidths = new int[] { 47, 315, 20, 0, 0, 0 };
+		gbl_panelPersonnels.columnWidths = new int[] { 25, 315, 20, 0, 0, 0 };
 		gbl_panelPersonnels.rowHeights = new int[] { 41, 19, 353, 28, 0 };
 		gbl_panelPersonnels.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_panelPersonnels.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
@@ -1033,7 +1267,7 @@ public class MainView {
 
 		DefaultListModel<Personnels> listModel = new DefaultListModel<Personnels>();
 		JList list = new JList(listModel);
-		list.setBorder(new MatteBorder(0, 0, 0, 3, (Color) new Color(0, 51, 153)));
+		list.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 51, 153)));
 		list.setFont(new Font("Levenim MT", Font.PLAIN, 14));
 		list.setForeground(new Color(0, 51, 153));
 		ArrayList<Personnels> listePersonnels = new ArrayList<Personnels>();
