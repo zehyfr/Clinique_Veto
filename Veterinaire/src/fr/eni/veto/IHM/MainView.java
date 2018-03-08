@@ -700,7 +700,7 @@ public class MainView {
 				panel.add(lblAjouterClient, gbc_lblAjouterClient);
 				
 				JLabel label = new JLabel("");
-				label.setIcon(new ImageIcon("/ressources/client icon.png"));
+				label.setIcon(new ImageIcon(MainView.class.getResource("/ressources/ajoutClient icon.jpg")));
 				GridBagConstraints gbc_label = new GridBagConstraints();
 				gbc_label.gridwidth = 2;
 				gbc_label.insets = new Insets(0, 0, 5, 5);
@@ -945,7 +945,6 @@ public class MainView {
 				panel.add(commentaireTxt, gbc_commentaireTxt);
 				
 				JButton btnAjouterCAdd = new JButton("Ajouter");
-				btnAjouterCAdd.setIcon(new ImageIcon("/ressources/blue.png"));
 				btnAjouterCAdd.setForeground(new Color(0, 51, 153));
 				btnAjouterCAdd.setFont(new Font("Gisha", Font.PLAIN, 12));
 				btnAjouterCAdd.setBackground(new Color(255, 255, 255));
