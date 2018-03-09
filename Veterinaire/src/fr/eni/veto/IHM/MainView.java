@@ -3,6 +3,7 @@ package fr.eni.veto.IHM;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -11,8 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -31,12 +37,12 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import fr.eni.veto.BLL.AnimalMger;
 import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.BO.Clients;
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.CTRL.Controler;
 import fr.eni.veto.DAL.DALException;
+import javax.swing.border.LineBorder;
 
 public class MainView {
 
@@ -55,15 +61,20 @@ public class MainView {
 	private JFrame frmAjouterDuClient;
 	private JFrame frmInformationsClient;
 
+	private Date dateJour;
+
 	private ArrayList<Animaux> arrayListAnimaux;
+
+	private String droitVisibility;
 
 	private Clients nouveau;
 
 	/**
 	 * Create the application.
 	 */
-	public MainView(Controler controler) {
+	public MainView(Controler controler, String aCode) {
 		this.ctrl = controler;
+		droitVisibility = aCode;
 		initialize();
 	}
 
@@ -91,38 +102,140 @@ public class MainView {
 		frmGestion.getContentPane().add(tabbedPane, gbc_tabbedPane);
 
 		/**
-		 * AGENDA PANEL
+		 * ACCUEIL PANEL
 		 */
+
+		JScrollPane scrollPane = new JScrollPane();
+		tabbedPane.addTab("Accueil", new ImageIcon(MainView.class.getResource("/ressources/accueil ico.png")), scrollPane, null);
+		tabbedPane.setForegroundAt(0, new Color(0, 51, 153));
+		JPanel panelAccueil = new JPanel(){
+			protected void paintComponent(Graphics g) {
+				try {
+					g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
+				} catch (IOException e) {
+				}
+			}
+		};
+		panelAccueil.setBackground(new Color(204, 204, 204));
+		scrollPane.setViewportView(panelAccueil);
+		GridBagLayout gbl_panelAccueil = new GridBagLayout();
+		gbl_panelAccueil.columnWidths = new int[]{36, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 115, 0, 0};
+		gbl_panelAccueil.rowHeights = new int[]{23, 40, 82, 0, 0};
+		gbl_panelAccueil.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelAccueil.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panelAccueil.setLayout(gbl_panelAccueil);
+		
+		JLabel spaceBoundAccueil = new JLabel("");
+		GridBagConstraints gbc_spaceBoundAccueil = new GridBagConstraints();
+		gbc_spaceBoundAccueil.insets = new Insets(0, 0, 5, 5);
+		gbc_spaceBoundAccueil.gridx = 0;
+		gbc_spaceBoundAccueil.gridy = 0;
+		panelAccueil.add(spaceBoundAccueil, gbc_spaceBoundAccueil);
+		JLabel dateLbl = new JLabel();
+		dateLbl.setText("heure");
+		dateLbl.setForeground(new Color(255, 255, 255));
+		dateLbl.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
+		GridBagConstraints gbc_dateLbl = new GridBagConstraints();
+		gbc_dateLbl.anchor = GridBagConstraints.EAST;
+		gbc_dateLbl.gridwidth = 5;
+		gbc_dateLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_dateLbl.gridx = 8;
+		gbc_dateLbl.gridy = 0;
+		panelAccueil.add(dateLbl, gbc_dateLbl);
+
+		JLabel iconLbl = new JLabel("");
+		iconLbl.setIcon(new ImageIcon(MainView.class.getResource("/ressources/accueilVetoICO.jpg")));
+		GridBagConstraints gbc_iconLbl = new GridBagConstraints();
+		gbc_iconLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_iconLbl.gridx = 1;
+		gbc_iconLbl.gridy = 1;
+		panelAccueil.add(iconLbl, gbc_iconLbl);
+		new Thread(){
+			@Override
+			public void run(){
+				while(true){
+					dateJour = new Date(System.currentTimeMillis());
+					dateLbl.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dateJour));
+				}
+			}
+		}.start();
+		
+				JLabel bienvenueLbl = new JLabel("BIENVENUE");
+				bienvenueLbl.setForeground(new Color(255, 255, 255));
+				bienvenueLbl.setFont(new Font("Gisha", Font.BOLD, 30));
+				GridBagConstraints gbc_bienvenueLbl = new GridBagConstraints();
+				gbc_bienvenueLbl.anchor = GridBagConstraints.NORTH;
+				gbc_bienvenueLbl.insets = new Insets(0, 0, 5, 5);
+				gbc_bienvenueLbl.gridx = 3;
+				gbc_bienvenueLbl.gridy = 1;
+				panelAccueil.add(bienvenueLbl, gbc_bienvenueLbl);
+
 		JScrollPane agendaPane = new JScrollPane();
 		tabbedPane.addTab("Agenda", new ImageIcon(MainView.class.getResource("/ressources/calendar ico.png")),
 				agendaPane, null);
-		tabbedPane.setForegroundAt(0, new Color(0, 51, 153));
-		tabbedPane.setBackgroundAt(0, new Color(255, 255, 255));
+		tabbedPane.setForegroundAt(1, new Color(0, 51, 153));
+		tabbedPane.setBackgroundAt(1, new Color(255, 255, 255));
 
-		JPanel panelAgenda = new JPanel();
-		panelAgenda.setBackground(new Color(255, 255, 255));
+		JPanel panelAgenda = new JPanel()
+		{
+			protected void paintComponent(Graphics g) {
+				try {
+					g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
+				} catch (IOException e) {
+				}
+			}
+		};
+		panelAgenda.setBackground(new Color(204, 204, 204));
 		agendaPane.setViewportView(panelAgenda);
 		GridBagLayout gbl_panelAgenda = new GridBagLayout();
-		gbl_panelAgenda.columnWidths = new int[] { 0 };
-		gbl_panelAgenda.rowHeights = new int[] { 0 };
-		gbl_panelAgenda.columnWeights = new double[] { Double.MIN_VALUE };
-		gbl_panelAgenda.rowWeights = new double[] { Double.MIN_VALUE };
+		gbl_panelAgenda.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panelAgenda.rowHeights = new int[] { 21, 0, 0 };
+		gbl_panelAgenda.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panelAgenda.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		panelAgenda.setLayout(gbl_panelAgenda);
+		
+		JLabel label_5 = new JLabel();
+		label_5.setForeground(Color.WHITE);
+		label_5.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
+		GridBagConstraints gbc_label_5 = new GridBagConstraints();
+		gbc_label_5.gridwidth = 5;
+		gbc_label_5.insets = new Insets(0, 0, 5, 0);
+		gbc_label_5.gridx = 9;
+		gbc_label_5.gridy = 0;
+		panelAgenda.add(label_5, gbc_label_5);
+		
+		JLabel label_4 = new JLabel("Gestion des clients");
+		label_4.setForeground(Color.WHITE);
+		label_4.setFont(new Font("Gisha", Font.BOLD, 30));
+		GridBagConstraints gbc_label_4 = new GridBagConstraints();
+		gbc_label_4.insets = new Insets(0, 0, 0, 5);
+		gbc_label_4.gridx = 2;
+		gbc_label_4.gridy = 1;
+		panelAgenda.add(label_4, gbc_label_4);
 
 		/**
 		 * CLIENT PANEL
 		 */
-		JScrollPane clientPane = new JScrollPane();
-		tabbedPane.addTab("Gestion Clients", new ImageIcon(MainView.class.getResource("/ressources/client ico.png")),
-				clientPane, null);
 
-		JPanel panelClient = new JPanel();
-		panelClient.setBackground(new Color(255, 255, 255));
+		JScrollPane clientPane = new JScrollPane();
+		tabbedPane.addTab("Gestion Clients",
+				new ImageIcon(MainView.class.getResource("/ressources/client ico.png")), clientPane, null);
+
+		JPanel panelClient = new JPanel()
+		{
+			protected void paintComponent(Graphics g) {
+				try {
+					g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
+				} catch (IOException e) {
+				}
+			}
+		};
+		panelClient.setBackground(new Color(204, 204, 204));
 		clientPane.setViewportView(panelClient);
 		GridBagLayout gbl_panelClient = new GridBagLayout();
-		gbl_panelClient.columnWidths = new int[] { 26, 108, 240, 41, 246, 0, 0 };
-		gbl_panelClient.rowHeights = new int[] { 16, 18, 16, 336, 0 };
-		gbl_panelClient.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panelClient.columnWidths = new int[] { 26, 38, 143, 164, 15, 253, 17, 0 };
+		gbl_panelClient.rowHeights = new int[] { 25, 36, 40, 299, 0 };
+		gbl_panelClient.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_panelClient.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelClient.setLayout(gbl_panelClient);
 
@@ -132,6 +245,26 @@ public class MainView {
 		gbc_spaceBoundC2lbl.gridx = 1;
 		gbc_spaceBoundC2lbl.gridy = 0;
 		panelClient.add(spaceBoundC2lbl, gbc_spaceBoundC2lbl);
+		
+		JLabel heureGestion = new JLabel();
+		new Thread(){
+			@Override
+			public void run(){
+				while(true){
+					dateJour = new Date(System.currentTimeMillis());
+					heureGestion.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dateJour));
+				}
+			}
+		}.start();
+		heureGestion.setForeground(Color.WHITE);
+		heureGestion.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
+		GridBagConstraints gbc_heureGestion = new GridBagConstraints();
+		gbc_heureGestion.gridwidth = 2;
+		gbc_heureGestion.anchor = GridBagConstraints.EAST;
+		gbc_heureGestion.insets = new Insets(0, 0, 5, 5);
+		gbc_heureGestion.gridx = 5;
+		gbc_heureGestion.gridy = 0;
+		panelClient.add(heureGestion, gbc_heureGestion);
 
 		JLabel spaceBoundC3lbl = new JLabel("");
 		GridBagConstraints gbc_spaceBoundC3lbl = new GridBagConstraints();
@@ -140,21 +273,22 @@ public class MainView {
 		gbc_spaceBoundC3lbl.gridx = 0;
 		gbc_spaceBoundC3lbl.gridy = 1;
 		panelClient.add(spaceBoundC3lbl, gbc_spaceBoundC3lbl);
-
-		JLabel clientTitleLbl = new JLabel("Gestion des clients");
-		clientTitleLbl.setForeground(new Color(0, 51, 153));
-		clientTitleLbl.setFont(new Font("Gisha", Font.BOLD, 18));
-		GridBagConstraints gbc_clientTitleLbl = new GridBagConstraints();
-		gbc_clientTitleLbl.anchor = GridBagConstraints.NORTHWEST;
-		gbc_clientTitleLbl.insets = new Insets(0, 0, 5, 5);
-		gbc_clientTitleLbl.gridx = 2;
-		gbc_clientTitleLbl.gridy = 1;
-		panelClient.add(clientTitleLbl, gbc_clientTitleLbl);
+		
+		JLabel gestionClientTitleLbl = new JLabel("Gestion des clients");
+		gestionClientTitleLbl.setForeground(Color.WHITE);
+		gestionClientTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
+		GridBagConstraints gbc_gestionClientTitleLbl = new GridBagConstraints();
+		gbc_gestionClientTitleLbl.gridwidth = 2;
+		gbc_gestionClientTitleLbl.anchor = GridBagConstraints.WEST;
+		gbc_gestionClientTitleLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_gestionClientTitleLbl.gridx = 2;
+		gbc_gestionClientTitleLbl.gridy = 1;
+		panelClient.add(gestionClientTitleLbl, gbc_gestionClientTitleLbl);
 
 		JLabel spaceBoundCLbl = new JLabel("");
 		GridBagConstraints gbc_spaceBoundCLbl = new GridBagConstraints();
 		gbc_spaceBoundCLbl.insets = new Insets(0, 0, 5, 5);
-		gbc_spaceBoundCLbl.gridx = 3;
+		gbc_spaceBoundCLbl.gridx = 4;
 		gbc_spaceBoundCLbl.gridy = 1;
 		panelClient.add(spaceBoundCLbl, gbc_spaceBoundCLbl);
 
@@ -178,7 +312,7 @@ public class MainView {
 		liste.setFont(new Font("Levenim MT", Font.PLAIN, 14));
 		liste.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 51, 153)));
 		GridBagConstraints gbc_listeClient = new GridBagConstraints();
-		gbc_listeClient.gridwidth = 2;
+		gbc_listeClient.gridwidth = 3;
 		gbc_listeClient.insets = new Insets(0, 0, 0, 5);
 		gbc_listeClient.fill = GridBagConstraints.BOTH;
 		gbc_listeClient.gridx = 1;
@@ -192,13 +326,13 @@ public class MainView {
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 4;
+		gbc_panel_1.gridx = 5;
 		gbc_panel_1.gridy = 3;
 		panelClient.add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[] { 67, 55, 67, 0, 0 };
+		gbl_panel_1.columnWidths = new int[] { 13, 37, 35, 55, 67, 0, 0 };
 		gbl_panel_1.rowHeights = new int[] { 28, 0, 16, 0, 25, 0, 36, 14, 0 };
-		gbl_panel_1.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panel_1.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 
@@ -208,7 +342,7 @@ public class MainView {
 		GridBagConstraints gbc_identifiantCLbl = new GridBagConstraints();
 		gbc_identifiantCLbl.anchor = GridBagConstraints.EAST;
 		gbc_identifiantCLbl.insets = new Insets(0, 0, 5, 5);
-		gbc_identifiantCLbl.gridx = 0;
+		gbc_identifiantCLbl.gridx = 2;
 		gbc_identifiantCLbl.gridy = 1;
 		panel_1.add(identifiantCLbl, gbc_identifiantCLbl);
 
@@ -222,7 +356,7 @@ public class MainView {
 		gbc_clientNameLbl.gridwidth = 2;
 		gbc_clientNameLbl.anchor = GridBagConstraints.NORTHWEST;
 		gbc_clientNameLbl.insets = new Insets(0, 0, 5, 5);
-		gbc_clientNameLbl.gridx = 1;
+		gbc_clientNameLbl.gridx = 3;
 		gbc_clientNameLbl.gridy = 1;
 		panel_1.add(clientNameLbl, gbc_clientNameLbl);
 
@@ -275,8 +409,8 @@ public class MainView {
 				gbl_panel.columnWidths = new int[] { 49, 83, 112, 70, 28, 28, 332, 23, 0 };
 				gbl_panel.rowHeights = new int[] { 17, 0, 29, 20, 20, 0, 23, 0, 20, 0, 19, 0, 20, 0, 25, 0, 0 };
 				gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
-				gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-						0.0, 0.0, 0.0, Double.MIN_VALUE };
+				gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+						0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 				panel.setLayout(gbl_panel);
 
 				// titre de la vue
@@ -372,7 +506,8 @@ public class MainView {
 				GridBagLayout gbl_panelAnimal = new GridBagLayout();
 				gbl_panelAnimal.columnWidths = new int[] { 0, 23, 89, 19, 44, 99, 0, 0 };
 				gbl_panelAnimal.rowHeights = new int[] { 13, 0, 21, 0, 22, 22, 19, 0, 26, 0, 0 };
-				gbl_panelAnimal.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+				gbl_panelAnimal.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,
+						Double.MIN_VALUE };
 				gbl_panelAnimal.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 						Double.MIN_VALUE };
 				panelAnimal.setLayout(gbl_panelAnimal);
@@ -824,6 +959,7 @@ public class MainView {
 				String emptyAnimal = "Pas d'animal";
 				if (arrayListAnimaux.isEmpty()) {
 					animalCmb.insertItemAt(emptyAnimal, 0);
+					animalCmb.setSelectedIndex(0);
 					ajouterAnimalBtn.setVisible(true);
 				} else {
 					animalCmb.setModel(new DefaultComboBoxModel(arrayListAnimaux.toArray()));
@@ -852,7 +988,8 @@ public class MainView {
 							tatouageAnimalTxt.setText("");
 							antecedantAnimalTxt.setText("");
 						} else {
-							numeroAnimalTxt.setText(Integer.toString(arrayListAnimaux.get(indexCmb).getCodeAnimal()));
+							numeroAnimalTxt
+							.setText(Integer.toString(arrayListAnimaux.get(indexCmb).getCodeAnimal()));
 							nomAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getNomAnimal());
 							sexeAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getSexe());
 							couleurAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getCouleur());
@@ -866,12 +1003,11 @@ public class MainView {
 
 				panel.add(animalCmb, gbc_animalCmb);
 
-				//BOUTTON ANNULER ANIMAL
+				// BOUTTON ANNULER ANIMAL
 				annulerAnimalBtn.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						if(animalCmb.getItemAt(indexCmb).equals(emptyAnimal))
-						{
+						if (animalCmb.getItemAt(indexCmb).equals(emptyAnimal)) {
 							nomAnimalTxt.setText("");
 							sexeAnimalTxt.setText("");
 							couleurAnimalTxt.setText("");
@@ -879,10 +1015,9 @@ public class MainView {
 							especeAnimalTxt.setText("");
 							tatouageAnimalTxt.setText("");
 							antecedantAnimalTxt.setText("");
-						}
-						else
-						{
-							numeroAnimalTxt.setText(Integer.toString(arrayListAnimaux.get(indexCmb).getCodeAnimal()));
+						} else {
+							numeroAnimalTxt
+							.setText(Integer.toString(arrayListAnimaux.get(indexCmb).getCodeAnimal()));
 							nomAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getNomAnimal());
 							sexeAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getSexe());
 							couleurAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getCouleur());
@@ -893,12 +1028,15 @@ public class MainView {
 						}
 					}
 				});
-				
-				//BOUTTON AJOUTER ANIMAL
+
+				// BOUTTON AJOUTER ANIMAL
 				ajouterAnimalBtn.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Animaux newAnimal = new Animaux(nomAnimalTxt.getText(), sexeAnimalTxt.getText(), couleurAnimalTxt.getText(), raceAnimalTxt.getText(), especeAnimalTxt.getText(), listModelClient.get(indexClient).getCodeClient() ,tatouageAnimalTxt.getText(), antecedantAnimalTxt.getText(), false);
+						Animaux newAnimal = new Animaux(nomAnimalTxt.getText(), sexeAnimalTxt.getText(),
+								couleurAnimalTxt.getText(), raceAnimalTxt.getText(), especeAnimalTxt.getText(),
+								listModelClient.get(indexClient).getCodeClient(), tatouageAnimalTxt.getText(),
+								antecedantAnimalTxt.getText(), false);
 						try {
 							ctrl.insertAnimal(newAnimal);
 						} catch (DALException e1) {
@@ -907,13 +1045,12 @@ public class MainView {
 						}
 					}
 				});
-				
 
-				//BOUTTON VALIDER ANIMAL
+				// BOUTTON VALIDER ANIMAL
 				validerAnimalBtn.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
+
 					}
 				});
 
@@ -924,9 +1061,9 @@ public class MainView {
 		buttonPlus.setFont(new Font("Gisha", Font.PLAIN, 12));
 		buttonPlus.setBackground(Color.WHITE);
 		GridBagConstraints gbc_buttonPlus = new GridBagConstraints();
-		gbc_buttonPlus.gridwidth = 3;
+		gbc_buttonPlus.gridwidth = 4;
 		gbc_buttonPlus.insets = new Insets(0, 0, 5, 5);
-		gbc_buttonPlus.gridx = 0;
+		gbc_buttonPlus.gridx = 1;
 		gbc_buttonPlus.gridy = 3;
 		panel_1.add(buttonPlus, gbc_buttonPlus);
 
@@ -935,9 +1072,9 @@ public class MainView {
 		label_10.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_label_10 = new GridBagConstraints();
 		gbc_label_10.anchor = GridBagConstraints.SOUTH;
-		gbc_label_10.gridwidth = 3;
+		gbc_label_10.gridwidth = 4;
 		gbc_label_10.insets = new Insets(0, 0, 5, 5);
-		gbc_label_10.gridx = 0;
+		gbc_label_10.gridx = 1;
 		gbc_label_10.gridy = 5;
 		panel_1.add(label_10, gbc_label_10);
 
@@ -1036,9 +1173,9 @@ public class MainView {
 		archiverClientBtn.setBackground(Color.WHITE);
 		GridBagConstraints gbc_archiverClientBtn = new GridBagConstraints();
 		gbc_archiverClientBtn.anchor = GridBagConstraints.WEST;
-		gbc_archiverClientBtn.gridwidth = 2;
+		gbc_archiverClientBtn.gridwidth = 3;
 		gbc_archiverClientBtn.insets = new Insets(0, 0, 0, 5);
-		gbc_archiverClientBtn.gridx = 0;
+		gbc_archiverClientBtn.gridx = 1;
 		gbc_archiverClientBtn.gridy = 7;
 		panel_1.add(archiverClientBtn, gbc_archiverClientBtn);
 
@@ -1061,8 +1198,8 @@ public class MainView {
 				gbl_panel.columnWidths = new int[] { 45, 46, 70, 85, 16, 43, 161, 0, 0 };
 				gbl_panel.rowHeights = new int[] { 22, 0, 23, 0, 18, 19, 15, 0, 14, 0, 20, 0, 0, 0 };
 				gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-				gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
-						Double.MIN_VALUE };
+				gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+						1.0, Double.MIN_VALUE };
 				panel.setLayout(gbl_panel);
 
 				JLabel lblAjouterClient = new JLabel("Ajouter un client");
@@ -1335,9 +1472,9 @@ public class MainView {
 				btnAjouterCAdd.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						nouveau = new Clients(nomTxtCAdd.getText(), prenomClientTxtAdd.getText(),
-								adresse1ClientTxt.getText(), adresseClient2Txt.getText(), codePostalTxtAdd.getText(),
-								villeTxtAdd.getText(), telTxt.getText(), "no", emailTxt.getText(),
-								commentaireTxt.getText(), false);
+								adresse1ClientTxt.getText(), adresseClient2Txt.getText(),
+								codePostalTxtAdd.getText(), villeTxtAdd.getText(), telTxt.getText(), "no",
+								emailTxt.getText(), commentaireTxt.getText(), false);
 						ctrl.ajouterClient(nouveau);
 						frmAjouterDuClient.setVisible(false);
 					}
@@ -1359,55 +1496,85 @@ public class MainView {
 		GridBagConstraints gbc_addClientButton = new GridBagConstraints();
 		gbc_addClientButton.anchor = GridBagConstraints.EAST;
 		gbc_addClientButton.insets = new Insets(0, 0, 0, 5);
-		gbc_addClientButton.gridx = 2;
+		gbc_addClientButton.gridx = 4;
 		gbc_addClientButton.gridy = 7;
 		panel_1.add(addClientButton, gbc_addClientButton);
-		tabbedPane.setForegroundAt(1, new Color(0, 51, 153));
-		tabbedPane.setBackgroundAt(1, new Color(255, 255, 255));
+		tabbedPane.setForegroundAt(2, new Color(0, 51, 153));
+		tabbedPane.setBackgroundAt(2, new Color(255, 255, 255));
 
 		// FIN BOUTON AJOUTER CLIENT
-
-		JScrollPane vetoPane = new JScrollPane();
-		tabbedPane.addTab("Gestion du personnel",
-				new ImageIcon(MainView.class.getResource("/ressources/veto icon.png")), vetoPane, null);
-		tabbedPane.setBackgroundAt(2, new Color(255, 255, 255));
-		tabbedPane.setForegroundAt(2, new Color(0, 51, 153));
 
 		/**
 		 * PERSONNELS PANEL
 		 */
-		JPanel panelPersonnels = new JPanel();
-		panelPersonnels.setBackground(new Color(255, 255, 255));
+
+		JScrollPane vetoPane = new JScrollPane();
+		tabbedPane.addTab("Gestion du personnel",
+				new ImageIcon(MainView.class.getResource("/ressources/veto icon.png")), vetoPane, null);
+		tabbedPane.setBackgroundAt(3, new Color(255, 255, 255));
+		tabbedPane.setForegroundAt(3, new Color(0, 51, 153));
+
+		JPanel panelPersonnels = new JPanel()
+
+		{
+			protected void paintComponent(Graphics g) {
+				try {
+					g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
+				} catch (IOException e) {
+				}
+			}
+		};
+		panelPersonnels.setBackground(new Color(204, 204, 204));
 		vetoPane.setViewportView(panelPersonnels);
 		GridBagLayout gbl_panelPersonnels = new GridBagLayout();
-		gbl_panelPersonnels.columnWidths = new int[] { 25, 315, 20, 0, 0, 0 };
-		gbl_panelPersonnels.rowHeights = new int[] { 41, 19, 353, 28, 0 };
-		gbl_panelPersonnels.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
-		gbl_panelPersonnels.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_panelPersonnels.columnWidths = new int[] { 26, 345, 30, 0, 0, 0 };
+		gbl_panelPersonnels.rowHeights = new int[] { 22, 48, 36, 312, 7, 0 };
+		gbl_panelPersonnels.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_panelPersonnels.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelPersonnels.setLayout(gbl_panelPersonnels);
-
-		JLabel gestionPersonnelTitleLbl = new JLabel("Gestion du personnel");
-		gestionPersonnelTitleLbl.setForeground(new Color(0, 51, 153));
-		gestionPersonnelTitleLbl.setFont(new Font("Gisha", Font.BOLD, 18));
-		GridBagConstraints gbc_gestionPersonnelTitleLbl = new GridBagConstraints();
-		gbc_gestionPersonnelTitleLbl.anchor = GridBagConstraints.SOUTH;
-		gbc_gestionPersonnelTitleLbl.insets = new Insets(0, 0, 5, 5);
-		gbc_gestionPersonnelTitleLbl.gridx = 1;
-		gbc_gestionPersonnelTitleLbl.gridy = 0;
-		panelPersonnels.add(gestionPersonnelTitleLbl, gbc_gestionPersonnelTitleLbl);
+		
+		JLabel heureGestionPersonnelLbl = new JLabel();
+		new Thread(){
+			@Override
+			public void run(){
+				while(true){
+					dateJour = new Date(System.currentTimeMillis());
+					heureGestionPersonnelLbl.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dateJour));
+				}
+			}
+		}.start();
+		heureGestionPersonnelLbl.setForeground(Color.WHITE);
+		heureGestionPersonnelLbl.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
+		GridBagConstraints gbc_heureGestionPersonnelLbl = new GridBagConstraints();
+		gbc_heureGestionPersonnelLbl.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_heureGestionPersonnelLbl.gridwidth = 2;
+		gbc_heureGestionPersonnelLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_heureGestionPersonnelLbl.gridx = 3;
+		gbc_heureGestionPersonnelLbl.gridy = 0;
+		panelPersonnels.add(heureGestionPersonnelLbl, gbc_heureGestionPersonnelLbl);
+		
+		JLabel gestionPersonelleTitleLbl = new JLabel(" Gestion du personnel");
+		gestionPersonelleTitleLbl.setForeground(Color.WHITE);
+		gestionPersonelleTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
+		GridBagConstraints gbc_gestionPersonelleTitleLbl = new GridBagConstraints();
+		gbc_gestionPersonelleTitleLbl.gridwidth = 2;
+		gbc_gestionPersonelleTitleLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_gestionPersonelleTitleLbl.gridx = 1;
+		gbc_gestionPersonelleTitleLbl.gridy = 1;
+		panelPersonnels.add(gestionPersonelleTitleLbl, gbc_gestionPersonelleTitleLbl);
 
 		JLabel spaceBoundLbl = new JLabel("");
 		GridBagConstraints gbc_spaceBoundLbl = new GridBagConstraints();
 		gbc_spaceBoundLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_spaceBoundLbl.gridx = 0;
-		gbc_spaceBoundLbl.gridy = 1;
+		gbc_spaceBoundLbl.gridy = 2;
 		panelPersonnels.add(spaceBoundLbl, gbc_spaceBoundLbl);
 
 		JLabel spaceBoundLbl3 = new JLabel("");
 		GridBagConstraints gbc_spaceBoundLbl3 = new GridBagConstraints();
 		gbc_spaceBoundLbl3.insets = new Insets(0, 0, 5, 5);
 		gbc_spaceBoundLbl3.gridx = 2;
-		gbc_spaceBoundLbl3.gridy = 1;
+		gbc_spaceBoundLbl3.gridy = 2;
 		panelPersonnels.add(spaceBoundLbl3, gbc_spaceBoundLbl3);
 
 		// LISTE VIEW PERSONNELS
@@ -1427,7 +1594,7 @@ public class MainView {
 		gbc_list.insets = new Insets(0, 0, 5, 5);
 		gbc_list.fill = GridBagConstraints.BOTH;
 		gbc_list.gridx = 1;
-		gbc_list.gridy = 2;
+		gbc_list.gridy = 3;
 		panelPersonnels.add(list, gbc_list);
 		list.setSelectedIndex(0);
 
@@ -1437,7 +1604,7 @@ public class MainView {
 		gbc_idPanel.insets = new Insets(0, 0, 5, 5);
 		gbc_idPanel.fill = GridBagConstraints.BOTH;
 		gbc_idPanel.gridx = 3;
-		gbc_idPanel.gridy = 2;
+		gbc_idPanel.gridy = 3;
 		panelPersonnels.add(idPanel, gbc_idPanel);
 		GridBagLayout gbl_idPanel = new GridBagLayout();
 		gbl_idPanel.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0 };
@@ -1880,7 +2047,8 @@ public class MainView {
 				gbc_btnAjouterAdd.gridx = 3;
 				gbc_btnAjouterAdd.gridy = 7;
 				panel.add(btnAjouterAdd, gbc_btnAjouterAdd);
-				frmAjouterDuPersonnel.setIconImage(Toolkit.getDefaultToolkit().getImage("/ressources/ico_veto.png"));
+				frmAjouterDuPersonnel
+				.setIconImage(Toolkit.getDefaultToolkit().getImage("/ressources/ico_veto.png"));
 				frmAjouterDuPersonnel.setTitle("Ajouter du personnel");
 				frmAjouterDuPersonnel.setBounds(100, 100, 347, 276);
 				frmAjouterDuPersonnel.setLocationRelativeTo(null);
@@ -1931,7 +2099,7 @@ public class MainView {
 		GridBagConstraints gbc_spaceBoundLbl2 = new GridBagConstraints();
 		gbc_spaceBoundLbl2.insets = new Insets(0, 0, 0, 5);
 		gbc_spaceBoundLbl2.gridx = 0;
-		gbc_spaceBoundLbl2.gridy = 3;
+		gbc_spaceBoundLbl2.gridy = 4;
 		panelPersonnels.add(spaceBoundLbl2, gbc_spaceBoundLbl2);
 		frmGestion.setForeground(Color.WHITE);
 		frmGestion.setTitle("Gestion");
@@ -2055,10 +2223,12 @@ public class MainView {
 					break;
 				}
 				listModel.get(indexPersonnel).getRole();
-
 			}
 		});
 
+		// VISIBILITY DES ONGLETS
+
+		frmGestion.setBounds(100, 100, 700, 500);
 		frmGestion.setLocationRelativeTo(null);
 		frmGestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGestion.setVisible(true);

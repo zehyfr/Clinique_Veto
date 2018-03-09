@@ -9,14 +9,23 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 import java.awt.Font;
 import javax.swing.JLabel;
 import java.awt.Insets;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
+
+import fr.eni.veto.BO.Animaux;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
@@ -61,5 +70,5 @@ public class test {
 	private void initialize() {
 		
 	}
-
+		
 }

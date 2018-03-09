@@ -19,7 +19,7 @@ import fr.eni.veto.IHM.MainView;
 
 public class Controler {
 
-	private boolean res = false;
+	private String res = "";
 
 	@SuppressWarnings("unused")
 	private Authentification auth;
@@ -34,13 +34,15 @@ public class Controler {
 	 * Connection personnel
 	 * @param aNom, aRole, aCodePers
 	 */
-	public boolean validation(String login, String mdp) {
+	public String validation(String login, String mdp) {
 		LoginMger log = new LoginMger();
 		int loginInt = Integer.parseInt(login);
 
 		if (log.connection(loginInt, mdp).equals("VET") || log.connection(loginInt, mdp).equals("ADM")
 				|| log.connection(loginInt, mdp).equals("SEC")) {
-			res = true;
+			res = log.connection(loginInt, mdp);
+		}else{
+			res = "0";
 		}
 		return res;
 	}
@@ -68,8 +70,8 @@ public class Controler {
 	/**
 	 * Contrôle d'accès
 	 */
-	public void acces() {
-		this.main = new MainView(this);
+	public void acces(String aCode) {
+		this.main = new MainView(this, aCode);
 	}
 	
 	/**
