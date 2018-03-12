@@ -1,24 +1,20 @@
 package fr.eni.veto.DAL;
 
-import fr.eni.veto.BO.Animaux;
+import java.util.Date;
+
+import fr.eni.veto.BO.Agendas;
+import fr.eni.veto.DAL.agenda.AgendaDAOImpl;
 
 public class AppliTestDAL {
 	
 	public static void main(String[] args) {
-		
-		AnimauxDAOImpl co = new AnimauxDAOImpl();
-		Animaux a = new Animaux("Petit Tonnerre", "M", "Brin", "Pur Sang Arabe", "Cheval", 7, "65-THE-8", "Il est con", false);
+		AgendaDAOImpl dao = new AgendaDAOImpl();
+		Agendas a = new Agendas(8, new Date(System.currentTimeMillis()), 6);
 		try {
-			co.insertAnimal(a);
-			System.out.println(co.selectByCodeClient(7).toString());
-			a.setNomAnimal("Kebab");
-			co.updateAnimal(a);
-			System.out.println(co.selectByCodeClient(7).toString());
-			co.deleteAnimal(a.getCodeAnimal());
-			System.out.println(co.selectByCodeClient(7));
-		} catch (DALException e) {
+		dao.ajouterRdv(a);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("DONE");
+		//System.out.println("DONE");
 	}
 }
