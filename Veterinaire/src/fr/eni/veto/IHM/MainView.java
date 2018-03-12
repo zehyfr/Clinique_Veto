@@ -221,7 +221,7 @@ public class MainView {
 		heureAgendaLbl.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
 		GridBagConstraints gbc_heureAgendaLbl = new GridBagConstraints();
 		gbc_heureAgendaLbl.gridwidth = 2;
-		gbc_heureAgendaLbl.anchor = GridBagConstraints.SOUTH;
+		gbc_heureAgendaLbl.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_heureAgendaLbl.insets = new Insets(0, 0, 5, 0);
 		gbc_heureAgendaLbl.gridx = 6;
 		gbc_heureAgendaLbl.gridy = 0;
