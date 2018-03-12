@@ -40,6 +40,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
+
 import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.BO.Clients;
 import fr.eni.veto.BO.Personnels;
@@ -73,6 +76,8 @@ public class MainView {
 
 	private Clients nouveau;
 	private JTextField textField;
+	
+	private JDateChooser dateField;
 
 	/**
 	 * Create the application.
@@ -247,10 +252,10 @@ public class MainView {
 		panelAgenda.add(panel_2, gbc_panel_2);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[] { 42, 115, 33, 111, 20, 61, 41, 22, 43, 12, 0 };
-		gbl_panel_2.rowHeights = new int[] { 21, 0, 0, 0, 0, 120, 0 };
+		gbl_panel_2.rowHeights = new int[] { 21, 0, 0, 0, 0, 0, 120, 0 };
 		gbl_panel_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
-		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_2.setLayout(gbl_panel_2);
 
 		JLabel lblClient = new JLabel("Client :");
@@ -301,16 +306,16 @@ public class MainView {
 		gbc_dateAgendaLbl.gridy = 1;
 		panel_2.add(dateAgendaLbl, gbc_dateAgendaLbl);
 
-		textField = new JTextField();
-		textField.setFont(new Font("Gisha", Font.PLAIN, 12));
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.gridwidth = 3;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 6;
-		gbc_textField.gridy = 1;
-		panel_2.add(textField, gbc_textField);
-		textField.setColumns(10);
+		dateField = new JDateChooser();
+		dateField.setBackground(new Color(255, 255, 255));
+		dateField.setForeground(new Color(0, 51, 153));
+		GridBagConstraints calendar = new GridBagConstraints();
+		calendar.gridwidth = 3;
+		calendar.insets = new Insets(0, 0, 5, 5);
+		calendar.fill = GridBagConstraints.HORIZONTAL;
+		calendar.gridx = 6;
+		calendar.gridy = 1;
+		panel_2.add(dateField, calendar);
 		
 		JComboBox veterinaireAgendaCmb = new JComboBox();
 		veterinaireAgendaCmb.setForeground(new Color(0, 51, 153));
@@ -389,7 +394,7 @@ public class MainView {
 		gbc_spinner.gridx = 6;
 		gbc_spinner.gridy = 3;
 		panel_2.add(spinner, gbc_spinner);
-
+		
 		JLabel lblH = new JLabel("H");
 		lblH.setFont(new Font("Gisha", Font.PLAIN, 12));
 		lblH.setForeground(new Color(0, 51, 153));
@@ -423,6 +428,26 @@ public class MainView {
 				}
 			}
 		});
+		
+		JButton ajouterRDVBtn = new JButton("Ajouter RDV");
+		ajouterRDVBtn.setBackground(new Color(255, 255, 255));
+		ajouterRDVBtn.setFont(new Font("Gisha", Font.PLAIN, 12));
+		ajouterRDVBtn.setForeground(new Color(0, 51, 153));
+		GridBagConstraints gbc_ajouterRDVBtn = new GridBagConstraints();
+		gbc_ajouterRDVBtn.gridwidth = 3;
+		gbc_ajouterRDVBtn.insets = new Insets(0, 0, 5, 5);
+		gbc_ajouterRDVBtn.gridx = 6;
+		gbc_ajouterRDVBtn.gridy = 5;
+		panel_2.add(ajouterRDVBtn, gbc_ajouterRDVBtn);
+		ajouterRDVBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int c = arrayClientList.get(clientsAgendaCmb.getSelectedIndex()).getCodeClient();
+				int a = arrayListAnimaux.get(animalcomboAngendaCmb.getSelectedIndex()).getCodeAnimal();
+				int v = arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers();
+				//ctrl.rdv(c, a, v);
+			}
+		});
 
 		JList liste_agenda = new JList();
 		GridBagConstraints gbc_liste_agenda = new GridBagConstraints();
@@ -430,7 +455,7 @@ public class MainView {
 		gbc_liste_agenda.insets = new Insets(0, 0, 0, 5);
 		gbc_liste_agenda.fill = GridBagConstraints.BOTH;
 		gbc_liste_agenda.gridx = 0;
-		gbc_liste_agenda.gridy = 5;
+		gbc_liste_agenda.gridy = 6;
 		panel_2.add(liste_agenda, gbc_liste_agenda);
 
 		/**
