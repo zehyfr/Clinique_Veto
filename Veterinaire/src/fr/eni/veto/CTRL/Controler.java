@@ -2,6 +2,7 @@ package fr.eni.veto.CTRL;
 
 import java.util.ArrayList;
 
+import fr.eni.veto.BLL.AgendaMger;
 import fr.eni.veto.BLL.AnimalMger;
 import fr.eni.veto.BLL.ClientAjoutMger;
 import fr.eni.veto.BLL.ClientMger;
@@ -10,6 +11,7 @@ import fr.eni.veto.BLL.LoginMger;
 import fr.eni.veto.BLL.PersonnelsAjoutMger;
 import fr.eni.veto.BLL.PersonnelsMger;
 import fr.eni.veto.BLL.PersonnelsUpdateMger;
+import fr.eni.veto.BO.Agendas;
 import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.BO.Clients;
 import fr.eni.veto.BO.Personnels;
@@ -142,6 +144,40 @@ public class Controler {
 	{
 		AnimalMger insertAni = new AnimalMger();
 		insertAni.insertAnimal(animal);
+	}
+	
+	/**
+	 * Ajouter un rdv
+	 * @param agendas
+	 */
+	public void rdv(Agendas agendas)
+	{
+		AgendaMger newRDV = new AgendaMger();
+		try {
+			newRDV.nouveauRDV(agendas);
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Récuperer la liste des rdv
+	 * @throws DALException 
+	 */
+	public ArrayList<Agendas> getRDV() throws DALException
+	{
+		AgendaMger rdv = new AgendaMger();
+		return rdv.getRDV();
+	}
+	
+	/**
+	 * Récuperer la liste des rdv
+	 * @throws DALException 
+	 */
+	public Clients getClient(int aCode) throws DALException
+	{
+		ClientMger client = new ClientMger();
+		return client.getAclients(aCode);
 	}
 	
 }

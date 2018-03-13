@@ -14,9 +14,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
@@ -40,9 +40,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
+import fr.eni.veto.BO.Agendas;
 import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.BO.Clients;
 import fr.eni.veto.BO.Personnels;
@@ -71,6 +71,7 @@ public class MainView {
 	private ArrayList<Animaux> arrayListAnimaux;
 	private ArrayList<Clients> arrayClientList;
 	private ArrayList<Personnels> arrayVetoList;
+	private ArrayList<Agendas> arrayListAgendas;
 
 	private String droitVisibility;
 
@@ -195,7 +196,7 @@ public class MainView {
 		agendaPane.setViewportView(panelAgenda);
 		GridBagLayout gbl_panelAgenda = new GridBagLayout();
 		gbl_panelAgenda.columnWidths = new int[] { 42, 32, 0, 0, 0, 63, 264, 22, 105, 0 };
-		gbl_panelAgenda.rowHeights = new int[] { 25, 0, 61, 275, 0 };
+		gbl_panelAgenda.rowHeights = new int[] { 25, 0, 38, 275, 0 };
 		gbl_panelAgenda.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_panelAgenda.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelAgenda.setLayout(gbl_panelAgenda);
@@ -251,9 +252,9 @@ public class MainView {
 		gbc_panel_2.gridy = 3;
 		panelAgenda.add(panel_2, gbc_panel_2);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[] { 42, 115, 33, 111, 20, 61, 41, 22, 43, 12, 0 };
-		gbl_panel_2.rowHeights = new int[] { 21, 0, 0, 0, 0, 0, 120, 0 };
-		gbl_panel_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+		gbl_panel_2.columnWidths = new int[] { 42, 115, 23, 33, 36, 19, 31, 20, 42, 41, 22, 43, 12, 0 };
+		gbl_panel_2.rowHeights = new int[] { 21, 0, 12, 0, 0, 0, 120, 0 };
+		gbl_panel_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel_2.setLayout(gbl_panel_2);
@@ -286,15 +287,34 @@ public class MainView {
 		} else {
 			clientsAgendaCmb.setModel(new DefaultComboBoxModel(arrayClientList.toArray()));
 		}
-
-		JLabel veterinaireLbl = new JLabel("V\u00E9t\u00E9rinaire");
-		veterinaireLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
-		veterinaireLbl.setForeground(new Color(0, 51, 153));
-		GridBagConstraints gbc_veterinaireLbl = new GridBagConstraints();
-		gbc_veterinaireLbl.insets = new Insets(0, 0, 5, 5);
-		gbc_veterinaireLbl.gridx = 3;
-		gbc_veterinaireLbl.gridy = 1;
-		panel_2.add(veterinaireLbl, gbc_veterinaireLbl);
+				
+				JLabel spacebound6 = new JLabel("");
+				GridBagConstraints gbc_spacebound6 = new GridBagConstraints();
+				gbc_spacebound6.insets = new Insets(0, 0, 5, 5);
+				gbc_spacebound6.gridx = 2;
+				gbc_spacebound6.gridy = 1;
+				panel_2.add(spacebound6, gbc_spacebound6);
+		
+				JLabel veterinaireLbl = new JLabel("V\u00E9t\u00E9rinaire :");
+				veterinaireLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
+				veterinaireLbl.setForeground(new Color(0, 51, 153));
+				GridBagConstraints gbc_veterinaireLbl = new GridBagConstraints();
+				gbc_veterinaireLbl.anchor = GridBagConstraints.WEST;
+				gbc_veterinaireLbl.insets = new Insets(0, 0, 5, 5);
+				gbc_veterinaireLbl.gridx = 3;
+				gbc_veterinaireLbl.gridy = 1;
+				panel_2.add(veterinaireLbl, gbc_veterinaireLbl);
+		
+		JComboBox veterinaireAgendaCmb = new JComboBox();
+		veterinaireAgendaCmb.setForeground(new Color(0, 51, 153));
+		veterinaireAgendaCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
+		GridBagConstraints gbc_veterinaireAgendaCmb = new GridBagConstraints();
+		gbc_veterinaireAgendaCmb.gridwidth = 3;
+		gbc_veterinaireAgendaCmb.insets = new Insets(0, 0, 5, 5);
+		gbc_veterinaireAgendaCmb.fill = GridBagConstraints.HORIZONTAL;
+		gbc_veterinaireAgendaCmb.gridx = 4;
+		gbc_veterinaireAgendaCmb.gridy = 1;
+		panel_2.add(veterinaireAgendaCmb, gbc_veterinaireAgendaCmb);
 
 		JLabel dateAgendaLbl = new JLabel("Date :");
 		dateAgendaLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
@@ -302,7 +322,7 @@ public class MainView {
 		GridBagConstraints gbc_dateAgendaLbl = new GridBagConstraints();
 		gbc_dateAgendaLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_dateAgendaLbl.anchor = GridBagConstraints.EAST;
-		gbc_dateAgendaLbl.gridx = 5;
+		gbc_dateAgendaLbl.gridx = 8;
 		gbc_dateAgendaLbl.gridy = 1;
 		panel_2.add(dateAgendaLbl, gbc_dateAgendaLbl);
 
@@ -313,19 +333,9 @@ public class MainView {
 		calendar.gridwidth = 3;
 		calendar.insets = new Insets(0, 0, 5, 5);
 		calendar.fill = GridBagConstraints.HORIZONTAL;
-		calendar.gridx = 6;
+		calendar.gridx = 9;
 		calendar.gridy = 1;
 		panel_2.add(dateField, calendar);
-		
-		JComboBox veterinaireAgendaCmb = new JComboBox();
-		veterinaireAgendaCmb.setForeground(new Color(0, 51, 153));
-		veterinaireAgendaCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
-		GridBagConstraints gbc_veterinaireAgendaCmb = new GridBagConstraints();
-		gbc_veterinaireAgendaCmb.insets = new Insets(0, 0, 5, 5);
-		gbc_veterinaireAgendaCmb.fill = GridBagConstraints.HORIZONTAL;
-		gbc_veterinaireAgendaCmb.gridx = 3;
-		gbc_veterinaireAgendaCmb.gridy = 2;
-		panel_2.add(veterinaireAgendaCmb, gbc_veterinaireAgendaCmb);
 		arrayVetoList = new ArrayList<Personnels>();
 		arrayVetoList = ctrl.getListPersonnel();
 		String emptyVeto = "Pas de vétérinaire";
@@ -339,7 +349,7 @@ public class MainView {
 		JLabel spaceBound4 = new JLabel("");
 		GridBagConstraints gbc_spaceBound4 = new GridBagConstraints();
 		gbc_spaceBound4.insets = new Insets(0, 0, 5, 5);
-		gbc_spaceBound4.gridx = 4;
+		gbc_spaceBound4.gridx = 7;
 		gbc_spaceBound4.gridy = 2;
 		panel_2.add(spaceBound4, gbc_spaceBound4);
 
@@ -372,48 +382,36 @@ public class MainView {
 		} else {
 			animalcomboAngendaCmb.setModel(new DefaultComboBoxModel(arrayListAnimaux.toArray()));
 		}
-
-		JLabel heureAgendaLbl2 = new JLabel("Heure :");
-		heureAgendaLbl2.setForeground(new Color(0, 51, 153));
-		heureAgendaLbl2.setFont(new Font("Gisha", Font.PLAIN, 12));
-		GridBagConstraints gbc_heureAgendaLbl2 = new GridBagConstraints();
-		gbc_heureAgendaLbl2.anchor = GridBagConstraints.EAST;
-		gbc_heureAgendaLbl2.insets = new Insets(0, 0, 5, 5);
-		gbc_heureAgendaLbl2.gridx = 5;
-		gbc_heureAgendaLbl2.gridy = 3;
-		panel_2.add(heureAgendaLbl2, gbc_heureAgendaLbl2);
-
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(6, 6, 21, 1));
-		((DefaultEditor) spinner.getEditor()).getTextField().setEditable(false);
-		spinner.setFont(new Font("Gisha", Font.PLAIN, 12));
-		spinner.setForeground(new Color(255, 255, 255));
-		GridBagConstraints gbc_spinner = new GridBagConstraints();
-		gbc_spinner.fill = GridBagConstraints.HORIZONTAL;
-		gbc_spinner.insets = new Insets(0, 0, 5, 5);
-		gbc_spinner.gridx = 6;
-		gbc_spinner.gridy = 3;
-		panel_2.add(spinner, gbc_spinner);
+		
+				JLabel heureAgendaLbl2 = new JLabel("Heure :");
+				heureAgendaLbl2.setForeground(new Color(0, 51, 153));
+				heureAgendaLbl2.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_heureAgendaLbl2 = new GridBagConstraints();
+				gbc_heureAgendaLbl2.anchor = GridBagConstraints.WEST;
+				gbc_heureAgendaLbl2.insets = new Insets(0, 0, 5, 5);
+				gbc_heureAgendaLbl2.gridx = 3;
+				gbc_heureAgendaLbl2.gridy = 3;
+				panel_2.add(heureAgendaLbl2, gbc_heureAgendaLbl2);
+		
+				JSpinner spinnerHeureAgendas = new JSpinner();
+				spinnerHeureAgendas.setModel(new SpinnerNumberModel(6, 6, 21, 1));
+				((DefaultEditor) spinnerHeureAgendas.getEditor()).getTextField().setEditable(false);
+				spinnerHeureAgendas.setFont(new Font("Gisha", Font.PLAIN, 12));
+				spinnerHeureAgendas.setForeground(new Color(255, 255, 255));
+				GridBagConstraints gbc_spinner = new GridBagConstraints();
+				gbc_spinner.insets = new Insets(0, 0, 5, 5);
+				gbc_spinner.gridx = 4;
+				gbc_spinner.gridy = 3;
+				panel_2.add(spinnerHeureAgendas, gbc_spinner);
 		
 		JLabel lblH = new JLabel("H");
 		lblH.setFont(new Font("Gisha", Font.PLAIN, 12));
 		lblH.setForeground(new Color(0, 51, 153));
 		GridBagConstraints gbc_lblH = new GridBagConstraints();
 		gbc_lblH.insets = new Insets(0, 0, 5, 5);
-		gbc_lblH.gridx = 7;
+		gbc_lblH.gridx = 5;
 		gbc_lblH.gridy = 3;
 		panel_2.add(lblH, gbc_lblH);
-
-		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setModel(new SpinnerNumberModel(0, 0, 45, 15));
-		((DefaultEditor) spinner_1.getEditor()).getTextField().setEditable(false);
-		spinner_1.setFont(new Font("Gisha", Font.PLAIN, 12));
-		GridBagConstraints gbc_spinner_1 = new GridBagConstraints();
-		gbc_spinner_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_spinner_1.insets = new Insets(0, 0, 5, 5);
-		gbc_spinner_1.gridx = 8;
-		gbc_spinner_1.gridy = 3;
-		panel_2.add(spinner_1, gbc_spinner_1);
 		
 		clientsAgendaCmb.addActionListener(new ActionListener() {
 			@Override
@@ -429,6 +427,17 @@ public class MainView {
 			}
 		});
 		
+				JSpinner spinnerMinuteAgendas = new JSpinner();
+				spinnerMinuteAgendas.setModel(new SpinnerNumberModel(0, 0, 45, 15));
+				((DefaultEditor) spinnerMinuteAgendas.getEditor()).getTextField().setEditable(false);
+				spinnerMinuteAgendas.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_spinner_1 = new GridBagConstraints();
+				gbc_spinner_1.anchor = GridBagConstraints.WEST;
+				gbc_spinner_1.insets = new Insets(0, 0, 5, 5);
+				gbc_spinner_1.gridx = 6;
+				gbc_spinner_1.gridy = 3;
+				panel_2.add(spinnerMinuteAgendas, gbc_spinner_1);
+		
 		JButton ajouterRDVBtn = new JButton("Ajouter RDV");
 		ajouterRDVBtn.setBackground(new Color(255, 255, 255));
 		ajouterRDVBtn.setFont(new Font("Gisha", Font.PLAIN, 12));
@@ -436,28 +445,59 @@ public class MainView {
 		GridBagConstraints gbc_ajouterRDVBtn = new GridBagConstraints();
 		gbc_ajouterRDVBtn.gridwidth = 3;
 		gbc_ajouterRDVBtn.insets = new Insets(0, 0, 5, 5);
-		gbc_ajouterRDVBtn.gridx = 6;
-		gbc_ajouterRDVBtn.gridy = 5;
+		gbc_ajouterRDVBtn.gridx = 9;
+		gbc_ajouterRDVBtn.gridy = 3;
 		panel_2.add(ajouterRDVBtn, gbc_ajouterRDVBtn);
-		ajouterRDVBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int c = arrayClientList.get(clientsAgendaCmb.getSelectedIndex()).getCodeClient();
-				int a = arrayListAnimaux.get(animalcomboAngendaCmb.getSelectedIndex()).getCodeAnimal();
-				int v = arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers();
-				//ctrl.rdv(c, a, v);
-			}
-		});
-
-		JList liste_agenda = new JList();
+		
+		JLabel label_5 = new JLabel("_____________________________________________________________");
+		label_5.setFont(new Font("Tahoma", Font.BOLD, 13));
+		label_5.setForeground(new Color(0, 51, 153));
+		GridBagConstraints gbc_label_5 = new GridBagConstraints();
+		gbc_label_5.gridheight = 2;
+		gbc_label_5.gridwidth = 12;
+		gbc_label_5.insets = new Insets(0, 0, 5, 5);
+		gbc_label_5.gridx = 0;
+		gbc_label_5.gridy = 4;
+		panel_2.add(label_5, gbc_label_5);
+		
+		DefaultListModel<String> listModelAgendas = new DefaultListModel<String>();
+		JList listeRdv = new JList(listModelAgendas);
+		listeRdv.setFont(new Font("Gisha", Font.PLAIN, 14));
+		listeRdv.setForeground(new Color(0, 51, 153));
+		ArrayList<Agendas> listeAgendasArray = new ArrayList<Agendas>();
+		try {
+			listeAgendasArray = ctrl.getRDV();
+		} catch (DALException e2) {
+			e2.printStackTrace();
+		}
+		for (Agendas rdv : listeAgendasArray) {
+			String tempList = "HEURE: " + rdv.getDateRdv().getHours()+":"+rdv.getDateRdv().getMinutes() + " LE : " +rdv.getDateRdv().getDate();
+			listModelAgendas.addElement(tempList);
+		}
+		
 		GridBagConstraints gbc_liste_agenda = new GridBagConstraints();
-		gbc_liste_agenda.gridwidth = 9;
+		gbc_liste_agenda.gridwidth = 12;
 		gbc_liste_agenda.insets = new Insets(0, 0, 0, 5);
 		gbc_liste_agenda.fill = GridBagConstraints.BOTH;
 		gbc_liste_agenda.gridx = 0;
 		gbc_liste_agenda.gridy = 6;
-		panel_2.add(liste_agenda, gbc_liste_agenda);
-
+		panel_2.add(listeRdv, gbc_liste_agenda);
+		
+		ajouterRDVBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int a = arrayListAnimaux.get(animalcomboAngendaCmb.getSelectedIndex()).getCodeAnimal();
+				int v = arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers();
+				String vName = arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getNom();
+				String cName = arrayClientList.get(veterinaireAgendaCmb.getSelectedIndex()).getNomClient();
+				Date dateRdv = dateField.getDate();
+				dateRdv.setHours((int)spinnerHeureAgendas.getValue());
+				dateRdv.setMinutes((int)spinnerMinuteAgendas.getValue());
+				Agendas nouveauRDV = new Agendas(v, dateRdv, a, vName, cName);
+				ctrl.rdv(nouveauRDV);
+			}
+		});
+		
 		/**
 		 * CLIENT PANEL
 		 */

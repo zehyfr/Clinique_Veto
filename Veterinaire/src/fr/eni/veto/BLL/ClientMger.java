@@ -7,19 +7,23 @@ import fr.eni.veto.DAL.DALException;
 import fr.eni.veto.DAL.Client.ClientsDAOImpl;
 
 public class ClientMger {
+
+	ArrayList<Clients> res = new ArrayList<Clients>();
 	
-ArrayList<Clients> res = new ArrayList<Clients>();
-	
-	public ArrayList<Clients> getAllClients()
-	{
+	public ArrayList<Clients> getAllClients() {
 		ClientsDAOImpl getListClients = new ClientsDAOImpl();
-		
+
 		try {
-			 res = getListClients.selectAllClients();
+			res = getListClients.selectAllClients();
 		} catch (DALException e) {
 		}
-		
+
 		return res;
 	}
 
+	public Clients getAclients(int aCode) throws DALException 
+	{
+		ClientsDAOImpl getClients = new ClientsDAOImpl();
+		return getClients.selectClients(aCode);
+	}
 }

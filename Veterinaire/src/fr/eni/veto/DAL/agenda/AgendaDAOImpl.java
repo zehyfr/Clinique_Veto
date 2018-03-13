@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.eni.veto.BO.Agendas;
 import fr.eni.veto.DAL.DALException;
@@ -37,17 +36,17 @@ public class AgendaDAOImpl extends JdbcTools{
 		}
 	}
 	
-	public List<Agendas> selectAll() throws DALException{
+	public ArrayList<Agendas> selectAll() throws DALException{
 		Connection connec = null;
 		Statement stmt = null;
-		List<Agendas> res = new ArrayList<Agendas>();
+		ArrayList<Agendas> res = new ArrayList<Agendas>();
 		String sql = "SELECT CodeVeto, DateRdv, CodeAnimal FROM Agendas;";
 		try {
 			connec = getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				res.add(new Agendas(rs.getInt("CodeVeto"), rs.getDate("DateRdv"), rs.getInt("CodeAnimal")));
+				res.add(new Agendas(rs.getInt("CodeVeto"), rs.getTimestamp("DateRdv"), rs.getInt("CodeAnimal"), rs.getString("NomVeto"), rs.getString("NomClient")));
 			}
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage() + "Select Agendas impossible.");
