@@ -1,4 +1,4 @@
-package fr.eni.veto.DAL;
+package fr.eni.veto.DAL.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,9 +8,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import fr.eni.veto.BO.Animaux;
-import fr.eni.veto.DAL.jdbc.JdbcTools;
+import fr.eni.veto.DAL.AnimauxDAO;
+import fr.eni.veto.DAL.DALException;
 
-public class AnimauxDAOImpl extends JdbcTools{
+public class AnimauxDAOImpl implements AnimauxDAO{
+	
+	private JdbcTools jdbc;
 	
 	public ArrayList<Animaux> selectByCodeClient(int code) throws DALException{
 		Connection connec = null;
@@ -18,7 +21,7 @@ public class AnimauxDAOImpl extends JdbcTools{
 		ArrayList<Animaux> res= new ArrayList<Animaux>();
 		String sql = "Select CodeAnimal, NomAnimal, Sexe, Couleur, Race, Espece, Tatouage, Antecedents, Archive FROM Animaux where CodeClient = " + code + " ;";
 		try {
-			connec = getConnection();
+			connec = jdbc.getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -28,7 +31,7 @@ public class AnimauxDAOImpl extends JdbcTools{
 			throw new DALException(e.getMessage() + "Select par code client impossible");
 		} finally {
 			try {
-				closeAll(connec, stmt);
+				closeCoAndStatement(connec, stmt);
 			} catch(SQLException e) {
 				throw new DALException(e.getMessage() + "Erreur fermeture connexion select par code client");
 			}
@@ -41,7 +44,7 @@ public class AnimauxDAOImpl extends JdbcTools{
 		PreparedStatement stmt = null;
 		String sql = "INSERT INTO Animaux (NomAnimal, Sexe, Couleur, Race, Espece, CodeClient, Tatouage, Antecedents, Archive) values (?,?,?,?,?,?,?,?,?);";
 		try {
-			connec = getConnection();
+			connec = jdbc.getConnection();
 			stmt = connec.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, a.getNomAnimal());
 			stmt.setString(2, a.getSexe());
@@ -60,7 +63,7 @@ public class AnimauxDAOImpl extends JdbcTools{
 			throw new DALException(e.getMessage() + "Insert animal impossible");
 		} finally {
 			try {
-				closeAll(connec, stmt);
+				closeCoAndStatement(connec, stmt);
 			} catch (SQLException e) {
 				throw new DALException(e.getMessage() + "Erreur fermeture connexion Insert animal");
 			}
@@ -72,7 +75,7 @@ public class AnimauxDAOImpl extends JdbcTools{
 		PreparedStatement stmt = null;
 		String sql = "UPDATE Animaux set NomAnimal = ?, Sexe = ?, Couleur = ?, Race = ?, Espece = ?, CodeClient = ?, Tatouage = ?, Antecedents = ?, Archive = ? where CodeAnimal = ?;";
 		try {
-			connec = getConnection();
+			connec = jdbc.getConnection();
 			stmt = connec.prepareStatement(sql);
 			stmt.setString(1, a.getNomAnimal());
 			stmt.setString(2, a.getSexe());
@@ -89,7 +92,7 @@ public class AnimauxDAOImpl extends JdbcTools{
 			throw new DALException(e.getMessage() + "Update animal impossible");
 		} finally {
 			try {
-				closeAll(connec, stmt);
+				closeCoAndStatement(connec, stmt);
 			} catch (SQLException e) {
 				throw new DALException(e.getMessage() + "Erreur fermeture connexion Update animal");
 			}
@@ -101,17 +104,24 @@ public class AnimauxDAOImpl extends JdbcTools{
 		Statement stmt = null;
 		String sql = "DELETE FROM Animaux where CodeAnimal = " + code + ";";
 		try {
-			connec = getConnection();
+			connec = jdbc.getConnection();
 			stmt = connec.createStatement();
 			stmt.executeUpdate(sql);
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage() + "Impossible de delete animal");
 		} finally {
 			try {
-				closeAll(connec, stmt);
+				closeCoAndStatement(connec, stmt);
 			} catch (SQLException e) {
 				throw new DALException(e.getMessage() + "Erreur fermeture connexion delete animal");
 			}
 		}
+	}
+	
+	public void closeCoAndStatement(Connection connec, Statement stmt) throws SQLException{
+		if(stmt != null) {
+			stmt.close();
+		}
+		jdbc.closeConnection(connec);
 	}
 }

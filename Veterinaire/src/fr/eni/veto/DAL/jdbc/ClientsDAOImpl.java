@@ -1,4 +1,4 @@
-package fr.eni.veto.DAL.Client;
+package fr.eni.veto.DAL.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,17 +8,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import fr.eni.veto.BO.Clients;
+import fr.eni.veto.DAL.ClientsDAO;
 import fr.eni.veto.DAL.DALException;
-import fr.eni.veto.DAL.jdbc.JdbcTools;
 
-public class ClientsDAOImpl extends JdbcTools{
+public class ClientsDAOImpl implements ClientsDAO{
+	private JdbcTools jdbc;
 
 	public void createClient(Clients c) throws DALException{
 		Connection connec = null;
 		PreparedStatement stmt = null;
 		String requete = "INSERT INTO Clients (NomClient, PrenomClient, Adresse1, Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive) values(?,?,?,?,?,?,?,?,?,?,?);";
 		try {
-			connec = getConnection();
+			connec = jdbc.getConnection();
 			stmt = connec.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, c.getNomClient());
 			stmt.setString(2, c.getPrenomClient());
@@ -40,25 +41,19 @@ public class ClientsDAOImpl extends JdbcTools{
 			throw new DALException("Insertion non effectuee");
 		}finally {
 			try{
-				closeAll(connec, stmt);
+				closeCoAndStatement(connec, stmt);
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
 		}
 	}
 	
-	/**
-	 * Modifier un client
-	 * @param c
-	 * @throws DALException
-	 */
-	
 	public void updateClient(Clients c) throws DALException{
 		Connection connec = null;
 		PreparedStatement stmt = null;
 		String requete = "UPDATE Clients set NomClient = ?, PrenomClient = ?, Adresse1 = ?, Adresse2 = ?, CodePostal = ?, Ville = ?, NumTel = ?, Assurance = ?, Email = ?, Remarque = ?, Archive = ? where CodeClient = ?;";
 		try {
-			connec = getConnection();
+			connec = jdbc.getConnection();
 			stmt = connec.prepareStatement(requete);
 			stmt.setString(1, c.getNomClient());
 			stmt.setString(2, c.getPrenomClient());
@@ -77,25 +72,20 @@ public class ClientsDAOImpl extends JdbcTools{
 			throw new DALException(e.getMessage() + "Update non effectuee");
 		}finally {
 			try{
-				closeAll(connec, stmt);
+				closeCoAndStatement(connec, stmt);
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
 		}
 	}
 	
-	/**
-	 * Retourne la liste des clients
-	 * @return
-	 * @throws DALException
-	 */
 	public ArrayList<Clients> selectAllClients() throws DALException{
 		Connection connec = null;
 		Statement stmt = null;
 		String requete = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients WHERE Archive = 0;";
 		ArrayList<Clients> all = new ArrayList<Clients>();
 		try {
-			connec = getConnection();
+			connec = jdbc.getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery(requete);
 			while(rs.next()) {
@@ -105,7 +95,7 @@ public class ClientsDAOImpl extends JdbcTools{
 			throw new DALException("Select all non effectuee");
 		}finally {
 			try{
-				closeAll(connec, stmt);
+				closeCoAndStatement(connec, stmt);
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
@@ -113,20 +103,13 @@ public class ClientsDAOImpl extends JdbcTools{
 		return all;
 	}
 	
-	/**
-	 * Selectionner un client
-	 * @param code
-	 * @return
-	 * @throws DALException
-	 */
-	
 	public Clients selectClients(int code) throws DALException{
 		Connection connec = null;
 		Statement stmt = null;
 		String requete = "SELECT CodeClient, NomClient, PrenomClient, Adresse1, Adresse2, CodePostal, Ville, NumTel, Assurance, Email, Remarque, Archive FROM Clients where CodeClient = " + code + ";";
 		Clients result = null;
 		try {
-			connec = getConnection();
+			connec = jdbc.getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery(requete);
 			rs.next();
@@ -136,7 +119,7 @@ public class ClientsDAOImpl extends JdbcTools{
 			throw new DALException("Delete non effectuee");
 		}finally {
 			try{
-				closeAll(connec, stmt);
+				closeCoAndStatement(connec, stmt);
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
@@ -144,18 +127,12 @@ public class ClientsDAOImpl extends JdbcTools{
 		return result;
 	}
 	
-	/**
-	 * Supprimer client
-	 * @param aCodeClient
-	 * @throws DALException
-	 */
-	
 	public void deleteClients(int aCodeClient) throws DALException{
 		Connection connec = null;
 		PreparedStatement stmt = null;
 		
 		try {
-			connec = getConnection();
+			connec = jdbc.getConnection();
 			stmt = connec.prepareStatement("UPDATE Clients SET Archive = 1 WHERE CodeClient = ?");
 			stmt.setInt(1, aCodeClient);
 			stmt.execute();
@@ -164,10 +141,17 @@ public class ClientsDAOImpl extends JdbcTools{
 			throw new DALException("Archivage non effectuee");
 		}finally {
 			try{
-				closeAll(connec, stmt);
+				closeCoAndStatement(connec, stmt);
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
 		}
+	}
+	
+	public void closeCoAndStatement(Connection connec, Statement stmt) throws SQLException{
+		if(stmt != null) {
+			stmt.close();
+		}
+		jdbc.closeConnection(connec);
 	}
 }

@@ -3,7 +3,7 @@ package fr.eni.veto.DAL;
 import java.util.Date;
 
 import fr.eni.veto.BO.Agendas;
-import fr.eni.veto.DAL.agenda.AgendaDAOImpl;
+import fr.eni.veto.DAL.jdbc.AgendaDAOImpl;
 
 public class AppliTestDAL {
 	

@@ -3,9 +3,6 @@ package fr.eni.veto.DAL.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-
-import fr.eni.veto.DAL.Settings;
 
 public class JdbcTools {
 	private static  String urldb;
@@ -24,15 +21,12 @@ public class JdbcTools {
 		passworddb = Settings.getProperty("passworddb");
 	}
 	
-	public static Connection getConnection() throws SQLException{
+	public Connection getConnection() throws SQLException{
 		Connection c = DriverManager.getConnection(urldb, userdb, passworddb);
 		return c;
 	}
 	
-	public static void closeAll(Connection c, Statement s) throws SQLException{
-		if(s != null) {
-			s.close();
-		}
+	public void closeConnection(Connection c) throws SQLException{
 		if(c != null) {
 		c.close();
 		}
