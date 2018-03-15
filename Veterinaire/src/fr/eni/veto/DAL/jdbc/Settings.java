@@ -1,4 +1,4 @@
-package fr.eni.veto.DAL;
+package fr.eni.veto.DAL.jdbc;
 
 import java.util.Properties;
 

@@ -4,12 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import fr.eni.veto.DAL.ConnexionDAO;
 import fr.eni.veto.DAL.DALException;
 
 
-public class ConnexionDAOJdbcImpl extends JdbcTools implements ConnexionDAO {
+public class ConnexionDAOImpl implements ConnexionDAO {
+	
+	private JdbcTools jdbc;
 
 	public String authentification(int id, String pass) throws DALException{
 		Connection connec = null;
@@ -17,7 +20,7 @@ public class ConnexionDAOJdbcImpl extends JdbcTools implements ConnexionDAO {
 		String role = "nul";
 		
 		try {
-			connec = getConnection();
+			connec = jdbc.getConnection();
 			stmt = connec.prepareStatement("select Role from Personnels WHERE CodePers = ?");
 			stmt.setInt(1, id);
 
@@ -29,11 +32,18 @@ public class ConnexionDAOJdbcImpl extends JdbcTools implements ConnexionDAO {
 			throw new DALException("Erreur connexion");
 		}finally {
 			try{
-				closeAll(connec, stmt);
-			}catch(Exception ex) {
-				throw new DALException("Erreur fermeture connexion");
+				closeCoAndStatement(connec, stmt);
+			}catch(SQLException ex) {
+				throw new DALException(ex.getMessage() + "Erreur fermeture connexion");
 			}
 		}
 		return role;
+	}
+	
+	public void closeCoAndStatement(Connection connec, Statement stmt) throws SQLException{
+		if(stmt != null) {
+			stmt.close();
+		}
+		jdbc.closeConnection(connec);
 	}
 }
