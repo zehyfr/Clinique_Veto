@@ -9,7 +9,8 @@ import fr.eni.veto.DAL.PersonnelDAOFactory;
 
 public class PersonnelsMger {
 	
-	ArrayList<Personnels> res = new ArrayList<Personnels>();
+	private ArrayList<Personnels> res = new ArrayList<Personnels>();
+	private String result;
 	
 	public ArrayList<Personnels> getPersonnels()
 	{
@@ -22,5 +23,16 @@ public class PersonnelsMger {
 		
 		return res;
 	}
+	
+	public String getAsalarie(int aCode)
+	{
+		PersonnelDAO getSalarie = PersonnelDAOFactory.getPersonnelDAO();
+		
+		try {
+			 result = getSalarie.getAsalarie(aCode);
+		} catch (DALException e) {
+		}
+		return result;
+	} 
 
 }

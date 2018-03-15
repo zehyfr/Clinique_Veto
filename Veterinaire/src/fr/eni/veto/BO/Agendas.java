@@ -8,15 +8,20 @@ public class Agendas {
 	private Date DateRdv;
 	private int CodeAnimal;
 	
+	private String nomVeto;
+	private String nomClient;
+	
 	public Agendas()
 	{
 	}
 
-	public Agendas(int codeVeto, Date dateRdv, int codeAnimal) {
+	public Agendas(int codeVeto, Date dateRdv, int codeAnimal, String nomVeto, String nomClient) {
 		super();
 		CodeVeto = codeVeto;
 		DateRdv = dateRdv;
 		CodeAnimal = codeAnimal;
+		this.nomVeto = nomVeto;
+		this.nomClient = nomClient;
 	}
 
 	public int getCodeVeto() {
@@ -43,9 +48,24 @@ public class Agendas {
 		CodeAnimal = codeAnimal;
 	}
 
-	@Override
-	public String toString() {
-		return "Agendas [CodeVeto=" + CodeVeto + ", DateRdv=" + DateRdv + ", CodeAnimal=" + CodeAnimal + "]";
+	public String getNomVeto() {
+		return nomVeto;
+	}
+
+	public void setNomVeto(String nomVeto) {
+		this.nomVeto = nomVeto;
+	}
+
+	public String getNomClient() {
+		return nomClient;
+	}
+
+	public void setNomClient(String nomClient) {
+		this.nomClient = nomClient;
 	}
 	
+	@Override
+	public String toString() {
+		return getDateRdv() + " pour " + getCodeAnimal();
+	}
 }

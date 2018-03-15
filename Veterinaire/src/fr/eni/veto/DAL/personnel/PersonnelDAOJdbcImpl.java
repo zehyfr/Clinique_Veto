@@ -1,4 +1,4 @@
-package fr.eni.veto.DAL.jdbc;
+package fr.eni.veto.DAL.personnel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,11 +9,9 @@ import java.util.ArrayList;
 
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.DAL.DALException;
-import fr.eni.veto.DAL.PersonnelDAO;
+import fr.eni.veto.DAL.jdbc.JdbcTools;
 
-public class PersonnelDAOImpl implements PersonnelDAO{
-	
-	private JdbcTools jdbc;
+public class PersonnelDAOJdbcImpl extends JdbcTools{
 	
 	public ArrayList<Personnels> getListPersonnels() throws DALException{
 		Connection connec = null;
@@ -21,7 +19,7 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 		ArrayList<Personnels> listPers = new ArrayList<Personnels>();
 		
 		try {
-			connec = jdbc.getConnection();
+			connec = getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery("select CodePers, Nom, Role from Personnels WHERE Archive = 0");
 			while(rs.next())
@@ -33,11 +31,11 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 			throw new DALException("Erreur connexion");
 		}finally {
 			try{
-				closeCoAndStatement(connec, stmt);
+				closeAll(connec, stmt);
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
-		}
+		}//zut
 		return listPers;
 	}
 	
@@ -46,7 +44,7 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 		PreparedStatement stmt = null;
 		
 		try {
-			connec = jdbc.getConnection();
+			connec = getConnection();
 			stmt = connec.prepareStatement("UPDATE Personnels SET Nom = ?, Role = ? WHERE CodePers = ?");
 			stmt.setString(1, aNom);
 			stmt.setString(2, aRole);
@@ -57,7 +55,7 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 			throw new DALException("Erreur connexion");
 		}finally {
 			try{
-				closeCoAndStatement(connec, stmt);
+				closeAll(connec, stmt);
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
@@ -69,7 +67,7 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 		PreparedStatement stmt = null;
 		
 		try {
-			connec = jdbc.getConnection();
+			connec = getConnection();
 			stmt = connec.prepareStatement("UPDATE Personnels SET Archive = 1 WHERE CodePers = ?");
 			stmt.setInt(1, aCodePers);
 			stmt.execute();
@@ -78,7 +76,7 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 			throw new DALException("Erreur connexion");
 		}finally {
 			try{
-				closeCoAndStatement(connec, stmt);
+				closeAll(connec, stmt);
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
@@ -90,7 +88,7 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 		PreparedStatement stmt = null;
 		String requete = "INSERT INTO Personnels (Nom, MotPasse, Role, Archive) values(?,?,?,?)";
 		try {
-			connec = jdbc.getConnection();
+			connec = getConnection();
 			stmt = connec.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, aNom);
 			stmt.setString(2, "123");
@@ -102,7 +100,7 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 			throw new DALException("Insertion non effectuee");
 		}finally {
 			try{
-				closeCoAndStatement(connec, stmt);
+				closeAll(connec, stmt);
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
@@ -114,7 +112,7 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 		Statement stmt = null;
 		
 		try {
-			connec = jdbc.getConnection();
+			connec = getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery("select Nom from Personnels WHERE CodePers = " + aCode);
 			rs.next();
@@ -126,17 +124,10 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 			throw new DALException("Erreur connexion");
 		}finally {
 			try{
-				closeCoAndStatement(connec, stmt);
+				closeAll(connec, stmt);
 			}catch(Exception ex) {
 				throw new DALException("Erreur fermeture connexion");
 			}
 		}
-	}
-	
-	public void closeCoAndStatement(Connection connec, Statement stmt) throws SQLException{
-		if(stmt != null) {
-			stmt.close();
-		}
-		jdbc.closeConnection(connec);
 	}
 }

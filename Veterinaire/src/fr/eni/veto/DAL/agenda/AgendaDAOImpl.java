@@ -1,4 +1,4 @@
-package fr.eni.veto.DAL.jdbc;
+package fr.eni.veto.DAL.agenda;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,24 +6,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import fr.eni.veto.BO.Agendas;
-import fr.eni.veto.DAL.AgendaDAO;
+import fr.eni.veto.BO.Clients;
 import fr.eni.veto.DAL.DALException;
+import fr.eni.veto.DAL.jdbc.JdbcTools;
 
-public class AgendaDAOImpl implements AgendaDAO{
-	private JdbcTools jdbc;
+public class AgendaDAOImpl extends JdbcTools {
 
 	public void ajouterRdv(Agendas a) throws DALException {
 		Connection connec = null;
 		PreparedStatement stmt = null;
 		String sql = "INSERT INTO Agendas (CodeVeto, DateRdv, CodeAnimal, NomVeto, NomClient) values (?,?,?,?,?);";
 		try {
-			connec = jdbc.getConnection();
+			connec = getConnection();
 			stmt = connec.prepareStatement(sql);
 			stmt.setInt(1, a.getCodeVeto());
 			stmt.setTimestamp(2, new Timestamp(a.getDateRdv().getTime()));
@@ -35,7 +36,7 @@ public class AgendaDAOImpl implements AgendaDAO{
 			throw new DALException(e.getMessage() + "Insert Agendas impossible.");
 		} finally {
 			try {
-				closeCoAndStatement(connec, stmt);
+				closeAll(connec, stmt);
 			} catch (SQLException ec) {
 				throw new DALException(ec.getMessage() + "Fermeture connexion Agendas insert.");
 			}
@@ -44,6 +45,7 @@ public class AgendaDAOImpl implements AgendaDAO{
 
 	public ArrayList<Agendas> selectAll(int aVeto, Date aDate) throws DALException {
 		Date aDateTommorow = aDate;
+		Date dt = new Date();
 		Calendar c = Calendar.getInstance(); 
 		c.setTime(aDateTommorow); 
 		c.add(Calendar.DATE, 1);
@@ -56,7 +58,7 @@ public class AgendaDAOImpl implements AgendaDAO{
 		String stampBis = "SMALLDATETIMEFROMPARTS(" + new SimpleDateFormat("yyyy").format(aDateTommorow) +","+ new SimpleDateFormat("MM").format(aDateTommorow)+ ","+new SimpleDateFormat("dd").format(aDateTommorow)+ "," + new SimpleDateFormat("HH").format(00)+ "," + new SimpleDateFormat("mm").format(00)+")";
 		String sql = "SELECT CodeVeto, DateRdv, CodeAnimal, NomVeto, NomClient FROM Agendas WHERE CodeVeto = " + aVeto+ " AND DateRdv >= " + stamp + " AND DateRdv < " + stampBis +" ORDER BY DateRdv;";
 		try {
-			connec = jdbc.getConnection();
+			connec = getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
@@ -67,12 +69,14 @@ public class AgendaDAOImpl implements AgendaDAO{
 			throw new DALException(e.getMessage() + "Select Agendas impossible.");
 		} finally {
 			try {
-				closeCoAndStatement(connec, stmt);
+				closeAll(connec, stmt);
 			} catch (SQLException ec) {
 				throw new DALException(ec.getMessage() + "Fermeture connexion Agendas select.");
 			}
 		}
 		return res;
+		
+		//zut
 	}
 
 	public void supprimerRdv(Agendas a) throws DALException {
@@ -80,7 +84,7 @@ public class AgendaDAOImpl implements AgendaDAO{
 		PreparedStatement stmt = null;
 		String sql = "DELETE FROM Agendas where CodeVeto = ? and DateRdv = ? and CodeAnimal = ?;";
 		try {
-			connec = jdbc.getConnection();
+			connec = getConnection();
 			stmt = connec.prepareStatement(sql);
 			stmt.setInt(1, a.getCodeVeto());
 			stmt.setTimestamp(2, new Timestamp(a.getDateRdv().getTime()));
@@ -90,7 +94,7 @@ public class AgendaDAOImpl implements AgendaDAO{
 			throw new DALException(e.getMessage() + "Suppression Agendas impossible.");
 		} finally {
 			try {
-				closeCoAndStatement(connec, stmt);
+				closeAll(connec, stmt);
 			} catch (SQLException ec) {
 				throw new DALException(ec.getMessage() + "Fermeture connexion Agendas suppression.");
 			}
@@ -105,14 +109,13 @@ public class AgendaDAOImpl implements AgendaDAO{
 	 * @throws SQLException 
 	 */
 	
-	public int verify(int aCode, Date aDate) throws DALException{
+	public int verify(int aCode, Date aDate) throws DALException, SQLException{
 		Connection connec = null;
 		Statement stmt = null;
 		int res = 0;
 		String stamp = "SMALLDATETIMEFROMPARTS(" + new SimpleDateFormat("yyyy").format(aDate) +","+ new SimpleDateFormat("MM").format(aDate)+ ","+new SimpleDateFormat("dd").format(aDate)+ "," + new SimpleDateFormat("HH").format(aDate)+ "," + new SimpleDateFormat("mm").format(aDate);
 		String requete = "SELECT CodeVeto FROM Agendas WHERE CodeVeto = " + aCode +" and DateRdv = " + stamp + ");";
-		try {
-			connec = jdbc.getConnection();
+			connec = getConnection();
 			stmt = connec.createStatement();
 			ResultSet rs = stmt.executeQuery(requete);
 			
@@ -120,23 +123,6 @@ public class AgendaDAOImpl implements AgendaDAO{
 			{
 				res = rs.getInt(1);
 			}
-		} catch (SQLException e) {
-			throw new DALException(e.getMessage() + "Verification agenda impossible.");
-		} finally {
-			try {
-				closeCoAndStatement(connec, stmt);
-			} catch (SQLException ec) {
-				throw new DALException(ec.getMessage() + "Fermeture connexion Agendas suppression.");
-			}
-		}
 			return res;
-	}
-	
-	
-	public void closeCoAndStatement(Connection connec, Statement stmt) throws SQLException{
-		if(stmt != null) {
-			stmt.close();
-		}
-		jdbc.closeConnection(connec);
 	}
 }

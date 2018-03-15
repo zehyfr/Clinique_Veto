@@ -8,19 +8,25 @@ import fr.eni.veto.DAL.ClientsDAOFactory;
 import fr.eni.veto.DAL.DALException;
 
 public class ClientMger {
+
 	
-ArrayList<Clients> res = new ArrayList<Clients>();
 	
 	public ArrayList<Clients> getAllClients() //throws BLLException
 	{
 		ClientsDAO getListClients = ClientsDAOFactory.getClientsDAO();
+		ArrayList<Clients> res = new ArrayList<Clients>();
 		
 		try {
-			 res = getListClients.selectAllClients();
+			res = getListClients.selectAllClients();
 		} catch (DALException e) {
 			//throw new BLLException(e.getMessage() + "Erreur lors de la récuperation de la liste de tout les clients");
 		}
 		return res;
 	}
 
+	public Clients getAclients(int aCode) throws DALException 
+	{
+		ClientsDAO getClients = ClientsDAOFactory.getClientsDAO();
+		return getClients.selectClients(aCode);
+	} 
 }
