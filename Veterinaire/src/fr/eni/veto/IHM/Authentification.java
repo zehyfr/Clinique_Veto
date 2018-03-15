@@ -1,31 +1,30 @@
 package fr.eni.veto.IHM;
 
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import fr.eni.veto.CTRL.Controler;
-
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Authentification {
 
@@ -128,8 +127,8 @@ public class Authentification {
 
 		passwordField = new JPasswordField();
 		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordField.gridx = 2;
 		gbc_passwordField.gridy = 5;
 		frmIdentification.getContentPane().add(passwordField, gbc_passwordField);
@@ -137,32 +136,65 @@ public class Authentification {
 		JButton validerBtn = new JButton("Valider");
 		validerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+					switch (ctrl.validation(identifiantTxt.getText(), passwordField.getText())) {
+					case "VET":
+						frmIdentification.setVisible(false);
+						errorIdLbl.setVisible(false);
+						ctrl.acces("VET", Integer.parseInt(identifiantTxt.getText()));
+						break;
+					case "ADM":
+						frmIdentification.setVisible(false);
+						errorIdLbl.setVisible(false);
+						ctrl.acces("ADM", Integer.parseInt(identifiantTxt.getText()));
+						break;
+					case "SEC":
+						frmIdentification.setVisible(false);
+						errorIdLbl.setVisible(false);
+						ctrl.acces("SEC", Integer.parseInt(identifiantTxt.getText()));
+						break;
+					case "0":
+						errorIdLbl.setVisible(true);
+						break;
+
+					default:
+						break;
+					}
+					identifiantTxt.setText("");
+					passwordField.setText("");
+				}
+		});
+		
+		passwordField.addActionListener(new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				switch (ctrl.validation(identifiantTxt.getText(), passwordField.getText())) {
 				case "VET":
 					frmIdentification.setVisible(false);
 					errorIdLbl.setVisible(false);
-					ctrl.acces("VET");
+					ctrl.acces("VET", Integer.parseInt(identifiantTxt.getText()));
 					break;
 				case "ADM":
 					frmIdentification.setVisible(false);
 					errorIdLbl.setVisible(false);
-					ctrl.acces("ADM");
+					ctrl.acces("ADM", Integer.parseInt(identifiantTxt.getText()));
 					break;
 				case "SEC":
 					frmIdentification.setVisible(false);
 					errorIdLbl.setVisible(false);
-					ctrl.acces("SEC");
+					ctrl.acces("SEC", Integer.parseInt(identifiantTxt.getText()));
 					break;
 				case "0":
 					errorIdLbl.setVisible(true);
 					break;
-					
+
 				default:
 					break;
 				}
+				identifiantTxt.setText("");
+				passwordField.setText("");
 			}
-		});
-		
+	});
+
 		errorIdLbl = new JLabel("Identifiant et/ou mot de passe incorrect !");
 		errorIdLbl.setForeground(new Color(220, 20, 60));
 		GridBagConstraints gbc_errorIdLbl = new GridBagConstraints();
@@ -171,7 +203,7 @@ public class Authentification {
 		gbc_errorIdLbl.gridy = 6;
 		panel.add(errorIdLbl, gbc_errorIdLbl);
 		errorIdLbl.setVisible(false);
-		
+
 		validerBtn.setBackground(new Color(255, 255, 255));
 		validerBtn.setIcon(new ImageIcon("src/ressources/tick.png"));
 		validerBtn.setForeground(new Color(0, 0, 0));
@@ -186,7 +218,7 @@ public class Authentification {
 		JButton btnTechnician = new JButton("Technicien");
 		btnTechnician.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ctrl.acces("VET");
+				ctrl.acces("VET", 1);
 			}
 		});
 		GridBagConstraints gbc_btnTechnician = new GridBagConstraints();
@@ -194,9 +226,18 @@ public class Authentification {
 		gbc_btnTechnician.gridx = 3;
 		gbc_btnTechnician.gridy = 7;
 		panel.add(btnTechnician, gbc_btnTechnician);
+		btnTechnician.setVisible(false);
 
 		frmIdentification.setVisible(true);
 
+	}
+
+	public JFrame getFrmIdentification() {
+		return frmIdentification;
+	}
+
+	public void setFrmIdentification(JFrame frmIdentification) {
+		this.frmIdentification = frmIdentification;
 	}
 
 }

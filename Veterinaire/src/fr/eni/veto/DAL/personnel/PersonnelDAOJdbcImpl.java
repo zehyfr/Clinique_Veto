@@ -106,4 +106,28 @@ public class PersonnelDAOJdbcImpl extends JdbcTools{
 			}
 		}
 	}
+	
+	public String getAsalarie(int aCode) throws DALException{
+		Connection connec = null;
+		Statement stmt = null;
+		
+		try {
+			connec = getConnection();
+			stmt = connec.createStatement();
+			ResultSet rs = stmt.executeQuery("select Nom from Personnels WHERE CodePers = " + aCode);
+			rs.next();
+			
+			return rs.getString("Nom");
+				
+			
+		}catch (SQLException e) {
+			throw new DALException("Erreur connexion");
+		}finally {
+			try{
+				closeAll(connec, stmt);
+			}catch(Exception ex) {
+				throw new DALException("Erreur fermeture connexion");
+			}
+		}
+	}
 }

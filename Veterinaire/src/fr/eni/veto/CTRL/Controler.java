@@ -1,6 +1,13 @@
 package fr.eni.veto.CTRL;
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import fr.eni.veto.BLL.AgendaMger;
 import fr.eni.veto.BLL.AnimalMger;
@@ -28,7 +35,29 @@ public class Controler {
 	@SuppressWarnings("unused")
 	private MainView main;
 	
-	public Controler() {
+	public Controler(){
+		
+//		try {
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+//				| UnsupportedLookAndFeelException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		
+		for(LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()){
+			if("Nimbus".equals(info.getName())){
+				try {
+					UIManager.setLookAndFeel(info.getClassName());
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+						| UnsupportedLookAndFeelException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
 		this.auth = new Authentification(this);
 	}
 
@@ -72,8 +101,9 @@ public class Controler {
 	/**
 	 * Contrôle d'accès
 	 */
-	public void acces(String aCode) {
-		this.main = new MainView(this, aCode);
+	public void acces(String aCode, int aCodePers) {
+		this.main = new MainView(this, aCode, aCodePers);
+		auth.getFrmIdentification().setVisible(false);
 	}
 	
 	/**
@@ -164,10 +194,10 @@ public class Controler {
 	 * Récuperer la liste des rdv
 	 * @throws DALException 
 	 */
-	public ArrayList<Agendas> getRDV() throws DALException
+	public ArrayList<Agendas> getRDV(int aVeto, Date aDate) throws DALException
 	{
 		AgendaMger rdv = new AgendaMger();
-		return rdv.getRDV();
+		return rdv.getRDV(aVeto, aDate);
 	}
 	
 	/**
@@ -180,4 +210,35 @@ public class Controler {
 		return client.getAclients(aCode);
 	}
 	
+	/**
+	 * Vérifier la disponibilité d'un veto
+	 * @throws SQLException 
+	 * @throws ParseException 
+	 */
+	public Boolean verify(int aCode, Date aDate) throws DALException, SQLException, ParseException
+	{
+		AgendaMger agendaVerif = new AgendaMger();
+		if(agendaVerif.verify(aCode, aDate)==0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	/**
+	 * Récuperer un personnel
+	 * @throws DALException 
+	 */
+	public String getSalarie(int aCode) throws DALException
+	{
+		PersonnelsMger personnels = new PersonnelsMger();
+		return personnels.getAsalarie(aCode);
+	}
+	
+	public void getAuth(){
+		auth.getFrmIdentification().setVisible(true);
+	}
 }
