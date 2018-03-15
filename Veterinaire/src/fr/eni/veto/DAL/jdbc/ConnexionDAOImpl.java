@@ -33,8 +33,8 @@ public class ConnexionDAOImpl implements ConnexionDAO {
 		}finally {
 			try{
 				closeCoAndStatement(connec, stmt);
-			}catch(Exception ex) {
-				throw new DALException("Erreur fermeture connexion");
+			}catch(SQLException ex) {
+				throw new DALException(ex.getMessage() + "Erreur fermeture connexion");
 			}
 		}
 		return role;

@@ -21,14 +21,14 @@ public class JdbcTools {
 		passworddb = Settings.getProperty("passworddb");
 	}
 	
-	public Connection getConnection() throws SQLException{
+	public static Connection getConnection() throws SQLException{
 		Connection c = DriverManager.getConnection(urldb, userdb, passworddb);
 		return c;
 	}
 	
-	public void closeConnection(Connection c) throws SQLException{
+	public static void closeConnection(Connection c) throws SQLException{
 		if(c != null) {
-		c.close();
+			c.close();
 		}
 	}
 }
