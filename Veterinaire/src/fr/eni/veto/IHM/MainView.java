@@ -262,11 +262,18 @@ public class MainView {
 			String prochainRdv = null;
 			Agendas agendas =null;
 			try {
-				agendas = ctrl.getRDV(1, new Date(System.currentTimeMillis())).get(0);
+				if(ctrl.getRDV(codePersonnel, new Date(System.currentTimeMillis())).isEmpty())
+				{
+					prochainRdv = "Pas de RDV de programmé aujourd'hui.";
+				}
+				else
+				{
+					agendas = ctrl.getRDV(codePersonnel, new Date(System.currentTimeMillis())).get(0);
+					prochainRdv = "à " + agendas.getDateRdv()+ " avec MR/MME " + agendas.getNomClient();
+				}
 			} catch (DALException e1) {
 				e1.printStackTrace();
 			}
-			prochainRdv = "à " + agendas.getDateRdv()+ " avec MR/MME " + agendas.getNomClient();
 
 			JLabel resultLbl = new JLabel(prochainRdv);
 			resultLbl.setForeground(new Color(0, 51, 153));
