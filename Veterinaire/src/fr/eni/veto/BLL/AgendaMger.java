@@ -1,30 +1,30 @@
 package fr.eni.veto.BLL;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import fr.eni.veto.BO.Agendas;
+import fr.eni.veto.DAL.AgendaDAO;
+import fr.eni.veto.DAL.AgendaDAOFactory;
 import fr.eni.veto.DAL.DALException;
-import fr.eni.veto.DAL.agenda.AgendaDAOImpl;
 
 public class AgendaMger {
 	
 	public void nouveauRDV(Agendas agendas) throws DALException
 	{
-		AgendaDAOImpl insertAnimal = new AgendaDAOImpl();
+		AgendaDAO insertAnimal = AgendaDAOFactory.getAgendaDAO();
 		insertAnimal.ajouterRdv(agendas);
 	}
 	
 	public ArrayList<Agendas> getRDV(int aVeto, Date aDate) throws DALException
 	{
-		AgendaDAOImpl getList = new AgendaDAOImpl();
+		AgendaDAO getList = AgendaDAOFactory.getAgendaDAO();
 		return getList.selectAll(aVeto, aDate);
 	}
 	
-	public int verify(int aCode, Date aDate) throws DALException, SQLException
+	public int verify(int aCode, Date aDate) throws DALException
 	{
-		AgendaDAOImpl agendaVerif = new AgendaDAOImpl();
+		AgendaDAO agendaVerif = AgendaDAOFactory.getAgendaDAO();
 		return agendaVerif.verify(aCode, aDate);
 	}
 }
