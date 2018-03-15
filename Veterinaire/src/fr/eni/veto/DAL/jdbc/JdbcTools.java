@@ -3,9 +3,6 @@ package fr.eni.veto.DAL.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-
-import fr.eni.veto.DAL.Settings;
 
 public class JdbcTools {
 	private static  String urldb;
@@ -29,12 +26,9 @@ public class JdbcTools {
 		return c;
 	}
 	
-	public static void closeAll(Connection c, Statement s) throws SQLException{
-		if(s != null) {
-			s.close();
-		}
+	public static void closeConnection(Connection c) throws SQLException{
 		if(c != null) {
-		c.close();
+			c.close();
 		}
 	}
 }

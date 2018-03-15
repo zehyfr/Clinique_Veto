@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.DAL.DALException;
-import fr.eni.veto.DAL.personnel.PersonnelDAOJdbcImpl;
+import fr.eni.veto.DAL.PersonnelDAO;
+import fr.eni.veto.DAL.PersonnelDAOFactory;
 
 public class PersonnelsMger {
 	
@@ -13,7 +14,7 @@ public class PersonnelsMger {
 	
 	public ArrayList<Personnels> getPersonnels()
 	{
-		PersonnelDAOJdbcImpl getListPersonnels = new PersonnelDAOJdbcImpl();
+		PersonnelDAO getListPersonnels = PersonnelDAOFactory.getPersonnelDAO();
 		
 		try {
 			 res = getListPersonnels.getListPersonnels();
@@ -25,13 +26,13 @@ public class PersonnelsMger {
 	
 	public String getAsalarie(int aCode)
 	{
-		PersonnelDAOJdbcImpl getSalarie = new PersonnelDAOJdbcImpl();
+		PersonnelDAO getSalarie = PersonnelDAOFactory.getPersonnelDAO();
 		
 		try {
 			 result = getSalarie.getAsalarie(aCode);
 		} catch (DALException e) {
 		}
 		return result;
-	}
+	} 
 
 }
