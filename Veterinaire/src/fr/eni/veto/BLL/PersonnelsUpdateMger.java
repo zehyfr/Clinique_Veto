@@ -23,6 +23,7 @@ public class PersonnelsUpdateMger {
 		try {
 			 personnelsUp.archivage(aCodePers);
 		} catch (DALException e) {
+			e.printStackTrace();
 		}
 	}
 

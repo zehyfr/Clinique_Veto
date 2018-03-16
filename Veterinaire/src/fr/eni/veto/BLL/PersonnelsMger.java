@@ -31,6 +31,7 @@ public class PersonnelsMger {
 		try {
 			 result = getSalarie.getAsalarie(aCode);
 		} catch (DALException e) {
+			e.printStackTrace();
 		}
 		return result;
 	} 

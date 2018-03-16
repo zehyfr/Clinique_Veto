@@ -14,7 +14,7 @@ public class PersonnelsAjoutMger {
 			 createAdd.create(aNom, aRole);
 			 
 		} catch (DALException e) {
-			
+			e.printStackTrace();
 		}
 	}
 }

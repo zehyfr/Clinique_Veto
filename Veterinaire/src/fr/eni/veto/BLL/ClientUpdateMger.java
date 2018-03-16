@@ -13,6 +13,7 @@ public class ClientUpdateMger {
 		try {
 			archivage.deleteClients(aCodePers);
 		} catch (DALException e) {
+			e.printStackTrace();
 		}
 	}
 
