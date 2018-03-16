@@ -18,6 +18,7 @@ ArrayList<Animaux> res = new ArrayList<Animaux>();
 		try {
 			 res = getListAnimaux.selectByCodeClient(aClient);
 		} catch (DALException e) {
+			e.printStackTrace();
 		}
 		
 		return res;

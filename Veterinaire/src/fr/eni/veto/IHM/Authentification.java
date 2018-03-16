@@ -9,8 +9,6 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -201,8 +199,6 @@ public class Authentification {
 					}
 					identifiantTxt.setText("");
 					passwordField.setText("");
-					errorIdLbl.setVisible(false);
-
 				}
 			}
 		});
@@ -243,7 +239,6 @@ public class Authentification {
 		btnTechnician.setVisible(false);
 
 		frmIdentification.setVisible(true);
-
 	}
 
 	public JFrame getFrmIdentification() {
@@ -253,5 +248,5 @@ public class Authentification {
 	public void setFrmIdentification(JFrame frmIdentification) {
 		this.frmIdentification = frmIdentification;
 	}
-
+	
 }

@@ -14,7 +14,7 @@ public class LoginMger {
 		try {
 			 res = co.authentification(login, mdp);
 		} catch (DALException e) {
-
+			e.printStackTrace();
 		}
 		
 		return res;

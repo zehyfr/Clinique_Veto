@@ -23,7 +23,7 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 		try {
 			connec = jdbc.getConnection();
 			stmt = connec.createStatement();
-			ResultSet rs = stmt.executeQuery("select CodePers, Nom, Role from Personnels WHERE Archive = 0");
+			ResultSet rs = stmt.executeQuery("select CodePers, Nom, Role from Personnels WHERE Archive = 0 AND Role = \'VET\'");
 			while(rs.next())
 			{
 				Personnels pers= new Personnels(rs.getInt("CodePers"), rs.getString("Nom"), rs.getString("Role"));

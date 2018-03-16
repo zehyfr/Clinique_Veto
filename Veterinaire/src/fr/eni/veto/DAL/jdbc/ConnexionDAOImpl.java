@@ -21,8 +21,9 @@ public class ConnexionDAOImpl implements ConnexionDAO {
 		
 		try {
 			connec = jdbc.getConnection();
-			stmt = connec.prepareStatement("select Role from Personnels WHERE CodePers = ?");
+			stmt = connec.prepareStatement("select Role from Personnels WHERE CodePers = ? AND MotPasse = ?");
 			stmt.setInt(1, id);
+			stmt.setString(2,pass);
 
 			ResultSet rs = stmt.executeQuery();
 			rs.next();

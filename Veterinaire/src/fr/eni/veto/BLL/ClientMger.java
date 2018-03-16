@@ -20,6 +20,7 @@ public class ClientMger {
 			res = getListClients.selectAllClients();
 		} catch (DALException e) {
 			//throw new BLLException(e.getMessage() + "Erreur lors de la récuperation de la liste de tout les clients");
+			e.printStackTrace();
 		}
 		return res;
 	}

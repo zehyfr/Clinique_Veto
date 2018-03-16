@@ -14,7 +14,7 @@ public class ClientAjoutMger {
 			 createAdd.createClient(c);
 			 
 		} catch (DALException e) {
-			
+			e.printStackTrace();
 		}
 	}
 }
