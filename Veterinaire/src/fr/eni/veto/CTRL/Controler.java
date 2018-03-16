@@ -62,13 +62,14 @@ public class Controler {
 	}
 
 	/**
-	 * Connection personnel
+	 * Connection à l'application via le code perso et son mot de passe
 	 * @param aNom, aRole, aCodePers
 	 */
 	public String validation(String login, String mdp) {
-		LoginMger log = new LoginMger();
+		
 		int loginInt = Integer.parseInt(login);
 
+		LoginMger log = new LoginMger();
 		if (log.connection(loginInt, mdp).equals("VET") || log.connection(loginInt, mdp).equals("ADM")
 				|| log.connection(loginInt, mdp).equals("SEC")) {
 			res = log.connection(loginInt, mdp);

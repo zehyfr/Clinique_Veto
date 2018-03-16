@@ -136,6 +136,9 @@ public class Authentification {
 		JButton validerBtn = new JButton("Valider");
 		validerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (identifiantTxt.getText().equals("")) {
+					errorIdLbl.setVisible(true);
+				} else {
 					switch (ctrl.validation(identifiantTxt.getText(), passwordField.getText())) {
 					case "VET":
 						frmIdentification.setVisible(false);
@@ -161,45 +164,56 @@ public class Authentification {
 					}
 					identifiantTxt.setText("");
 					passwordField.setText("");
+					errorIdLbl.setVisible(false);
+
 				}
+			}
 		});
-		
+
 		passwordField.addActionListener(new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				switch (ctrl.validation(identifiantTxt.getText(), passwordField.getText())) {
-				case "VET":
-					frmIdentification.setVisible(false);
-					errorIdLbl.setVisible(false);
-					ctrl.acces("VET", Integer.parseInt(identifiantTxt.getText()));
-					break;
-				case "ADM":
-					frmIdentification.setVisible(false);
-					errorIdLbl.setVisible(false);
-					ctrl.acces("ADM", Integer.parseInt(identifiantTxt.getText()));
-					break;
-				case "SEC":
-					frmIdentification.setVisible(false);
-					errorIdLbl.setVisible(false);
-					ctrl.acces("SEC", Integer.parseInt(identifiantTxt.getText()));
-					break;
-				case "0":
+				if (identifiantTxt.getText().equals("")) {
 					errorIdLbl.setVisible(true);
-					break;
+				} else {
+					switch (ctrl.validation(identifiantTxt.getText(), passwordField.getText())) {
+					case "VET":
+						frmIdentification.setVisible(false);
+						errorIdLbl.setVisible(false);
+						ctrl.acces("VET", Integer.parseInt(identifiantTxt.getText()));
+						break;
+					case "ADM":
+						frmIdentification.setVisible(false);
+						errorIdLbl.setVisible(false);
+						ctrl.acces("ADM", Integer.parseInt(identifiantTxt.getText()));
+						break;
+					case "SEC":
+						frmIdentification.setVisible(false);
+						errorIdLbl.setVisible(false);
+						ctrl.acces("SEC", Integer.parseInt(identifiantTxt.getText()));
+						break;
+					case "0":
+						errorIdLbl.setVisible(true);
+						break;
 
-				default:
-					break;
+					default:
+						break;
+					}
+					identifiantTxt.setText("");
+					passwordField.setText("");
+					errorIdLbl.setVisible(false);
+
 				}
-				identifiantTxt.setText("");
-				passwordField.setText("");
 			}
-	});
+		});
 
 		errorIdLbl = new JLabel("Identifiant et/ou mot de passe incorrect !");
 		errorIdLbl.setForeground(new Color(220, 20, 60));
 		GridBagConstraints gbc_errorIdLbl = new GridBagConstraints();
+		gbc_errorIdLbl.anchor = GridBagConstraints.EAST;
+		gbc_errorIdLbl.gridwidth = 2;
 		gbc_errorIdLbl.insets = new Insets(0, 0, 5, 5);
-		gbc_errorIdLbl.gridx = 2;
+		gbc_errorIdLbl.gridx = 1;
 		gbc_errorIdLbl.gridy = 6;
 		panel.add(errorIdLbl, gbc_errorIdLbl);
 		errorIdLbl.setVisible(false);
