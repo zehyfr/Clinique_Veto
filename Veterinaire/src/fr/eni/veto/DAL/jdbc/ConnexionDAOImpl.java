@@ -14,22 +14,29 @@ public class ConnexionDAOImpl implements ConnexionDAO {
 	
 	private JdbcTools jdbc;
 
-	public String authentification(int id, String pass) throws DALException{
+	public String authentification(int anId, String aPass) throws DALException{
 		Connection connec = null;
 		PreparedStatement stmt = null;
 		String role = "nul";
+		String pass = " ";
+		if(aPass!=null)
+		{
+			pass=aPass;
+		}
 		
 		try {
 			connec = jdbc.getConnection();
 			stmt = connec.prepareStatement("select Role from Personnels WHERE CodePers = ? AND MotPasse = ?");
-			stmt.setInt(1, id);
+			stmt.setInt(1, anId);
 			stmt.setString(2,pass);
 
 			ResultSet rs = stmt.executeQuery();
-			rs.next();
-			role = rs.getString("Role");
-			
+			if(rs.next())
+			{
+				role = rs.getString("Role");
+			}
 		}catch (SQLException e) {
+			e.printStackTrace();
 			throw new DALException("Erreur connexion");
 		}finally {
 			try{

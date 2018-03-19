@@ -133,6 +133,28 @@ public class PersonnelDAOImpl implements PersonnelDAO{
 		}
 	}
 	
+	public void modificationMdp(int aCodePers, String newMdp) throws DALException{
+		Connection connec = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			connec = jdbc.getConnection();
+			stmt = connec.prepareStatement("UPDATE Personnels SET MotPasse= ? WHERE CodePers = ?");
+			stmt.setString(1, newMdp);
+			stmt.setInt(2, aCodePers);
+			stmt.execute();
+
+		}catch (SQLException e) {
+			throw new DALException("Erreur connexion");
+		}finally {
+			try{
+				closeCoAndStatement(connec, stmt);
+			}catch(Exception ex) {
+				throw new DALException("Erreur fermeture connexion");
+			}
+		}
+	}
+	
 	public void closeCoAndStatement(Connection connec, Statement stmt) throws SQLException{
 		if(stmt != null) {
 			stmt.close();

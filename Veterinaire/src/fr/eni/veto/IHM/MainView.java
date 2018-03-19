@@ -53,6 +53,9 @@ import fr.eni.veto.BO.Clients;
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.CTRL.Controler;
 import fr.eni.veto.DAL.DALException;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class MainView {
 
@@ -70,6 +73,7 @@ public class MainView {
 	private JFrame frmAjouterDuPersonnel;
 	private JFrame frmAjouterDuClient;
 	private JFrame frmInformationsClient;
+	private JFrame frmChangerLeMot;
 
 	private Date dateJour;
 
@@ -126,10 +130,6 @@ public class MainView {
 		 * ACCUEIL PANEL
 		 */
 
-		JScrollPane accueilPane = new JScrollPane();
-		tabbedPane.addTab("Accueil", new ImageIcon(MainView.class.getResource("/ressources/accueil ico.png")),
-				accueilPane, null);
-		tabbedPane.setForegroundAt(0, new Color(0, 51, 153));
 		JPanel panelAccueil = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				try {
@@ -138,14 +138,16 @@ public class MainView {
 				}
 			}
 		};
+		tabbedPane.addTab("Accueil", new ImageIcon(MainView.class.getResource("/ressources/accueil ico.png")),
+				panelAccueil, null);
+		tabbedPane.setForegroundAt(0, new Color(0, 51, 153));
 		panelAccueil.setBackground(new Color(204, 204, 204));
-		accueilPane.setViewportView(panelAccueil);
 		GridBagLayout gbl_panelAccueil = new GridBagLayout();
 		gbl_panelAccueil.columnWidths = new int[] { 36, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 115, 0, 0 };
-		gbl_panelAccueil.rowHeights = new int[] { 23, 40, 61, 200, 42, 33, 0 };
+		gbl_panelAccueil.rowHeights = new int[] { 23, 40, 61, 179, 42, 58, 0 };
 		gbl_panelAccueil.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, Double.MIN_VALUE };
-		gbl_panelAccueil.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_panelAccueil.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelAccueil.setLayout(gbl_panelAccueil);
 
 		JLabel spaceBoundAccueil = new JLabel("");
@@ -161,7 +163,7 @@ public class MainView {
 		GridBagConstraints gbc_dateLbl = new GridBagConstraints();
 		gbc_dateLbl.anchor = GridBagConstraints.EAST;
 		gbc_dateLbl.gridwidth = 6;
-		gbc_dateLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_dateLbl.insets = new Insets(0, 0, 5, 0);
 		gbc_dateLbl.gridx = 8;
 		gbc_dateLbl.gridy = 0;
 		panelAccueil.add(dateLbl, gbc_dateLbl);
@@ -191,7 +193,7 @@ public class MainView {
 		panelInfoAccueil.setBackground(Color.WHITE);
 		GridBagConstraints gbc_panelInfoAccueil = new GridBagConstraints();
 		gbc_panelInfoAccueil.gridheight = 2;
-		gbc_panelInfoAccueil.gridwidth = 9;
+		gbc_panelInfoAccueil.gridwidth = 10;
 		gbc_panelInfoAccueil.insets = new Insets(0, 0, 5, 5);
 		gbc_panelInfoAccueil.fill = GridBagConstraints.BOTH;
 		gbc_panelInfoAccueil.gridx = 1;
@@ -206,27 +208,27 @@ public class MainView {
 
 		JLabel bjrLbl = null;
 		String prefix = "";
-		
+
 		switch (droitVisibility) {
 		case "ADM":
-			prefix= "Administrateur ";
+			prefix = "Administrateur ";
 			break;
 		case "VET":
-			prefix= "Docteur ";
+			prefix = "Docteur ";
 			break;
 		case "SEC":
-			prefix= "MR/MME ";
+			prefix = "MR/MME ";
 			break;
 		default:
 			break;
-			
+
 		}
 		try {
 			bjrLbl = new JLabel("Bonjour " + prefix + ctrl.getSalarie(codePersonnel) + " !");
 		} catch (DALException e3) {
 			e3.printStackTrace();
 		}
-		
+
 		JLabel spaceAccueilLbl1 = new JLabel("");
 		GridBagConstraints gbc_spaceAccueilLbl1 = new GridBagConstraints();
 		gbc_spaceAccueilLbl1.insets = new Insets(0, 0, 5, 5);
@@ -241,14 +243,14 @@ public class MainView {
 		gbc_bjrLbl.gridx = 1;
 		gbc_bjrLbl.gridy = 1;
 		panelInfoAccueil.add(bjrLbl, gbc_bjrLbl);
-		
+
 		JLabel spacebound7 = new JLabel("");
 		GridBagConstraints gbc_spacebound7 = new GridBagConstraints();
 		gbc_spacebound7.insets = new Insets(0, 0, 5, 5);
 		gbc_spacebound7.gridx = 0;
 		gbc_spacebound7.gridy = 2;
 		panelInfoAccueil.add(spacebound7, gbc_spacebound7);
-		
+
 		if (droitVisibility == "VET") {
 			JLabel prchRdvlbl = new JLabel("Votre prochain RDV est :");
 			prchRdvlbl.setForeground(new Color(0, 51, 153));
@@ -258,18 +260,15 @@ public class MainView {
 			gbc_prchRdvlbl.gridx = 1;
 			gbc_prchRdvlbl.gridy = 3;
 			panelInfoAccueil.add(prchRdvlbl, gbc_prchRdvlbl);
-			
+
 			String prochainRdv = null;
-			Agendas agendas =null;
+			Agendas agendas = null;
 			try {
-				if(ctrl.getRDV(codePersonnel, new Date(System.currentTimeMillis())).isEmpty())
-				{
+				if (ctrl.getRDV(codePersonnel, new Date(System.currentTimeMillis())).isEmpty()) {
 					prochainRdv = "Pas de RDV de programmé aujourd'hui.";
-				}
-				else
-				{
+				} else {
 					agendas = ctrl.getRDV(codePersonnel, new Date(System.currentTimeMillis())).get(0);
-					prochainRdv = "à " + agendas.getDateRdv()+ " avec MR/MME " + agendas.getNomClient();
+					prochainRdv = "à " + agendas.getDateRdv() + " avec MR/MME " + agendas.getNomClient();
 				}
 			} catch (DALException e1) {
 				e1.printStackTrace();
@@ -286,6 +285,7 @@ public class MainView {
 
 		JLabel spaceBound7 = new JLabel("");
 		GridBagConstraints gbc_spaceBound7 = new GridBagConstraints();
+		gbc_spaceBound7.anchor = GridBagConstraints.SOUTH;
 		gbc_spaceBound7.insets = new Insets(0, 0, 0, 5);
 		gbc_spaceBound7.gridx = 0;
 		gbc_spaceBound7.gridy = 5;
@@ -298,6 +298,213 @@ public class MainView {
 		gbc_logoutIco.gridx = 13;
 		gbc_logoutIco.gridy = 5;
 		panelAccueil.add(logoutIco, gbc_logoutIco);
+
+		JMenuBar menuBar = new JMenuBar();
+
+		JMenu mnNewMenu = new JMenu("Mon compte");
+		menuBar.add(mnNewMenu);
+
+		JMenuItem mntmNewMenuItem = new JMenuItem("Gestion mot de passe");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frmChangerLeMot = new JFrame();
+				frmChangerLeMot.getContentPane().setBackground(new Color(255, 255, 255));
+				GridBagLayout gridBagLayout = new GridBagLayout();
+				gridBagLayout.columnWidths = new int[] { 32, 193, 0, 156, 0, 0 };
+				gridBagLayout.rowHeights = new int[] { 17, 50, 35, 34, 0, 31, 0 };
+				gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				frmChangerLeMot.getContentPane().setLayout(gridBagLayout);
+
+				JLabel spaceLabelMdp;
+				spaceLabelMdp = new JLabel("");
+				GridBagConstraints gbc_spaceLabelMdp = new GridBagConstraints();
+				gbc_spaceLabelMdp.insets = new Insets(0, 0, 5, 6);
+				gbc_spaceLabelMdp.gridx = 0;
+				gbc_spaceLabelMdp.gridy = 0;
+				frmChangerLeMot.getContentPane().add(spaceLabelMdp, gbc_spaceLabelMdp);
+
+				JLabel lblAncienMotDe = new JLabel("Ancien mot de passe :");
+				lblAncienMotDe.setForeground(new Color(0, 51, 153));
+				lblAncienMotDe.setFont(new Font("Gisha", Font.PLAIN, 14));
+				lblAncienMotDe.setBackground(new Color(0, 51, 153));
+				GridBagConstraints gbc_lblAncienMotDe = new GridBagConstraints();
+				gbc_lblAncienMotDe.anchor = GridBagConstraints.WEST;
+				gbc_lblAncienMotDe.insets = new Insets(0, 0, 5, 5);
+				gbc_lblAncienMotDe.gridx = 1;
+				gbc_lblAncienMotDe.gridy = 1;
+				frmChangerLeMot.getContentPane().add(lblAncienMotDe, gbc_lblAncienMotDe);
+
+				JTextField ancienMdrTxt;
+				ancienMdrTxt = new JTextField();
+				GridBagConstraints gbc_ancienMdrTxt = new GridBagConstraints();
+				gbc_ancienMdrTxt.insets = new Insets(0, 0, 5, 5);
+				gbc_ancienMdrTxt.fill = GridBagConstraints.HORIZONTAL;
+				gbc_ancienMdrTxt.gridx = 3;
+				gbc_ancienMdrTxt.gridy = 1;
+				frmChangerLeMot.getContentPane().add(ancienMdrTxt, gbc_ancienMdrTxt);
+				ancienMdrTxt.setColumns(10);
+
+				JLabel lblNouveauMotDe = new JLabel("Nouveau mot de passe :");
+				lblNouveauMotDe.setForeground(new Color(0, 51, 153));
+				lblNouveauMotDe.setFont(new Font("Gisha", Font.PLAIN, 14));
+				lblNouveauMotDe.setBackground(new Color(0, 51, 153));
+				GridBagConstraints gbc_lblNouveauMotDe = new GridBagConstraints();
+				gbc_lblNouveauMotDe.anchor = GridBagConstraints.WEST;
+				gbc_lblNouveauMotDe.insets = new Insets(0, 0, 5, 5);
+				gbc_lblNouveauMotDe.gridx = 1;
+				gbc_lblNouveauMotDe.gridy = 2;
+				frmChangerLeMot.getContentPane().add(lblNouveauMotDe, gbc_lblNouveauMotDe);
+
+				JTextField nouveauMdp;
+				nouveauMdp = new JTextField();
+				GridBagConstraints gbc_nouveauMdp = new GridBagConstraints();
+				gbc_nouveauMdp.insets = new Insets(0, 0, 5, 5);
+				gbc_nouveauMdp.fill = GridBagConstraints.HORIZONTAL;
+				gbc_nouveauMdp.gridx = 3;
+				gbc_nouveauMdp.gridy = 2;
+				frmChangerLeMot.getContentPane().add(nouveauMdp, gbc_nouveauMdp);
+				nouveauMdp.setColumns(10);
+
+				JLabel lblConfirmerMotDe = new JLabel("Confirmer mot de passe :");
+				lblConfirmerMotDe.setForeground(new Color(0, 51, 153));
+				lblConfirmerMotDe.setFont(new Font("Gisha", Font.PLAIN, 14));
+				lblConfirmerMotDe.setBackground(new Color(0, 51, 153));
+				GridBagConstraints gbc_lblConfirmerMotDe = new GridBagConstraints();
+				gbc_lblConfirmerMotDe.anchor = GridBagConstraints.NORTHWEST;
+				gbc_lblConfirmerMotDe.insets = new Insets(0, 0, 5, 5);
+				gbc_lblConfirmerMotDe.gridx = 1;
+				gbc_lblConfirmerMotDe.gridy = 3;
+				frmChangerLeMot.getContentPane().add(lblConfirmerMotDe, gbc_lblConfirmerMotDe);
+
+				JTextField nouveauMdp2;
+				nouveauMdp2 = new JTextField();
+				GridBagConstraints gbc_nouveauMdp2 = new GridBagConstraints();
+				gbc_nouveauMdp2.anchor = GridBagConstraints.NORTH;
+				gbc_nouveauMdp2.insets = new Insets(0, 0, 5, 5);
+				gbc_nouveauMdp2.fill = GridBagConstraints.HORIZONTAL;
+				gbc_nouveauMdp2.gridx = 3;
+				gbc_nouveauMdp2.gridy = 3;
+				frmChangerLeMot.getContentPane().add(nouveauMdp2, gbc_nouveauMdp2);
+				nouveauMdp2.setColumns(10);
+
+				JButton validerMotdepasseNew = new JButton("Changer mot de passe");
+				validerMotdepasseNew.setForeground(new Color(0, 51, 153));
+				validerMotdepasseNew.setFont(new Font("Gisha", Font.PLAIN, 12));
+				validerMotdepasseNew.setBackground(new Color(255, 255, 255));
+				GridBagConstraints gbc_validerMotdepasseNew = new GridBagConstraints();
+				gbc_validerMotdepasseNew.gridwidth = 3;
+				gbc_validerMotdepasseNew.anchor = GridBagConstraints.SOUTH;
+				gbc_validerMotdepasseNew.insets = new Insets(0, 0, 0, 6);
+				gbc_validerMotdepasseNew.gridx = 1;
+				gbc_validerMotdepasseNew.gridy = 5;
+				validerMotdepasseNew.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (!ancienMdrTxt.equals("") || !nouveauMdp.equals("") || !nouveauMdp2.equals("")) {
+							if ((ctrl.validation(String.valueOf(codePersonnel), ancienMdrTxt.getText()) != "0")
+									&& (nouveauMdp.getText().equals(nouveauMdp2.getText()))) {
+								try {
+									ctrl.modifMdp(codePersonnel, nouveauMdp.getText());
+
+									// MODALE VALIDATION
+									frmArchiverPersonnel = new JFrame();
+									frmArchiverPersonnel.setTitle("Valider ?");
+									frmArchiverPersonnel.setIconImage(
+											Toolkit.getDefaultToolkit().getImage("/ressources/ico_veto.png"));
+									frmArchiverPersonnel.setBounds(200, 200, 350, 145);
+
+									JPanel panel = new JPanel();
+									panel.setBackground(Color.WHITE);
+									frmArchiverPersonnel.getContentPane().add(panel, BorderLayout.CENTER);
+									GridBagLayout gbl_panel = new GridBagLayout();
+									gbl_panel.columnWidths = new int[] { 98, 5, 41, 5, 0, 0 };
+									gbl_panel.rowHeights = new int[] { 24, 0, 0, 0 };
+									gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0,
+											Double.MIN_VALUE };
+									gbl_panel.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+									panel.setLayout(gbl_panel);
+
+									JLabel label = new JLabel("");
+									GridBagConstraints gbc_label = new GridBagConstraints();
+									gbc_label.gridwidth = 3;
+									gbc_label.insets = new Insets(0, 0, 5, 5);
+									gbc_label.gridx = 1;
+									gbc_label.gridy = 0;
+									panel.add(label, gbc_label);
+
+									JLabel lblNewLabel = new JLabel("Le mot de passe a été changé");
+									lblNewLabel.setForeground(new Color(0, 51, 153));
+									lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 12));
+									GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+									gbc_lblNewLabel.gridwidth = 5;
+									gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+									gbc_lblNewLabel.gridx = 0;
+									gbc_lblNewLabel.gridy = 1;
+									panel.add(lblNewLabel, gbc_lblNewLabel);
+
+									JButton validerModalBtn = new JButton("Ok");
+									validerModalBtn.setForeground(new Color(0, 51, 153));
+									validerModalBtn.setFont(new Font("Gisha", Font.PLAIN, 11));
+									validerModalBtn.setBackground(new Color(255, 255, 255));
+									GridBagConstraints gbc_validerModalBtn = new GridBagConstraints();
+									gbc_validerModalBtn.insets = new Insets(0, 0, 0, 5);
+									gbc_validerModalBtn.anchor = GridBagConstraints.EAST;
+									gbc_validerModalBtn.gridx = 3;
+									gbc_validerModalBtn.gridy = 2;
+									panel.add(validerModalBtn, gbc_validerModalBtn);
+
+									validerModalBtn.addMouseListener(new MouseAdapter() {
+										@Override
+										public void mouseClicked(MouseEvent e) {
+											frmArchiverPersonnel.setVisible(false);
+										}
+									});
+									frmArchiverPersonnel.setVisible(true);
+									frmArchiverPersonnel.setLocationRelativeTo(null);
+								} catch (DALException e1) {
+									e1.printStackTrace();
+								}
+							} else {
+								System.out.println("NON");
+							}
+						}
+					}
+				});
+
+				JLabel lblAncienMotDe_1 = new JLabel("Ancien mot de passe incorrect");
+				lblAncienMotDe_1.setFont(new Font("Gisha", Font.PLAIN, 12));
+				lblAncienMotDe_1.setForeground(new Color(153, 51, 51));
+				GridBagConstraints gbc_lblAncienMotDe_1 = new GridBagConstraints();
+				gbc_lblAncienMotDe_1.gridwidth = 3;
+				gbc_lblAncienMotDe_1.insets = new Insets(0, 0, 5, 5);
+				gbc_lblAncienMotDe_1.gridx = 1;
+				gbc_lblAncienMotDe_1.gridy = 4;
+				frmChangerLeMot.getContentPane().add(lblAncienMotDe_1, gbc_lblAncienMotDe_1);
+
+				frmChangerLeMot.getContentPane().add(validerMotdepasseNew, gbc_validerMotdepasseNew);
+				frmChangerLeMot.setTitle("Changer le mot de passe");
+				frmChangerLeMot.setIconImage(Toolkit.getDefaultToolkit()
+						.getImage(MainView.class.getResource("/ressources/accueilVetoICO.jpg")));
+				frmChangerLeMot.setBounds(100, 100, 461, 230);
+				frmChangerLeMot.setLocationRelativeTo(null);
+
+				frmChangerLeMot.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
+
+		JMenuItem mntmDconnection = new JMenuItem("D\u00E9connection");
+		mntmDconnection.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frmGestion.setVisible(false);
+				ctrl.getAuth();
+			}
+		});
+		mnNewMenu.add(mntmDconnection);
+
 		logoutIco.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -323,12 +530,11 @@ public class MainView {
 		tabbedPane.setForegroundAt(1, new Color(0, 51, 153));
 		tabbedPane.setBackgroundAt(1, new Color(255, 255, 255));
 
-		
 		panelAgenda.setBackground(new Color(204, 204, 204));
 		GridBagLayout gbl_panelAgenda = new GridBagLayout();
 		gbl_panelAgenda.columnWidths = new int[] { 32, 32, 0, 0, 0, 63, 264, 22, 105, 0 };
-		gbl_panelAgenda.rowHeights = new int[] { 25, 0, 38, 269, 58, 0 };
-		gbl_panelAgenda.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panelAgenda.rowHeights = new int[] { 28, 0, 38, 269, 58, 0 };
+		gbl_panelAgenda.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		gbl_panelAgenda.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelAgenda.setLayout(gbl_panelAgenda);
 
@@ -352,6 +558,7 @@ public class MainView {
 		heureAgendaLbl.setForeground(Color.WHITE);
 		heureAgendaLbl.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
 		GridBagConstraints gbc_heureAgendaLbl = new GridBagConstraints();
+		gbc_heureAgendaLbl.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_heureAgendaLbl.insets = new Insets(0, 0, 5, 0);
 		gbc_heureAgendaLbl.gridx = 8;
 		gbc_heureAgendaLbl.gridy = 0;
@@ -384,7 +591,7 @@ public class MainView {
 		gbc_agendasPanelInside.gridy = 3;
 		panelAgenda.add(agendasPanelInside, gbc_agendasPanelInside);
 		GridBagLayout gbl_agendasPanelInside = new GridBagLayout();
-		gbl_agendasPanelInside.columnWidths = new int[] { 57, 115, 15, 33, 36, 19, 31, 14, 42, 41, 22, 43, 12, 0 };
+		gbl_agendasPanelInside.columnWidths = new int[] { 43, 115, 15, 33, 36, 19, 31, 14, 32, 41, 22, 79, 12, 0 };
 		gbl_agendasPanelInside.rowHeights = new int[] { 21, 0, 12, 0, 28, 42, 102, 0 };
 		gbl_agendasPanelInside.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 1.0, Double.MIN_VALUE };
@@ -478,9 +685,8 @@ public class MainView {
 		} else {
 			veterinaireAgendaCmb.setModel(new DefaultComboBoxModel(arrayVetoList.toArray()));
 		}
-		if(droitVisibility == "VET")
-		{
-			veterinaireAgendaCmb.setSelectedIndex(codePersonnel-1);
+		if (droitVisibility == "VET") {
+			veterinaireAgendaCmb.setSelectedIndex(codePersonnel - 1);
 		}
 
 		JLabel spaceBound4 = new JLabel("");
@@ -581,6 +787,7 @@ public class MainView {
 		ajouterRDVBtn.setFont(new Font("Gisha", Font.PLAIN, 12));
 		ajouterRDVBtn.setForeground(new Color(0, 51, 153));
 		GridBagConstraints gbc_ajouterRDVBtn = new GridBagConstraints();
+		gbc_ajouterRDVBtn.anchor = GridBagConstraints.EAST;
 		gbc_ajouterRDVBtn.gridwidth = 3;
 		gbc_ajouterRDVBtn.insets = new Insets(0, 0, 5, 5);
 		gbc_ajouterRDVBtn.gridx = 9;
@@ -737,18 +944,17 @@ public class MainView {
 		 */
 
 		if (droitVisibility == "SEC" || droitVisibility == "ADM") {
-		JPanel panelClient = new JPanel() {
-			protected void paintComponent(Graphics g) {
-				try {
-					g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
-				} catch (IOException e) {
+			JPanel panelClient = new JPanel() {
+				protected void paintComponent(Graphics g) {
+					try {
+						g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
+					} catch (IOException e) {
+					}
 				}
-			}
-		};
+			};
 			tabbedPane.addTab("Gestion Clients",
 					new ImageIcon(MainView.class.getResource("/ressources/client ico.png")), panelClient, null);
 
-			
 			panelClient.setBackground(new Color(204, 204, 204));
 			GridBagLayout gbl_panelClient = new GridBagLayout();
 			gbl_panelClient.columnWidths = new int[] { 26, 38, 143, 164, 15, 253, 17, 0 };
@@ -1480,6 +1686,9 @@ public class MainView {
 						tatouageAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getTatouage());
 						antecedantAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getAntecedant());
 						validerAnimalBtn.setVisible(true);
+						animalCmb.removeAll();
+						arrayListAnimaux = ctrl.getAllAnimaux(listModelClient.get(indexClient).getCodeClient());
+						animalCmb.setModel(new DefaultComboBoxModel(arrayListAnimaux.toArray()));
 					}
 
 					animalCmb.addActionListener(new ActionListener() {
@@ -2019,8 +2228,7 @@ public class MainView {
 		 */
 
 		if (droitVisibility == "ADM") {
-			JPanel panelPersonnels = new JPanel()
-			{
+			JPanel panelPersonnels = new JPanel() {
 				protected void paintComponent(Graphics g) {
 					try {
 						g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
@@ -2744,6 +2952,8 @@ public class MainView {
 		frmGestion.setBounds(100, 100, 700, 500);
 		frmGestion.setLocationRelativeTo(null);
 		frmGestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		frmGestion.setJMenuBar(menuBar);
 		frmGestion.setVisible(true);
 	}
 }

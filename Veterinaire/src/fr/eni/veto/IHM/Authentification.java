@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -98,7 +99,7 @@ public class Authentification {
 		gbc_identificationLbl.gridy = 3;
 		frmIdentification.getContentPane().add(identificationLbl, gbc_identificationLbl);
 
-		identifiantTxt = new JTextField();
+		identifiantTxt = new JNumberTextField();
 		GridBagConstraints gbc_identifiantTxt = new GridBagConstraints();
 		gbc_identifiantTxt.insets = new Insets(0, 0, 5, 5);
 		gbc_identifiantTxt.fill = GridBagConstraints.HORIZONTAL;
@@ -106,7 +107,7 @@ public class Authentification {
 		gbc_identifiantTxt.gridy = 3;
 		frmIdentification.getContentPane().add(identifiantTxt, gbc_identifiantTxt);
 		identifiantTxt.setColumns(10);
-
+		
 		JLabel spaceLbl = new JLabel("");
 		GridBagConstraints gbc_spaceLbl = new GridBagConstraints();
 		gbc_spaceLbl.insets = new Insets(0, 0, 5, 5);
@@ -163,7 +164,6 @@ public class Authentification {
 					identifiantTxt.setText("");
 					passwordField.setText("");
 					errorIdLbl.setVisible(false);
-
 				}
 			}
 		});
@@ -247,6 +247,31 @@ public class Authentification {
 
 	public void setFrmIdentification(JFrame frmIdentification) {
 		this.frmIdentification = frmIdentification;
+	}
+	
+	public class JNumberTextField extends JTextField {
+	    private static final long serialVersionUID = 1L;
+
+	    @Override
+	    public void processKeyEvent(KeyEvent ev) {
+	        if (Character.isDigit(ev.getKeyChar()) || ev.getKeyCode() == KeyEvent.VK_BACK_SPACE || ev.getKeyCode() == KeyEvent.VK_LEFT || ev.getKeyCode() == KeyEvent.VK_RIGHT) {
+	            super.processKeyEvent(ev);
+	        }
+	        ev.consume();
+	        return;
+	    }
+
+	    /**
+	     * As the user is not even able to enter a dot ("."), only integers (whole numbers) may be entered.
+	     */
+	    public Long getNumber() {
+	        Long result = null;
+	        String text = getText();
+	        if (text != null && !"".equals(text)) {
+	            result = Long.valueOf(text);
+	        }
+	        return result;
+	    }
 	}
 	
 }

@@ -26,5 +26,15 @@ public class PersonnelsUpdateMger {
 			e.printStackTrace();
 		}
 	}
+	
+	public void modifMotdepasse(int aCodePers, String aMdp)
+	{
+		PersonnelDAO personnelsUp = PersonnelDAOFactory.getPersonnelDAO();
+		
+		try {
+			 personnelsUp.modificationMdp(aCodePers, aMdp);
+		} catch (DALException e) {
+		}
+	}
 
 }

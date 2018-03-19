@@ -239,6 +239,16 @@ public class Controler {
 		return personnels.getAsalarie(aCode);
 	}
 	
+	/**
+	 * Changement du mot de passe 
+	 * @throws DALException 
+	 */
+	public void modifMdp(int aCode, String aMdp) throws DALException
+	{
+		PersonnelsUpdateMger personnels = new PersonnelsUpdateMger();
+		personnels.modifMotdepasse(aCode, aMdp);
+	}
+	
 	public void getAuth(){
 		auth.getFrmIdentification().setVisible(true);
 	}
