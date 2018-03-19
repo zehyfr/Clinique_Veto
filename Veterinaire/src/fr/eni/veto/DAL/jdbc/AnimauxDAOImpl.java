@@ -102,7 +102,7 @@ public class AnimauxDAOImpl implements AnimauxDAO{
 	public void deleteAnimal(int code) throws DALException{
 		Connection connec = null;
 		Statement stmt = null;
-		String sql = "DELETE FROM Animaux where CodeAnimal = " + code + ";";
+		String sql = "UPDATE Animaux set Archive = true where CodeAnimal = " + code + ";";
 		try {
 			connec = jdbc.getConnection();
 			stmt = connec.createStatement();
