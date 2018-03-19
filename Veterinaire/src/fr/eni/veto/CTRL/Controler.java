@@ -249,6 +249,12 @@ public class Controler {
 		personnels.modifMotdepasse(aCode, aMdp);
 	}
 	
+	public void supprimerRdv(Agendas anAgendas) throws DALException
+	{
+		AgendaMger supprimerRdv = new AgendaMger();
+		supprimerRdv.supprimerRdv(anAgendas);
+	}
+	
 	public void getAuth(){
 		auth.getFrmIdentification().setVisible(true);
 	}

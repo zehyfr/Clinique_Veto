@@ -23,6 +23,13 @@ public class Agendas {
 		this.nomVeto = nomVeto;
 		this.nomClient = nomClient;
 	}
+	
+	public Agendas(int codeVeto, Date dateRdv, int codeAnimal) {
+		super();
+		CodeVeto = codeVeto;
+		DateRdv = dateRdv;
+		CodeAnimal = codeAnimal;
+	}
 
 	public int getCodeVeto() {
 		return CodeVeto;

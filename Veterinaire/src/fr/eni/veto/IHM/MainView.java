@@ -81,6 +81,7 @@ public class MainView {
 	private ArrayList<Clients> arrayClientList;
 	private ArrayList<Personnels> arrayVetoList;
 	private ArrayList<Agendas> arrayListAgendas;
+	private ArrayList<Agendas> listeAgendasArray;
 
 	private String droitVisibility;
 
@@ -389,6 +390,17 @@ public class MainView {
 				frmChangerLeMot.getContentPane().add(nouveauMdp2, gbc_nouveauMdp2);
 				nouveauMdp2.setColumns(10);
 
+				JLabel lblAncienMotDe_1 = new JLabel("Ancien mot de passe incorrect");
+				lblAncienMotDe_1.setFont(new Font("Gisha", Font.PLAIN, 12));
+				lblAncienMotDe_1.setForeground(new Color(153, 51, 51));
+				GridBagConstraints gbc_lblAncienMotDe_1 = new GridBagConstraints();
+				gbc_lblAncienMotDe_1.gridwidth = 3;
+				gbc_lblAncienMotDe_1.insets = new Insets(0, 0, 5, 5);
+				gbc_lblAncienMotDe_1.gridx = 1;
+				gbc_lblAncienMotDe_1.gridy = 4;
+				lblAncienMotDe_1.setVisible(false);
+				frmChangerLeMot.getContentPane().add(lblAncienMotDe_1, gbc_lblAncienMotDe_1);
+
 				JButton validerMotdepasseNew = new JButton("Changer mot de passe");
 				validerMotdepasseNew.setForeground(new Color(0, 51, 153));
 				validerMotdepasseNew.setFont(new Font("Gisha", Font.PLAIN, 12));
@@ -408,7 +420,7 @@ public class MainView {
 								try {
 									ctrl.modifMdp(codePersonnel, nouveauMdp.getText());
 
-									// MODALE VALIDATION
+									/////////// MODALE VALIDATION ///////////
 									frmArchiverPersonnel = new JFrame();
 									frmArchiverPersonnel.setTitle("Valider ?");
 									frmArchiverPersonnel.setIconImage(
@@ -455,33 +467,26 @@ public class MainView {
 									gbc_validerModalBtn.gridy = 2;
 									panel.add(validerModalBtn, gbc_validerModalBtn);
 
+									frmArchiverPersonnel.setVisible(true);
+									frmArchiverPersonnel.setLocationRelativeTo(null);
+
 									validerModalBtn.addMouseListener(new MouseAdapter() {
 										@Override
 										public void mouseClicked(MouseEvent e) {
 											frmArchiverPersonnel.setVisible(false);
+											frmChangerLeMot.setVisible(false);
 										}
 									});
-									frmArchiverPersonnel.setVisible(true);
-									frmArchiverPersonnel.setLocationRelativeTo(null);
+
 								} catch (DALException e1) {
 									e1.printStackTrace();
 								}
 							} else {
-								System.out.println("NON");
+								lblAncienMotDe_1.setVisible(true);
 							}
 						}
 					}
 				});
-
-				JLabel lblAncienMotDe_1 = new JLabel("Ancien mot de passe incorrect");
-				lblAncienMotDe_1.setFont(new Font("Gisha", Font.PLAIN, 12));
-				lblAncienMotDe_1.setForeground(new Color(153, 51, 51));
-				GridBagConstraints gbc_lblAncienMotDe_1 = new GridBagConstraints();
-				gbc_lblAncienMotDe_1.gridwidth = 3;
-				gbc_lblAncienMotDe_1.insets = new Insets(0, 0, 5, 5);
-				gbc_lblAncienMotDe_1.gridx = 1;
-				gbc_lblAncienMotDe_1.gridy = 4;
-				frmChangerLeMot.getContentPane().add(lblAncienMotDe_1, gbc_lblAncienMotDe_1);
 
 				frmChangerLeMot.getContentPane().add(validerMotdepasseNew, gbc_validerMotdepasseNew);
 				frmChangerLeMot.setTitle("Changer le mot de passe");
@@ -810,27 +815,18 @@ public class MainView {
 		label_5.setFont(new Font("Tahoma", Font.BOLD, 13));
 		label_5.setForeground(new Color(0, 51, 153));
 		GridBagConstraints gbc_label_5 = new GridBagConstraints();
-		gbc_label_5.anchor = GridBagConstraints.NORTH;
-		gbc_label_5.gridwidth = 12;
+		gbc_label_5.anchor = GridBagConstraints.NORTHEAST;
+		gbc_label_5.gridwidth = 11;
 		gbc_label_5.insets = new Insets(0, 0, 5, 5);
 		gbc_label_5.gridx = 0;
 		gbc_label_5.gridy = 5;
 		agendasPanelInside.add(label_5, gbc_label_5);
 
-		JScrollPane scrollPane = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridwidth = 12;
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 6;
-		agendasPanelInside.add(scrollPane, gbc_scrollPane);
-
 		DefaultListModel<String> listModelAgendas = new DefaultListModel<String>();
 		JList listeRdv = new JList(listModelAgendas);
 		listeRdv.setFont(new Font("Gisha", Font.PLAIN, 14));
 		listeRdv.setForeground(new Color(0, 51, 153));
-		ArrayList<Agendas> listeAgendasArray = new ArrayList<Agendas>();
+		listeAgendasArray = new ArrayList<Agendas>();
 		try {
 			listeAgendasArray = ctrl.getRDV(arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
 					dateField.getDate());
@@ -848,6 +844,52 @@ public class MainView {
 							+ " | Vétérinaire : " + rdv.getNomVeto());
 			listModelAgendas.addElement(tempList);
 		}
+
+		JButton supprimerRdvBtn = new JButton("");
+		supprimerRdvBtn.setBackground(Color.WHITE);
+		supprimerRdvBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!listeRdv.isSelectionEmpty()) {
+					Agendas agendasSuppr = new Agendas(listeAgendasArray.get(listeRdv.getSelectedIndex()).getCodeVeto(),
+							listeAgendasArray.get(listeRdv.getSelectedIndex()).getDateRdv(),
+							listeAgendasArray.get(listeRdv.getSelectedIndex()).getCodeAnimal());
+					try {
+						ctrl.supprimerRdv(agendasSuppr);
+					} catch (DALException e) {
+						e.printStackTrace();
+					}
+					listModelAgendas.remove(listeRdv.getSelectedIndex());
+
+					if (listModelAgendas.isEmpty()) {
+						supprimerRdvBtn.setEnabled(false);
+					}
+				}
+			}
+		});
+		supprimerRdvBtn.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash2.png")));
+		GridBagConstraints gbc_supprimerRdvBtn = new GridBagConstraints();
+		gbc_supprimerRdvBtn.anchor = GridBagConstraints.EAST;
+		gbc_supprimerRdvBtn.insets = new Insets(0, 0, 5, 5);
+		gbc_supprimerRdvBtn.gridx = 11;
+		gbc_supprimerRdvBtn.gridy = 5;
+		agendasPanelInside.add(supprimerRdvBtn, gbc_supprimerRdvBtn);
+		supprimerRdvBtn.setEnabled(false);
+
+		if (!listModelAgendas.isEmpty()) {
+			supprimerRdvBtn.setEnabled(true);
+		} else {
+			supprimerRdvBtn.setEnabled(false);
+		}
+
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 12;
+		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 6;
+		agendasPanelInside.add(scrollPane, gbc_scrollPane);
+
 		scrollPane.setViewportView(listeRdv);
 
 		// AJOUTER UN RDV
@@ -882,6 +924,10 @@ public class MainView {
 					}
 				} catch (DALException | SQLException | ParseException e1) {
 					e1.printStackTrace();
+				}
+
+				if (!listModelAgendas.isEmpty()) {
+					supprimerRdvBtn.setEnabled(true);
 				}
 			}
 		});

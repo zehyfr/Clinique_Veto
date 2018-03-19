@@ -27,4 +27,10 @@ public class AgendaMger {
 		AgendaDAO agendaVerif = AgendaDAOFactory.getAgendaDAO();
 		return agendaVerif.verify(aCode, aDate);
 	}
+	
+	public void supprimerRdv(Agendas anAgendas) throws DALException
+	{
+		AgendaDAO agendaSupprimer = AgendaDAOFactory.getAgendaDAO();
+		agendaSupprimer.supprimerRdv(anAgendas);
+	}
 }
