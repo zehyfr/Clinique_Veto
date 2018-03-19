@@ -81,6 +81,9 @@ public class MainView {
 	private ArrayList<Clients> arrayClientList;
 	private ArrayList<Personnels> arrayVetoList;
 	private ArrayList<Agendas> listeAgendasArray;
+	private ArrayList<String> listeSexe;
+	private ArrayList<String> listeRace;
+	private ArrayList<String> listeEspece;
 
 	private String droitVisibility;
 
@@ -600,7 +603,7 @@ public class MainView {
 				0.0, 1.0, Double.MIN_VALUE };
 		gbl_agendasPanelInside.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		agendasPanelInside.setLayout(gbl_agendasPanelInside);
-		
+
 		JLabel dateAnterieurWarnLbl = new JLabel("Attention, la date du RDV est d\u00E9j\u00E0 pass\u00E9e");
 		dateAnterieurWarnLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 		dateAnterieurWarnLbl.setForeground(new Color(204, 51, 0));
@@ -861,7 +864,8 @@ public class MainView {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!listeRdv.isSelectionEmpty()) {
 					try {
-						listeAgendasArray = ctrl.getRDV(arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
+						listeAgendasArray = ctrl.getRDV(
+								arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
 								dateField.getDate());
 					} catch (DALException e1) {
 						e1.printStackTrace();
@@ -914,7 +918,8 @@ public class MainView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					listeAgendasArray = ctrl.getRDV(arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
+					listeAgendasArray = ctrl.getRDV(
+							arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
 							dateField.getDate());
 				} catch (DALException e2) {
 					e2.printStackTrace();
@@ -955,9 +960,7 @@ public class MainView {
 					if (!listModelAgendas.isEmpty()) {
 						supprimerRdvBtn.setEnabled(true);
 					}
-				}
-				else
-				{
+				} else {
 					dateAnterieurWarnLbl.setVisible(true);
 				}
 			}
@@ -1368,15 +1371,21 @@ public class MainView {
 				gbc_sexeAnimalLbl.gridy = 3;
 				panelAnimal.add(sexeAnimalLbl, gbc_sexeAnimalLbl);
 
-				JTextField sexeAnimalTxt;
-				sexeAnimalTxt = new JTextField();
-				GridBagConstraints gbc_sexeAnimalTxt = new GridBagConstraints();
-				gbc_sexeAnimalTxt.insets = new Insets(0, 0, 5, 5);
-				gbc_sexeAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
-				gbc_sexeAnimalTxt.gridx = 2;
-				gbc_sexeAnimalTxt.gridy = 3;
-				panelAnimal.add(sexeAnimalTxt, gbc_sexeAnimalTxt);
-				sexeAnimalTxt.setColumns(10);
+				JComboBox sexeAnimalCmb = new JComboBox();
+				sexeAnimalCmb.setForeground(new Color(0, 51, 153));
+				sexeAnimalCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_sexeAnimalCmb = new GridBagConstraints();
+				gbc_sexeAnimalCmb.insets = new Insets(0, 0, 5, 5);
+				gbc_sexeAnimalCmb.fill = GridBagConstraints.HORIZONTAL;
+				gbc_sexeAnimalCmb.gridx = 2;
+				gbc_sexeAnimalCmb.gridy = 3;
+				panelAnimal.add(sexeAnimalCmb, gbc_sexeAnimalCmb);
+
+				listeSexe = new ArrayList<String>();
+				listeSexe.add(" ");
+				listeSexe.add("M");
+				listeSexe.add("F");
+				sexeAnimalCmb.setModel(new DefaultComboBoxModel(listeSexe.toArray()));
 
 				JLabel couleurAnimalLbl = new JLabel("Couleur : ");
 				couleurAnimalLbl.setForeground(new Color(0, 51, 153));
@@ -1416,15 +1425,25 @@ public class MainView {
 				gbc_raceAnimalLbl.gridy = 5;
 				panelAnimal.add(raceAnimalLbl, gbc_raceAnimalLbl);
 
-				JTextField raceAnimalTxt;
-				raceAnimalTxt = new JTextField();
-				GridBagConstraints gbc_raceAnimalTxt = new GridBagConstraints();
-				gbc_raceAnimalTxt.insets = new Insets(0, 0, 5, 5);
-				gbc_raceAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
-				gbc_raceAnimalTxt.gridx = 2;
-				gbc_raceAnimalTxt.gridy = 5;
-				panelAnimal.add(raceAnimalTxt, gbc_raceAnimalTxt);
-				raceAnimalTxt.setColumns(10);
+				JComboBox raceAnimalCmb = new JComboBox();
+				raceAnimalCmb.setForeground(new Color(0, 51, 153));
+				raceAnimalCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_raceAnimalCmb = new GridBagConstraints();
+				gbc_raceAnimalCmb.insets = new Insets(0, 0, 5, 5);
+				gbc_raceAnimalCmb.fill = GridBagConstraints.HORIZONTAL;
+				gbc_raceAnimalCmb.gridx = 2;
+				gbc_raceAnimalCmb.gridy = 5;
+				panelAnimal.add(raceAnimalCmb, gbc_raceAnimalCmb);
+				
+				listeRace = new ArrayList<String>();
+				listeRace = ctrl.get
+				String empty = "Pas de races";
+				if (listeRace.isEmpty()) {
+					raceAnimalCmb.insertItemAt(empty, 0);
+					raceAnimalCmb.setSelectedIndex(0);
+				} else {
+					raceAnimalCmb.setModel(new DefaultComboBoxModel(listeRace.toArray()));
+				}
 
 				JLabel especeAnimalLbl = new JLabel("Esp\u00E8ce : ");
 				especeAnimalLbl.setForeground(new Color(0, 51, 153));
@@ -1436,15 +1455,25 @@ public class MainView {
 				gbc_especeAnimalLbl.gridy = 5;
 				panelAnimal.add(especeAnimalLbl, gbc_especeAnimalLbl);
 
-				JTextField especeAnimalTxt;
-				especeAnimalTxt = new JTextField();
-				GridBagConstraints gbc_especeAnimalTxt = new GridBagConstraints();
-				gbc_especeAnimalTxt.insets = new Insets(0, 0, 5, 5);
-				gbc_especeAnimalTxt.fill = GridBagConstraints.HORIZONTAL;
-				gbc_especeAnimalTxt.gridx = 5;
-				gbc_especeAnimalTxt.gridy = 5;
-				panelAnimal.add(especeAnimalTxt, gbc_especeAnimalTxt);
-				especeAnimalTxt.setColumns(10);
+				JComboBox especeAnimalCmb = new JComboBox();
+				especeAnimalCmb.setForeground(new Color(0, 51, 153));
+				especeAnimalCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_especeAnimalCmb = new GridBagConstraints();
+				gbc_especeAnimalCmb.insets = new Insets(0, 0, 5, 5);
+				gbc_especeAnimalCmb.fill = GridBagConstraints.HORIZONTAL;
+				gbc_especeAnimalCmb.gridx = 5;
+				gbc_especeAnimalCmb.gridy = 5;
+				panelAnimal.add(especeAnimalCmb, gbc_especeAnimalCmb);
+				
+				listeEspece = new ArrayList<String>();
+				listeEspece = ctrl.get
+				String emptyEspece = "Pas d'espèces";
+				if (listeEspece.isEmpty()) {
+					especeAnimalCmb.insertItemAt(emptyEspece, 0);
+					especeAnimalCmb.setSelectedIndex(0);
+				} else {
+					especeAnimalCmb.setModel(new DefaultComboBoxModel(listeEspece.toArray()));
+				}
 
 				JLabel label_2 = new JLabel("");
 				GridBagConstraints gbc_label_2 = new GridBagConstraints();
@@ -1759,10 +1788,10 @@ public class MainView {
 					public void actionPerformed(ActionEvent e) {
 						numeroAnimalTxt.setText("");
 						nomAnimalTxt.setText("");
-						sexeAnimalTxt.setText("");
+						sexeAnimalCmb.setSelectedIndex(0);
 						couleurAnimalTxt.setText("");
-						raceAnimalTxt.setText("");
-						especeAnimalTxt.setText("");
+						raceAnimalCmb.setSelectedIndex(0);
+						especeAnimalCmb.setSelectedIndex(0);
 						tatouageAnimalTxt.setText("");
 						antecedantAnimalTxt.setText("");
 						validerAnimalBtn.setVisible(false);
@@ -1781,10 +1810,10 @@ public class MainView {
 					animalCmb.setModel(new DefaultComboBoxModel(arrayListAnimaux.toArray()));
 					numeroAnimalTxt.setText(Integer.toString(arrayListAnimaux.get(indexCmb).getCodeAnimal()));
 					nomAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getNomAnimal());
-					sexeAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getSexe());
+					sexeAnimalCmb.setSelectedIndex(0);
 					couleurAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getCouleur());
-					raceAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getRace());
-					especeAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getEspece());
+					raceAnimalCmb.setSelectedIndex(0);
+					especeAnimalCmb.setSelectedIndex(0);
 					tatouageAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getTatouage());
 					antecedantAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getAntecedant());
 					validerAnimalBtn.setVisible(true);
@@ -1800,19 +1829,19 @@ public class MainView {
 						if (animalCmb.getItemAt(indexCmb).equals(emptyAnimal)) {
 							numeroAnimalTxt.setText("");
 							nomAnimalTxt.setText("");
-							sexeAnimalTxt.setText("");
+							sexeAnimalCmb.setSelectedIndex(0);
 							couleurAnimalTxt.setText("");
-							raceAnimalTxt.setText("");
-							especeAnimalTxt.setText("");
+							raceAnimalCmb.setSelectedIndex(0);
+							especeAnimalCmb.setSelectedIndex(0);
 							tatouageAnimalTxt.setText("");
 							antecedantAnimalTxt.setText("");
 						} else {
 							numeroAnimalTxt.setText(Integer.toString(arrayListAnimaux.get(indexCmb).getCodeAnimal()));
 							nomAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getNomAnimal());
-							sexeAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getSexe());
+							sexeAnimalCmb.setSelectedIndex(0);
 							couleurAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getCouleur());
-							raceAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getRace());
-							especeAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getEspece());
+							raceAnimalCmb.setSelectedIndex(0);
+							especeAnimalCmb.setSelectedIndex(0);
 							tatouageAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getTatouage());
 							antecedantAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getAntecedant());
 						}
@@ -1827,19 +1856,19 @@ public class MainView {
 					public void actionPerformed(ActionEvent e) {
 						if (animalCmb.getItemAt(indexCmb).equals(emptyAnimal)) {
 							nomAnimalTxt.setText("");
-							sexeAnimalTxt.setText("");
+							sexeAnimalCmb.setSelectedIndex(0);
 							couleurAnimalTxt.setText("");
-							raceAnimalTxt.setText("");
-							especeAnimalTxt.setText("");
+							raceAnimalCmb.setSelectedIndex(0);
+							especeAnimalCmb.setSelectedIndex(0);
 							tatouageAnimalTxt.setText("");
 							antecedantAnimalTxt.setText("");
 						} else {
 							numeroAnimalTxt.setText(Integer.toString(arrayListAnimaux.get(indexCmb).getCodeAnimal()));
 							nomAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getNomAnimal());
-							sexeAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getSexe());
+							sexeAnimalCmb.setSelectedIndex(0);
 							couleurAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getCouleur());
-							raceAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getRace());
-							especeAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getEspece());
+							raceAnimalCmb.setSelectedIndex(0);
+							especeAnimalCmb.setSelectedIndex(0);
 							tatouageAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getTatouage());
 							antecedantAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getAntecedant());
 							validerAnimalBtn.setVisible(true);
@@ -1852,8 +1881,8 @@ public class MainView {
 				ajouterAnimalBtn.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Animaux newAnimal = new Animaux(nomAnimalTxt.getText(), sexeAnimalTxt.getText(),
-								couleurAnimalTxt.getText(), raceAnimalTxt.getText(), especeAnimalTxt.getText(),
+						Animaux newAnimal = new Animaux(nomAnimalTxt.getText(), sexeAnimalCmb.toString(),
+								couleurAnimalTxt.getText(), raceAnimalCmb.toString(), especeAnimalCmb.toString(),
 								listModelClient.get(indexClient).getCodeClient(), tatouageAnimalTxt.getText(),
 								antecedantAnimalTxt.getText(), false);
 						try {
@@ -1869,8 +1898,8 @@ public class MainView {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						Animaux dltAnimal = new Animaux(Integer.parseInt(numeroAnimalTxt.getText()),
-								nomAnimalTxt.getText(), sexeAnimalTxt.getText(), couleurAnimalTxt.getText(),
-								raceAnimalTxt.getText(), especeAnimalTxt.getText(),
+								nomAnimalTxt.getText(), sexeAnimalCmb.toString(), couleurAnimalTxt.getText(),
+								raceAnimalCmb.toString(), especeAnimalCmb.toString(),
 								listModelClient.get(indexClient).getCodeClient(), tatouageAnimalTxt.getText(),
 								antecedantAnimalTxt.getText(), false);
 						try {
