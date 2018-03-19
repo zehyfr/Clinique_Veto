@@ -73,7 +73,7 @@ public class AnimauxDAOImpl implements AnimauxDAO{
 	public void updateAnimal(Animaux a) throws DALException{
 		Connection connec = null;
 		PreparedStatement stmt = null;
-		String sql = "UPDATE Animaux set NomAnimal = ?, Sexe = ?, Couleur = ?, Race = ?, Espece = ?, CodeClient = ?, Tatouage = ?, Antecedents = ?, Archive = ? where CodeAnimal = ?;";
+		String sql = "UPDATE Animaux set NomAnimal = ?, Sexe = ?, Couleur = ?, Race = ?, Espece = ?, CodeClient = ?, Tatouage = ?, Antecedents = ?, Archive = ? where CodeAnimal = ? and Archive = 0;";
 		try {
 			connec = jdbc.getConnection();
 			stmt = connec.prepareStatement(sql);
