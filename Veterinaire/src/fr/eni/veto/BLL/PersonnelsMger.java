@@ -12,14 +12,28 @@ public class PersonnelsMger {
 	private ArrayList<Personnels> res = new ArrayList<Personnels>();
 	private String result;
 	
-	public ArrayList<Personnels> getPersonnels()
+	public ArrayList<Personnels> getPersonnels(int from)
 	{
 		PersonnelDAO getListPersonnels = PersonnelDAOFactory.getPersonnelDAO();
 		
-		try {
-			 res = getListPersonnels.getListPersonnels();
-		} catch (DALException e) {
+		if(from == 0)
+		{
+			try {
+				 res = getListPersonnels.getListPersonnels();
+			} catch (DALException e) {
+				e.printStackTrace();
+			}
 		}
+		else
+		{
+			try {
+				 res = getListPersonnels.getListPersonnelsVeterinaire();
+			} catch (DALException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
 		
 		return res;
 	}

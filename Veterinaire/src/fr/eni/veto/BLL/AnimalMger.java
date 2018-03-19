@@ -29,5 +29,11 @@ ArrayList<Animaux> res = new ArrayList<Animaux>();
 		AnimauxDAO insertAnimal = AnimauxDAOFactory.getAnimauxDAO();
 		insertAnimal.insertAnimal(animal);
 	}
+	
+	public void updateAnimal(Animaux animal) throws DALException
+	{
+		AnimauxDAO insertAnimal = AnimauxDAOFactory.getAnimauxDAO();
+		insertAnimal.updateAnimal(animal);
+	}
 
 }

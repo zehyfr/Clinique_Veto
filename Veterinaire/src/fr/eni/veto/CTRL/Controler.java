@@ -110,10 +110,10 @@ public class Controler {
 	/**
 	 * Récupérer la liste du personnel
 	 */
-	public ArrayList<Personnels> getListPersonnel()
+	public ArrayList<Personnels> getListPersonnel(int from)
 	{
 		PersonnelsMger list = new PersonnelsMger();
-		return list.getPersonnels();
+		return list.getPersonnels(from);
 	}
 	
 	/**
@@ -249,10 +249,21 @@ public class Controler {
 		personnels.modifMotdepasse(aCode, aMdp);
 	}
 	
+	/**
+	 * Suppression d'un rendez vous
+	 * @param anAgendas
+	 * @throws DALException
+	 */
 	public void supprimerRdv(Agendas anAgendas) throws DALException
 	{
 		AgendaMger supprimerRdv = new AgendaMger();
 		supprimerRdv.supprimerRdv(anAgendas);
+	}
+	
+	public void updateAnimal(Animaux anAnimal) throws DALException
+	{
+		AnimalMger updateAnimal = new AnimalMger();
+		updateAnimal.updateAnimal(anAnimal);
 	}
 	
 	public void getAuth(){
