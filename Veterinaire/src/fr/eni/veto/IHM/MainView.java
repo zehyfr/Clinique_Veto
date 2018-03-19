@@ -600,6 +600,18 @@ public class MainView {
 				0.0, 1.0, Double.MIN_VALUE };
 		gbl_agendasPanelInside.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		agendasPanelInside.setLayout(gbl_agendasPanelInside);
+		
+		JLabel dateAnterieurWarnLbl = new JLabel("Attention, la date du RDV est d\u00E9j\u00E0 pass\u00E9e");
+		dateAnterieurWarnLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
+		dateAnterieurWarnLbl.setForeground(new Color(204, 51, 0));
+		GridBagConstraints gbc_dateAnterieurWarnLbl = new GridBagConstraints();
+		gbc_dateAnterieurWarnLbl.gridwidth = 6;
+		gbc_dateAnterieurWarnLbl.anchor = GridBagConstraints.NORTHWEST;
+		gbc_dateAnterieurWarnLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_dateAnterieurWarnLbl.gridx = 7;
+		gbc_dateAnterieurWarnLbl.gridy = 0;
+		agendasPanelInside.add(dateAnterieurWarnLbl, gbc_dateAnterieurWarnLbl);
+		dateAnterieurWarnLbl.setVisible(false);
 
 		JLabel lblClient = new JLabel("Client :");
 		lblClient.setForeground(new Color(0, 51, 153));
@@ -848,6 +860,12 @@ public class MainView {
 		supprimerRdvBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!listeRdv.isSelectionEmpty()) {
+					try {
+						listeAgendasArray = ctrl.getRDV(arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
+								dateField.getDate());
+					} catch (DALException e1) {
+						e1.printStackTrace();
+					}
 					Agendas agendasSuppr = new Agendas(listeAgendasArray.get(listeRdv.getSelectedIndex()).getCodeVeto(),
 							listeAgendasArray.get(listeRdv.getSelectedIndex()).getDateRdv(),
 							listeAgendasArray.get(listeRdv.getSelectedIndex()).getCodeAnimal());
@@ -895,39 +913,52 @@ public class MainView {
 		ajouterRDVBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				int a = arrayListAnimaux.get(animalcomboAngendaCmb.getSelectedIndex()).getCodeAnimal();
-				int v = arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers();
-				String vName = arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getNom();
-				String cName = arrayClientList.get(clientsAgendaCmb.getSelectedIndex()).getNomClient();
+				try {
+					listeAgendasArray = ctrl.getRDV(arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
+							dateField.getDate());
+				} catch (DALException e2) {
+					e2.printStackTrace();
+				}
+				Date dateJ = new Date(System.currentTimeMillis());
 				Date dateRdv = dateField.getDate();
 				dateRdv.setHours((int) spinnerHeureAgendas.getValue());
 				dateRdv.setMinutes((int) spinnerMinuteAgendas.getValue());
 				dateRdv.setSeconds(00);
-				Agendas nouveauRDV = new Agendas(v, dateRdv, a, vName, cName);
-				try {
-					if (ctrl.verify(v, nouveauRDV.getDateRdv())) {
-						ctrl.rdv(nouveauRDV);
-						String minutesAffichage = "00";
-						if (nouveauRDV.getDateRdv().getMinutes() == 0) {
-							minutesAffichage = "00";
+				if (dateJ.before(dateRdv)) {
+					dateAnterieurWarnLbl.setVisible(false);
+					int a = arrayListAnimaux.get(animalcomboAngendaCmb.getSelectedIndex()).getCodeAnimal();
+					int v = arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers();
+					String vName = arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getNom();
+					String cName = arrayClientList.get(clientsAgendaCmb.getSelectedIndex()).getNomClient();
+					Agendas nouveauRDV = new Agendas(v, dateRdv, a, vName, cName);
+					try {
+						if (ctrl.verify(v, nouveauRDV.getDateRdv())) {
+							ctrl.rdv(nouveauRDV);
+							String minutesAffichage = "00";
+							if (nouveauRDV.getDateRdv().getMinutes() == 0) {
+								minutesAffichage = "00";
+							}
+							String tempList = "MR/MME " + nouveauRDV.getNomClient() + " HEURE: "
+									+ nouveauRDV.getDateRdv().getHours() + ":" + minutesAffichage + " LE : "
+									+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(nouveauRDV.getDateRdv())
+											.toUpperCase() + " | Vétérinaire : " + nouveauRDV.getNomVeto());
+							listModelAgendas.addElement(tempList);
+							listeRdv.setSelectedIndex(listModelAgendas.getSize());
+							verifyAlertlbl.setVisible(false);
+						} else {
+							verifyAlertlbl.setVisible(true);
 						}
-						String tempList = "MR/MME " + nouveauRDV.getNomClient() + " HEURE: "
-								+ nouveauRDV.getDateRdv().getHours() + ":" + minutesAffichage + " LE : "
-								+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(nouveauRDV.getDateRdv())
-										.toUpperCase() + " | Vétérinaire : " + nouveauRDV.getNomVeto());
-						listModelAgendas.addElement(tempList);
-						listeRdv.setSelectedIndex(listModelAgendas.getSize());
-						verifyAlertlbl.setVisible(false);
-					} else {
-						verifyAlertlbl.setVisible(true);
+					} catch (DALException | SQLException | ParseException e1) {
+						e1.printStackTrace();
 					}
-				} catch (DALException | SQLException | ParseException e1) {
-					e1.printStackTrace();
-				}
 
-				if (!listModelAgendas.isEmpty()) {
-					supprimerRdvBtn.setEnabled(true);
+					if (!listModelAgendas.isEmpty()) {
+						supprimerRdvBtn.setEnabled(true);
+					}
+				}
+				else
+				{
+					dateAnterieurWarnLbl.setVisible(true);
 				}
 			}
 		});
