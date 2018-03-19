@@ -11,7 +11,7 @@ public class Especes {
 	{
 	}
 
-	public Especes(String race, String pEspece) {
+	public Especes(String pEspece, String race) {
 		super();
 		espece = pEspece;
 		races = new ArrayList<String>();
