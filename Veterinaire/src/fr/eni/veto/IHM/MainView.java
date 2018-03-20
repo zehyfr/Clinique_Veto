@@ -137,20 +137,20 @@ public class MainView {
 		JPanel panelAccueil = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				try {
-					g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
+					g.drawImage(ImageIO.read(new File("src/ressources/bannerv2.png")), 0, 0, null);
 				} catch (IOException e) {
 				}
 			}
 		};
-		tabbedPane.addTab("Accueil", new ImageIcon(MainView.class.getResource("/ressources/accueil ico.png")),
-				panelAccueil, null);
-		tabbedPane.setForegroundAt(0, new Color(0, 51, 153));
+		tabbedPane.addTab("Accueil  ", new ImageIcon(MainView.class.getResource("/ressources/home.png")), panelAccueil,
+				null);
+		tabbedPane.setForegroundAt(0, new Color(16, 40, 99));
 		panelAccueil.setBackground(new Color(204, 204, 204));
 		GridBagLayout gbl_panelAccueil = new GridBagLayout();
-		gbl_panelAccueil.columnWidths = new int[] { 36, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 115, 0, 0 };
-		gbl_panelAccueil.rowHeights = new int[] { 23, 40, 61, 179, 42, 58, 0 };
+		gbl_panelAccueil.columnWidths = new int[] { 36, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 53, 115, 51, 0, 0 };
+		gbl_panelAccueil.rowHeights = new int[] { 23, 40, 43, 195, 42, 58, 0 };
 		gbl_panelAccueil.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, Double.MIN_VALUE };
+				0.0, 0.0, Double.MIN_VALUE };
 		gbl_panelAccueil.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelAccueil.setLayout(gbl_panelAccueil);
 
@@ -165,8 +165,8 @@ public class MainView {
 		dateLbl.setForeground(new Color(255, 255, 255));
 		dateLbl.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
 		GridBagConstraints gbc_dateLbl = new GridBagConstraints();
-		gbc_dateLbl.anchor = GridBagConstraints.EAST;
-		gbc_dateLbl.gridwidth = 6;
+		gbc_dateLbl.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_dateLbl.gridwidth = 7;
 		gbc_dateLbl.insets = new Insets(0, 0, 5, 0);
 		gbc_dateLbl.gridx = 8;
 		gbc_dateLbl.gridy = 0;
@@ -191,16 +191,16 @@ public class MainView {
 		panelAccueil.add(bienvenueLbl, gbc_bienvenueLbl);
 
 		JPanel panelInfoAccueil = new JPanel();
-		panelInfoAccueil.setForeground(new Color(0, 51, 153));
-		panelInfoAccueil.setBorder(new TitledBorder(new LineBorder(new Color(0, 51, 153), 1, true), "ACCUEIL",
-				TitledBorder.LEADING, TitledBorder.TOP, new Font("Gisha", 10, 16), new Color(0, 51, 153)));
+		panelInfoAccueil.setForeground(new Color(0, 51, 102));
+		panelInfoAccueil.setBorder(new TitledBorder(new LineBorder(new Color(16, 40, 99), 1, true), "ACCUEIL",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 51, 102)));
 		panelInfoAccueil.setBackground(Color.WHITE);
 		GridBagConstraints gbc_panelInfoAccueil = new GridBagConstraints();
 		gbc_panelInfoAccueil.gridheight = 2;
-		gbc_panelInfoAccueil.gridwidth = 10;
+		gbc_panelInfoAccueil.gridwidth = 9;
 		gbc_panelInfoAccueil.insets = new Insets(0, 0, 5, 5);
 		gbc_panelInfoAccueil.fill = GridBagConstraints.BOTH;
-		gbc_panelInfoAccueil.gridx = 1;
+		gbc_panelInfoAccueil.gridx = 3;
 		gbc_panelInfoAccueil.gridy = 3;
 		panelAccueil.add(panelInfoAccueil, gbc_panelInfoAccueil);
 		GridBagLayout gbl_panelInfoAccueil = new GridBagLayout();
@@ -240,7 +240,7 @@ public class MainView {
 		gbc_spaceAccueilLbl1.gridy = 0;
 		panelInfoAccueil.add(spaceAccueilLbl1, gbc_spaceAccueilLbl1);
 		bjrLbl.setFont(new Font("Gisha", Font.PLAIN, 15));
-		bjrLbl.setForeground(new Color(0, 51, 153));
+		bjrLbl.setForeground(new Color(16, 40, 99));
 		GridBagConstraints gbc_bjrLbl = new GridBagConstraints();
 		gbc_bjrLbl.anchor = GridBagConstraints.WEST;
 		gbc_bjrLbl.insets = new Insets(0, 0, 5, 0);
@@ -257,7 +257,7 @@ public class MainView {
 
 		if (droitVisibility == "VET") {
 			JLabel prchRdvlbl = new JLabel("Votre prochain RDV est :");
-			prchRdvlbl.setForeground(new Color(0, 51, 153));
+			prchRdvlbl.setForeground(new Color(16, 40, 99));
 			prchRdvlbl.setFont(new Font("Gisha", Font.PLAIN, 15));
 			GridBagConstraints gbc_prchRdvlbl = new GridBagConstraints();
 			gbc_prchRdvlbl.insets = new Insets(0, 0, 5, 0);
@@ -279,7 +279,7 @@ public class MainView {
 			}
 
 			JLabel resultLbl = new JLabel(prochainRdv);
-			resultLbl.setForeground(new Color(0, 51, 153));
+			resultLbl.setForeground(new Color(16, 40, 99));
 			resultLbl.setFont(new Font("Gisha", Font.PLAIN, 15));
 			GridBagConstraints gbc_resultLbl = new GridBagConstraints();
 			gbc_resultLbl.gridx = 1;
@@ -296,12 +296,21 @@ public class MainView {
 		panelAccueil.add(spaceBound7, gbc_spaceBound7);
 
 		JLabel logoutIco = new JLabel("");
-		logoutIco.setIcon(new ImageIcon(MainView.class.getResource("/ressources/logouticon.png")));
+		logoutIco.setIcon(new ImageIcon(MainView.class.getResource("/ressources/shut-down-icon.png")));
 		GridBagConstraints gbc_logoutIco = new GridBagConstraints();
+		gbc_logoutIco.insets = new Insets(0, 0, 0, 5);
 		gbc_logoutIco.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_logoutIco.gridx = 13;
 		gbc_logoutIco.gridy = 5;
 		panelAccueil.add(logoutIco, gbc_logoutIco);
+
+		logoutIco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frmGestion.setVisible(false);
+				ctrl.getAuth();
+			}
+		});
 
 		JMenuBar menuBar = new JMenuBar();
 
@@ -330,9 +339,9 @@ public class MainView {
 				frmChangerLeMot.getContentPane().add(spaceLabelMdp, gbc_spaceLabelMdp);
 
 				JLabel lblAncienMotDe = new JLabel("Ancien mot de passe :");
-				lblAncienMotDe.setForeground(new Color(0, 51, 153));
+				lblAncienMotDe.setForeground(new Color(16, 40, 99));
 				lblAncienMotDe.setFont(new Font("Gisha", Font.PLAIN, 14));
-				lblAncienMotDe.setBackground(new Color(0, 51, 153));
+				lblAncienMotDe.setBackground(new Color(16, 40, 99));
 				GridBagConstraints gbc_lblAncienMotDe = new GridBagConstraints();
 				gbc_lblAncienMotDe.anchor = GridBagConstraints.WEST;
 				gbc_lblAncienMotDe.insets = new Insets(0, 0, 5, 5);
@@ -351,9 +360,9 @@ public class MainView {
 				ancienMdrTxt.setColumns(10);
 
 				JLabel lblNouveauMotDe = new JLabel("Nouveau mot de passe :");
-				lblNouveauMotDe.setForeground(new Color(0, 51, 153));
+				lblNouveauMotDe.setForeground(new Color(16, 40, 99));
 				lblNouveauMotDe.setFont(new Font("Gisha", Font.PLAIN, 14));
-				lblNouveauMotDe.setBackground(new Color(0, 51, 153));
+				lblNouveauMotDe.setBackground(new Color(16, 40, 99));
 				GridBagConstraints gbc_lblNouveauMotDe = new GridBagConstraints();
 				gbc_lblNouveauMotDe.anchor = GridBagConstraints.WEST;
 				gbc_lblNouveauMotDe.insets = new Insets(0, 0, 5, 5);
@@ -372,9 +381,9 @@ public class MainView {
 				nouveauMdp.setColumns(10);
 
 				JLabel lblConfirmerMotDe = new JLabel("Confirmer mot de passe :");
-				lblConfirmerMotDe.setForeground(new Color(0, 51, 153));
+				lblConfirmerMotDe.setForeground(new Color(16, 40, 99));
 				lblConfirmerMotDe.setFont(new Font("Gisha", Font.PLAIN, 14));
-				lblConfirmerMotDe.setBackground(new Color(0, 51, 153));
+				lblConfirmerMotDe.setBackground(new Color(16, 40, 99));
 				GridBagConstraints gbc_lblConfirmerMotDe = new GridBagConstraints();
 				gbc_lblConfirmerMotDe.anchor = GridBagConstraints.NORTHWEST;
 				gbc_lblConfirmerMotDe.insets = new Insets(0, 0, 5, 5);
@@ -405,7 +414,7 @@ public class MainView {
 				frmChangerLeMot.getContentPane().add(lblAncienMotDe_1, gbc_lblAncienMotDe_1);
 
 				JButton validerMotdepasseNew = new JButton("Changer mot de passe");
-				validerMotdepasseNew.setForeground(new Color(0, 51, 153));
+				validerMotdepasseNew.setForeground(new Color(16, 40, 99));
 				validerMotdepasseNew.setFont(new Font("Gisha", Font.PLAIN, 12));
 				validerMotdepasseNew.setBackground(new Color(255, 255, 255));
 				GridBagConstraints gbc_validerMotdepasseNew = new GridBagConstraints();
@@ -450,7 +459,7 @@ public class MainView {
 									panel.add(label, gbc_label);
 
 									JLabel lblNewLabel = new JLabel("Le mot de passe a été changé");
-									lblNewLabel.setForeground(new Color(0, 51, 153));
+									lblNewLabel.setForeground(new Color(16, 40, 99));
 									lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 12));
 									GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 									gbc_lblNewLabel.gridwidth = 5;
@@ -460,7 +469,7 @@ public class MainView {
 									panel.add(lblNewLabel, gbc_lblNewLabel);
 
 									JButton validerModalBtn = new JButton("Ok");
-									validerModalBtn.setForeground(new Color(0, 51, 153));
+									validerModalBtn.setForeground(new Color(16, 40, 99));
 									validerModalBtn.setFont(new Font("Gisha", Font.PLAIN, 11));
 									validerModalBtn.setBackground(new Color(255, 255, 255));
 									GridBagConstraints gbc_validerModalBtn = new GridBagConstraints();
@@ -513,14 +522,6 @@ public class MainView {
 		});
 		mnNewMenu.add(mntmDconnection);
 
-		logoutIco.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				frmGestion.setVisible(false);
-				ctrl.getAuth();
-			}
-		});
-
 		/**
 		 * AGENDA PANEL
 		 */
@@ -528,14 +529,14 @@ public class MainView {
 		JPanel panelAgenda = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				try {
-					g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
+					g.drawImage(ImageIO.read(new File("src/ressources/bannerv2.png")), 0, 0, null);
 				} catch (IOException e) {
 				}
 			}
 		};
-		tabbedPane.addTab("Agendas", new ImageIcon(MainView.class.getResource("/ressources/calendar ico.png")),
+		tabbedPane.addTab("Agendas  ", new ImageIcon(MainView.class.getResource("/ressources/calendar.png")),
 				panelAgenda, null);
-		tabbedPane.setForegroundAt(1, new Color(0, 51, 153));
+		tabbedPane.setForegroundAt(1, new Color(16, 40, 99));
 		tabbedPane.setBackgroundAt(1, new Color(255, 255, 255));
 
 		panelAgenda.setBackground(new Color(204, 204, 204));
@@ -573,12 +574,14 @@ public class MainView {
 		panelAgenda.add(heureAgendaLbl, gbc_heureAgendaLbl);
 
 		JLabel agendaTitleLbl = new JLabel("Agenda");
+		agendaTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/ressources/calendarWt.png")));
 		agendaTitleLbl.setForeground(Color.WHITE);
 		agendaTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
 		GridBagConstraints gbc_agendaTitleLbl = new GridBagConstraints();
+		gbc_agendaTitleLbl.gridwidth = 3;
 		gbc_agendaTitleLbl.anchor = GridBagConstraints.EAST;
 		gbc_agendaTitleLbl.insets = new Insets(0, 0, 5, 5);
-		gbc_agendaTitleLbl.gridx = 2;
+		gbc_agendaTitleLbl.gridx = 1;
 		gbc_agendaTitleLbl.gridy = 1;
 		panelAgenda.add(agendaTitleLbl, gbc_agendaTitleLbl);
 
@@ -619,7 +622,7 @@ public class MainView {
 		dateAnterieurWarnLbl.setVisible(false);
 
 		JLabel lblClient = new JLabel("Client :");
-		lblClient.setForeground(new Color(0, 51, 153));
+		lblClient.setForeground(new Color(16, 40, 99));
 		lblClient.setFont(new Font("Gisha", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblClient = new GridBagConstraints();
 		gbc_lblClient.insets = new Insets(0, 0, 5, 5);
@@ -629,7 +632,7 @@ public class MainView {
 		agendasPanelInside.add(lblClient, gbc_lblClient);
 
 		JComboBox clientsAgendaCmb = new JComboBox();
-		clientsAgendaCmb.setForeground(new Color(0, 51, 153));
+		clientsAgendaCmb.setForeground(new Color(16, 40, 99));
 		clientsAgendaCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
 		GridBagConstraints gbc_clientsAgendaCmb = new GridBagConstraints();
 		gbc_clientsAgendaCmb.insets = new Insets(0, 0, 5, 5);
@@ -656,7 +659,7 @@ public class MainView {
 
 		JLabel veterinaireLbl = new JLabel("V\u00E9t\u00E9rinaire :");
 		veterinaireLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
-		veterinaireLbl.setForeground(new Color(0, 51, 153));
+		veterinaireLbl.setForeground(new Color(16, 40, 99));
 		GridBagConstraints gbc_veterinaireLbl = new GridBagConstraints();
 		gbc_veterinaireLbl.anchor = GridBagConstraints.WEST;
 		gbc_veterinaireLbl.insets = new Insets(0, 0, 5, 5);
@@ -665,7 +668,7 @@ public class MainView {
 		agendasPanelInside.add(veterinaireLbl, gbc_veterinaireLbl);
 
 		JComboBox veterinaireAgendaCmb = new JComboBox();
-		veterinaireAgendaCmb.setForeground(new Color(0, 51, 153));
+		veterinaireAgendaCmb.setForeground(new Color(16, 40, 99));
 		veterinaireAgendaCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
 		GridBagConstraints gbc_veterinaireAgendaCmb = new GridBagConstraints();
 		gbc_veterinaireAgendaCmb.gridwidth = 3;
@@ -677,7 +680,7 @@ public class MainView {
 
 		JLabel dateAgendaLbl = new JLabel("Date :");
 		dateAgendaLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
-		dateAgendaLbl.setForeground(new Color(0, 51, 153));
+		dateAgendaLbl.setForeground(new Color(16, 40, 99));
 		GridBagConstraints gbc_dateAgendaLbl = new GridBagConstraints();
 		gbc_dateAgendaLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_dateAgendaLbl.anchor = GridBagConstraints.EAST;
@@ -687,7 +690,7 @@ public class MainView {
 
 		dateField = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		dateField.setBackground(new Color(255, 255, 255));
-		dateField.setForeground(new Color(0, 51, 153));
+		dateField.setForeground(new Color(16, 40, 99));
 		dateField.setDate(new Date(System.currentTimeMillis()));
 		GridBagConstraints calendar = new GridBagConstraints();
 		calendar.gridwidth = 3;
@@ -717,7 +720,7 @@ public class MainView {
 		agendasPanelInside.add(spaceBound4, gbc_spaceBound4);
 
 		JLabel lblAnimal = new JLabel("Animal :");
-		lblAnimal.setForeground(new Color(0, 51, 153));
+		lblAnimal.setForeground(new Color(16, 40, 99));
 		lblAnimal.setFont(new Font("Gisha", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblAnimal = new GridBagConstraints();
 		gbc_lblAnimal.insets = new Insets(0, 0, 5, 5);
@@ -728,7 +731,7 @@ public class MainView {
 
 		JComboBox animalcomboAngendaCmb = new JComboBox();
 		animalcomboAngendaCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
-		animalcomboAngendaCmb.setForeground(new Color(0, 51, 153));
+		animalcomboAngendaCmb.setForeground(new Color(16, 40, 99));
 		GridBagConstraints gbc_animalcomboAngendaCmb = new GridBagConstraints();
 		gbc_animalcomboAngendaCmb.insets = new Insets(0, 0, 5, 5);
 		gbc_animalcomboAngendaCmb.fill = GridBagConstraints.HORIZONTAL;
@@ -747,7 +750,7 @@ public class MainView {
 		}
 
 		JLabel heureAgendaLbl2 = new JLabel("Heure :");
-		heureAgendaLbl2.setForeground(new Color(0, 51, 153));
+		heureAgendaLbl2.setForeground(new Color(16, 40, 99));
 		heureAgendaLbl2.setFont(new Font("Gisha", Font.PLAIN, 12));
 		GridBagConstraints gbc_heureAgendaLbl2 = new GridBagConstraints();
 		gbc_heureAgendaLbl2.anchor = GridBagConstraints.WEST;
@@ -769,7 +772,7 @@ public class MainView {
 
 		JLabel lblH = new JLabel("H");
 		lblH.setFont(new Font("Gisha", Font.PLAIN, 12));
-		lblH.setForeground(new Color(0, 51, 153));
+		lblH.setForeground(new Color(16, 40, 99));
 		GridBagConstraints gbc_lblH = new GridBagConstraints();
 		gbc_lblH.insets = new Insets(0, 0, 5, 5);
 		gbc_lblH.gridx = 5;
@@ -805,7 +808,7 @@ public class MainView {
 		JButton ajouterRDVBtn = new JButton("Ajouter RDV");
 		ajouterRDVBtn.setBackground(new Color(255, 255, 255));
 		ajouterRDVBtn.setFont(new Font("Gisha", Font.PLAIN, 12));
-		ajouterRDVBtn.setForeground(new Color(0, 51, 153));
+		ajouterRDVBtn.setForeground(new Color(16, 40, 99));
 		GridBagConstraints gbc_ajouterRDVBtn = new GridBagConstraints();
 		gbc_ajouterRDVBtn.anchor = GridBagConstraints.EAST;
 		gbc_ajouterRDVBtn.gridwidth = 3;
@@ -828,7 +831,7 @@ public class MainView {
 
 		JLabel label_5 = new JLabel("_____________________________________________________________");
 		label_5.setFont(new Font("Tahoma", Font.BOLD, 13));
-		label_5.setForeground(new Color(0, 51, 153));
+		label_5.setForeground(new Color(16, 40, 99));
 		GridBagConstraints gbc_label_5 = new GridBagConstraints();
 		gbc_label_5.anchor = GridBagConstraints.NORTHEAST;
 		gbc_label_5.gridwidth = 11;
@@ -840,7 +843,7 @@ public class MainView {
 		DefaultListModel<String> listModelAgendas = new DefaultListModel<String>();
 		JList listeRdv = new JList(listModelAgendas);
 		listeRdv.setFont(new Font("Gisha", Font.PLAIN, 14));
-		listeRdv.setForeground(new Color(0, 51, 153));
+		listeRdv.setForeground(new Color(16, 40, 99));
 		listeAgendasArray = new ArrayList<Agendas>();
 		try {
 			listeAgendasArray = ctrl.getRDV(arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
@@ -848,15 +851,20 @@ public class MainView {
 		} catch (DALException e2) {
 			e2.printStackTrace();
 		}
+		String tempList = "";
 		for (Agendas rdv : listeAgendasArray) {
-			String minutesAffichage = "00";
-			if (rdv.getDateRdv().getMinutes() == 0) {
-				minutesAffichage = "00";
+			int minutesAffichage = rdv.getDateRdv().getMinutes();
+			if (minutesAffichage == 0) {
+				tempList = "MR/MME " + rdv.getNomClient() + " HEURE: " + rdv.getDateRdv().getHours() + ":" + "00"
+						+ " LE : "
+						+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(rdv.getDateRdv()).toUpperCase()
+								+ " | Vétérinaire : " + rdv.getNomVeto());
+			} else {
+				tempList = "MR/MME " + rdv.getNomClient() + " HEURE: " + rdv.getDateRdv().getHours() + ":"
+						+ minutesAffichage + " LE : "
+						+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(rdv.getDateRdv()).toUpperCase()
+								+ " | Vétérinaire : " + rdv.getNomVeto());
 			}
-			String tempList = "MR/MME " + rdv.getNomClient() + " HEURE: " + rdv.getDateRdv().getHours() + ":"
-					+ minutesAffichage + " LE : "
-					+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(rdv.getDateRdv()).toUpperCase()
-							+ " | Vétérinaire : " + rdv.getNomVeto());
 			listModelAgendas.addElement(tempList);
 		}
 
@@ -889,7 +897,7 @@ public class MainView {
 				}
 			}
 		});
-		supprimerRdvBtn.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash2.png")));
+		supprimerRdvBtn.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash.png")));
 		GridBagConstraints gbc_supprimerRdvBtn = new GridBagConstraints();
 		gbc_supprimerRdvBtn.anchor = GridBagConstraints.EAST;
 		gbc_supprimerRdvBtn.insets = new Insets(0, 0, 5, 5);
@@ -941,14 +949,19 @@ public class MainView {
 					try {
 						if (ctrl.verify(v, nouveauRDV.getDateRdv())) {
 							ctrl.rdv(nouveauRDV);
-							String minutesAffichage = "00";
-							if (nouveauRDV.getDateRdv().getMinutes() == 0) {
-								minutesAffichage = "00";
+							String tempList = "";
+							int minutesAffichage = nouveauRDV.getDateRdv().getMinutes();
+							if (minutesAffichage == 0) {
+								tempList = "MR/MME " + nouveauRDV.getNomClient() + " HEURE: "
+										+ nouveauRDV.getDateRdv().getHours() + ":" + "00" + " LE : "
+										+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(nouveauRDV.getDateRdv())
+												.toUpperCase() + " | Vétérinaire : " + nouveauRDV.getNomVeto());
+							} else {
+								tempList = "MR/MME " + nouveauRDV.getNomClient() + " HEURE: "
+										+ nouveauRDV.getDateRdv().getHours() + ":" + minutesAffichage + " LE : "
+										+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(nouveauRDV.getDateRdv())
+												.toUpperCase() + " | Vétérinaire : " + nouveauRDV.getNomVeto());
 							}
-							String tempList = "MR/MME " + nouveauRDV.getNomClient() + " HEURE: "
-									+ nouveauRDV.getDateRdv().getHours() + ":" + minutesAffichage + " LE : "
-									+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(nouveauRDV.getDateRdv())
-											.toUpperCase() + " | Vétérinaire : " + nouveauRDV.getNomVeto());
 							listModelAgendas.addElement(tempList);
 							listeRdv.setSelectedIndex(listModelAgendas.getSize());
 							verifyAlertlbl.setVisible(false);
@@ -981,14 +994,20 @@ public class MainView {
 					e2.printStackTrace();
 				}
 				for (Agendas rdv : listeAgendasArray) {
-					String minutesAffichage = "00";
-					if (rdv.getDateRdv().getMinutes() == 0) {
-						minutesAffichage = "00";
+					String tempList = "";
+					int minutesAffichage = rdv.getDateRdv().getMinutes();
+					if (minutesAffichage == 0) {
+						tempList = "MR/MME " + rdv.getNomClient() + " HEURE: " + rdv.getDateRdv().getHours() + ":"
+								+ "00" + " LE : "
+								+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(rdv.getDateRdv()).toUpperCase()
+										+ " | Vétérinaire : " + rdv.getNomVeto());
+					} else {
+						tempList = "MR/MME " + rdv.getNomClient() + " HEURE: " + rdv.getDateRdv().getHours() + ":"
+								+ minutesAffichage + " LE : "
+								+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(rdv.getDateRdv()).toUpperCase()
+										+ " | Vétérinaire : " + rdv.getNomVeto());
 					}
-					String tempList = "MR/MME " + rdv.getNomClient() + " HEURE: " + rdv.getDateRdv().getHours() + ":"
-							+ minutesAffichage + " LE : "
-							+ (new SimpleDateFormat(" EEEE dd / MM / yyyy").format(rdv.getDateRdv()).toUpperCase()
-									+ " | Vétérinaire : " + rdv.getNomVeto());
+
 					listModelAgendas.addElement(tempList);
 				}
 			}
@@ -1029,20 +1048,21 @@ public class MainView {
 		JPanel panelClient = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				try {
-					g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
+					g.drawImage(ImageIO.read(new File("src/ressources/bannerv2.png")), 0, 0, null);
 				} catch (IOException e) {
 				}
 			}
 		};
-		tabbedPane.addTab("Gestion Clients", new ImageIcon(MainView.class.getResource("/ressources/client ico.png")),
-				panelClient, null);
+		tabbedPane.addTab("Gestion Clients  ",
+				new ImageIcon(MainView.class.getResource("/ressources/multiple-users-silhouette2.png")), panelClient,
+				null);
 
-		panelClient.setBackground(new Color(204, 204, 204));
+		panelClient.setBackground(new Color(255, 255, 255));
 		GridBagLayout gbl_panelClient = new GridBagLayout();
 		gbl_panelClient.columnWidths = new int[] { 26, 38, 143, 164, 15, 253, 17, 0 };
-		gbl_panelClient.rowHeights = new int[] { 25, 36, 40, 299, 0 };
+		gbl_panelClient.rowHeights = new int[] { 25, 36, 40, 238, 53, 0 };
 		gbl_panelClient.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panelClient.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panelClient.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelClient.setLayout(gbl_panelClient);
 
 		JLabel spaceBoundC2lbl = new JLabel("");
@@ -1057,7 +1077,7 @@ public class MainView {
 		GridBagConstraints gbc_heureGestion = new GridBagConstraints();
 		gbc_heureGestion.gridwidth = 2;
 		gbc_heureGestion.anchor = GridBagConstraints.EAST;
-		gbc_heureGestion.insets = new Insets(0, 0, 5, 5);
+		gbc_heureGestion.insets = new Insets(0, 0, 5, 0);
 		gbc_heureGestion.gridx = 5;
 		gbc_heureGestion.gridy = 0;
 		panelClient.add(heureGestion, gbc_heureGestion);
@@ -1070,14 +1090,15 @@ public class MainView {
 		gbc_spaceBoundC3lbl.gridy = 1;
 		panelClient.add(spaceBoundC3lbl, gbc_spaceBoundC3lbl);
 
-		JLabel gestionClientTitleLbl = new JLabel("Gestion des clients");
+		JLabel gestionClientTitleLbl = new JLabel(" Gestion des clients");
+		gestionClientTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/ressources/multipleWt.png")));
 		gestionClientTitleLbl.setForeground(Color.WHITE);
 		gestionClientTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
 		GridBagConstraints gbc_gestionClientTitleLbl = new GridBagConstraints();
-		gbc_gestionClientTitleLbl.gridwidth = 2;
+		gbc_gestionClientTitleLbl.gridwidth = 3;
 		gbc_gestionClientTitleLbl.anchor = GridBagConstraints.WEST;
 		gbc_gestionClientTitleLbl.insets = new Insets(0, 0, 5, 5);
-		gbc_gestionClientTitleLbl.gridx = 2;
+		gbc_gestionClientTitleLbl.gridx = 1;
 		gbc_gestionClientTitleLbl.gridy = 1;
 		panelClient.add(gestionClientTitleLbl, gbc_gestionClientTitleLbl);
 
@@ -1104,12 +1125,13 @@ public class MainView {
 			listModelClient.addElement(client);
 		}
 		liste.setLayoutOrientation(JList.VERTICAL);
-		liste.setForeground(new Color(0, 51, 153));
+		liste.setForeground(new Color(16, 40, 99));
 		liste.setFont(new Font("Levenim MT", Font.PLAIN, 14));
-		liste.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 51, 153)));
+		liste.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(16, 40, 99)));
 		GridBagConstraints gbc_listeClient = new GridBagConstraints();
+		gbc_listeClient.gridheight = 2;
 		gbc_listeClient.gridwidth = 3;
-		gbc_listeClient.insets = new Insets(0, 0, 0, 5);
+		gbc_listeClient.insets = new Insets(0, 0, 5, 5);
 		gbc_listeClient.fill = GridBagConstraints.BOTH;
 		gbc_listeClient.gridx = 1;
 		gbc_listeClient.gridy = 3;
@@ -1120,7 +1142,7 @@ public class MainView {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 5;
 		gbc_panel_1.gridy = 3;
@@ -1134,7 +1156,7 @@ public class MainView {
 
 		JLabel identifiantCLbl = new JLabel("Client :");
 		identifiantCLbl.setFont(new Font("Gisha", Font.PLAIN, 14));
-		identifiantCLbl.setForeground(new Color(0, 51, 153));
+		identifiantCLbl.setForeground(new Color(16, 40, 99));
 		GridBagConstraints gbc_identifiantCLbl = new GridBagConstraints();
 		gbc_identifiantCLbl.anchor = GridBagConstraints.EAST;
 		gbc_identifiantCLbl.insets = new Insets(0, 0, 5, 5);
@@ -1147,7 +1169,7 @@ public class MainView {
 			clientNameLbl.setText(listModelClient.get(liste.getSelectedIndex()).getNomClient());
 		}
 		clientNameLbl.setFont(new Font("Gisha", Font.PLAIN, 14));
-		clientNameLbl.setForeground(new Color(0, 51, 153));
+		clientNameLbl.setForeground(new Color(16, 40, 99));
 		GridBagConstraints gbc_clientNameLbl = new GridBagConstraints();
 		gbc_clientNameLbl.gridwidth = 2;
 		gbc_clientNameLbl.anchor = GridBagConstraints.NORTHWEST;
@@ -1178,7 +1200,7 @@ public class MainView {
 			public void actionPerformed(ActionEvent arg0) {
 				frmInformationsClient = new JFrame();
 				frmInformationsClient.getContentPane().setFont(new Font("Gisha", Font.PLAIN, 13));
-				frmInformationsClient.getContentPane().setForeground(new Color(0, 51, 153));
+				frmInformationsClient.getContentPane().setForeground(new Color(16, 40, 99));
 				frmInformationsClient.setBackground(Color.WHITE);
 				frmInformationsClient.setTitle("Informations client");
 				frmInformationsClient.setIconImage(
@@ -1211,7 +1233,7 @@ public class MainView {
 
 				// titre de la vue
 				JLabel titlteInfoClientlbl = new JLabel("Informations client");
-				titlteInfoClientlbl.setForeground(new Color(0, 51, 153));
+				titlteInfoClientlbl.setForeground(new Color(16, 40, 99));
 				titlteInfoClientlbl.setFont(new Font("Gisha", Font.BOLD, 18));
 				GridBagConstraints gbc_titlteInfoClientlbl = new GridBagConstraints();
 				gbc_titlteInfoClientlbl.gridwidth = 2;
@@ -1223,7 +1245,7 @@ public class MainView {
 
 				// logo de la vue
 				JLabel imageTitle = new JLabel("");
-				imageTitle.setIcon(new ImageIcon(MainView.class.getResource("/ressources/info icon.png")));
+				imageTitle.setIcon(new ImageIcon(MainView.class.getResource("/ressources/icon.png")));
 				GridBagConstraints gbc_imageTitle = new GridBagConstraints();
 				gbc_imageTitle.anchor = GridBagConstraints.WEST;
 				gbc_imageTitle.insets = new Insets(0, 0, 5, 5);
@@ -1248,7 +1270,7 @@ public class MainView {
 				// Nom du client
 				JLabel nomInfoLbl = new JLabel("Nom : ");
 				nomInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
-				nomInfoLbl.setForeground(new Color(0, 51, 153));
+				nomInfoLbl.setForeground(new Color(16, 40, 99));
 				GridBagConstraints gbc_nomInfoLbl = new GridBagConstraints();
 				gbc_nomInfoLbl.anchor = GridBagConstraints.WEST;
 				gbc_nomInfoLbl.insets = new Insets(0, 0, 5, 5);
@@ -1257,7 +1279,7 @@ public class MainView {
 				panel.add(nomInfoLbl, gbc_nomInfoLbl);
 
 				JLabel nomInfoTxt = new JLabel(listModelClient.get(indexClient).getNomClient());
-				nomInfoTxt.setForeground(new Color(0, 51, 153));
+				nomInfoTxt.setForeground(new Color(16, 40, 99));
 				nomInfoTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_nomInfoTxt = new GridBagConstraints();
 				gbc_nomInfoTxt.anchor = GridBagConstraints.WEST;
@@ -1268,7 +1290,7 @@ public class MainView {
 
 				// prenom du client
 				JLabel prenomInfoLbl = new JLabel("Pr\u00E9nom : ");
-				prenomInfoLbl.setForeground(new Color(0, 51, 153));
+				prenomInfoLbl.setForeground(new Color(16, 40, 99));
 				prenomInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_prenomInfoLbl = new GridBagConstraints();
 				gbc_prenomInfoLbl.anchor = GridBagConstraints.WEST;
@@ -1278,7 +1300,7 @@ public class MainView {
 				panel.add(prenomInfoLbl, gbc_prenomInfoLbl);
 
 				JLabel prenomInfoTxt = new JLabel(listModelClient.get(indexClient).getPrenomClient());
-				prenomInfoTxt.setForeground(new Color(0, 51, 153));
+				prenomInfoTxt.setForeground(new Color(16, 40, 99));
 				prenomInfoTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_prenomInfoTxt = new GridBagConstraints();
 				gbc_prenomInfoTxt.insets = new Insets(0, 0, 5, 5);
@@ -1290,8 +1312,8 @@ public class MainView {
 				// panel info de l'animal
 				JPanel panelAnimal = new JPanel();
 				panelAnimal.setBackground(new Color(250, 250, 255));
-				panelAnimal.setBorder(new TitledBorder(new MatteBorder(2, 0, 0, 0, (Color) new Color(0, 51, 153)),
-						"Animal du client", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 51, 153)));
+				panelAnimal.setBorder(new TitledBorder(new MatteBorder(2, 0, 0, 0, (Color) new Color(16, 40, 99)),
+						"Animal du client", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(16, 40, 99)));
 				GridBagConstraints gbc_panelAnimal = new GridBagConstraints();
 				gbc_panelAnimal.gridheight = 12;
 				gbc_panelAnimal.insets = new Insets(0, 0, 5, 5);
@@ -1316,7 +1338,7 @@ public class MainView {
 
 				// numero de l'animal
 				JLabel numeroAnimalLbl = new JLabel("N\u00B0 : ");
-				numeroAnimalLbl.setForeground(new Color(0, 51, 153));
+				numeroAnimalLbl.setForeground(new Color(16, 40, 99));
 				numeroAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_numeroAnimalLbl = new GridBagConstraints();
 				gbc_numeroAnimalLbl.anchor = GridBagConstraints.WEST;
@@ -1337,7 +1359,7 @@ public class MainView {
 				numeroAnimalTxt.setEnabled(false);
 
 				JLabel nomAnimalLbl = new JLabel("Nom : ");
-				nomAnimalLbl.setForeground(new Color(0, 51, 153));
+				nomAnimalLbl.setForeground(new Color(16, 40, 99));
 				nomAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_nomAnimalLbl = new GridBagConstraints();
 				gbc_nomAnimalLbl.anchor = GridBagConstraints.WEST;
@@ -1364,7 +1386,7 @@ public class MainView {
 				panelAnimal.add(label, gbc_label);
 
 				JLabel sexeAnimalLbl = new JLabel("Sexe : ");
-				sexeAnimalLbl.setForeground(new Color(0, 51, 153));
+				sexeAnimalLbl.setForeground(new Color(16, 40, 99));
 				sexeAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_sexeAnimalLbl = new GridBagConstraints();
 				gbc_sexeAnimalLbl.anchor = GridBagConstraints.WEST;
@@ -1374,7 +1396,7 @@ public class MainView {
 				panelAnimal.add(sexeAnimalLbl, gbc_sexeAnimalLbl);
 
 				JComboBox<String> sexeAnimalCmb = new JComboBox<String>();
-				sexeAnimalCmb.setForeground(new Color(0, 51, 153));
+				sexeAnimalCmb.setForeground(new Color(16, 40, 99));
 				sexeAnimalCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_sexeAnimalCmb = new GridBagConstraints();
 				gbc_sexeAnimalCmb.insets = new Insets(0, 0, 5, 5);
@@ -1390,7 +1412,7 @@ public class MainView {
 				sexeAnimalCmb.setModel(new DefaultComboBoxModel(listeSexe.toArray()));
 
 				JLabel couleurAnimalLbl = new JLabel("Couleur : ");
-				couleurAnimalLbl.setForeground(new Color(0, 51, 153));
+				couleurAnimalLbl.setForeground(new Color(16, 40, 99));
 				couleurAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_couleurAnimalLbl = new GridBagConstraints();
 				gbc_couleurAnimalLbl.anchor = GridBagConstraints.WEST;
@@ -1418,7 +1440,7 @@ public class MainView {
 				panelAnimal.add(label_1, gbc_label_1);
 
 				JLabel raceAnimalLbl = new JLabel("Race : ");
-				raceAnimalLbl.setForeground(new Color(0, 51, 153));
+				raceAnimalLbl.setForeground(new Color(16, 40, 99));
 				raceAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_raceAnimalLbl = new GridBagConstraints();
 				gbc_raceAnimalLbl.anchor = GridBagConstraints.WEST;
@@ -1428,7 +1450,7 @@ public class MainView {
 				panelAnimal.add(raceAnimalLbl, gbc_raceAnimalLbl);
 
 				JComboBox<String> raceAnimalCmb = new JComboBox<String>();
-				raceAnimalCmb.setForeground(new Color(0, 51, 153));
+				raceAnimalCmb.setForeground(new Color(16, 40, 99));
 				raceAnimalCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_raceAnimalCmb = new GridBagConstraints();
 				gbc_raceAnimalCmb.insets = new Insets(0, 0, 5, 5);
@@ -1438,7 +1460,7 @@ public class MainView {
 				panelAnimal.add(raceAnimalCmb, gbc_raceAnimalCmb);
 
 				JLabel especeAnimalLbl = new JLabel("Esp\u00E8ce : ");
-				especeAnimalLbl.setForeground(new Color(0, 51, 153));
+				especeAnimalLbl.setForeground(new Color(16, 40, 99));
 				especeAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_especeAnimalLbl = new GridBagConstraints();
 				gbc_especeAnimalLbl.anchor = GridBagConstraints.WEST;
@@ -1448,7 +1470,7 @@ public class MainView {
 				panelAnimal.add(especeAnimalLbl, gbc_especeAnimalLbl);
 
 				JComboBox<String> especeAnimalCmb = new JComboBox<String>();
-				especeAnimalCmb.setForeground(new Color(0, 51, 153));
+				especeAnimalCmb.setForeground(new Color(16, 40, 99));
 				especeAnimalCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_especeAnimalCmb = new GridBagConstraints();
 				gbc_especeAnimalCmb.insets = new Insets(0, 0, 5, 5);
@@ -1475,9 +1497,7 @@ public class MainView {
 						listeRace = new ArrayList<String>();
 						if (especeAnimalCmb.getSelectedItem() != null) {
 							listeRace = ctrl.getRaces(especeAnimalCmb.getSelectedItem().toString());
-						}
-						else
-						{
+						} else {
 							listeRace.add("");
 						}
 						String empty = "Pas de races";
@@ -1498,7 +1518,7 @@ public class MainView {
 				panelAnimal.add(label_2, gbc_label_2);
 
 				JLabel tatouageAnimalLbl = new JLabel("Tatouage : ");
-				tatouageAnimalLbl.setForeground(new Color(0, 51, 153));
+				tatouageAnimalLbl.setForeground(new Color(16, 40, 99));
 				tatouageAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_tatouageAnimalLbl = new GridBagConstraints();
 				gbc_tatouageAnimalLbl.anchor = GridBagConstraints.WEST;
@@ -1519,7 +1539,7 @@ public class MainView {
 				tatouageAnimalTxt.setColumns(10);
 
 				JLabel antecedantAnimalLbl = new JLabel("Antec\u00E9dants : ");
-				antecedantAnimalLbl.setForeground(new Color(0, 51, 153));
+				antecedantAnimalLbl.setForeground(new Color(16, 40, 99));
 				antecedantAnimalLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_antecedantAnimalLbl = new GridBagConstraints();
 				gbc_antecedantAnimalLbl.anchor = GridBagConstraints.WEST;
@@ -1548,7 +1568,7 @@ public class MainView {
 				JButton annulerAnimalBtn = new JButton("Annuler");
 				annulerAnimalBtn.setBackground(new Color(255, 255, 255));
 				annulerAnimalBtn.setFont(new Font("Gisha", Font.PLAIN, 12));
-				annulerAnimalBtn.setForeground(new Color(0, 51, 153));
+				annulerAnimalBtn.setForeground(new Color(16, 40, 99));
 				GridBagConstraints gbc_annulerAnimalBtn = new GridBagConstraints();
 				gbc_annulerAnimalBtn.insets = new Insets(0, 0, 0, 5);
 				gbc_annulerAnimalBtn.gridx = 2;
@@ -1556,7 +1576,7 @@ public class MainView {
 				panelAnimal.add(annulerAnimalBtn, gbc_annulerAnimalBtn);
 
 				JButton ajouterAnimalBtn = new JButton("Ajouter");
-				ajouterAnimalBtn.setForeground(new Color(0, 51, 153));
+				ajouterAnimalBtn.setForeground(new Color(16, 40, 99));
 				ajouterAnimalBtn.setFont(new Font("Gisha", Font.PLAIN, 12));
 				ajouterAnimalBtn.setBackground(new Color(255, 255, 255));
 				GridBagConstraints gbc_ajouterAnimalBtn = new GridBagConstraints();
@@ -1567,7 +1587,7 @@ public class MainView {
 				ajouterAnimalBtn.setVisible(false);
 
 				JButton validerAnimalBtn = new JButton("Valider");
-				validerAnimalBtn.setForeground(new Color(0, 51, 153));
+				validerAnimalBtn.setForeground(new Color(16, 40, 99));
 				validerAnimalBtn.setFont(new Font("Gisha", Font.PLAIN, 12));
 				validerAnimalBtn.setBackground(new Color(255, 255, 255));
 				GridBagConstraints gbc_validerAnimalBtn = new GridBagConstraints();
@@ -1586,7 +1606,7 @@ public class MainView {
 
 				// retour aux infos clients
 				JLabel adresseInfoLbl = new JLabel("Adresse 1 : ");
-				adresseInfoLbl.setForeground(new Color(0, 51, 153));
+				adresseInfoLbl.setForeground(new Color(16, 40, 99));
 				adresseInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_adresseInfoLbl = new GridBagConstraints();
 				gbc_adresseInfoLbl.anchor = GridBagConstraints.WEST;
@@ -1596,7 +1616,7 @@ public class MainView {
 				panel.add(adresseInfoLbl, gbc_adresseInfoLbl);
 
 				JLabel Adresse1InfoTxt = new JLabel(listModelClient.get(indexClient).getAdresse1());
-				Adresse1InfoTxt.setForeground(new Color(0, 51, 153));
+				Adresse1InfoTxt.setForeground(new Color(16, 40, 99));
 				Adresse1InfoTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_Adresse1InfoTxt = new GridBagConstraints();
 				gbc_Adresse1InfoTxt.anchor = GridBagConstraints.WEST;
@@ -1606,7 +1626,7 @@ public class MainView {
 				panel.add(Adresse1InfoTxt, gbc_Adresse1InfoTxt);
 
 				JLabel adresse2InfoLbl = new JLabel("Adresse 2 : ");
-				adresse2InfoLbl.setForeground(new Color(0, 51, 153));
+				adresse2InfoLbl.setForeground(new Color(16, 40, 99));
 				adresse2InfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_adresse2InfoLbl = new GridBagConstraints();
 				gbc_adresse2InfoLbl.anchor = GridBagConstraints.WEST;
@@ -1616,7 +1636,7 @@ public class MainView {
 				panel.add(adresse2InfoLbl, gbc_adresse2InfoLbl);
 
 				JLabel adresse2InfoTxt = new JLabel(listModelClient.get(indexClient).getAdresse2());
-				adresse2InfoTxt.setForeground(new Color(0, 51, 153));
+				adresse2InfoTxt.setForeground(new Color(16, 40, 99));
 				adresse2InfoTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_adresse2InfoTxt = new GridBagConstraints();
 				gbc_adresse2InfoTxt.insets = new Insets(0, 0, 5, 5);
@@ -1633,7 +1653,7 @@ public class MainView {
 				panel.add(spaceBoundinfo2, gbc_spaceBoundinfo2);
 
 				JLabel codePostalInfoLbl = new JLabel("Code postal : ");
-				codePostalInfoLbl.setForeground(new Color(0, 51, 153));
+				codePostalInfoLbl.setForeground(new Color(16, 40, 99));
 				codePostalInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_codePostalInfoLbl = new GridBagConstraints();
 				gbc_codePostalInfoLbl.anchor = GridBagConstraints.WEST;
@@ -1643,7 +1663,7 @@ public class MainView {
 				panel.add(codePostalInfoLbl, gbc_codePostalInfoLbl);
 
 				JLabel codePostalInfoTxt = new JLabel(listModelClient.get(indexClient).getCodePostal());
-				codePostalInfoTxt.setForeground(new Color(0, 51, 153));
+				codePostalInfoTxt.setForeground(new Color(16, 40, 99));
 				codePostalInfoTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_codePostalInfoTxt = new GridBagConstraints();
 				gbc_codePostalInfoTxt.anchor = GridBagConstraints.WEST;
@@ -1653,7 +1673,7 @@ public class MainView {
 				panel.add(codePostalInfoTxt, gbc_codePostalInfoTxt);
 
 				JLabel villeInfoLbl = new JLabel("Ville : ");
-				villeInfoLbl.setForeground(new Color(0, 51, 153));
+				villeInfoLbl.setForeground(new Color(16, 40, 99));
 				villeInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_villeInfoLbl = new GridBagConstraints();
 				gbc_villeInfoLbl.anchor = GridBagConstraints.WEST;
@@ -1663,7 +1683,7 @@ public class MainView {
 				panel.add(villeInfoLbl, gbc_villeInfoLbl);
 
 				JLabel villeInfoTxt = new JLabel(listModelClient.get(indexClient).getVille());
-				villeInfoTxt.setForeground(new Color(0, 51, 153));
+				villeInfoTxt.setForeground(new Color(16, 40, 99));
 				villeInfoTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_villeInfoTxt = new GridBagConstraints();
 				gbc_villeInfoTxt.insets = new Insets(0, 0, 5, 5);
@@ -1680,7 +1700,7 @@ public class MainView {
 				panel.add(spaceBoundinfo3, gbc_spaceBoundinfo3);
 
 				JLabel numTelInfoLbl = new JLabel("N\u00B0 Tel : ");
-				numTelInfoLbl.setForeground(new Color(0, 51, 153));
+				numTelInfoLbl.setForeground(new Color(16, 40, 99));
 				numTelInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_numTelInfoLbl = new GridBagConstraints();
 				gbc_numTelInfoLbl.anchor = GridBagConstraints.WEST;
@@ -1690,7 +1710,7 @@ public class MainView {
 				panel.add(numTelInfoLbl, gbc_numTelInfoLbl);
 
 				JLabel telInfoTxt = new JLabel(listModelClient.get(indexClient).getNumTel());
-				telInfoTxt.setForeground(new Color(0, 51, 153));
+				telInfoTxt.setForeground(new Color(16, 40, 99));
 				telInfoTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_telInfoTxt = new GridBagConstraints();
 				gbc_telInfoTxt.anchor = GridBagConstraints.WEST;
@@ -1700,7 +1720,7 @@ public class MainView {
 				panel.add(telInfoTxt, gbc_telInfoTxt);
 
 				JLabel emailInfoLbl = new JLabel("eMail : ");
-				emailInfoLbl.setForeground(new Color(0, 51, 153));
+				emailInfoLbl.setForeground(new Color(16, 40, 99));
 				emailInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_emailInfoLbl = new GridBagConstraints();
 				gbc_emailInfoLbl.anchor = GridBagConstraints.WEST;
@@ -1710,7 +1730,7 @@ public class MainView {
 				panel.add(emailInfoLbl, gbc_emailInfoLbl);
 
 				JLabel mailInfoTxt = new JLabel(listModelClient.get(indexClient).getEmail());
-				mailInfoTxt.setForeground(new Color(0, 51, 153));
+				mailInfoTxt.setForeground(new Color(16, 40, 99));
 				mailInfoTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_mailInfoTxt = new GridBagConstraints();
 				gbc_mailInfoTxt.insets = new Insets(0, 0, 5, 5);
@@ -1727,7 +1747,7 @@ public class MainView {
 				panel.add(spaceBoundinfo4, gbc_spaceBoundinfo4);
 
 				JLabel assuranceInfoLbl = new JLabel("Assurance : ");
-				assuranceInfoLbl.setForeground(new Color(0, 51, 153));
+				assuranceInfoLbl.setForeground(new Color(16, 40, 99));
 				assuranceInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_assuranceInfoLbl = new GridBagConstraints();
 				gbc_assuranceInfoLbl.anchor = GridBagConstraints.WEST;
@@ -1737,7 +1757,7 @@ public class MainView {
 				panel.add(assuranceInfoLbl, gbc_assuranceInfoLbl);
 
 				JLabel assuranceInfoTxt = new JLabel(listModelClient.get(indexClient).getAssurance());
-				assuranceInfoTxt.setForeground(new Color(0, 51, 153));
+				assuranceInfoTxt.setForeground(new Color(16, 40, 99));
 				assuranceInfoTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_assuranceInfoTxt = new GridBagConstraints();
 				gbc_assuranceInfoTxt.anchor = GridBagConstraints.WEST;
@@ -1747,7 +1767,7 @@ public class MainView {
 				panel.add(assuranceInfoTxt, gbc_assuranceInfoTxt);
 
 				JLabel commentaireInfoLbl = new JLabel("Commentaire : ");
-				commentaireInfoLbl.setForeground(new Color(0, 51, 153));
+				commentaireInfoLbl.setForeground(new Color(16, 40, 99));
 				commentaireInfoLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_commentaireInfoLbl = new GridBagConstraints();
 				gbc_commentaireInfoLbl.anchor = GridBagConstraints.WEST;
@@ -1757,7 +1777,7 @@ public class MainView {
 				panel.add(commentaireInfoLbl, gbc_commentaireInfoLbl);
 
 				JLabel commentaireInfoTxt = new JLabel(listModelClient.get(indexClient).getRemarque());
-				commentaireInfoTxt.setForeground(new Color(0, 51, 153));
+				commentaireInfoTxt.setForeground(new Color(16, 40, 99));
 				commentaireInfoTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_commentaireInfoTxt = new GridBagConstraints();
 				gbc_commentaireInfoTxt.insets = new Insets(0, 0, 5, 5);
@@ -1774,7 +1794,7 @@ public class MainView {
 				panel.add(spaceBoundinfo8, gbc_spaceBoundinfo8);
 
 				JButton ajouterAnimalBtnInfo = new JButton("");
-				ajouterAnimalBtnInfo.setIcon(new ImageIcon(MainView.class.getResource("/ressources/blue.png")));
+				ajouterAnimalBtnInfo.setIcon(new ImageIcon(MainView.class.getResource("/ressources/plus16.png")));
 				ajouterAnimalBtnInfo.setBackground(Color.WHITE);
 				GridBagConstraints gbc_ajouterAnimalBtnInfo = new GridBagConstraints();
 				gbc_ajouterAnimalBtnInfo.anchor = GridBagConstraints.WEST;
@@ -1828,13 +1848,9 @@ public class MainView {
 					nomAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getNomAnimal());
 					if (arrayListAnimaux.get(indexCmb).getSexe().equals("M")) {
 						sexeAnimalCmb.setSelectedIndex(0);
-					} 
-					else if(arrayListAnimaux.get(indexCmb).getSexe().equals("F"))
-					{
+					} else if (arrayListAnimaux.get(indexCmb).getSexe().equals("F")) {
 						sexeAnimalCmb.setSelectedIndex(1);
-					}
-					else
-					{
+					} else {
 						sexeAnimalCmb.setSelectedIndex(2);
 					}
 					Animaux locAnimal = arrayListAnimaux.get(indexCmb);
@@ -1881,7 +1897,7 @@ public class MainView {
 				annulerAnimalBtn.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						if (animalCmb.getSelectedIndex()==-1) {
+						if (animalCmb.getSelectedIndex() == -1) {
 							nomAnimalTxt.setText("");
 							sexeAnimalCmb.setSelectedIndex(-1);
 							couleurAnimalTxt.setText("");
@@ -1942,7 +1958,7 @@ public class MainView {
 			}
 
 		});
-		buttonPlus.setForeground(new Color(0, 51, 153));
+		buttonPlus.setForeground(new Color(16, 40, 99));
 		buttonPlus.setFont(new Font("Gisha", Font.PLAIN, 12));
 		buttonPlus.setBackground(Color.WHITE);
 		GridBagConstraints gbc_buttonPlus = new GridBagConstraints();
@@ -1953,7 +1969,7 @@ public class MainView {
 		panel_1.add(buttonPlus, gbc_buttonPlus);
 
 		JLabel label_10 = new JLabel("_________________________");
-		label_10.setForeground(new Color(0, 51, 153));
+		label_10.setForeground(new Color(16, 40, 99));
 		label_10.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_label_10 = new GridBagConstraints();
 		gbc_label_10.anchor = GridBagConstraints.SOUTH;
@@ -1992,7 +2008,7 @@ public class MainView {
 				panel.add(label, gbc_label);
 
 				JLabel lblNewLabel = new JLabel("Etes-vous s\u00FBr de vouloir archiver cette personne ?");
-				lblNewLabel.setForeground(new Color(0, 51, 153));
+				lblNewLabel.setForeground(new Color(16, 40, 99));
 				lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 				gbc_lblNewLabel.gridwidth = 5;
@@ -2002,7 +2018,7 @@ public class MainView {
 				panel.add(lblNewLabel, gbc_lblNewLabel);
 
 				JButton validerModalBtn = new JButton("Oui");
-				validerModalBtn.setForeground(new Color(0, 51, 153));
+				validerModalBtn.setForeground(new Color(16, 40, 99));
 				validerModalBtn.setFont(new Font("Gisha", Font.PLAIN, 11));
 				validerModalBtn.setBackground(new Color(255, 255, 255));
 				GridBagConstraints gbc_validerModalBtn = new GridBagConstraints();
@@ -2020,7 +2036,7 @@ public class MainView {
 				panel.add(label_1, gbc_label_1);
 
 				JButton btnNon = new JButton("Non");
-				btnNon.setForeground(new Color(0, 51, 153));
+				btnNon.setForeground(new Color(16, 40, 99));
 				btnNon.setFont(new Font("Gisha", Font.PLAIN, 11));
 				btnNon.setBackground(Color.WHITE);
 				GridBagConstraints gbc_btnNon = new GridBagConstraints();
@@ -2053,8 +2069,8 @@ public class MainView {
 				frmArchiverClient.setLocationRelativeTo(null);
 			}
 		});
-		archiverClientBtn.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash2.png")));
-		archiverClientBtn.setForeground(new Color(0, 51, 153));
+		archiverClientBtn.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash.png")));
+		archiverClientBtn.setForeground(new Color(16, 40, 99));
 		archiverClientBtn.setBackground(Color.WHITE);
 		GridBagConstraints gbc_archiverClientBtn = new GridBagConstraints();
 		gbc_archiverClientBtn.anchor = GridBagConstraints.WEST;
@@ -2088,7 +2104,7 @@ public class MainView {
 				panel.setLayout(gbl_panel);
 
 				JLabel lblAjouterClient = new JLabel("Ajouter un client");
-				lblAjouterClient.setForeground(new Color(0, 51, 153));
+				lblAjouterClient.setForeground(new Color(16, 40, 99));
 				lblAjouterClient.setFont(new Font("Gisha", Font.BOLD, 18));
 				lblAjouterClient.setBackground(new Color(255, 255, 255));
 				GridBagConstraints gbc_lblAjouterClient = new GridBagConstraints();
@@ -2124,7 +2140,7 @@ public class MainView {
 
 				JLabel lblNomCAdd = new JLabel("Nom :");
 				lblNomCAdd.setFont(new Font("Gisha", Font.PLAIN, 12));
-				lblNomCAdd.setForeground(new Color(0, 51, 153));
+				lblNomCAdd.setForeground(new Color(16, 40, 99));
 				GridBagConstraints gbc_lblNomCAdd = new GridBagConstraints();
 				gbc_lblNomCAdd.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNomCAdd.anchor = GridBagConstraints.EAST;
@@ -2134,7 +2150,7 @@ public class MainView {
 
 				JTextField nomTxtCAdd;
 				nomTxtCAdd = new JTextField();
-				nomTxtCAdd.setForeground(new Color(0, 51, 153));
+				nomTxtCAdd.setForeground(new Color(16, 40, 99));
 				GridBagConstraints gbc_nomTxtCAdd = new GridBagConstraints();
 				gbc_nomTxtCAdd.gridwidth = 2;
 				gbc_nomTxtCAdd.insets = new Insets(0, 0, 5, 5);
@@ -2145,7 +2161,7 @@ public class MainView {
 				nomTxtCAdd.setColumns(10);
 
 				JLabel prenomClientLbl = new JLabel("Pr\u00E9nom :");
-				prenomClientLbl.setForeground(new Color(0, 51, 153));
+				prenomClientLbl.setForeground(new Color(16, 40, 99));
 				prenomClientLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_prenomClientLbl = new GridBagConstraints();
 				gbc_prenomClientLbl.anchor = GridBagConstraints.EAST;
@@ -2156,7 +2172,7 @@ public class MainView {
 
 				JTextField prenomClientTxtAdd;
 				prenomClientTxtAdd = new JTextField();
-				prenomClientTxtAdd.setForeground(new Color(0, 51, 153));
+				prenomClientTxtAdd.setForeground(new Color(16, 40, 99));
 				prenomClientTxtAdd.setColumns(10);
 				GridBagConstraints gbc_textField = new GridBagConstraints();
 				gbc_textField.insets = new Insets(0, 0, 5, 5);
@@ -2173,7 +2189,7 @@ public class MainView {
 				panel.add(spaceAdd, gbc_spaceAdd);
 
 				JLabel adresseClienLbl = new JLabel("Adresse 1 :");
-				adresseClienLbl.setForeground(new Color(0, 51, 153));
+				adresseClienLbl.setForeground(new Color(16, 40, 99));
 				adresseClienLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_adresseClienLbl = new GridBagConstraints();
 				gbc_adresseClienLbl.anchor = GridBagConstraints.EAST;
@@ -2184,7 +2200,7 @@ public class MainView {
 
 				JTextField adresse1ClientTxt;
 				adresse1ClientTxt = new JTextField();
-				adresse1ClientTxt.setForeground(new Color(0, 51, 153));
+				adresse1ClientTxt.setForeground(new Color(16, 40, 99));
 				adresse1ClientTxt.setColumns(10);
 				GridBagConstraints gbc_adresse1ClientLbl = new GridBagConstraints();
 				gbc_adresse1ClientLbl.gridwidth = 2;
@@ -2195,7 +2211,7 @@ public class MainView {
 				panel.add(adresse1ClientTxt, gbc_adresse1ClientLbl);
 
 				JLabel adresseClient2Lbl = new JLabel("Adresse 2 :");
-				adresseClient2Lbl.setForeground(new Color(0, 51, 153));
+				adresseClient2Lbl.setForeground(new Color(16, 40, 99));
 				adresseClient2Lbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_adresseClient2Lbl = new GridBagConstraints();
 				gbc_adresseClient2Lbl.anchor = GridBagConstraints.EAST;
@@ -2206,7 +2222,7 @@ public class MainView {
 
 				JTextField adresseClient2Txt;
 				adresseClient2Txt = new JTextField();
-				adresseClient2Txt.setForeground(new Color(0, 51, 153));
+				adresseClient2Txt.setForeground(new Color(16, 40, 99));
 				adresseClient2Txt.setColumns(10);
 				GridBagConstraints gbc_adresseClient2Txt = new GridBagConstraints();
 				gbc_adresseClient2Txt.insets = new Insets(0, 0, 5, 5);
@@ -2223,7 +2239,7 @@ public class MainView {
 				panel.add(spaceBoundAdd2, gbc_spaceBoundAdd2);
 
 				JLabel codePostalClientLbl = new JLabel("Code Postal :");
-				codePostalClientLbl.setForeground(new Color(0, 51, 153));
+				codePostalClientLbl.setForeground(new Color(16, 40, 99));
 				codePostalClientLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_codePostalClientLbl = new GridBagConstraints();
 				gbc_codePostalClientLbl.anchor = GridBagConstraints.EAST;
@@ -2234,7 +2250,7 @@ public class MainView {
 
 				JTextField codePostalTxtAdd;
 				codePostalTxtAdd = new JTextField();
-				codePostalTxtAdd.setForeground(new Color(0, 51, 153));
+				codePostalTxtAdd.setForeground(new Color(16, 40, 99));
 				codePostalTxtAdd.setColumns(10);
 				GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 				gbc_textField_1.gridwidth = 2;
@@ -2245,7 +2261,7 @@ public class MainView {
 				panel.add(codePostalTxtAdd, gbc_textField_1);
 
 				JLabel villeClientLabel = new JLabel("Ville :");
-				villeClientLabel.setForeground(new Color(0, 51, 153));
+				villeClientLabel.setForeground(new Color(16, 40, 99));
 				villeClientLabel.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_villeClientLabel = new GridBagConstraints();
 				gbc_villeClientLabel.anchor = GridBagConstraints.EAST;
@@ -2256,7 +2272,7 @@ public class MainView {
 
 				JTextField villeTxtAdd;
 				villeTxtAdd = new JTextField();
-				villeTxtAdd.setForeground(new Color(0, 51, 153));
+				villeTxtAdd.setForeground(new Color(16, 40, 99));
 				villeTxtAdd.setColumns(10);
 				GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 				gbc_textField_2.insets = new Insets(0, 0, 5, 5);
@@ -2273,7 +2289,7 @@ public class MainView {
 				panel.add(spaceBoundCLient4, gbc_spaceBoundCLient4);
 
 				JLabel numTelLbl = new JLabel("N\u00B0 tel. :");
-				numTelLbl.setForeground(new Color(0, 51, 153));
+				numTelLbl.setForeground(new Color(16, 40, 99));
 				numTelLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_numTelLbl = new GridBagConstraints();
 				gbc_numTelLbl.anchor = GridBagConstraints.EAST;
@@ -2284,7 +2300,7 @@ public class MainView {
 
 				JTextField telTxt;
 				telTxt = new JTextField();
-				telTxt.setForeground(new Color(0, 51, 153));
+				telTxt.setForeground(new Color(16, 40, 99));
 				telTxt.setColumns(10);
 				GridBagConstraints gbc_telTxt = new GridBagConstraints();
 				gbc_telTxt.gridwidth = 2;
@@ -2295,7 +2311,7 @@ public class MainView {
 				panel.add(telTxt, gbc_telTxt);
 
 				JLabel emailClientLbl = new JLabel("eMail :");
-				emailClientLbl.setForeground(new Color(0, 51, 153));
+				emailClientLbl.setForeground(new Color(16, 40, 99));
 				emailClientLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_emailClientLbl = new GridBagConstraints();
 				gbc_emailClientLbl.anchor = GridBagConstraints.ABOVE_BASELINE_TRAILING;
@@ -2306,7 +2322,7 @@ public class MainView {
 
 				JTextField emailTxt;
 				emailTxt = new JTextField();
-				emailTxt.setForeground(new Color(0, 51, 153));
+				emailTxt.setForeground(new Color(16, 40, 99));
 				emailTxt.setColumns(10);
 				GridBagConstraints gbc_emailTxt = new GridBagConstraints();
 				gbc_emailTxt.insets = new Insets(0, 0, 5, 5);
@@ -2323,7 +2339,7 @@ public class MainView {
 				panel.add(spaceBoundC5, gbc_spaceBoundC5);
 
 				JLabel commentaireLbl = new JLabel("Commentaire :");
-				commentaireLbl.setForeground(new Color(0, 51, 153));
+				commentaireLbl.setForeground(new Color(16, 40, 99));
 				commentaireLbl.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_commentaireLbl = new GridBagConstraints();
 				gbc_commentaireLbl.anchor = GridBagConstraints.EAST;
@@ -2334,7 +2350,7 @@ public class MainView {
 
 				JTextField commentaireTxt;
 				commentaireTxt = new JTextField();
-				commentaireTxt.setForeground(new Color(0, 51, 153));
+				commentaireTxt.setForeground(new Color(16, 40, 99));
 				commentaireTxt.setColumns(10);
 				GridBagConstraints gbc_commentaireTxt = new GridBagConstraints();
 				gbc_commentaireTxt.gridwidth = 2;
@@ -2345,7 +2361,7 @@ public class MainView {
 				panel.add(commentaireTxt, gbc_commentaireTxt);
 
 				JButton btnAjouterCAdd = new JButton("Ajouter");
-				btnAjouterCAdd.setForeground(new Color(0, 51, 153));
+				btnAjouterCAdd.setForeground(new Color(16, 40, 99));
 				btnAjouterCAdd.setFont(new Font("Gisha", Font.PLAIN, 12));
 				btnAjouterCAdd.setBackground(new Color(255, 255, 255));
 				GridBagConstraints gbc_btnAjouterCAdd = new GridBagConstraints();
@@ -2377,8 +2393,8 @@ public class MainView {
 
 		// FIN DE L'AJOUT D'UN CLIENT
 
-		addClientButton.setIcon(new ImageIcon(MainView.class.getResource("/ressources/blue.png")));
-		addClientButton.setForeground(new Color(0, 51, 153));
+		addClientButton.setIcon(new ImageIcon(MainView.class.getResource("/ressources/plus.png")));
+		addClientButton.setForeground(new Color(16, 40, 99));
 		addClientButton.setBackground(Color.WHITE);
 		GridBagConstraints gbc_addClientButton = new GridBagConstraints();
 		gbc_addClientButton.anchor = GridBagConstraints.EAST;
@@ -2386,7 +2402,7 @@ public class MainView {
 		gbc_addClientButton.gridx = 4;
 		gbc_addClientButton.gridy = 7;
 		panel_1.add(addClientButton, gbc_addClientButton);
-		tabbedPane.setForegroundAt(2, new Color(0, 51, 153));
+		tabbedPane.setForegroundAt(2, new Color(16, 40, 99));
 		tabbedPane.setBackgroundAt(2, new Color(255, 255, 255));
 
 		// FIN BOUTON AJOUTER CLIENT
@@ -2396,680 +2412,595 @@ public class MainView {
 		 * PERSONNELS PANEL
 		 */
 
-		if (droitVisibility == "ADM") {
-			JPanel panelPersonnels = new JPanel() {
-				protected void paintComponent(Graphics g) {
-					try {
-						g.drawImage(ImageIO.read(new File("src/ressources/banner.png")), 0, 0, null);
-					} catch (IOException e) {
-					}
+		// if (droitVisibility == "ADM") {
+		JPanel panelPersonnels = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				try {
+					g.drawImage(ImageIO.read(new File("src/ressources/bannerv2.png")), 0, 0, null);
+				} catch (IOException e) {
 				}
-			};
-			tabbedPane.addTab("Gestion du personnel",
-					new ImageIcon(MainView.class.getResource("/ressources/veto icon.png")), panelPersonnels, null);
-
-			panelPersonnels.setBackground(new Color(204, 204, 204));
-			GridBagLayout gbl_panelPersonnels = new GridBagLayout();
-			gbl_panelPersonnels.columnWidths = new int[] { 26, 345, 30, 0, 0, 0 };
-			gbl_panelPersonnels.rowHeights = new int[] { 22, 48, 36, 312, 7, 0 };
-			gbl_panelPersonnels.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
-			gbl_panelPersonnels.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-			panelPersonnels.setLayout(gbl_panelPersonnels);
-
-			heureGestionPersonnelLbl.setForeground(Color.WHITE);
-			heureGestionPersonnelLbl.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
-			GridBagConstraints gbc_heureGestionPersonnelLbl = new GridBagConstraints();
-			gbc_heureGestionPersonnelLbl.anchor = GridBagConstraints.SOUTHEAST;
-			gbc_heureGestionPersonnelLbl.gridwidth = 2;
-			gbc_heureGestionPersonnelLbl.insets = new Insets(0, 0, 5, 5);
-			gbc_heureGestionPersonnelLbl.gridx = 3;
-			gbc_heureGestionPersonnelLbl.gridy = 0;
-			panelPersonnels.add(heureGestionPersonnelLbl, gbc_heureGestionPersonnelLbl);
-
-			JLabel gestionPersonelleTitleLbl = new JLabel(" Gestion du personnel");
-			gestionPersonelleTitleLbl.setForeground(Color.WHITE);
-			gestionPersonelleTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
-			GridBagConstraints gbc_gestionPersonelleTitleLbl = new GridBagConstraints();
-			gbc_gestionPersonelleTitleLbl.gridwidth = 2;
-			gbc_gestionPersonelleTitleLbl.insets = new Insets(0, 0, 5, 5);
-			gbc_gestionPersonelleTitleLbl.gridx = 1;
-			gbc_gestionPersonelleTitleLbl.gridy = 1;
-			panelPersonnels.add(gestionPersonelleTitleLbl, gbc_gestionPersonelleTitleLbl);
-
-			JLabel spaceBoundLbl = new JLabel("");
-			GridBagConstraints gbc_spaceBoundLbl = new GridBagConstraints();
-			gbc_spaceBoundLbl.insets = new Insets(0, 0, 5, 5);
-			gbc_spaceBoundLbl.gridx = 0;
-			gbc_spaceBoundLbl.gridy = 2;
-			panelPersonnels.add(spaceBoundLbl, gbc_spaceBoundLbl);
-
-			JLabel spaceBoundLbl3 = new JLabel("");
-			GridBagConstraints gbc_spaceBoundLbl3 = new GridBagConstraints();
-			gbc_spaceBoundLbl3.insets = new Insets(0, 0, 5, 5);
-			gbc_spaceBoundLbl3.gridx = 2;
-			gbc_spaceBoundLbl3.gridy = 2;
-			panelPersonnels.add(spaceBoundLbl3, gbc_spaceBoundLbl3);
-
-			// LISTE VIEW PERSONNELS
-
-			DefaultListModel<Personnels> listModel = new DefaultListModel<Personnels>();
-			JList list = new JList(listModel);
-			list.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 51, 153)));
-			list.setFont(new Font("Levenim MT", Font.PLAIN, 14));
-			list.setForeground(new Color(0, 51, 153));
-			ArrayList<Personnels> listePersonnels = new ArrayList<Personnels>();
-			listePersonnels = ctrl.getListPersonnel(0);
-			for (Personnels personnels : listePersonnels) {
-				listModel.addElement(personnels);
 			}
-			list.setLayoutOrientation(JList.VERTICAL);
-			GridBagConstraints gbc_list = new GridBagConstraints();
-			gbc_list.insets = new Insets(0, 0, 5, 5);
-			gbc_list.fill = GridBagConstraints.BOTH;
-			gbc_list.gridx = 1;
-			gbc_list.gridy = 3;
-			panelPersonnels.add(list, gbc_list);
-			list.setSelectedIndex(0);
+		};
+		tabbedPane.addTab("Gestion du personnel  ",
+				new ImageIcon(MainView.class.getResource("/ressources/veterinarian.png")), panelPersonnels, null);
 
-			JPanel idPanel = new JPanel();
-			idPanel.setBackground(new Color(255, 255, 255));
-			GridBagConstraints gbc_idPanel = new GridBagConstraints();
-			gbc_idPanel.insets = new Insets(0, 0, 5, 5);
-			gbc_idPanel.fill = GridBagConstraints.BOTH;
-			gbc_idPanel.gridx = 3;
-			gbc_idPanel.gridy = 3;
-			panelPersonnels.add(idPanel, gbc_idPanel);
-			GridBagLayout gbl_idPanel = new GridBagLayout();
-			gbl_idPanel.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0 };
-			gbl_idPanel.rowHeights = new int[] { 28, 0, 16, 0, 17, 0, 25, 0, 23, 12, 14, 0, 0 };
-			gbl_idPanel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-			gbl_idPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-					Double.MIN_VALUE };
-			idPanel.setLayout(gbl_idPanel);
+		panelPersonnels.setBackground(new Color(204, 204, 204));
+		GridBagLayout gbl_panelPersonnels = new GridBagLayout();
+		gbl_panelPersonnels.columnWidths = new int[] { 26, 345, 30, 0, 0, 0 };
+		gbl_panelPersonnels.rowHeights = new int[] { 22, 48, 36, 290, 7, 0 };
+		gbl_panelPersonnels.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_panelPersonnels.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panelPersonnels.setLayout(gbl_panelPersonnels);
 
-			JLabel spaceBoundlbl = new JLabel("");
-			GridBagConstraints gbc_spaceBoundlbl = new GridBagConstraints();
-			gbc_spaceBoundlbl.gridwidth = 2;
-			gbc_spaceBoundlbl.insets = new Insets(0, 0, 5, 5);
-			gbc_spaceBoundlbl.gridx = 0;
-			gbc_spaceBoundlbl.gridy = 0;
-			idPanel.add(spaceBoundlbl, gbc_spaceBoundlbl);
+		heureGestionPersonnelLbl.setForeground(Color.WHITE);
+		heureGestionPersonnelLbl.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
+		GridBagConstraints gbc_heureGestionPersonnelLbl = new GridBagConstraints();
+		gbc_heureGestionPersonnelLbl.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_heureGestionPersonnelLbl.gridwidth = 2;
+		gbc_heureGestionPersonnelLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_heureGestionPersonnelLbl.gridx = 3;
+		gbc_heureGestionPersonnelLbl.gridy = 0;
+		panelPersonnels.add(heureGestionPersonnelLbl, gbc_heureGestionPersonnelLbl);
 
-			JLabel identifiantLbl = new JLabel("Identifiant :");
-			identifiantLbl.setForeground(new Color(0, 51, 153));
-			GridBagConstraints gbc_identifiantLbl = new GridBagConstraints();
-			gbc_identifiantLbl.gridwidth = 2;
-			gbc_identifiantLbl.anchor = GridBagConstraints.WEST;
-			gbc_identifiantLbl.insets = new Insets(0, 0, 5, 5);
-			gbc_identifiantLbl.gridx = 0;
-			gbc_identifiantLbl.gridy = 1;
-			idPanel.add(identifiantLbl, gbc_identifiantLbl);
+		JLabel gestionPersonelleTitleLbl = new JLabel(" Gestion du personnel");
+		gestionPersonelleTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/ressources/veterinarianWt.png")));
+		gestionPersonelleTitleLbl.setForeground(Color.WHITE);
+		gestionPersonelleTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
+		GridBagConstraints gbc_gestionPersonelleTitleLbl = new GridBagConstraints();
+		gbc_gestionPersonelleTitleLbl.gridwidth = 3;
+		gbc_gestionPersonelleTitleLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_gestionPersonelleTitleLbl.gridx = 0;
+		gbc_gestionPersonelleTitleLbl.gridy = 1;
+		panelPersonnels.add(gestionPersonelleTitleLbl, gbc_gestionPersonelleTitleLbl);
 
-			identifiantTxt = new JTextField();
-			identifiantTxt.setForeground(new Color(0, 51, 153));
-			identifiantTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
-			GridBagConstraints gbc_identifiantTxt = new GridBagConstraints();
-			gbc_identifiantTxt.gridwidth = 3;
-			gbc_identifiantTxt.insets = new Insets(0, 0, 5, 5);
-			gbc_identifiantTxt.fill = GridBagConstraints.HORIZONTAL;
-			gbc_identifiantTxt.gridx = 2;
-			gbc_identifiantTxt.gridy = 1;
-			idPanel.add(identifiantTxt, gbc_identifiantTxt);
-			identifiantTxt.setColumns(10);
-			identifiantTxt.setEnabled(false);
+		JLabel spaceBoundLbl = new JLabel("");
+		GridBagConstraints gbc_spaceBoundLbl = new GridBagConstraints();
+		gbc_spaceBoundLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_spaceBoundLbl.gridx = 0;
+		gbc_spaceBoundLbl.gridy = 2;
+		panelPersonnels.add(spaceBoundLbl, gbc_spaceBoundLbl);
 
-			JLabel label = new JLabel("");
-			GridBagConstraints gbc_label = new GridBagConstraints();
-			gbc_label.gridwidth = 2;
-			gbc_label.insets = new Insets(0, 0, 5, 5);
-			gbc_label.gridx = 0;
-			gbc_label.gridy = 2;
-			idPanel.add(label, gbc_label);
+		JLabel spaceBoundLbl3 = new JLabel("");
+		GridBagConstraints gbc_spaceBoundLbl3 = new GridBagConstraints();
+		gbc_spaceBoundLbl3.insets = new Insets(0, 0, 5, 5);
+		gbc_spaceBoundLbl3.gridx = 2;
+		gbc_spaceBoundLbl3.gridy = 2;
+		panelPersonnels.add(spaceBoundLbl3, gbc_spaceBoundLbl3);
 
-			JLabel nomLbl = new JLabel("Nom :");
-			nomLbl.setForeground(new Color(0, 51, 153));
-			GridBagConstraints gbc_nomLbl = new GridBagConstraints();
-			gbc_nomLbl.gridwidth = 2;
-			gbc_nomLbl.insets = new Insets(0, 0, 5, 5);
-			gbc_nomLbl.anchor = GridBagConstraints.WEST;
-			gbc_nomLbl.gridx = 0;
-			gbc_nomLbl.gridy = 3;
-			idPanel.add(nomLbl, gbc_nomLbl);
+		// LISTE VIEW PERSONNELS
 
-			nomTxt = new JTextField();
-			nomTxt.setForeground(new Color(0, 51, 153));
-			nomTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
-			GridBagConstraints gbc_nomTxt = new GridBagConstraints();
-			gbc_nomTxt.gridwidth = 3;
-			gbc_nomTxt.insets = new Insets(0, 0, 5, 5);
-			gbc_nomTxt.fill = GridBagConstraints.HORIZONTAL;
-			gbc_nomTxt.gridx = 2;
-			gbc_nomTxt.gridy = 3;
-			idPanel.add(nomTxt, gbc_nomTxt);
-			nomTxt.setColumns(10);
+		DefaultListModel<Personnels> listModel = new DefaultListModel<Personnels>();
+		JList list = new JList(listModel);
+		list.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(16, 40, 99)));
+		list.setFont(new Font("Levenim MT", Font.PLAIN, 14));
+		list.setForeground(new Color(16, 40, 99));
+		ArrayList<Personnels> listePersonnels = new ArrayList<Personnels>();
+		listePersonnels = ctrl.getListPersonnel(0);
+		for (Personnels personnels : listePersonnels) {
+			listModel.addElement(personnels);
+		}
+		list.setLayoutOrientation(JList.VERTICAL);
+		GridBagConstraints gbc_list = new GridBagConstraints();
+		gbc_list.insets = new Insets(0, 0, 5, 5);
+		gbc_list.fill = GridBagConstraints.BOTH;
+		gbc_list.gridx = 1;
+		gbc_list.gridy = 3;
+		panelPersonnels.add(list, gbc_list);
+		list.setSelectedIndex(0);
 
-			JLabel label_1 = new JLabel("");
-			GridBagConstraints gbc_label_1 = new GridBagConstraints();
-			gbc_label_1.gridwidth = 2;
-			gbc_label_1.insets = new Insets(0, 0, 5, 5);
-			gbc_label_1.gridx = 0;
-			gbc_label_1.gridy = 4;
-			idPanel.add(label_1, gbc_label_1);
+		JPanel idPanel = new JPanel();
+		idPanel.setBackground(new Color(255, 255, 255));
+		GridBagConstraints gbc_idPanel = new GridBagConstraints();
+		gbc_idPanel.insets = new Insets(0, 0, 5, 5);
+		gbc_idPanel.fill = GridBagConstraints.BOTH;
+		gbc_idPanel.gridx = 3;
+		gbc_idPanel.gridy = 3;
+		panelPersonnels.add(idPanel, gbc_idPanel);
+		GridBagLayout gbl_idPanel = new GridBagLayout();
+		gbl_idPanel.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+		gbl_idPanel.rowHeights = new int[] { 28, 0, 16, 0, 17, 0, 25, 0, 23, 12, 14, 0, 0 };
+		gbl_idPanel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_idPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
+		idPanel.setLayout(gbl_idPanel);
 
-			JLabel roleLbl = new JLabel("R\u00F4le :");
-			roleLbl.setForeground(new Color(0, 51, 153));
-			GridBagConstraints gbc_roleLbl = new GridBagConstraints();
-			gbc_roleLbl.gridwidth = 2;
-			gbc_roleLbl.insets = new Insets(0, 0, 5, 5);
-			gbc_roleLbl.anchor = GridBagConstraints.WEST;
-			gbc_roleLbl.gridx = 0;
-			gbc_roleLbl.gridy = 5;
-			idPanel.add(roleLbl, gbc_roleLbl);
+		JLabel spaceBoundlbl = new JLabel("");
+		GridBagConstraints gbc_spaceBoundlbl = new GridBagConstraints();
+		gbc_spaceBoundlbl.gridwidth = 2;
+		gbc_spaceBoundlbl.insets = new Insets(0, 0, 5, 5);
+		gbc_spaceBoundlbl.gridx = 0;
+		gbc_spaceBoundlbl.gridy = 0;
+		idPanel.add(spaceBoundlbl, gbc_spaceBoundlbl);
 
-			JRadioButton rdbtnSec = new JRadioButton("SEC");
-			rdbtnSec.setBackground(new Color(255, 255, 255));
-			rdbtnSec.setForeground(new Color(0, 51, 153));
-			GridBagConstraints gbc_rdbtnSec = new GridBagConstraints();
-			gbc_rdbtnSec.insets = new Insets(0, 0, 5, 5);
-			gbc_rdbtnSec.gridx = 2;
-			gbc_rdbtnSec.gridy = 5;
-			idPanel.add(rdbtnSec, gbc_rdbtnSec);
+		JLabel identifiantLbl = new JLabel("Identifiant :");
+		identifiantLbl.setForeground(new Color(16, 40, 99));
+		GridBagConstraints gbc_identifiantLbl = new GridBagConstraints();
+		gbc_identifiantLbl.gridwidth = 2;
+		gbc_identifiantLbl.anchor = GridBagConstraints.WEST;
+		gbc_identifiantLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_identifiantLbl.gridx = 0;
+		gbc_identifiantLbl.gridy = 1;
+		idPanel.add(identifiantLbl, gbc_identifiantLbl);
 
-			JRadioButton rdbtnVet = new JRadioButton("VET");
-			rdbtnVet.setBackground(new Color(255, 255, 255));
-			rdbtnVet.setForeground(new Color(0, 51, 153));
-			GridBagConstraints gbc_rdbtnVet = new GridBagConstraints();
-			gbc_rdbtnVet.insets = new Insets(0, 0, 5, 5);
-			gbc_rdbtnVet.gridx = 3;
-			gbc_rdbtnVet.gridy = 5;
-			idPanel.add(rdbtnVet, gbc_rdbtnVet);
+		identifiantTxt = new JTextField();
+		identifiantTxt.setForeground(new Color(16, 40, 99));
+		identifiantTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
+		GridBagConstraints gbc_identifiantTxt = new GridBagConstraints();
+		gbc_identifiantTxt.gridwidth = 3;
+		gbc_identifiantTxt.insets = new Insets(0, 0, 5, 5);
+		gbc_identifiantTxt.fill = GridBagConstraints.HORIZONTAL;
+		gbc_identifiantTxt.gridx = 2;
+		gbc_identifiantTxt.gridy = 1;
+		idPanel.add(identifiantTxt, gbc_identifiantTxt);
+		identifiantTxt.setColumns(10);
+		identifiantTxt.setEnabled(false);
 
-			JRadioButton rdbtnAdm = new JRadioButton("ADM");
-			rdbtnAdm.setBackground(new Color(255, 255, 255));
-			rdbtnAdm.setForeground(new Color(0, 51, 153));
-			GridBagConstraints gbc_rdbtnAdm = new GridBagConstraints();
-			gbc_rdbtnAdm.insets = new Insets(0, 0, 5, 5);
-			gbc_rdbtnAdm.gridx = 4;
-			gbc_rdbtnAdm.gridy = 5;
-			idPanel.add(rdbtnAdm, gbc_rdbtnAdm);
+		JLabel label = new JLabel("");
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.gridwidth = 2;
+		gbc_label.insets = new Insets(0, 0, 5, 5);
+		gbc_label.gridx = 0;
+		gbc_label.gridy = 2;
+		idPanel.add(label, gbc_label);
 
-			JLabel spaceBoundlbl5 = new JLabel("");
-			GridBagConstraints gbc_spaceBoundlbl5 = new GridBagConstraints();
-			gbc_spaceBoundlbl5.gridwidth = 2;
-			gbc_spaceBoundlbl5.insets = new Insets(0, 0, 5, 5);
-			gbc_spaceBoundlbl5.gridx = 0;
-			gbc_spaceBoundlbl5.gridy = 6;
-			idPanel.add(spaceBoundlbl5, gbc_spaceBoundlbl5);
+		JLabel nomLbl = new JLabel("Nom :");
+		nomLbl.setForeground(new Color(16, 40, 99));
+		GridBagConstraints gbc_nomLbl = new GridBagConstraints();
+		gbc_nomLbl.gridwidth = 2;
+		gbc_nomLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_nomLbl.anchor = GridBagConstraints.WEST;
+		gbc_nomLbl.gridx = 0;
+		gbc_nomLbl.gridy = 3;
+		idPanel.add(nomLbl, gbc_nomLbl);
 
-			JButton btnAnnuler = new JButton("Annuler");
-			btnAnnuler.setBackground(new Color(255, 255, 255));
-			btnAnnuler.setFont(new Font("Gisha", Font.PLAIN, 12));
-			btnAnnuler.setForeground(new Color(0, 51, 153));
-			GridBagConstraints gbc_btnAnnuler = new GridBagConstraints();
-			gbc_btnAnnuler.anchor = GridBagConstraints.WEST;
-			gbc_btnAnnuler.gridwidth = 2;
-			gbc_btnAnnuler.insets = new Insets(0, 0, 5, 5);
-			gbc_btnAnnuler.gridx = 1;
-			gbc_btnAnnuler.gridy = 7;
-			idPanel.add(btnAnnuler, gbc_btnAnnuler);
+		nomTxt = new JTextField();
+		nomTxt.setForeground(new Color(16, 40, 99));
+		nomTxt.setFont(new Font("Gisha", Font.PLAIN, 12));
+		GridBagConstraints gbc_nomTxt = new GridBagConstraints();
+		gbc_nomTxt.gridwidth = 3;
+		gbc_nomTxt.insets = new Insets(0, 0, 5, 5);
+		gbc_nomTxt.fill = GridBagConstraints.HORIZONTAL;
+		gbc_nomTxt.gridx = 2;
+		gbc_nomTxt.gridy = 3;
+		idPanel.add(nomTxt, gbc_nomTxt);
+		nomTxt.setColumns(10);
 
-			JButton btnValider = new JButton("Valider");
-			btnValider.setBackground(new Color(255, 255, 255));
-			btnValider.setForeground(new Color(0, 51, 153));
-			btnValider.setFont(new Font("Gisha", Font.PLAIN, 12));
-			GridBagConstraints gbc_btnValider = new GridBagConstraints();
-			gbc_btnValider.anchor = GridBagConstraints.EAST;
-			gbc_btnValider.gridwidth = 2;
-			gbc_btnValider.insets = new Insets(0, 0, 5, 5);
-			gbc_btnValider.gridx = 3;
-			gbc_btnValider.gridy = 7;
-			idPanel.add(btnValider, gbc_btnValider);
+		JLabel label_1 = new JLabel("");
+		GridBagConstraints gbc_label_1 = new GridBagConstraints();
+		gbc_label_1.gridwidth = 2;
+		gbc_label_1.insets = new Insets(0, 0, 5, 5);
+		gbc_label_1.gridx = 0;
+		gbc_label_1.gridy = 4;
+		idPanel.add(label_1, gbc_label_1);
 
-			JLabel spaceBoundLbl4 = new JLabel("");
-			GridBagConstraints gbc_spaceBoundLbl4 = new GridBagConstraints();
-			gbc_spaceBoundLbl4.gridwidth = 2;
-			gbc_spaceBoundLbl4.insets = new Insets(0, 0, 5, 5);
-			gbc_spaceBoundLbl4.gridx = 0;
-			gbc_spaceBoundLbl4.gridy = 9;
-			idPanel.add(spaceBoundLbl4, gbc_spaceBoundLbl4);
+		JLabel roleLbl = new JLabel("R\u00F4le :");
+		roleLbl.setForeground(new Color(16, 40, 99));
+		GridBagConstraints gbc_roleLbl = new GridBagConstraints();
+		gbc_roleLbl.gridwidth = 2;
+		gbc_roleLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_roleLbl.anchor = GridBagConstraints.WEST;
+		gbc_roleLbl.gridx = 0;
+		gbc_roleLbl.gridy = 5;
+		idPanel.add(roleLbl, gbc_roleLbl);
 
-			// BOUTTON ARCHIVER PERSONNEL
+		JRadioButton rdbtnSec = new JRadioButton("SEC");
+		rdbtnSec.setBackground(new Color(255, 255, 255));
+		rdbtnSec.setForeground(new Color(16, 40, 99));
+		GridBagConstraints gbc_rdbtnSec = new GridBagConstraints();
+		gbc_rdbtnSec.insets = new Insets(0, 0, 5, 5);
+		gbc_rdbtnSec.gridx = 2;
+		gbc_rdbtnSec.gridy = 5;
+		idPanel.add(rdbtnSec, gbc_rdbtnSec);
 
-			JButton btnArchiver = new JButton("");
-			btnArchiver.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash2.png")));
-			btnArchiver.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					frmArchiverPersonnel = new JFrame();
-					frmArchiverPersonnel.setTitle("Archiver ?");
-					frmArchiverPersonnel.setIconImage(Toolkit.getDefaultToolkit().getImage("/ressources/ico_veto.png"));
-					frmArchiverPersonnel.setBounds(200, 200, 350, 145);
+		JRadioButton rdbtnVet = new JRadioButton("VET");
+		rdbtnVet.setBackground(new Color(255, 255, 255));
+		rdbtnVet.setForeground(new Color(16, 40, 99));
+		GridBagConstraints gbc_rdbtnVet = new GridBagConstraints();
+		gbc_rdbtnVet.insets = new Insets(0, 0, 5, 5);
+		gbc_rdbtnVet.gridx = 3;
+		gbc_rdbtnVet.gridy = 5;
+		idPanel.add(rdbtnVet, gbc_rdbtnVet);
 
-					JPanel panel = new JPanel();
-					panel.setBackground(Color.WHITE);
-					frmArchiverPersonnel.getContentPane().add(panel, BorderLayout.CENTER);
-					GridBagLayout gbl_panel = new GridBagLayout();
-					gbl_panel.columnWidths = new int[] { 98, 5, 29, 5, 0, 0 };
-					gbl_panel.rowHeights = new int[] { 24, 0, 0, 0 };
-					gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-					gbl_panel.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
-					panel.setLayout(gbl_panel);
+		JRadioButton rdbtnAdm = new JRadioButton("ADM");
+		rdbtnAdm.setBackground(new Color(255, 255, 255));
+		rdbtnAdm.setForeground(new Color(16, 40, 99));
+		GridBagConstraints gbc_rdbtnAdm = new GridBagConstraints();
+		gbc_rdbtnAdm.insets = new Insets(0, 0, 5, 5);
+		gbc_rdbtnAdm.gridx = 4;
+		gbc_rdbtnAdm.gridy = 5;
+		idPanel.add(rdbtnAdm, gbc_rdbtnAdm);
 
-					JLabel label = new JLabel("");
-					GridBagConstraints gbc_label = new GridBagConstraints();
-					gbc_label.gridwidth = 3;
-					gbc_label.insets = new Insets(0, 0, 5, 5);
-					gbc_label.gridx = 1;
-					gbc_label.gridy = 0;
-					panel.add(label, gbc_label);
+		JLabel spaceBoundlbl5 = new JLabel("");
+		GridBagConstraints gbc_spaceBoundlbl5 = new GridBagConstraints();
+		gbc_spaceBoundlbl5.gridwidth = 2;
+		gbc_spaceBoundlbl5.insets = new Insets(0, 0, 5, 5);
+		gbc_spaceBoundlbl5.gridx = 0;
+		gbc_spaceBoundlbl5.gridy = 6;
+		idPanel.add(spaceBoundlbl5, gbc_spaceBoundlbl5);
 
-					JLabel lblNewLabel = new JLabel("Etes-vous s\u00FBr de vouloir archiver cette personne ?");
-					lblNewLabel.setForeground(new Color(0, 51, 153));
-					lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 12));
-					GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-					gbc_lblNewLabel.gridwidth = 5;
-					gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-					gbc_lblNewLabel.gridx = 0;
-					gbc_lblNewLabel.gridy = 1;
-					panel.add(lblNewLabel, gbc_lblNewLabel);
+		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setBackground(new Color(255, 255, 255));
+		btnAnnuler.setFont(new Font("Gisha", Font.PLAIN, 12));
+		btnAnnuler.setForeground(new Color(16, 40, 99));
+		GridBagConstraints gbc_btnAnnuler = new GridBagConstraints();
+		gbc_btnAnnuler.anchor = GridBagConstraints.WEST;
+		gbc_btnAnnuler.gridwidth = 2;
+		gbc_btnAnnuler.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAnnuler.gridx = 1;
+		gbc_btnAnnuler.gridy = 7;
+		idPanel.add(btnAnnuler, gbc_btnAnnuler);
 
-					JButton validerModalBtn = new JButton("Oui");
-					validerModalBtn.setForeground(new Color(0, 51, 153));
-					validerModalBtn.setFont(new Font("Gisha", Font.PLAIN, 11));
-					validerModalBtn.setBackground(new Color(255, 255, 255));
-					GridBagConstraints gbc_validerModalBtn = new GridBagConstraints();
-					gbc_validerModalBtn.insets = new Insets(0, 0, 0, 5);
-					gbc_validerModalBtn.anchor = GridBagConstraints.WEST;
-					gbc_validerModalBtn.gridx = 1;
-					gbc_validerModalBtn.gridy = 2;
-					panel.add(validerModalBtn, gbc_validerModalBtn);
+		JButton btnValider = new JButton("Valider");
+		btnValider.setBackground(new Color(255, 255, 255));
+		btnValider.setForeground(new Color(16, 40, 99));
+		btnValider.setFont(new Font("Gisha", Font.PLAIN, 12));
+		GridBagConstraints gbc_btnValider = new GridBagConstraints();
+		gbc_btnValider.anchor = GridBagConstraints.EAST;
+		gbc_btnValider.gridwidth = 2;
+		gbc_btnValider.insets = new Insets(0, 0, 5, 5);
+		gbc_btnValider.gridx = 3;
+		gbc_btnValider.gridy = 7;
+		idPanel.add(btnValider, gbc_btnValider);
 
-					JLabel label_1 = new JLabel("");
-					GridBagConstraints gbc_label_1 = new GridBagConstraints();
-					gbc_label_1.insets = new Insets(0, 0, 0, 5);
-					gbc_label_1.gridx = 2;
-					gbc_label_1.gridy = 2;
-					panel.add(label_1, gbc_label_1);
+		JLabel spaceBoundLbl4 = new JLabel("");
+		GridBagConstraints gbc_spaceBoundLbl4 = new GridBagConstraints();
+		gbc_spaceBoundLbl4.gridwidth = 2;
+		gbc_spaceBoundLbl4.insets = new Insets(0, 0, 5, 5);
+		gbc_spaceBoundLbl4.gridx = 0;
+		gbc_spaceBoundLbl4.gridy = 9;
+		idPanel.add(spaceBoundLbl4, gbc_spaceBoundLbl4);
 
-					JButton btnNon = new JButton("Non");
-					btnNon.setForeground(new Color(0, 51, 153));
-					btnNon.setFont(new Font("Gisha", Font.PLAIN, 11));
-					btnNon.setBackground(Color.WHITE);
-					GridBagConstraints gbc_btnNon = new GridBagConstraints();
-					gbc_btnNon.insets = new Insets(0, 0, 0, 5);
-					gbc_btnNon.gridx = 3;
-					gbc_btnNon.gridy = 2;
-					panel.add(btnNon, gbc_btnNon);
+		// BOUTTON ARCHIVER PERSONNEL
 
-					validerModalBtn.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
+		JButton btnArchiver = new JButton("");
+		btnArchiver.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash.png")));
+		btnArchiver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmArchiverPersonnel = new JFrame();
+				frmArchiverPersonnel.setTitle("Archiver ?");
+				frmArchiverPersonnel.setIconImage(Toolkit.getDefaultToolkit().getImage("/ressources/ico_veto.png"));
+				frmArchiverPersonnel.setBounds(200, 200, 350, 145);
 
-							frmArchiverPersonnel.setVisible(false);
-							ctrl.archive(listModel.get(indexPersonnel).getCodePers());
-							listModel.remove(list.getSelectedIndex());
-							int indexActual = list.getSelectedIndex();
-							list.setSelectedIndex(indexActual + 1);
-							indexPersonnel = list.getSelectedIndex();
-							identifiantTxt.setText(Integer.toString(listModel.get(indexPersonnel).getCodePers()));
-							nomTxt.setText(listModel.get(indexPersonnel).getNom());
-						}
-					});
+				JPanel panel = new JPanel();
+				panel.setBackground(Color.WHITE);
+				frmArchiverPersonnel.getContentPane().add(panel, BorderLayout.CENTER);
+				GridBagLayout gbl_panel = new GridBagLayout();
+				gbl_panel.columnWidths = new int[] { 98, 5, 29, 5, 0, 0 };
+				gbl_panel.rowHeights = new int[] { 24, 0, 0, 0 };
+				gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+				gbl_panel.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+				panel.setLayout(gbl_panel);
 
-					btnNon.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							frmArchiverPersonnel.setVisible(false);
-						}
-					});
+				JLabel label = new JLabel("");
+				GridBagConstraints gbc_label = new GridBagConstraints();
+				gbc_label.gridwidth = 3;
+				gbc_label.insets = new Insets(0, 0, 5, 5);
+				gbc_label.gridx = 1;
+				gbc_label.gridy = 0;
+				panel.add(label, gbc_label);
 
-					frmArchiverPersonnel.setVisible(true);
-					frmArchiverPersonnel.setLocationRelativeTo(null);
-				}
-			});
+				JLabel lblNewLabel = new JLabel("Etes-vous s\u00FBr de vouloir archiver cette personne ?");
+				lblNewLabel.setForeground(new Color(16, 40, 99));
+				lblNewLabel.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+				gbc_lblNewLabel.gridwidth = 5;
+				gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+				gbc_lblNewLabel.gridx = 0;
+				gbc_lblNewLabel.gridy = 1;
+				panel.add(lblNewLabel, gbc_lblNewLabel);
 
-			JLabel traitLbl = new JLabel("_________________________");
-			traitLbl.setFont(new Font("Tahoma", Font.BOLD, 11));
-			traitLbl.setForeground(new Color(0, 51, 153));
-			GridBagConstraints gbc_traitLbl = new GridBagConstraints();
-			gbc_traitLbl.anchor = GridBagConstraints.SOUTH;
-			gbc_traitLbl.gridwidth = 4;
-			gbc_traitLbl.insets = new Insets(0, 0, 5, 5);
-			gbc_traitLbl.gridx = 1;
-			gbc_traitLbl.gridy = 8;
-			idPanel.add(traitLbl, gbc_traitLbl);
-			btnArchiver.setForeground(new Color(0, 51, 153));
-			btnArchiver.setBackground(new Color(255, 255, 255));
-			GridBagConstraints gbc_btnArchiver = new GridBagConstraints();
-			gbc_btnArchiver.gridwidth = 2;
-			gbc_btnArchiver.anchor = GridBagConstraints.WEST;
-			gbc_btnArchiver.insets = new Insets(0, 0, 0, 5);
-			gbc_btnArchiver.gridx = 1;
-			gbc_btnArchiver.gridy = 10;
-			idPanel.add(btnArchiver, gbc_btnArchiver);
+				JButton validerModalBtn = new JButton("Oui");
+				validerModalBtn.setForeground(new Color(16, 40, 99));
+				validerModalBtn.setFont(new Font("Gisha", Font.PLAIN, 11));
+				validerModalBtn.setBackground(new Color(255, 255, 255));
+				GridBagConstraints gbc_validerModalBtn = new GridBagConstraints();
+				gbc_validerModalBtn.insets = new Insets(0, 0, 0, 5);
+				gbc_validerModalBtn.anchor = GridBagConstraints.WEST;
+				gbc_validerModalBtn.gridx = 1;
+				gbc_validerModalBtn.gridy = 2;
+				panel.add(validerModalBtn, gbc_validerModalBtn);
 
-			indexPersonnel = list.getSelectedIndex();
-			identifiantTxt.setText(Integer.toString(listModel.get(indexPersonnel).getCodePers()));
-			nomTxt.setText(listModel.get(indexPersonnel).getNom());
-			switch (listModel.get(indexPersonnel).getRole()) {
-			case "VET":
-				rdbtnVet.setSelected(true);
-				rdbtnSec.setSelected(false);
-				rdbtnAdm.setSelected(false);
-				break;
+				JLabel label_1 = new JLabel("");
+				GridBagConstraints gbc_label_1 = new GridBagConstraints();
+				gbc_label_1.insets = new Insets(0, 0, 0, 5);
+				gbc_label_1.gridx = 2;
+				gbc_label_1.gridy = 2;
+				panel.add(label_1, gbc_label_1);
 
-			case "ADM":
-				rdbtnVet.setSelected(false);
-				rdbtnSec.setSelected(false);
-				rdbtnAdm.setSelected(true);
-				break;
+				JButton btnNon = new JButton("Non");
+				btnNon.setForeground(new Color(16, 40, 99));
+				btnNon.setFont(new Font("Gisha", Font.PLAIN, 11));
+				btnNon.setBackground(Color.WHITE);
+				GridBagConstraints gbc_btnNon = new GridBagConstraints();
+				gbc_btnNon.insets = new Insets(0, 0, 0, 5);
+				gbc_btnNon.gridx = 3;
+				gbc_btnNon.gridy = 2;
+				panel.add(btnNon, gbc_btnNon);
 
-			case "SEC":
-				rdbtnVet.setSelected(false);
-				rdbtnSec.setSelected(true);
-				rdbtnAdm.setSelected(false);
-				break;
+				validerModalBtn.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
 
-			default:
-				break;
-			}
-
-			// BOUTTON AJOUTER PERSONNEL
-
-			JButton addButon = new JButton("");
-			addButon.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-
-					frmAjouterDuPersonnel = new JFrame();
-					frmAjouterDuPersonnel.getContentPane().setBackground(new Color(255, 255, 255));
-
-					JPanel panel = new JPanel();
-					panel.setBackground(new Color(255, 255, 255));
-					frmAjouterDuPersonnel.getContentPane().add(panel, BorderLayout.CENTER);
-					GridBagLayout gbl_panel = new GridBagLayout();
-					gbl_panel.columnWidths = new int[] { 45, 46, 44, 41, 75, 0, 43, 0 };
-					gbl_panel.rowHeights = new int[] { 22, 0, 23, 0, 18, 19, 15, 0, 0 };
-					gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-					gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-					panel.setLayout(gbl_panel);
-
-					JLabel lblAjouterDuPersonnel = new JLabel("Ajouter du personnel");
-					lblAjouterDuPersonnel.setForeground(new Color(0, 51, 153));
-					lblAjouterDuPersonnel.setFont(new Font("Gisha", Font.BOLD, 18));
-					lblAjouterDuPersonnel.setBackground(new Color(255, 255, 255));
-					GridBagConstraints gbc_lblAjouterDuPersonnel = new GridBagConstraints();
-					gbc_lblAjouterDuPersonnel.gridwidth = 4;
-					gbc_lblAjouterDuPersonnel.anchor = GridBagConstraints.SOUTHWEST;
-					gbc_lblAjouterDuPersonnel.insets = new Insets(0, 0, 5, 5);
-					gbc_lblAjouterDuPersonnel.gridx = 1;
-					gbc_lblAjouterDuPersonnel.gridy = 1;
-					panel.add(lblAjouterDuPersonnel, gbc_lblAjouterDuPersonnel);
-
-					JLabel label = new JLabel("");
-					label.setIcon(new ImageIcon("/ressources/medic image.png"));
-					GridBagConstraints gbc_label = new GridBagConstraints();
-					gbc_label.insets = new Insets(0, 0, 5, 5);
-					gbc_label.gridx = 5;
-					gbc_label.gridy = 1;
-					panel.add(label, gbc_label);
-
-					JLabel spaceBoundAdd = new JLabel("");
-					GridBagConstraints gbc_spaceBoundAdd = new GridBagConstraints();
-					gbc_spaceBoundAdd.insets = new Insets(0, 0, 5, 5);
-					gbc_spaceBoundAdd.gridx = 1;
-					gbc_spaceBoundAdd.gridy = 2;
-					panel.add(spaceBoundAdd, gbc_spaceBoundAdd);
-
-					JLabel lblNomAdd = new JLabel("Nom :");
-					lblNomAdd.setFont(new Font("Gisha", Font.PLAIN, 12));
-					lblNomAdd.setForeground(new Color(0, 51, 153));
-					GridBagConstraints gbc_lblNomAdd = new GridBagConstraints();
-					gbc_lblNomAdd.insets = new Insets(0, 0, 5, 5);
-					gbc_lblNomAdd.anchor = GridBagConstraints.EAST;
-					gbc_lblNomAdd.gridx = 1;
-					gbc_lblNomAdd.gridy = 3;
-					panel.add(lblNomAdd, gbc_lblNomAdd);
-
-					final JTextField nomTxtAdd;
-					nomTxtAdd = new JTextField();
-					GridBagConstraints gbc_nomTxtAdd = new GridBagConstraints();
-					gbc_nomTxtAdd.gridwidth = 4;
-					gbc_nomTxtAdd.insets = new Insets(0, 0, 5, 5);
-					gbc_nomTxtAdd.fill = GridBagConstraints.HORIZONTAL;
-					gbc_nomTxtAdd.gridx = 2;
-					gbc_nomTxtAdd.gridy = 3;
-					panel.add(nomTxtAdd, gbc_nomTxtAdd);
-					nomTxtAdd.setColumns(10);
-
-					JLabel spaceAdd = new JLabel("");
-					GridBagConstraints gbc_spaceAdd = new GridBagConstraints();
-					gbc_spaceAdd.insets = new Insets(0, 0, 5, 5);
-					gbc_spaceAdd.gridx = 1;
-					gbc_spaceAdd.gridy = 4;
-					panel.add(spaceAdd, gbc_spaceAdd);
-
-					JLabel roleLblAdd = new JLabel("R\u00F4le :");
-					roleLblAdd.setForeground(new Color(0, 51, 153));
-					roleLblAdd.setFont(new Font("Gisha", Font.PLAIN, 12));
-					GridBagConstraints gbc_roleLblAdd = new GridBagConstraints();
-					gbc_roleLblAdd.anchor = GridBagConstraints.EAST;
-					gbc_roleLblAdd.insets = new Insets(0, 0, 5, 5);
-					gbc_roleLblAdd.gridx = 1;
-					gbc_roleLblAdd.gridy = 5;
-					panel.add(roleLblAdd, gbc_roleLblAdd);
-
-					JRadioButton rdbtnSecAdd = new JRadioButton("SEC");
-					rdbtnSecAdd.setBackground(new Color(255, 255, 255));
-					rdbtnSecAdd.setForeground(new Color(0, 51, 153));
-					GridBagConstraints gbc_rdbtnSecAdd = new GridBagConstraints();
-					gbc_rdbtnSecAdd.insets = new Insets(0, 0, 5, 5);
-					gbc_rdbtnSecAdd.gridx = 2;
-					gbc_rdbtnSecAdd.gridy = 5;
-					panel.add(rdbtnSecAdd, gbc_rdbtnSecAdd);
-
-					JRadioButton rdbtnVetAdd = new JRadioButton("VET");
-					rdbtnVetAdd.setForeground(new Color(0, 51, 153));
-					rdbtnVetAdd.setBackground(Color.WHITE);
-					GridBagConstraints gbc_rdbtnVetAdd = new GridBagConstraints();
-					gbc_rdbtnVetAdd.insets = new Insets(0, 0, 5, 5);
-					gbc_rdbtnVetAdd.gridx = 3;
-					gbc_rdbtnVetAdd.gridy = 5;
-					panel.add(rdbtnVetAdd, gbc_rdbtnVetAdd);
-
-					JRadioButton rdbtnAdmAdd = new JRadioButton("ADM");
-					rdbtnAdmAdd.setForeground(new Color(0, 51, 153));
-					rdbtnAdmAdd.setBackground(Color.WHITE);
-					GridBagConstraints gbc_rdbtnAdmAdd = new GridBagConstraints();
-					gbc_rdbtnAdmAdd.anchor = GridBagConstraints.WEST;
-					gbc_rdbtnAdmAdd.insets = new Insets(0, 0, 5, 5);
-					gbc_rdbtnAdmAdd.gridx = 4;
-					gbc_rdbtnAdmAdd.gridy = 5;
-					panel.add(rdbtnAdmAdd, gbc_rdbtnAdmAdd);
-
-					JLabel spaceBoundAdd2 = new JLabel("");
-					GridBagConstraints gbc_spaceBoundAdd2 = new GridBagConstraints();
-					gbc_spaceBoundAdd2.insets = new Insets(0, 0, 5, 5);
-					gbc_spaceBoundAdd2.gridx = 1;
-					gbc_spaceBoundAdd2.gridy = 6;
-					panel.add(spaceBoundAdd2, gbc_spaceBoundAdd2);
-
-					JButton btnAjouterAdd = new JButton("Ajouter");
-					btnAjouterAdd.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent arg0) {
-							nomTxtAdd.getText();
-							String newCode = "";
-							if (rdbtnAdmAdd.isSelected()) {
-								newCode = "ADM";
-							} else if (rdbtnSecAdd.isSelected()) {
-								newCode = "SEC";
-							} else if (rdbtnVetAdd.isSelected()) {
-								newCode = "VET";
-							}
-							ctrl.create(nomTxtAdd.getText(), newCode);
-							listModel.addElement(ctrl.getListPersonnel(0).get(listModel.getSize()));
-							list.setSelectedIndex(listModel.getSize());
-							frmAjouterDuPersonnel.setVisible(false);
-						}
-					});
-					btnAjouterAdd.setForeground(new Color(0, 51, 153));
-					btnAjouterAdd.setFont(new Font("Gisha", Font.PLAIN, 12));
-					btnAjouterAdd.setBackground(new Color(255, 255, 255));
-					GridBagConstraints gbc_btnAjouterAdd = new GridBagConstraints();
-					gbc_btnAjouterAdd.gridwidth = 2;
-					gbc_btnAjouterAdd.anchor = GridBagConstraints.WEST;
-					gbc_btnAjouterAdd.insets = new Insets(0, 0, 0, 5);
-					gbc_btnAjouterAdd.gridx = 3;
-					gbc_btnAjouterAdd.gridy = 7;
-					panel.add(btnAjouterAdd, gbc_btnAjouterAdd);
-					frmAjouterDuPersonnel
-							.setIconImage(Toolkit.getDefaultToolkit().getImage("/ressources/ico_veto.png"));
-					frmAjouterDuPersonnel.setTitle("Ajouter du personnel");
-					frmAjouterDuPersonnel.setBounds(100, 100, 347, 276);
-					frmAjouterDuPersonnel.setLocationRelativeTo(null);
-					frmAjouterDuPersonnel.setVisible(true);
-
-					rdbtnAdmAdd.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							if (rdbtnAdmAdd.isSelected()) {
-								rdbtnSecAdd.setSelected(false);
-								rdbtnVetAdd.setSelected(false);
-							}
-						}
-					});
-
-					rdbtnSecAdd.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							if (rdbtnSecAdd.isSelected()) {
-								rdbtnAdmAdd.setSelected(false);
-								rdbtnVetAdd.setSelected(false);
-							}
-						}
-					});
-
-					rdbtnVetAdd.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							if (rdbtnVetAdd.isSelected()) {
-								rdbtnSecAdd.setSelected(false);
-								rdbtnAdmAdd.setSelected(false);
-							}
-						}
-					});
-				}
-			});
-			addButon.setIcon(new ImageIcon(MainView.class.getResource("/ressources/blue.png")));
-			addButon.setForeground(new Color(0, 51, 153));
-			addButon.setBackground(Color.WHITE);
-			GridBagConstraints gbc_addButon = new GridBagConstraints();
-			gbc_addButon.anchor = GridBagConstraints.EAST;
-			gbc_addButon.insets = new Insets(0, 0, 0, 5);
-			gbc_addButon.gridx = 4;
-			gbc_addButon.gridy = 10;
-			idPanel.add(addButon, gbc_addButon);
-
-			JLabel spaceBoundLbl2 = new JLabel("");
-			GridBagConstraints gbc_spaceBoundLbl2 = new GridBagConstraints();
-			gbc_spaceBoundLbl2.insets = new Insets(0, 0, 0, 5);
-			gbc_spaceBoundLbl2.gridx = 0;
-			gbc_spaceBoundLbl2.gridy = 4;
-			panelPersonnels.add(spaceBoundLbl2, gbc_spaceBoundLbl2);
-			frmGestion.setForeground(Color.WHITE);
-			frmGestion.setTitle("Gestion");
-			frmGestion.setIconImage(Toolkit.getDefaultToolkit()
-					.getImage("\\\\10.3.0.254\\Partage_Stagiaires\\ressources\\Images\\ico_veto.png"));
-			frmGestion.setBounds(100, 100, 700, 500);
-			frmGestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-			list.addListSelectionListener(new ListSelectionListener() {
-				@Override
-				public void valueChanged(ListSelectionEvent e) {
-					if (e.getValueIsAdjusting()) {
+						frmArchiverPersonnel.setVisible(false);
+						ctrl.archive(listModel.get(indexPersonnel).getCodePers());
+						listModel.remove(list.getSelectedIndex());
+						int indexActual = list.getSelectedIndex();
+						list.setSelectedIndex(indexActual + 1);
 						indexPersonnel = list.getSelectedIndex();
 						identifiantTxt.setText(Integer.toString(listModel.get(indexPersonnel).getCodePers()));
 						nomTxt.setText(listModel.get(indexPersonnel).getNom());
-						switch (listModel.get(indexPersonnel).getRole()) {
-						case "VET":
-							rdbtnVet.setSelected(true);
-							rdbtnSec.setSelected(false);
-							rdbtnAdm.setSelected(false);
-							break;
+					}
+				});
 
-						case "ADM":
-							rdbtnVet.setSelected(false);
-							rdbtnSec.setSelected(false);
-							rdbtnAdm.setSelected(true);
-							break;
+				btnNon.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						frmArchiverPersonnel.setVisible(false);
+					}
+				});
 
-						case "SEC":
-							rdbtnVet.setSelected(false);
-							rdbtnSec.setSelected(true);
-							rdbtnAdm.setSelected(false);
-							break;
+				frmArchiverPersonnel.setVisible(true);
+				frmArchiverPersonnel.setLocationRelativeTo(null);
+			}
+		});
 
-						default:
-							break;
+		JLabel traitLbl = new JLabel("_________________________");
+		traitLbl.setFont(new Font("Tahoma", Font.BOLD, 11));
+		traitLbl.setForeground(new Color(16, 40, 99));
+		GridBagConstraints gbc_traitLbl = new GridBagConstraints();
+		gbc_traitLbl.anchor = GridBagConstraints.SOUTH;
+		gbc_traitLbl.gridwidth = 4;
+		gbc_traitLbl.insets = new Insets(0, 0, 5, 5);
+		gbc_traitLbl.gridx = 1;
+		gbc_traitLbl.gridy = 8;
+		idPanel.add(traitLbl, gbc_traitLbl);
+		btnArchiver.setForeground(new Color(16, 40, 99));
+		btnArchiver.setBackground(new Color(255, 255, 255));
+		GridBagConstraints gbc_btnArchiver = new GridBagConstraints();
+		gbc_btnArchiver.gridwidth = 2;
+		gbc_btnArchiver.anchor = GridBagConstraints.WEST;
+		gbc_btnArchiver.insets = new Insets(0, 0, 0, 5);
+		gbc_btnArchiver.gridx = 1;
+		gbc_btnArchiver.gridy = 10;
+		idPanel.add(btnArchiver, gbc_btnArchiver);
+
+		indexPersonnel = list.getSelectedIndex();
+		identifiantTxt.setText(Integer.toString(listModel.get(indexPersonnel).getCodePers()));
+		nomTxt.setText(listModel.get(indexPersonnel).getNom());
+		switch (listModel.get(indexPersonnel).getRole()) {
+		case "VET":
+			rdbtnVet.setSelected(true);
+			rdbtnSec.setSelected(false);
+			rdbtnAdm.setSelected(false);
+			break;
+
+		case "ADM":
+			rdbtnVet.setSelected(false);
+			rdbtnSec.setSelected(false);
+			rdbtnAdm.setSelected(true);
+			break;
+
+		case "SEC":
+			rdbtnVet.setSelected(false);
+			rdbtnSec.setSelected(true);
+			rdbtnAdm.setSelected(false);
+			break;
+
+		default:
+			break;
+		}
+
+		// BOUTTON AJOUTER PERSONNEL
+
+		JButton addButon = new JButton("");
+		addButon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				frmAjouterDuPersonnel = new JFrame();
+				frmAjouterDuPersonnel.getContentPane().setBackground(new Color(255, 255, 255));
+
+				JPanel panel = new JPanel();
+				panel.setBackground(new Color(255, 255, 255));
+				frmAjouterDuPersonnel.getContentPane().add(panel, BorderLayout.CENTER);
+				GridBagLayout gbl_panel = new GridBagLayout();
+				gbl_panel.columnWidths = new int[] { 45, 46, 44, 41, 75, 0, 43, 0 };
+				gbl_panel.rowHeights = new int[] { 22, 0, 23, 0, 18, 19, 15, 0, 0 };
+				gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				panel.setLayout(gbl_panel);
+
+				JLabel lblAjouterDuPersonnel = new JLabel("Ajouter du personnel");
+				lblAjouterDuPersonnel.setForeground(new Color(16, 40, 99));
+				lblAjouterDuPersonnel.setFont(new Font("Gisha", Font.BOLD, 18));
+				lblAjouterDuPersonnel.setBackground(new Color(255, 255, 255));
+				GridBagConstraints gbc_lblAjouterDuPersonnel = new GridBagConstraints();
+				gbc_lblAjouterDuPersonnel.gridwidth = 4;
+				gbc_lblAjouterDuPersonnel.anchor = GridBagConstraints.SOUTHWEST;
+				gbc_lblAjouterDuPersonnel.insets = new Insets(0, 0, 5, 5);
+				gbc_lblAjouterDuPersonnel.gridx = 1;
+				gbc_lblAjouterDuPersonnel.gridy = 1;
+				panel.add(lblAjouterDuPersonnel, gbc_lblAjouterDuPersonnel);
+
+				JLabel label = new JLabel("");
+				label.setIcon(new ImageIcon("/ressources/medic image.png"));
+				GridBagConstraints gbc_label = new GridBagConstraints();
+				gbc_label.insets = new Insets(0, 0, 5, 5);
+				gbc_label.gridx = 5;
+				gbc_label.gridy = 1;
+				panel.add(label, gbc_label);
+
+				JLabel spaceBoundAdd = new JLabel("");
+				GridBagConstraints gbc_spaceBoundAdd = new GridBagConstraints();
+				gbc_spaceBoundAdd.insets = new Insets(0, 0, 5, 5);
+				gbc_spaceBoundAdd.gridx = 1;
+				gbc_spaceBoundAdd.gridy = 2;
+				panel.add(spaceBoundAdd, gbc_spaceBoundAdd);
+
+				JLabel lblNomAdd = new JLabel("Nom :");
+				lblNomAdd.setFont(new Font("Gisha", Font.PLAIN, 12));
+				lblNomAdd.setForeground(new Color(16, 40, 99));
+				GridBagConstraints gbc_lblNomAdd = new GridBagConstraints();
+				gbc_lblNomAdd.insets = new Insets(0, 0, 5, 5);
+				gbc_lblNomAdd.anchor = GridBagConstraints.EAST;
+				gbc_lblNomAdd.gridx = 1;
+				gbc_lblNomAdd.gridy = 3;
+				panel.add(lblNomAdd, gbc_lblNomAdd);
+
+				final JTextField nomTxtAdd;
+				nomTxtAdd = new JTextField();
+				GridBagConstraints gbc_nomTxtAdd = new GridBagConstraints();
+				gbc_nomTxtAdd.gridwidth = 4;
+				gbc_nomTxtAdd.insets = new Insets(0, 0, 5, 5);
+				gbc_nomTxtAdd.fill = GridBagConstraints.HORIZONTAL;
+				gbc_nomTxtAdd.gridx = 2;
+				gbc_nomTxtAdd.gridy = 3;
+				panel.add(nomTxtAdd, gbc_nomTxtAdd);
+				nomTxtAdd.setColumns(10);
+
+				JLabel spaceAdd = new JLabel("");
+				GridBagConstraints gbc_spaceAdd = new GridBagConstraints();
+				gbc_spaceAdd.insets = new Insets(0, 0, 5, 5);
+				gbc_spaceAdd.gridx = 1;
+				gbc_spaceAdd.gridy = 4;
+				panel.add(spaceAdd, gbc_spaceAdd);
+
+				JLabel roleLblAdd = new JLabel("R\u00F4le :");
+				roleLblAdd.setForeground(new Color(16, 40, 99));
+				roleLblAdd.setFont(new Font("Gisha", Font.PLAIN, 12));
+				GridBagConstraints gbc_roleLblAdd = new GridBagConstraints();
+				gbc_roleLblAdd.anchor = GridBagConstraints.EAST;
+				gbc_roleLblAdd.insets = new Insets(0, 0, 5, 5);
+				gbc_roleLblAdd.gridx = 1;
+				gbc_roleLblAdd.gridy = 5;
+				panel.add(roleLblAdd, gbc_roleLblAdd);
+
+				JRadioButton rdbtnSecAdd = new JRadioButton("SEC");
+				rdbtnSecAdd.setBackground(new Color(255, 255, 255));
+				rdbtnSecAdd.setForeground(new Color(16, 40, 99));
+				GridBagConstraints gbc_rdbtnSecAdd = new GridBagConstraints();
+				gbc_rdbtnSecAdd.insets = new Insets(0, 0, 5, 5);
+				gbc_rdbtnSecAdd.gridx = 2;
+				gbc_rdbtnSecAdd.gridy = 5;
+				panel.add(rdbtnSecAdd, gbc_rdbtnSecAdd);
+
+				JRadioButton rdbtnVetAdd = new JRadioButton("VET");
+				rdbtnVetAdd.setForeground(new Color(16, 40, 99));
+				rdbtnVetAdd.setBackground(Color.WHITE);
+				GridBagConstraints gbc_rdbtnVetAdd = new GridBagConstraints();
+				gbc_rdbtnVetAdd.insets = new Insets(0, 0, 5, 5);
+				gbc_rdbtnVetAdd.gridx = 3;
+				gbc_rdbtnVetAdd.gridy = 5;
+				panel.add(rdbtnVetAdd, gbc_rdbtnVetAdd);
+
+				JRadioButton rdbtnAdmAdd = new JRadioButton("ADM");
+				rdbtnAdmAdd.setForeground(new Color(16, 40, 99));
+				rdbtnAdmAdd.setBackground(Color.WHITE);
+				GridBagConstraints gbc_rdbtnAdmAdd = new GridBagConstraints();
+				gbc_rdbtnAdmAdd.anchor = GridBagConstraints.WEST;
+				gbc_rdbtnAdmAdd.insets = new Insets(0, 0, 5, 5);
+				gbc_rdbtnAdmAdd.gridx = 4;
+				gbc_rdbtnAdmAdd.gridy = 5;
+				panel.add(rdbtnAdmAdd, gbc_rdbtnAdmAdd);
+
+				JLabel spaceBoundAdd2 = new JLabel("");
+				GridBagConstraints gbc_spaceBoundAdd2 = new GridBagConstraints();
+				gbc_spaceBoundAdd2.insets = new Insets(0, 0, 5, 5);
+				gbc_spaceBoundAdd2.gridx = 1;
+				gbc_spaceBoundAdd2.gridy = 6;
+				panel.add(spaceBoundAdd2, gbc_spaceBoundAdd2);
+
+				JButton btnAjouterAdd = new JButton("Ajouter");
+				btnAjouterAdd.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						nomTxtAdd.getText();
+						String newCode = "";
+						if (rdbtnAdmAdd.isSelected()) {
+							newCode = "ADM";
+						} else if (rdbtnSecAdd.isSelected()) {
+							newCode = "SEC";
+						} else if (rdbtnVetAdd.isSelected()) {
+							newCode = "VET";
 						}
-						listModel.get(indexPersonnel).getRole();
+						ctrl.create(nomTxtAdd.getText(), newCode);
+						listModel.addElement(ctrl.getListPersonnel(0).get(listModel.getSize()));
+						list.setSelectedIndex(listModel.getSize());
+						frmAjouterDuPersonnel.setVisible(false);
 					}
-				}
-			});
+				});
+				btnAjouterAdd.setForeground(new Color(16, 40, 99));
+				btnAjouterAdd.setFont(new Font("Gisha", Font.PLAIN, 12));
+				btnAjouterAdd.setBackground(new Color(255, 255, 255));
+				GridBagConstraints gbc_btnAjouterAdd = new GridBagConstraints();
+				gbc_btnAjouterAdd.gridwidth = 2;
+				gbc_btnAjouterAdd.anchor = GridBagConstraints.WEST;
+				gbc_btnAjouterAdd.insets = new Insets(0, 0, 0, 5);
+				gbc_btnAjouterAdd.gridx = 3;
+				gbc_btnAjouterAdd.gridy = 7;
+				panel.add(btnAjouterAdd, gbc_btnAjouterAdd);
+				frmAjouterDuPersonnel.setIconImage(Toolkit.getDefaultToolkit().getImage("/ressources/ico_veto.png"));
+				frmAjouterDuPersonnel.setTitle("Ajouter du personnel");
+				frmAjouterDuPersonnel.setBounds(100, 100, 347, 276);
+				frmAjouterDuPersonnel.setLocationRelativeTo(null);
+				frmAjouterDuPersonnel.setVisible(true);
 
-			rdbtnAdm.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					if (rdbtnAdm.isSelected()) {
-						rdbtnSec.setSelected(false);
-						rdbtnVet.setSelected(false);
+				rdbtnAdmAdd.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if (rdbtnAdmAdd.isSelected()) {
+							rdbtnSecAdd.setSelected(false);
+							rdbtnVetAdd.setSelected(false);
+						}
 					}
-				}
-			});
+				});
 
-			rdbtnSec.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					if (rdbtnSec.isSelected()) {
-						rdbtnAdm.setSelected(false);
-						rdbtnVet.setSelected(false);
+				rdbtnSecAdd.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if (rdbtnSecAdd.isSelected()) {
+							rdbtnAdmAdd.setSelected(false);
+							rdbtnVetAdd.setSelected(false);
+						}
 					}
-				}
-			});
+				});
 
-			rdbtnVet.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					if (rdbtnVet.isSelected()) {
-						rdbtnSec.setSelected(false);
-						rdbtnAdm.setSelected(false);
+				rdbtnVetAdd.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if (rdbtnVetAdd.isSelected()) {
+							rdbtnSecAdd.setSelected(false);
+							rdbtnAdmAdd.setSelected(false);
+						}
 					}
-				}
-			});
+				});
+			}
+		});
+		addButon.setIcon(new ImageIcon(MainView.class.getResource("/ressources/plus.png")));
+		addButon.setForeground(new Color(16, 40, 99));
+		addButon.setBackground(Color.WHITE);
+		GridBagConstraints gbc_addButon = new GridBagConstraints();
+		gbc_addButon.anchor = GridBagConstraints.EAST;
+		gbc_addButon.insets = new Insets(0, 0, 0, 5);
+		gbc_addButon.gridx = 4;
+		gbc_addButon.gridy = 10;
+		idPanel.add(addButon, gbc_addButon);
 
-			// BOUTON VALIDER
-			btnValider.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					String newCode = null;
-					listModel.get(indexPersonnel).setNom(nomTxt.getText());
-					if (rdbtnAdm.isSelected()) {
-						newCode = "ADM";
-					} else if (rdbtnSec.isSelected()) {
-						newCode = "SEC";
-					} else if (rdbtnVet.isSelected()) {
-						newCode = "VET";
-					}
-					listModel.get(indexPersonnel).setRole(newCode);
+		JLabel spaceBoundLbl2 = new JLabel("");
+		GridBagConstraints gbc_spaceBoundLbl2 = new GridBagConstraints();
+		gbc_spaceBoundLbl2.insets = new Insets(0, 0, 0, 5);
+		gbc_spaceBoundLbl2.gridx = 0;
+		gbc_spaceBoundLbl2.gridy = 4;
+		panelPersonnels.add(spaceBoundLbl2, gbc_spaceBoundLbl2);
+		frmGestion.setForeground(Color.WHITE);
+		frmGestion.setTitle("Gestion");
+		frmGestion.setIconImage(Toolkit.getDefaultToolkit()
+				.getImage("\\\\10.3.0.254\\Partage_Stagiaires\\ressources\\Images\\ico_veto.png"));
+		frmGestion.setBounds(100, 100, 700, 500);
+		frmGestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-					ctrl.update(listModel.get(indexPersonnel).getNom(), listModel.get(indexPersonnel).getRole(),
-							listModel.get(indexPersonnel).getCodePers());
-				}
-			});
-
-			// BOUTON ANNULER
-			btnAnnuler.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-
+		list.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (e.getValueIsAdjusting()) {
 					indexPersonnel = list.getSelectedIndex();
 					identifiantTxt.setText(Integer.toString(listModel.get(indexPersonnel).getCodePers()));
 					nomTxt.setText(listModel.get(indexPersonnel).getNom());
@@ -3097,8 +3028,94 @@ public class MainView {
 					}
 					listModel.get(indexPersonnel).getRole();
 				}
-			});
-		}
+			}
+		});
+
+		rdbtnAdm.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (rdbtnAdm.isSelected()) {
+					rdbtnSec.setSelected(false);
+					rdbtnVet.setSelected(false);
+				}
+			}
+		});
+
+		rdbtnSec.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (rdbtnSec.isSelected()) {
+					rdbtnAdm.setSelected(false);
+					rdbtnVet.setSelected(false);
+				}
+			}
+		});
+
+		rdbtnVet.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (rdbtnVet.isSelected()) {
+					rdbtnSec.setSelected(false);
+					rdbtnAdm.setSelected(false);
+				}
+			}
+		});
+
+		// BOUTON VALIDER
+		btnValider.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String newCode = null;
+				listModel.get(indexPersonnel).setNom(nomTxt.getText());
+				if (rdbtnAdm.isSelected()) {
+					newCode = "ADM";
+				} else if (rdbtnSec.isSelected()) {
+					newCode = "SEC";
+				} else if (rdbtnVet.isSelected()) {
+					newCode = "VET";
+				}
+				listModel.get(indexPersonnel).setRole(newCode);
+
+				ctrl.update(listModel.get(indexPersonnel).getNom(), listModel.get(indexPersonnel).getRole(),
+						listModel.get(indexPersonnel).getCodePers());
+			}
+		});
+
+		// BOUTON ANNULER
+		btnAnnuler.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				indexPersonnel = list.getSelectedIndex();
+				identifiantTxt.setText(Integer.toString(listModel.get(indexPersonnel).getCodePers()));
+				nomTxt.setText(listModel.get(indexPersonnel).getNom());
+				switch (listModel.get(indexPersonnel).getRole()) {
+				case "VET":
+					rdbtnVet.setSelected(true);
+					rdbtnSec.setSelected(false);
+					rdbtnAdm.setSelected(false);
+					break;
+
+				case "ADM":
+					rdbtnVet.setSelected(false);
+					rdbtnSec.setSelected(false);
+					rdbtnAdm.setSelected(true);
+					break;
+
+				case "SEC":
+					rdbtnVet.setSelected(false);
+					rdbtnSec.setSelected(true);
+					rdbtnAdm.setSelected(false);
+					break;
+
+				default:
+					break;
+				}
+				listModel.get(indexPersonnel).getRole();
+			}
+		});
+		idPanel.setOpaque(false);
+		// }
 
 		// Gestion de l'heure
 

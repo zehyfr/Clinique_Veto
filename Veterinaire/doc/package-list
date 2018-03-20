@@ -1,0 +1,7 @@
+fr.eni.veto.BLL
+fr.eni.veto.BO
+fr.eni.veto.CTRL
+fr.eni.veto.DAL
+fr.eni.veto.DAL.jdbc
+fr.eni.veto.IHM
+fr.eni.veto.Launcher

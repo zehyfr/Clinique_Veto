@@ -64,9 +64,9 @@ public class Authentification {
 		};
 		frmIdentification.setContentPane(panel);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 157, 117, 187, 0, 0 };
+		gridBagLayout.columnWidths = new int[] { 157, 93, 187, 90, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 27, 56, 0, 0, 14, 0, 48, 59, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		frmIdentification.getContentPane().setLayout(gridBagLayout);
 		frmIdentification.setLocationRelativeTo(null);
@@ -81,8 +81,8 @@ public class Authentification {
 		frmIdentification.getContentPane().add(iconeImage, gbc_iconeImage);
 
 		JLabel connectionLbl = new JLabel("Connection");
-		connectionLbl.setForeground(new Color(0, 51, 153));
-		connectionLbl.setFont(new Font("Gisha", Font.BOLD, 23));
+		connectionLbl.setForeground(new Color(16, 40, 99));
+		connectionLbl.setFont(new Font("Tahoma", Font.BOLD, 22));
 		GridBagConstraints gbc_connectionLbl = new GridBagConstraints();
 		gbc_connectionLbl.anchor = GridBagConstraints.SOUTH;
 		gbc_connectionLbl.insets = new Insets(0, 0, 5, 5);
@@ -90,10 +90,12 @@ public class Authentification {
 		gbc_connectionLbl.gridy = 1;
 		frmIdentification.getContentPane().add(connectionLbl, gbc_connectionLbl);
 
-		JLabel identificationLbl = new JLabel("Identifiant");
+		JLabel identificationLbl = new JLabel("");
+		identificationLbl.setIcon(new ImageIcon(Authentification.class.getResource("/ressources/man-user.png")));
 		identificationLbl.setForeground(new Color(0, 51, 153));
 		identificationLbl.setFont(new Font("Gisha", Font.BOLD, 12));
 		GridBagConstraints gbc_identificationLbl = new GridBagConstraints();
+		gbc_identificationLbl.anchor = GridBagConstraints.EAST;
 		gbc_identificationLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_identificationLbl.gridx = 1;
 		gbc_identificationLbl.gridy = 3;
@@ -115,10 +117,12 @@ public class Authentification {
 		gbc_spaceLbl.gridy = 4;
 		frmIdentification.getContentPane().add(spaceLbl, gbc_spaceLbl);
 
-		JLabel passwordLbl = new JLabel("Mot de passe");
+		JLabel passwordLbl = new JLabel("");
+		passwordLbl.setIcon(new ImageIcon(Authentification.class.getResource("/ressources/padlock.png")));
 		passwordLbl.setForeground(new Color(0, 51, 153));
 		passwordLbl.setFont(new Font("Gisha", Font.BOLD, 12));
 		GridBagConstraints gbc_passwordLbl = new GridBagConstraints();
+		gbc_passwordLbl.anchor = GridBagConstraints.EAST;
 		gbc_passwordLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordLbl.gridx = 1;
 		gbc_passwordLbl.gridy = 5;
@@ -206,8 +210,7 @@ public class Authentification {
 		errorIdLbl = new JLabel("Identifiant et/ou mot de passe incorrect !");
 		errorIdLbl.setForeground(new Color(220, 20, 60));
 		GridBagConstraints gbc_errorIdLbl = new GridBagConstraints();
-		gbc_errorIdLbl.anchor = GridBagConstraints.EAST;
-		gbc_errorIdLbl.gridwidth = 2;
+		gbc_errorIdLbl.gridwidth = 3;
 		gbc_errorIdLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_errorIdLbl.gridx = 1;
 		gbc_errorIdLbl.gridy = 6;
@@ -221,7 +224,7 @@ public class Authentification {
 		GridBagConstraints gbc_validerBtn = new GridBagConstraints();
 		gbc_validerBtn.anchor = GridBagConstraints.SOUTH;
 		gbc_validerBtn.insets = new Insets(0, 0, 5, 0);
-		gbc_validerBtn.gridx = 3;
+		gbc_validerBtn.gridx = 4;
 		gbc_validerBtn.gridy = 6;
 		frmIdentification.getContentPane().add(validerBtn, gbc_validerBtn);
 
@@ -233,7 +236,7 @@ public class Authentification {
 		});
 		GridBagConstraints gbc_btnTechnician = new GridBagConstraints();
 		gbc_btnTechnician.anchor = GridBagConstraints.NORTH;
-		gbc_btnTechnician.gridx = 3;
+		gbc_btnTechnician.gridx = 4;
 		gbc_btnTechnician.gridy = 7;
 		panel.add(btnTechnician, gbc_btnTechnician);
 		btnTechnician.setVisible(false);
