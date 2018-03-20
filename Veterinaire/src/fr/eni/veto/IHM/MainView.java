@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
@@ -50,6 +51,7 @@ import com.toedter.calendar.JDateChooser;
 import fr.eni.veto.BO.Agendas;
 import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.BO.Clients;
+import fr.eni.veto.BO.Especes;
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.CTRL.Controler;
 import fr.eni.veto.DAL.DALException;
@@ -66,7 +68,7 @@ public class MainView {
 
 	private int indexPersonnel;
 	private int indexClient;
-	private int indexCmb;
+	private int indexCmb = 0;
 
 	private JFrame frmArchiverPersonnel;
 	private JFrame frmArchiverClient;
@@ -77,13 +79,13 @@ public class MainView {
 
 	private Date dateJour;
 
-	private ArrayList<Animaux> arrayListAnimaux;
+	private List<Animaux> arrayListAnimaux;
 	private ArrayList<Clients> arrayClientList;
 	private ArrayList<Personnels> arrayVetoList;
 	private ArrayList<Agendas> listeAgendasArray;
 	private ArrayList<String> listeSexe;
 	private ArrayList<String> listeRace;
-	private ArrayList<String> listeEspece;
+	private List<String> listeEspece;
 
 	private String droitVisibility;
 
@@ -1371,7 +1373,7 @@ public class MainView {
 				gbc_sexeAnimalLbl.gridy = 3;
 				panelAnimal.add(sexeAnimalLbl, gbc_sexeAnimalLbl);
 
-				JComboBox sexeAnimalCmb = new JComboBox();
+				JComboBox<String> sexeAnimalCmb = new JComboBox<String>();
 				sexeAnimalCmb.setForeground(new Color(0, 51, 153));
 				sexeAnimalCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_sexeAnimalCmb = new GridBagConstraints();
@@ -1382,9 +1384,9 @@ public class MainView {
 				panelAnimal.add(sexeAnimalCmb, gbc_sexeAnimalCmb);
 
 				listeSexe = new ArrayList<String>();
-				listeSexe.add(" ");
 				listeSexe.add("M");
 				listeSexe.add("F");
+				listeSexe.add("H");
 				sexeAnimalCmb.setModel(new DefaultComboBoxModel(listeSexe.toArray()));
 
 				JLabel couleurAnimalLbl = new JLabel("Couleur : ");
@@ -1425,7 +1427,7 @@ public class MainView {
 				gbc_raceAnimalLbl.gridy = 5;
 				panelAnimal.add(raceAnimalLbl, gbc_raceAnimalLbl);
 
-				JComboBox raceAnimalCmb = new JComboBox();
+				JComboBox<String> raceAnimalCmb = new JComboBox<String>();
 				raceAnimalCmb.setForeground(new Color(0, 51, 153));
 				raceAnimalCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_raceAnimalCmb = new GridBagConstraints();
@@ -1434,16 +1436,6 @@ public class MainView {
 				gbc_raceAnimalCmb.gridx = 2;
 				gbc_raceAnimalCmb.gridy = 5;
 				panelAnimal.add(raceAnimalCmb, gbc_raceAnimalCmb);
-				
-				listeRace = new ArrayList<String>();
-				listeRace = ctrl.get
-				String empty = "Pas de races";
-				if (listeRace.isEmpty()) {
-					raceAnimalCmb.insertItemAt(empty, 0);
-					raceAnimalCmb.setSelectedIndex(0);
-				} else {
-					raceAnimalCmb.setModel(new DefaultComboBoxModel(listeRace.toArray()));
-				}
 
 				JLabel especeAnimalLbl = new JLabel("Esp\u00E8ce : ");
 				especeAnimalLbl.setForeground(new Color(0, 51, 153));
@@ -1455,7 +1447,7 @@ public class MainView {
 				gbc_especeAnimalLbl.gridy = 5;
 				panelAnimal.add(especeAnimalLbl, gbc_especeAnimalLbl);
 
-				JComboBox especeAnimalCmb = new JComboBox();
+				JComboBox<String> especeAnimalCmb = new JComboBox<String>();
 				especeAnimalCmb.setForeground(new Color(0, 51, 153));
 				especeAnimalCmb.setFont(new Font("Gisha", Font.PLAIN, 12));
 				GridBagConstraints gbc_especeAnimalCmb = new GridBagConstraints();
@@ -1464,16 +1456,39 @@ public class MainView {
 				gbc_especeAnimalCmb.gridx = 5;
 				gbc_especeAnimalCmb.gridy = 5;
 				panelAnimal.add(especeAnimalCmb, gbc_especeAnimalCmb);
-				
+
+				// REMPLISSAGE DE LA CMB ESPECE
 				listeEspece = new ArrayList<String>();
-				listeEspece = ctrl.get
+				listeEspece = ctrl.getEspeces();
 				String emptyEspece = "Pas d'espèces";
 				if (listeEspece.isEmpty()) {
-					especeAnimalCmb.insertItemAt(emptyEspece, 0);
-					especeAnimalCmb.setSelectedIndex(0);
+					especeAnimalCmb.setSelectedIndex(-1);
 				} else {
-					especeAnimalCmb.setModel(new DefaultComboBoxModel(listeEspece.toArray()));
+					especeAnimalCmb.setModel(
+							new DefaultComboBoxModel<String>(listeEspece.toArray(new String[listeEspece.size()])));
 				}
+
+				especeAnimalCmb.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// REMPLISSAGE DE LA CMB RACE
+						listeRace = new ArrayList<String>();
+						if (especeAnimalCmb.getSelectedItem() != null) {
+							listeRace = ctrl.getRaces(especeAnimalCmb.getSelectedItem().toString());
+						}
+						else
+						{
+							listeRace.add("");
+						}
+						String empty = "Pas de races";
+						if (listeRace.isEmpty()) {
+							especeAnimalCmb.setSelectedIndex(-1);
+						} else {
+							raceAnimalCmb.setModel(
+									new DefaultComboBoxModel<String>(listeRace.toArray(new String[listeRace.size()])));
+						}
+					}
+				});
 
 				JLabel label_2 = new JLabel("");
 				GridBagConstraints gbc_label_2 = new GridBagConstraints();
@@ -1775,7 +1790,7 @@ public class MainView {
 				gbc_spaceBoundinfo5.gridy = 14;
 				panel.add(spaceBoundinfo5, gbc_spaceBoundinfo5);
 
-				JComboBox animalCmb = new JComboBox();
+				JComboBox<Animaux> animalCmb = new JComboBox<Animaux>();
 				GridBagConstraints gbc_animalCmb = new GridBagConstraints();
 				gbc_animalCmb.gridwidth = 2;
 				gbc_animalCmb.insets = new Insets(0, 0, 5, 5);
@@ -1788,10 +1803,10 @@ public class MainView {
 					public void actionPerformed(ActionEvent e) {
 						numeroAnimalTxt.setText("");
 						nomAnimalTxt.setText("");
-						sexeAnimalCmb.setSelectedIndex(0);
+						sexeAnimalCmb.setSelectedIndex(-1);
 						couleurAnimalTxt.setText("");
-						raceAnimalCmb.setSelectedIndex(0);
-						especeAnimalCmb.setSelectedIndex(0);
+						raceAnimalCmb.setSelectedIndex(-1);
+						especeAnimalCmb.setSelectedIndex(-1);
 						tatouageAnimalTxt.setText("");
 						antecedantAnimalTxt.setText("");
 						validerAnimalBtn.setVisible(false);
@@ -1803,17 +1818,29 @@ public class MainView {
 				arrayListAnimaux = ctrl.getAllAnimaux(listModelClient.get(indexClient).getCodeClient());
 				String emptyAnimal = "Pas d'animal";
 				if (arrayListAnimaux.isEmpty()) {
-					animalCmb.insertItemAt(emptyAnimal, 0);
-					animalCmb.setSelectedIndex(0);
+					animalCmb.setSelectedIndex(-1);
 					ajouterAnimalBtn.setVisible(true);
 				} else {
-					animalCmb.setModel(new DefaultComboBoxModel(arrayListAnimaux.toArray()));
+					DefaultComboBoxModel<Animaux> model = new DefaultComboBoxModel<Animaux>(
+							arrayListAnimaux.toArray(new Animaux[arrayListAnimaux.size()]));
+					animalCmb.setModel(model);
 					numeroAnimalTxt.setText(Integer.toString(arrayListAnimaux.get(indexCmb).getCodeAnimal()));
 					nomAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getNomAnimal());
-					sexeAnimalCmb.setSelectedIndex(0);
+					if (arrayListAnimaux.get(indexCmb).getSexe().equals("M")) {
+						sexeAnimalCmb.setSelectedIndex(0);
+					} 
+					else if(arrayListAnimaux.get(indexCmb).getSexe().equals("F"))
+					{
+						sexeAnimalCmb.setSelectedIndex(1);
+					}
+					else
+					{
+						sexeAnimalCmb.setSelectedIndex(2);
+					}
+					Animaux locAnimal = arrayListAnimaux.get(indexCmb);
 					couleurAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getCouleur());
-					raceAnimalCmb.setSelectedIndex(0);
-					especeAnimalCmb.setSelectedIndex(0);
+					especeAnimalCmb.setSelectedItem(arrayListAnimaux.get(indexCmb).getEspece());
+					raceAnimalCmb.setSelectedItem(arrayListAnimaux.get(indexCmb).getRace());
 					tatouageAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getTatouage());
 					antecedantAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getAntecedant());
 					validerAnimalBtn.setVisible(true);
@@ -1826,22 +1853,22 @@ public class MainView {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						indexCmb = animalCmb.getSelectedIndex();
-						if (animalCmb.getItemAt(indexCmb).equals(emptyAnimal)) {
+						if (animalCmb.getSelectedIndex() == -1) {
 							numeroAnimalTxt.setText("");
 							nomAnimalTxt.setText("");
-							sexeAnimalCmb.setSelectedIndex(0);
+							sexeAnimalCmb.setSelectedIndex(-1);
 							couleurAnimalTxt.setText("");
-							raceAnimalCmb.setSelectedIndex(0);
 							especeAnimalCmb.setSelectedIndex(0);
+							raceAnimalCmb.setSelectedIndex(0);
 							tatouageAnimalTxt.setText("");
 							antecedantAnimalTxt.setText("");
 						} else {
 							numeroAnimalTxt.setText(Integer.toString(arrayListAnimaux.get(indexCmb).getCodeAnimal()));
 							nomAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getNomAnimal());
-							sexeAnimalCmb.setSelectedIndex(0);
+							sexeAnimalCmb.setSelectedItem(arrayListAnimaux.get(indexCmb).getSexe());
 							couleurAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getCouleur());
-							raceAnimalCmb.setSelectedIndex(0);
-							especeAnimalCmb.setSelectedIndex(0);
+							especeAnimalCmb.setSelectedItem(arrayListAnimaux.get(indexCmb).getEspece());
+							raceAnimalCmb.setSelectedItem(arrayListAnimaux.get(indexCmb).getRace());
 							tatouageAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getTatouage());
 							antecedantAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getAntecedant());
 						}
@@ -1854,21 +1881,21 @@ public class MainView {
 				annulerAnimalBtn.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						if (animalCmb.getItemAt(indexCmb).equals(emptyAnimal)) {
+						if (animalCmb.getSelectedIndex()==-1) {
 							nomAnimalTxt.setText("");
-							sexeAnimalCmb.setSelectedIndex(0);
+							sexeAnimalCmb.setSelectedIndex(-1);
 							couleurAnimalTxt.setText("");
-							raceAnimalCmb.setSelectedIndex(0);
-							especeAnimalCmb.setSelectedIndex(0);
+							raceAnimalCmb.setSelectedIndex(-1);
+							especeAnimalCmb.setSelectedIndex(-1);
 							tatouageAnimalTxt.setText("");
 							antecedantAnimalTxt.setText("");
 						} else {
 							numeroAnimalTxt.setText(Integer.toString(arrayListAnimaux.get(indexCmb).getCodeAnimal()));
 							nomAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getNomAnimal());
-							sexeAnimalCmb.setSelectedIndex(0);
+							sexeAnimalCmb.setSelectedItem(arrayListAnimaux.get(indexCmb).getSexe());
 							couleurAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getCouleur());
-							raceAnimalCmb.setSelectedIndex(0);
-							especeAnimalCmb.setSelectedIndex(0);
+							especeAnimalCmb.setSelectedItem(arrayListAnimaux.get(indexCmb).getEspece());
+							raceAnimalCmb.setSelectedItem(arrayListAnimaux.get(indexCmb).getRace());
 							tatouageAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getTatouage());
 							antecedantAnimalTxt.setText(arrayListAnimaux.get(indexCmb).getAntecedant());
 							validerAnimalBtn.setVisible(true);

@@ -36,7 +36,7 @@ public class Especes {
 
 	@Override
 	public String toString() {
-		return "Races [Races = " + races.toString() + ", Espece=" + espece + "]";
+		return espece;
 	}
 	
 }

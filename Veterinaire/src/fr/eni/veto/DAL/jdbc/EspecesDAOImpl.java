@@ -1,6 +1,7 @@
 package fr.eni.veto.DAL.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,7 +18,7 @@ public class EspecesDAOImpl implements EspecesDAO{
 	public ArrayList<Especes> selectAllEspeces() throws DALException {
 		Connection connec = null;
 		Statement stmt = null;
-		int i = 0;
+		int i = -1;
 		String especePrec = "";
 		String nomEspece = null;
 		String sql = "SELECT Espece, Race FROM Races ORDER BY Espece;";
@@ -49,21 +50,25 @@ public class EspecesDAOImpl implements EspecesDAO{
 	}
 
 	@Override
-	public void ajouter(Especes pEspece) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void supprimerEspece(String pEspece) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void supprimerRace(Especes pEspece) throws DALException {
-		// TODO Auto-generated method stub
-		
+	public void ajouter(String espece, String race) throws DALException {
+		Connection connec = null;
+		PreparedStatement stmt = null;
+		String sql = "INSERT INTO Races Espece, Race values (?, ?);";
+		try {
+			connec = jdbc.getConnection();
+			stmt = connec.prepareStatement(sql);
+			stmt.setString(1, espece);
+			stmt.setString(2, race);
+			stmt.executeUpdate();
+		}catch (SQLException e) {
+			throw new DALException(e.getMessage() + " Probleme lors de l insert d'une espece/race.");
+		}finally {
+			try {
+				closeCoAndStatement(connec, stmt);
+			}catch (SQLException ex) {
+				throw new DALException(ex.getMessage() + " Erreur fermeture Connexion.");
+			}
+		}	
 	}
 
 	public void closeCoAndStatement(Connection connec, Statement stmt) throws SQLException{

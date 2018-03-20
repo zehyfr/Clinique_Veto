@@ -3,9 +3,12 @@ package fr.eni.veto.BLL;
 import java.util.ArrayList;
 
 import fr.eni.veto.BO.Animaux;
+import fr.eni.veto.BO.Especes;
 import fr.eni.veto.DAL.AnimauxDAO;
 import fr.eni.veto.DAL.AnimauxDAOFactory;
 import fr.eni.veto.DAL.DALException;
+import fr.eni.veto.DAL.EspecesDAO;
+import fr.eni.veto.DAL.EspecesDAOFactory;
 
 public class AnimalMger {
 
@@ -34,6 +37,20 @@ ArrayList<Animaux> res = new ArrayList<Animaux>();
 	{
 		AnimauxDAO insertAnimal = AnimauxDAOFactory.getAnimauxDAO();
 		insertAnimal.updateAnimal(animal);
+	}
+	
+	ArrayList<Especes> res2 = new ArrayList<Especes>();
+	
+	public ArrayList<Especes> getEspece()
+	{
+		EspecesDAO getEspece = EspecesDAOFactory.getEspeceDAO();
+		
+		try {
+			 res2 = getEspece.selectAllEspeces();
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+		return res2;
 	}
 
 }

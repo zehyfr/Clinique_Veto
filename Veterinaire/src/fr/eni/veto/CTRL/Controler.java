@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -21,6 +22,7 @@ import fr.eni.veto.BLL.PersonnelsUpdateMger;
 import fr.eni.veto.BO.Agendas;
 import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.BO.Clients;
+import fr.eni.veto.BO.Especes;
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.DAL.DALException;
 import fr.eni.veto.IHM.Authentification;
@@ -259,14 +261,38 @@ public class Controler {
 		AgendaMger supprimerRdv = new AgendaMger();
 		supprimerRdv.supprimerRdv(anAgendas);
 	}
-	
+	/**
+	 * Mise à jour des infos de l'animal
+	 * @param anAnimal
+	 * @throws DALException
+	 */
 	public void updateAnimal(Animaux anAnimal) throws DALException
 	{
 		AnimalMger updateAnimal = new AnimalMger();
 		updateAnimal.updateAnimal(anAnimal);
 	}
 	
+	public List<String> getEspeces()
+	{
+		AnimalMger getEspeces = new AnimalMger();
+		List<String> ret = new ArrayList<String>(); 
+		for(Especes inGet : getEspeces.getEspece()){
+			ret.add(inGet.getEspece());
+		}
+		return ret;
+	}
+	
 	public void getAuth(){
 		auth.getFrmIdentification().setVisible(true);
+	}
+
+	public ArrayList<String> getRaces(String espece) {
+		AnimalMger getEspeces = new AnimalMger();
+		for(Especes inGet : getEspeces.getEspece()){
+			if(espece.equalsIgnoreCase(inGet.getEspece())){
+				return inGet.getRaces();
+			}
+		}
+		return null;
 	}
 }
