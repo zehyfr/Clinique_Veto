@@ -136,16 +136,14 @@ public class MainView {
 
 		JPanel panelAccueil = new JPanel() {
 			protected void paintComponent(Graphics g) {
-				try {
-					g.drawImage(ImageIO.read(new File("src/ressources/bannerv2.png")), 0, 0, null);
-				} catch (IOException e) {
-				}
+				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0, 0, null);
+				this.repaint();
 			}
 		};
-		tabbedPane.addTab("Accueil  ", new ImageIcon(MainView.class.getResource("/ressources/home.png")), panelAccueil,
+		tabbedPane.addTab("Accueil  ", new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/home.png")), panelAccueil,
 				null);
 		tabbedPane.setForegroundAt(0, new Color(16, 40, 99));
-		panelAccueil.setBackground(new Color(204, 204, 204));
+		panelAccueil.setBackground(Color.WHITE);
 		GridBagLayout gbl_panelAccueil = new GridBagLayout();
 		gbl_panelAccueil.columnWidths = new int[] { 36, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 53, 115, 51, 0, 0 };
 		gbl_panelAccueil.rowHeights = new int[] { 23, 40, 43, 195, 42, 58, 0 };
@@ -173,7 +171,7 @@ public class MainView {
 		panelAccueil.add(dateLbl, gbc_dateLbl);
 
 		JLabel iconLbl = new JLabel("");
-		iconLbl.setIcon(new ImageIcon(MainView.class.getResource("/ressources/accueilVetoICO.jpg")));
+		iconLbl.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/accueilVetoICO.jpg")));
 		GridBagConstraints gbc_iconLbl = new GridBagConstraints();
 		gbc_iconLbl.insets = new Insets(0, 0, 5, 5);
 		gbc_iconLbl.gridx = 1;
@@ -296,7 +294,7 @@ public class MainView {
 		panelAccueil.add(spaceBound7, gbc_spaceBound7);
 
 		JLabel logoutIco = new JLabel("");
-		logoutIco.setIcon(new ImageIcon(MainView.class.getResource("/ressources/shut-down-icon.png")));
+		logoutIco.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/shut-down-icon.png")));
 		GridBagConstraints gbc_logoutIco = new GridBagConstraints();
 		gbc_logoutIco.insets = new Insets(0, 0, 0, 5);
 		gbc_logoutIco.anchor = GridBagConstraints.SOUTHWEST;
@@ -528,18 +526,16 @@ public class MainView {
 
 		JPanel panelAgenda = new JPanel() {
 			protected void paintComponent(Graphics g) {
-				try {
-					g.drawImage(ImageIO.read(new File("src/ressources/bannerv2.png")), 0, 0, null);
-				} catch (IOException e) {
-				}
+				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0, 0, null);
+				this.repaint();
 			}
 		};
-		tabbedPane.addTab("Agendas  ", new ImageIcon(MainView.class.getResource("/ressources/calendar.png")),
+		tabbedPane.addTab("Agendas  ", new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/calendar.png")),
 				panelAgenda, null);
 		tabbedPane.setForegroundAt(1, new Color(16, 40, 99));
 		tabbedPane.setBackgroundAt(1, new Color(255, 255, 255));
 
-		panelAgenda.setBackground(new Color(204, 204, 204));
+		panelAgenda.setBackground(Color.WHITE);
 		GridBagLayout gbl_panelAgenda = new GridBagLayout();
 		gbl_panelAgenda.columnWidths = new int[] { 32, 32, 0, 0, 0, 63, 264, 22, 105, 0 };
 		gbl_panelAgenda.rowHeights = new int[] { 28, 0, 38, 269, 58, 0 };
@@ -574,7 +570,7 @@ public class MainView {
 		panelAgenda.add(heureAgendaLbl, gbc_heureAgendaLbl);
 
 		JLabel agendaTitleLbl = new JLabel("Agenda");
-		agendaTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/ressources/calendarWt.png")));
+		agendaTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/calendarWt.png")));
 		agendaTitleLbl.setForeground(Color.WHITE);
 		agendaTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
 		GridBagConstraints gbc_agendaTitleLbl = new GridBagConstraints();
@@ -897,7 +893,7 @@ public class MainView {
 				}
 			}
 		});
-		supprimerRdvBtn.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash.png")));
+		supprimerRdvBtn.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/trash.png")));
 		GridBagConstraints gbc_supprimerRdvBtn = new GridBagConstraints();
 		gbc_supprimerRdvBtn.anchor = GridBagConstraints.EAST;
 		gbc_supprimerRdvBtn.insets = new Insets(0, 0, 5, 5);
@@ -1047,14 +1043,12 @@ public class MainView {
 		// if (droitVisibility == "SEC" || droitVisibility == "ADM") {
 		JPanel panelClient = new JPanel() {
 			protected void paintComponent(Graphics g) {
-				try {
-					g.drawImage(ImageIO.read(new File("src/ressources/bannerv2.png")), 0, 0, null);
-				} catch (IOException e) {
-				}
+				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0, 0, null);
+				this.repaint();
 			}
 		};
 		tabbedPane.addTab("Gestion Clients  ",
-				new ImageIcon(MainView.class.getResource("/ressources/multiple-users-silhouette2.png")), panelClient,
+				new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/multiple-users-silhouette2.png")), panelClient,
 				null);
 
 		panelClient.setBackground(new Color(255, 255, 255));
@@ -1091,7 +1085,7 @@ public class MainView {
 		panelClient.add(spaceBoundC3lbl, gbc_spaceBoundC3lbl);
 
 		JLabel gestionClientTitleLbl = new JLabel(" Gestion des clients");
-		gestionClientTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/ressources/multipleWt.png")));
+		gestionClientTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/multipleWt.png")));
 		gestionClientTitleLbl.setForeground(Color.WHITE);
 		gestionClientTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
 		GridBagConstraints gbc_gestionClientTitleLbl = new GridBagConstraints();
@@ -1204,7 +1198,7 @@ public class MainView {
 				frmInformationsClient.setBackground(Color.WHITE);
 				frmInformationsClient.setTitle("Informations client");
 				frmInformationsClient.setIconImage(
-						Toolkit.getDefaultToolkit().getImage(MainView.class.getResource("/ressources/ico_veto.png")));
+						Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/ico_veto.png")));
 				frmInformationsClient.getContentPane().setBackground(Color.WHITE);
 				frmInformationsClient.setBounds(100, 100, 870, 388);
 				frmInformationsClient.setLocationRelativeTo(null);
@@ -1245,7 +1239,7 @@ public class MainView {
 
 				// logo de la vue
 				JLabel imageTitle = new JLabel("");
-				imageTitle.setIcon(new ImageIcon(MainView.class.getResource("/ressources/icon.png")));
+				imageTitle.setIcon(new ImageIcon(getClass().getResource("ressources/icon.png")));
 				GridBagConstraints gbc_imageTitle = new GridBagConstraints();
 				gbc_imageTitle.anchor = GridBagConstraints.WEST;
 				gbc_imageTitle.insets = new Insets(0, 0, 5, 5);
@@ -1794,7 +1788,7 @@ public class MainView {
 				panel.add(spaceBoundinfo8, gbc_spaceBoundinfo8);
 
 				JButton ajouterAnimalBtnInfo = new JButton("");
-				ajouterAnimalBtnInfo.setIcon(new ImageIcon(MainView.class.getResource("/ressources/plus16.png")));
+				ajouterAnimalBtnInfo.setIcon(new ImageIcon(getClass().getResource("ressources/plus16.png")));
 				ajouterAnimalBtnInfo.setBackground(Color.WHITE);
 				GridBagConstraints gbc_ajouterAnimalBtnInfo = new GridBagConstraints();
 				gbc_ajouterAnimalBtnInfo.anchor = GridBagConstraints.WEST;
@@ -2069,7 +2063,7 @@ public class MainView {
 				frmArchiverClient.setLocationRelativeTo(null);
 			}
 		});
-		archiverClientBtn.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash.png")));
+		archiverClientBtn.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/trash.png")));
 		archiverClientBtn.setForeground(new Color(16, 40, 99));
 		archiverClientBtn.setBackground(Color.WHITE);
 		GridBagConstraints gbc_archiverClientBtn = new GridBagConstraints();
@@ -2393,7 +2387,7 @@ public class MainView {
 
 		// FIN DE L'AJOUT D'UN CLIENT
 
-		addClientButton.setIcon(new ImageIcon(MainView.class.getResource("/ressources/plus.png")));
+		addClientButton.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/plus.png")));
 		addClientButton.setForeground(new Color(16, 40, 99));
 		addClientButton.setBackground(Color.WHITE);
 		GridBagConstraints gbc_addClientButton = new GridBagConstraints();
@@ -2415,14 +2409,12 @@ public class MainView {
 		// if (droitVisibility == "ADM") {
 		JPanel panelPersonnels = new JPanel() {
 			protected void paintComponent(Graphics g) {
-				try {
-					g.drawImage(ImageIO.read(new File("src/ressources/bannerv2.png")), 0, 0, null);
-				} catch (IOException e) {
-				}
+				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0, 0, null);
+				this.repaint();
 			}
 		};
 		tabbedPane.addTab("Gestion du personnel  ",
-				new ImageIcon(MainView.class.getResource("/ressources/veterinarian.png")), panelPersonnels, null);
+				new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/veterinarian.png")), panelPersonnels, null);
 
 		panelPersonnels.setBackground(new Color(204, 204, 204));
 		GridBagLayout gbl_panelPersonnels = new GridBagLayout();
@@ -2443,7 +2435,7 @@ public class MainView {
 		panelPersonnels.add(heureGestionPersonnelLbl, gbc_heureGestionPersonnelLbl);
 
 		JLabel gestionPersonelleTitleLbl = new JLabel(" Gestion du personnel");
-		gestionPersonelleTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/ressources/veterinarianWt.png")));
+		gestionPersonelleTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/veterinarianWt.png")));
 		gestionPersonelleTitleLbl.setForeground(Color.WHITE);
 		gestionPersonelleTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
 		GridBagConstraints gbc_gestionPersonelleTitleLbl = new GridBagConstraints();
@@ -2653,7 +2645,7 @@ public class MainView {
 		// BOUTTON ARCHIVER PERSONNEL
 
 		JButton btnArchiver = new JButton("");
-		btnArchiver.setIcon(new ImageIcon(MainView.class.getResource("/ressources/trash.png")));
+		btnArchiver.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/trash.png")));
 		btnArchiver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmArchiverPersonnel = new JFrame();
@@ -2974,7 +2966,7 @@ public class MainView {
 				});
 			}
 		});
-		addButon.setIcon(new ImageIcon(MainView.class.getResource("/ressources/plus.png")));
+		addButon.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/plus.png")));
 		addButon.setForeground(new Color(16, 40, 99));
 		addButon.setBackground(Color.WHITE);
 		GridBagConstraints gbc_addButon = new GridBagConstraints();

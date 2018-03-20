@@ -56,10 +56,8 @@ public class Authentification {
 		JPanel panel = new JPanel() {
 			@Override
 			protected void paintComponent(Graphics g) {
-				try {
-					g.drawImage(ImageIO.read(new File("src/ressources/fond.jpg")), 0, 0, null);
-				} catch (IOException e) {
-				}
+				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/fond.jpg")), 0, 0, null);
+				this.repaint();
 			}
 		};
 		frmIdentification.setContentPane(panel);
@@ -72,7 +70,7 @@ public class Authentification {
 		frmIdentification.setLocationRelativeTo(null);
 
 		JLabel iconeImage = new JLabel("");
-		iconeImage.setIcon(new ImageIcon("src/ressources/logo.jpg"));
+		iconeImage.setIcon(new ImageIcon(Authentification.class.getResource("/fr/eni/veto/IHM/ressources/logo.jpg")));
 		GridBagConstraints gbc_iconeImage = new GridBagConstraints();
 		gbc_iconeImage.gridheight = 2;
 		gbc_iconeImage.insets = new Insets(0, 0, 5, 5);
@@ -91,7 +89,7 @@ public class Authentification {
 		frmIdentification.getContentPane().add(connectionLbl, gbc_connectionLbl);
 
 		JLabel identificationLbl = new JLabel("");
-		identificationLbl.setIcon(new ImageIcon(Authentification.class.getResource("/ressources/man-user.png")));
+		identificationLbl.setIcon(new ImageIcon(Authentification.class.getResource("/fr/eni/veto/IHM/ressources/man-user.png")));
 		identificationLbl.setForeground(new Color(0, 51, 153));
 		identificationLbl.setFont(new Font("Gisha", Font.BOLD, 12));
 		GridBagConstraints gbc_identificationLbl = new GridBagConstraints();
@@ -118,7 +116,7 @@ public class Authentification {
 		frmIdentification.getContentPane().add(spaceLbl, gbc_spaceLbl);
 
 		JLabel passwordLbl = new JLabel("");
-		passwordLbl.setIcon(new ImageIcon(Authentification.class.getResource("/ressources/padlock.png")));
+		passwordLbl.setIcon(new ImageIcon(Authentification.class.getResource("/fr/eni/veto/IHM/ressources/padlock.png")));
 		passwordLbl.setForeground(new Color(0, 51, 153));
 		passwordLbl.setFont(new Font("Gisha", Font.BOLD, 12));
 		GridBagConstraints gbc_passwordLbl = new GridBagConstraints();
@@ -218,7 +216,7 @@ public class Authentification {
 		errorIdLbl.setVisible(false);
 
 		validerBtn.setBackground(new Color(255, 255, 255));
-		validerBtn.setIcon(new ImageIcon("src/ressources/tick.png"));
+		validerBtn.setIcon(new ImageIcon(Authentification.class.getResource("/fr/eni/veto/IHM/ressources/tick.png")));
 		validerBtn.setForeground(new Color(0, 0, 0));
 		validerBtn.setFont(new Font("Gisha", Font.BOLD, 11));
 		GridBagConstraints gbc_validerBtn = new GridBagConstraints();
