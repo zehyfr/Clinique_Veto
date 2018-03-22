@@ -14,8 +14,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.imageio.ImageIO;
+import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -32,7 +30,11 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -45,19 +47,16 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import com.toedter.calendar.JDateChooser;
 
 import fr.eni.veto.BO.Agendas;
 import fr.eni.veto.BO.Animaux;
 import fr.eni.veto.BO.Clients;
-import fr.eni.veto.BO.Especes;
 import fr.eni.veto.BO.Personnels;
 import fr.eni.veto.CTRL.Controler;
 import fr.eni.veto.DAL.DALException;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 public class MainView {
 
@@ -95,7 +94,6 @@ public class MainView {
 	private JDateChooser dateField;
 
 	JLabel heureGestion = new JLabel();
-	JLabel heureGestionPersonnelLbl = new JLabel();
 
 	/**
 	 * Create the application.
@@ -136,12 +134,13 @@ public class MainView {
 
 		JPanel panelAccueil = new JPanel() {
 			protected void paintComponent(Graphics g) {
-				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0, 0, null);
+				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0,
+						0, null);
 				this.repaint();
 			}
 		};
-		tabbedPane.addTab("Accueil  ", new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/home.png")), panelAccueil,
-				null);
+		tabbedPane.addTab("Accueil  ",
+				new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/home.png")), panelAccueil, null);
 		tabbedPane.setForegroundAt(0, new Color(16, 40, 99));
 		panelAccueil.setBackground(Color.WHITE);
 		GridBagLayout gbl_panelAccueil = new GridBagLayout();
@@ -158,17 +157,6 @@ public class MainView {
 		gbc_spaceBoundAccueil.gridx = 0;
 		gbc_spaceBoundAccueil.gridy = 0;
 		panelAccueil.add(spaceBoundAccueil, gbc_spaceBoundAccueil);
-		JLabel dateLbl = new JLabel();
-		dateLbl.setText("heure");
-		dateLbl.setForeground(new Color(255, 255, 255));
-		dateLbl.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
-		GridBagConstraints gbc_dateLbl = new GridBagConstraints();
-		gbc_dateLbl.anchor = GridBagConstraints.SOUTHEAST;
-		gbc_dateLbl.gridwidth = 7;
-		gbc_dateLbl.insets = new Insets(0, 0, 5, 0);
-		gbc_dateLbl.gridx = 8;
-		gbc_dateLbl.gridy = 0;
-		panelAccueil.add(dateLbl, gbc_dateLbl);
 
 		JLabel iconLbl = new JLabel("");
 		iconLbl.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/accueilVetoICO.jpg")));
@@ -314,7 +302,8 @@ public class MainView {
 
 		JMenu mnNewMenu = new JMenu("Mon compte");
 		menuBar.add(mnNewMenu);
-
+		mnNewMenu.setForeground(new Color(16, 40, 99));
+		mnNewMenu.setFont(new Font("Gisha", Font.PLAIN, 14));
 		JMenuItem mntmNewMenuItem = new JMenuItem("Gestion mot de passe");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			@Override
@@ -347,8 +336,8 @@ public class MainView {
 				gbc_lblAncienMotDe.gridy = 1;
 				frmChangerLeMot.getContentPane().add(lblAncienMotDe, gbc_lblAncienMotDe);
 
-				JTextField ancienMdrTxt;
-				ancienMdrTxt = new JTextField();
+				JPasswordField ancienMdrTxt;
+				ancienMdrTxt = new JPasswordField();
 				GridBagConstraints gbc_ancienMdrTxt = new GridBagConstraints();
 				gbc_ancienMdrTxt.insets = new Insets(0, 0, 5, 5);
 				gbc_ancienMdrTxt.fill = GridBagConstraints.HORIZONTAL;
@@ -368,8 +357,8 @@ public class MainView {
 				gbc_lblNouveauMotDe.gridy = 2;
 				frmChangerLeMot.getContentPane().add(lblNouveauMotDe, gbc_lblNouveauMotDe);
 
-				JTextField nouveauMdp;
-				nouveauMdp = new JTextField();
+				JPasswordField nouveauMdp;
+				nouveauMdp = new JPasswordField();
 				GridBagConstraints gbc_nouveauMdp = new GridBagConstraints();
 				gbc_nouveauMdp.insets = new Insets(0, 0, 5, 5);
 				gbc_nouveauMdp.fill = GridBagConstraints.HORIZONTAL;
@@ -389,8 +378,8 @@ public class MainView {
 				gbc_lblConfirmerMotDe.gridy = 3;
 				frmChangerLeMot.getContentPane().add(lblConfirmerMotDe, gbc_lblConfirmerMotDe);
 
-				JTextField nouveauMdp2;
-				nouveauMdp2 = new JTextField();
+				JPasswordField nouveauMdp2;
+				nouveauMdp2 = new JPasswordField();
 				GridBagConstraints gbc_nouveauMdp2 = new GridBagConstraints();
 				gbc_nouveauMdp2.anchor = GridBagConstraints.NORTH;
 				gbc_nouveauMdp2.insets = new Insets(0, 0, 5, 5);
@@ -500,8 +489,8 @@ public class MainView {
 
 				frmChangerLeMot.getContentPane().add(validerMotdepasseNew, gbc_validerMotdepasseNew);
 				frmChangerLeMot.setTitle("Changer le mot de passe");
-				frmChangerLeMot.setIconImage(Toolkit.getDefaultToolkit()
-						.getImage(MainView.class.getResource("/ressources/accueilVetoICO.jpg")));
+				frmChangerLeMot.setIconImage(
+						Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/accueilVetoICO.jpg")));
 				frmChangerLeMot.setBounds(100, 100, 430, 230);
 				frmChangerLeMot.setLocationRelativeTo(null);
 
@@ -526,12 +515,14 @@ public class MainView {
 
 		JPanel panelAgenda = new JPanel() {
 			protected void paintComponent(Graphics g) {
-				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0, 0, null);
+				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0,
+						0, null);
 				this.repaint();
 			}
 		};
-		tabbedPane.addTab("Agendas  ", new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/calendar.png")),
-				panelAgenda, null);
+		tabbedPane.addTab("Agendas  ",
+				new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/calendar.png")), panelAgenda,
+				null);
 		tabbedPane.setForegroundAt(1, new Color(16, 40, 99));
 		tabbedPane.setBackgroundAt(1, new Color(255, 255, 255));
 
@@ -557,17 +548,6 @@ public class MainView {
 		gbc_label_4.gridx = 7;
 		gbc_label_4.gridy = 0;
 		panelAgenda.add(label_4, gbc_label_4);
-
-		JLabel heureAgendaLbl = new JLabel();
-
-		heureAgendaLbl.setForeground(Color.WHITE);
-		heureAgendaLbl.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
-		GridBagConstraints gbc_heureAgendaLbl = new GridBagConstraints();
-		gbc_heureAgendaLbl.anchor = GridBagConstraints.SOUTHEAST;
-		gbc_heureAgendaLbl.insets = new Insets(0, 0, 5, 0);
-		gbc_heureAgendaLbl.gridx = 8;
-		gbc_heureAgendaLbl.gridy = 0;
-		panelAgenda.add(heureAgendaLbl, gbc_heureAgendaLbl);
 
 		JLabel agendaTitleLbl = new JLabel("Agenda");
 		agendaTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/calendarWt.png")));
@@ -736,7 +716,10 @@ public class MainView {
 		agendasPanelInside.add(animalcomboAngendaCmb, gbc_animalcomboAngendaCmb);
 
 		arrayListAnimaux = new ArrayList<Animaux>();
-		arrayListAnimaux = ctrl.getAllAnimaux(arrayClientList.get(clientsAgendaCmb.getSelectedIndex()).getCodeClient());
+		if (!arrayClientList.isEmpty()) {
+			arrayListAnimaux = ctrl
+					.getAllAnimaux(arrayClientList.get(clientsAgendaCmb.getSelectedIndex()).getCodeClient());
+		}
 		String emptyAnimal = "Pas d'animal";
 		if (arrayListAnimaux.isEmpty()) {
 			animalcomboAngendaCmb.insertItemAt(emptyAnimal, 0);
@@ -841,11 +824,13 @@ public class MainView {
 		listeRdv.setFont(new Font("Gisha", Font.PLAIN, 14));
 		listeRdv.setForeground(new Color(16, 40, 99));
 		listeAgendasArray = new ArrayList<Agendas>();
-		try {
-			listeAgendasArray = ctrl.getRDV(arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
-					dateField.getDate());
-		} catch (DALException e2) {
-			e2.printStackTrace();
+		if (!arrayVetoList.isEmpty()) {
+			try {
+				listeAgendasArray = ctrl.getRDV(
+						arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(), dateField.getDate());
+			} catch (DALException e2) {
+				e2.printStackTrace();
+			}
 		}
 		String tempList = "";
 		for (Agendas rdv : listeAgendasArray) {
@@ -1015,12 +1000,14 @@ public class MainView {
 			public void propertyChange(PropertyChangeEvent evt) {
 				ArrayList<Agendas> listeAgendasArray = new ArrayList<Agendas>();
 				listModelAgendas.removeAllElements();
-				try {
-					listeAgendasArray = ctrl.getRDV(
-							arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
-							dateField.getDate());
-				} catch (DALException e2) {
-					e2.printStackTrace();
+				if (!listeAgendasArray.isEmpty()) {
+					try {
+						listeAgendasArray = ctrl.getRDV(
+								arrayVetoList.get(veterinaireAgendaCmb.getSelectedIndex()).getCodePers(),
+								dateField.getDate());
+					} catch (DALException e2) {
+						e2.printStackTrace();
+					}
 				}
 				for (Agendas rdv : listeAgendasArray) {
 					String minutesAffichage = "00";
@@ -1043,13 +1030,14 @@ public class MainView {
 		// if (droitVisibility == "SEC" || droitVisibility == "ADM") {
 		JPanel panelClient = new JPanel() {
 			protected void paintComponent(Graphics g) {
-				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0, 0, null);
+				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0,
+						0, null);
 				this.repaint();
 			}
 		};
 		tabbedPane.addTab("Gestion Clients  ",
-				new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/multiple-users-silhouette2.png")), panelClient,
-				null);
+				new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/multiple-users-silhouette2.png")),
+				panelClient, null);
 
 		panelClient.setBackground(new Color(255, 255, 255));
 		GridBagLayout gbl_panelClient = new GridBagLayout();
@@ -1066,8 +1054,8 @@ public class MainView {
 		gbc_spaceBoundC2lbl.gridy = 0;
 		panelClient.add(spaceBoundC2lbl, gbc_spaceBoundC2lbl);
 
-		heureGestion.setForeground(Color.WHITE);
-		heureGestion.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
+		heureGestion.setForeground(new Color(16, 40, 99));
+		heureGestion.setFont(new Font("Gisha", Font.BOLD, 12));
 		GridBagConstraints gbc_heureGestion = new GridBagConstraints();
 		gbc_heureGestion.gridwidth = 2;
 		gbc_heureGestion.anchor = GridBagConstraints.EAST;
@@ -1085,7 +1073,8 @@ public class MainView {
 		panelClient.add(spaceBoundC3lbl, gbc_spaceBoundC3lbl);
 
 		JLabel gestionClientTitleLbl = new JLabel(" Gestion des clients");
-		gestionClientTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/multipleWt.png")));
+		gestionClientTitleLbl
+				.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/multipleWt.png")));
 		gestionClientTitleLbl.setForeground(Color.WHITE);
 		gestionClientTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
 		GridBagConstraints gbc_gestionClientTitleLbl = new GridBagConstraints();
@@ -1159,8 +1148,10 @@ public class MainView {
 		panel_1.add(identifiantCLbl, gbc_identifiantCLbl);
 
 		JLabel clientNameLbl = new JLabel("");
-		if (listModelClient.get(liste.getSelectedIndex()).getNomClient() != null) {
-			clientNameLbl.setText(listModelClient.get(liste.getSelectedIndex()).getNomClient());
+		if (!listModelClient.isEmpty()) {
+			if (listModelClient.get(liste.getSelectedIndex()).getNomClient() != null) {
+				clientNameLbl.setText(listModelClient.get(liste.getSelectedIndex()).getNomClient());
+			}
 		}
 		clientNameLbl.setFont(new Font("Gisha", Font.PLAIN, 14));
 		clientNameLbl.setForeground(new Color(16, 40, 99));
@@ -1180,7 +1171,14 @@ public class MainView {
 				} else {
 					indexClient = liste.getSelectedIndex();
 				}
-				clientNameLbl.setText(listModelClient.get(indexClient).getNomClient());
+				if(!listModelClient.isEmpty())
+				{
+					clientNameLbl.setText(listModelClient.get(indexClient).getNomClient());
+				}
+				else
+				{
+					clientNameLbl.setText("Pas de séléction");
+				}
 			}
 		});
 
@@ -1788,7 +1786,7 @@ public class MainView {
 				panel.add(spaceBoundinfo8, gbc_spaceBoundinfo8);
 
 				JButton ajouterAnimalBtnInfo = new JButton("");
-				ajouterAnimalBtnInfo.setIcon(new ImageIcon(getClass().getResource("ressources/plus16.png")));
+				ajouterAnimalBtnInfo.setIcon(new ImageIcon(MainView.class.getResource("ressources/plus16.png")));
 				ajouterAnimalBtnInfo.setBackground(Color.WHITE);
 				GridBagConstraints gbc_ajouterAnimalBtnInfo = new GridBagConstraints();
 				gbc_ajouterAnimalBtnInfo.anchor = GridBagConstraints.WEST;
@@ -2049,6 +2047,25 @@ public class MainView {
 						int indexActualC = liste.getSelectedIndex();
 						liste.setSelectedIndex(indexActualC + 1);
 						indexPersonnel = liste.getSelectedIndex();
+						
+						if (listModelClient.isEmpty()) {
+							buttonPlus.setEnabled(false);
+							archiverClientBtn.setEnabled(false);
+							
+						} else {
+							archiverClientBtn.setEnabled(true);
+							buttonPlus.setEnabled(true);
+						}
+						
+						arrayClientList = new ArrayList<Clients>();
+						arrayClientList = ctrl.getAllClients();
+						String emptyClient = "Pas de Clients";
+						if (arrayClientList.isEmpty()) {
+							clientsAgendaCmb.insertItemAt(emptyClient, 0);
+							clientsAgendaCmb.setSelectedIndex(0);
+						} else {
+							clientsAgendaCmb.setModel(new DefaultComboBoxModel(arrayClientList.toArray()));
+						}
 					}
 				});
 
@@ -2110,7 +2127,7 @@ public class MainView {
 				panel.add(lblAjouterClient, gbc_lblAjouterClient);
 
 				JLabel label = new JLabel("");
-				label.setIcon(new ImageIcon(MainView.class.getResource("/ressources/ajoutClient icon.jpg")));
+				label.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/ajoutClient icon.jpg")));
 				GridBagConstraints gbc_label = new GridBagConstraints();
 				gbc_label.gridwidth = 2;
 				gbc_label.insets = new Insets(0, 0, 5, 5);
@@ -2374,6 +2391,24 @@ public class MainView {
 						listModelClient.addElement(ctrl.getAllClients().get(listModelClient.getSize()));
 						liste.setSelectedIndex(listModelClient.getSize());
 						frmAjouterDuClient.setVisible(false);
+						if (listModelClient.isEmpty()) {
+							buttonPlus.setEnabled(false);
+							archiverClientBtn.setEnabled(false);
+							
+						} else {
+							archiverClientBtn.setEnabled(true);
+							buttonPlus.setEnabled(true);
+						}
+						
+						arrayClientList = new ArrayList<Clients>();
+						arrayClientList = ctrl.getAllClients();
+						String emptyClient = "Pas de Clients";
+						if (arrayClientList.isEmpty()) {
+							clientsAgendaCmb.insertItemAt(emptyClient, 0);
+							clientsAgendaCmb.setSelectedIndex(0);
+						} else {
+							clientsAgendaCmb.setModel(new DefaultComboBoxModel(arrayClientList.toArray()));
+						}
 					}
 				});
 				frmAjouterDuClient.setIconImage(Toolkit.getDefaultToolkit().getImage("/ressources/ico_veto.png"));
@@ -2386,6 +2421,15 @@ public class MainView {
 		});
 
 		// FIN DE L'AJOUT D'UN CLIENT
+		
+		if (listModelClient.isEmpty()) {
+			buttonPlus.setEnabled(false);
+			archiverClientBtn.setEnabled(false);
+			
+		} else {
+			archiverClientBtn.setEnabled(true);
+			buttonPlus.setEnabled(true);
+		}
 
 		addClientButton.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/plus.png")));
 		addClientButton.setForeground(new Color(16, 40, 99));
@@ -2409,12 +2453,14 @@ public class MainView {
 		// if (droitVisibility == "ADM") {
 		JPanel panelPersonnels = new JPanel() {
 			protected void paintComponent(Graphics g) {
-				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0, 0, null);
+				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0,
+						0, null);
 				this.repaint();
 			}
 		};
 		tabbedPane.addTab("Gestion du personnel  ",
-				new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/veterinarian.png")), panelPersonnels, null);
+				new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/veterinarian.png")),
+				panelPersonnels, null);
 
 		panelPersonnels.setBackground(new Color(204, 204, 204));
 		GridBagLayout gbl_panelPersonnels = new GridBagLayout();
@@ -2424,18 +2470,9 @@ public class MainView {
 		gbl_panelPersonnels.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelPersonnels.setLayout(gbl_panelPersonnels);
 
-		heureGestionPersonnelLbl.setForeground(Color.WHITE);
-		heureGestionPersonnelLbl.setFont(new Font("DejaVu Sans Condensed", Font.BOLD, 12));
-		GridBagConstraints gbc_heureGestionPersonnelLbl = new GridBagConstraints();
-		gbc_heureGestionPersonnelLbl.anchor = GridBagConstraints.SOUTHEAST;
-		gbc_heureGestionPersonnelLbl.gridwidth = 2;
-		gbc_heureGestionPersonnelLbl.insets = new Insets(0, 0, 5, 5);
-		gbc_heureGestionPersonnelLbl.gridx = 3;
-		gbc_heureGestionPersonnelLbl.gridy = 0;
-		panelPersonnels.add(heureGestionPersonnelLbl, gbc_heureGestionPersonnelLbl);
-
 		JLabel gestionPersonelleTitleLbl = new JLabel(" Gestion du personnel");
-		gestionPersonelleTitleLbl.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/veterinarianWt.png")));
+		gestionPersonelleTitleLbl
+				.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/veterinarianWt.png")));
 		gestionPersonelleTitleLbl.setForeground(Color.WHITE);
 		gestionPersonelleTitleLbl.setFont(new Font("Gisha", Font.BOLD, 30));
 		GridBagConstraints gbc_gestionPersonelleTitleLbl = new GridBagConstraints();
@@ -2721,6 +2758,19 @@ public class MainView {
 						indexPersonnel = list.getSelectedIndex();
 						identifiantTxt.setText(Integer.toString(listModel.get(indexPersonnel).getCodePers()));
 						nomTxt.setText(listModel.get(indexPersonnel).getNom());
+						
+						arrayVetoList = new ArrayList<Personnels>();
+						arrayVetoList = ctrl.getListPersonnel(1);
+						String emptyVeto = "Pas de vétérinaire";
+						if (arrayVetoList.isEmpty()) {
+							veterinaireAgendaCmb.insertItemAt(emptyVeto, 0);
+							veterinaireAgendaCmb.setSelectedIndex(0);
+						} else {
+							veterinaireAgendaCmb.setModel(new DefaultComboBoxModel(arrayVetoList.toArray()));
+						}
+						if (droitVisibility == "VET") {
+							veterinaireAgendaCmb.setSelectedIndex(codePersonnel - 1);
+						}
 					}
 				});
 
@@ -2917,6 +2967,16 @@ public class MainView {
 						listModel.addElement(ctrl.getListPersonnel(0).get(listModel.getSize()));
 						list.setSelectedIndex(listModel.getSize());
 						frmAjouterDuPersonnel.setVisible(false);
+						
+						arrayClientList = new ArrayList<Clients>();
+						arrayClientList = ctrl.getAllClients();
+						String emptyClient = "Pas de Clients";
+						if (arrayClientList.isEmpty()) {
+							clientsAgendaCmb.insertItemAt(emptyClient, 0);
+							clientsAgendaCmb.setSelectedIndex(0);
+						} else {
+							clientsAgendaCmb.setModel(new DefaultComboBoxModel(arrayClientList.toArray()));
+						}
 					}
 				});
 				btnAjouterAdd.setForeground(new Color(16, 40, 99));
@@ -3117,13 +3177,13 @@ public class MainView {
 			public void run() {
 				while (true) {
 					dateJour = new Date(System.currentTimeMillis());
-					heureGestionPersonnelLbl.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dateJour));
 					heureGestion.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dateJour));
-					heureAgendaLbl.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dateJour));
-					dateLbl.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(dateJour));
 				}
 			}
 		}.start();
+		
+		menuBar.add(Box.createGlue());
+		menuBar.add(heureGestion);
 
 		// VISIBILITY DES ONGLETS
 

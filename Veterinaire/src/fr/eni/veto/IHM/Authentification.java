@@ -240,6 +240,7 @@ public class Authentification {
 		btnTechnician.setVisible(false);
 
 		frmIdentification.setVisible(true);
+		frmIdentification.setResizable(false);
 	}
 
 	public JFrame getFrmIdentification() {
