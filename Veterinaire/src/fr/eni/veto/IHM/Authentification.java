@@ -137,7 +137,7 @@ public class Authentification {
 		JButton validerBtn = new JButton("Valider");
 		validerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (identifiantTxt.getText().equals("")) {
+				if (identifiantTxt.getText().isEmpty()||passwordField.getText().isEmpty()) {
 					errorIdLbl.setVisible(true);
 				} else {
 					switch (ctrl.validation(identifiantTxt.getText(), passwordField.getText())) {
@@ -158,14 +158,13 @@ public class Authentification {
 						break;
 					case "0":
 						errorIdLbl.setVisible(true);
+						passwordField.setText("");
 						break;
 
 					default:
 						break;
 					}
-					identifiantTxt.setText("");
 					passwordField.setText("");
-					errorIdLbl.setVisible(false);
 				}
 			}
 		});
@@ -173,7 +172,7 @@ public class Authentification {
 		passwordField.addActionListener(new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (identifiantTxt.getText().equals("")) {
+				if (identifiantTxt.getText().isEmpty()||passwordField.getText().isEmpty()) {
 					errorIdLbl.setVisible(true);
 				} else {
 					switch (ctrl.validation(identifiantTxt.getText(), passwordField.getText())) {
@@ -194,14 +193,14 @@ public class Authentification {
 						break;
 					case "0":
 						errorIdLbl.setVisible(true);
+						passwordField.setText("");
 						break;
 
 					default:
 						break;
 					}
-					identifiantTxt.setText("");
-					passwordField.setText("");
 				}
+				passwordField.setText("");
 			}
 		});
 

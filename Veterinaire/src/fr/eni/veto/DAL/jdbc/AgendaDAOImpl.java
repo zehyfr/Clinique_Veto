@@ -58,7 +58,6 @@ public class AgendaDAOImpl implements AgendaDAO{
 		try {
 			connec = jdbc.getConnection();
 			stmt = connec.createStatement();
-			System.out.println(sql);
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				res.add(new Agendas(rs.getInt("CodeVeto"), rs.getTimestamp("DateRdv"), rs.getInt("CodeAnimal"),

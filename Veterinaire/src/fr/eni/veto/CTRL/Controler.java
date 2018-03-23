@@ -15,6 +15,7 @@ import fr.eni.veto.BLL.AnimalMger;
 import fr.eni.veto.BLL.ClientAjoutMger;
 import fr.eni.veto.BLL.ClientMger;
 import fr.eni.veto.BLL.ClientUpdateMger;
+import fr.eni.veto.BLL.EspecesAjoutMger;
 import fr.eni.veto.BLL.LoginMger;
 import fr.eni.veto.BLL.PersonnelsAjoutMger;
 import fr.eni.veto.BLL.PersonnelsMger;
@@ -270,6 +271,16 @@ public class Controler {
 	{
 		AnimalMger updateAnimal = new AnimalMger();
 		updateAnimal.updateAnimal(anAnimal);
+	}
+	
+
+	/**
+	 * Ajouter une espece
+	 */
+	public void ajouter(String anEspece, String aRace)
+	{
+		EspecesAjoutMger newEspece = new EspecesAjoutMger();
+		newEspece.ajouter(anEspece, aRace);
 	}
 	
 	public List<String> getEspeces()

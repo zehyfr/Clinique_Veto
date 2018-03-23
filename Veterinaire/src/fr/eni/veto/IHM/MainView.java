@@ -47,7 +47,6 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.text.StyledEditorKit.BoldAction;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -75,6 +74,8 @@ public class MainView {
 	private JFrame frmAjouterDuClient;
 	private JFrame frmInformationsClient;
 	private JFrame frmChangerLeMot;
+	private JFrame ajouterEspece;
+	private JFrame ajouterRace;
 
 	private Date dateJour;
 
@@ -413,7 +414,7 @@ public class MainView {
 				validerMotdepasseNew.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						if (!ancienMdrTxt.equals("") || !nouveauMdp.equals("") || !nouveauMdp2.equals("")) {
+						if (!ancienMdrTxt.getText().equals("") && !nouveauMdp.getText().equals("") && !nouveauMdp2.getText().equals("")) {
 							if ((ctrl.validation(String.valueOf(codePersonnel), ancienMdrTxt.getText()) != "0")
 									&& (nouveauMdp.getText().equals(nouveauMdp2.getText()))) {
 								try {
@@ -481,8 +482,12 @@ public class MainView {
 									e1.printStackTrace();
 								}
 							} else {
+								lblAncienMotDe_1.setText("Ancien mot de passe incorrect.");
 								lblAncienMotDe_1.setVisible(true);
 							}
+						} else {
+							lblAncienMotDe_1.setText("Un ou plusieurs champs sont vides.");
+							lblAncienMotDe_1.setVisible(true);
 						}
 					}
 				});
@@ -684,10 +689,7 @@ public class MainView {
 		} else {
 			veterinaireAgendaCmb.setModel(new DefaultComboBoxModel(arrayVetoList.toArray()));
 		}
-		if (droitVisibility == "VET") {
-			veterinaireAgendaCmb.setSelectedIndex(codePersonnel - 1);
-		}
-
+		
 		JLabel spaceBound4 = new JLabel("");
 		GridBagConstraints gbc_spaceBound4 = new GridBagConstraints();
 		gbc_spaceBound4.insets = new Insets(0, 0, 5, 5);
@@ -848,7 +850,8 @@ public class MainView {
 			}
 			listModelAgendas.addElement(tempList);
 		}
-
+		
+		
 		JButton supprimerRdvBtn = new JButton("");
 		supprimerRdvBtn.setBackground(Color.WHITE);
 		supprimerRdvBtn.addActionListener(new ActionListener() {
@@ -1027,7 +1030,7 @@ public class MainView {
 		 * CLIENT PANEL
 		 */
 
-		// if (droitVisibility == "SEC" || droitVisibility == "ADM") {
+		if (droitVisibility == "SEC" || droitVisibility == "ADM") {
 		JPanel panelClient = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0,
@@ -1198,7 +1201,7 @@ public class MainView {
 				frmInformationsClient.setIconImage(
 						Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/ico_veto.png")));
 				frmInformationsClient.getContentPane().setBackground(Color.WHITE);
-				frmInformationsClient.setBounds(100, 100, 870, 388);
+				frmInformationsClient.setBounds(100, 100, 950, 388);
 				frmInformationsClient.setLocationRelativeTo(null);
 				GridBagLayout gridBagLayout = new GridBagLayout();
 				gridBagLayout.columnWidths = new int[] { 832, 0 };
@@ -1216,9 +1219,9 @@ public class MainView {
 				gbc_panel.gridy = 0;
 				frmInformationsClient.getContentPane().add(panel, gbc_panel);
 				GridBagLayout gbl_panel = new GridBagLayout();
-				gbl_panel.columnWidths = new int[] { 49, 83, 112, 70, 28, 28, 332, 23, 0 };
+				gbl_panel.columnWidths = new int[] { 39, 83, 112, 70, 97, 485, 23, 0 };
 				gbl_panel.rowHeights = new int[] { 17, 0, 29, 20, 20, 0, 23, 0, 20, 0, 19, 0, 20, 0, 25, 0, 0 };
-				gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
+				gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 				gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 						0.0, 0.0, 0.0, Double.MIN_VALUE };
 				panel.setLayout(gbl_panel);
@@ -1248,7 +1251,7 @@ public class MainView {
 				JLabel spaceBoundInfo7 = new JLabel("");
 				GridBagConstraints gbc_spaceBoundInfo7 = new GridBagConstraints();
 				gbc_spaceBoundInfo7.insets = new Insets(0, 0, 5, 0);
-				gbc_spaceBoundInfo7.gridx = 7;
+				gbc_spaceBoundInfo7.gridx = 6;
 				gbc_spaceBoundInfo7.gridy = 1;
 				panel.add(spaceBoundInfo7, gbc_spaceBoundInfo7);
 
@@ -1310,11 +1313,11 @@ public class MainView {
 				gbc_panelAnimal.gridheight = 12;
 				gbc_panelAnimal.insets = new Insets(0, 0, 5, 5);
 				gbc_panelAnimal.fill = GridBagConstraints.BOTH;
-				gbc_panelAnimal.gridx = 6;
+				gbc_panelAnimal.gridx = 5;
 				gbc_panelAnimal.gridy = 2;
 				panel.add(panelAnimal, gbc_panelAnimal);
 				GridBagLayout gbl_panelAnimal = new GridBagLayout();
-				gbl_panelAnimal.columnWidths = new int[] { 0, 23, 89, 19, 44, 99, 0, 0 };
+				gbl_panelAnimal.columnWidths = new int[] { 20, 23, 89, 19, 44, 99, 0, 0 };
 				gbl_panelAnimal.rowHeights = new int[] { 13, 0, 21, 0, 22, 22, 19, 0, 26, 0, 0 };
 				gbl_panelAnimal.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 				gbl_panelAnimal.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -1450,6 +1453,151 @@ public class MainView {
 				gbc_raceAnimalCmb.gridx = 2;
 				gbc_raceAnimalCmb.gridy = 5;
 				panelAnimal.add(raceAnimalCmb, gbc_raceAnimalCmb);
+				
+				JButton addRacebtn = new JButton("");
+				addRacebtn.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/plus16.png")));
+				GridBagConstraints gbc_addRacebtn = new GridBagConstraints();
+				gbc_addRacebtn.insets = new Insets(0, 0, 5, 5);
+				gbc_addRacebtn.gridx = 3;
+				gbc_addRacebtn.gridy = 5;
+				panelAnimal.add(addRacebtn, gbc_addRacebtn);
+				
+				addRacebtn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						ajouterRace = new JFrame();
+						ajouterRace.setTitle("Ajouter une race");
+						ajouterRace.setIconImage(Toolkit.getDefaultToolkit().getImage(MainView.class.getResource("/fr/eni/veto/IHM/ressources/ico_veto.png")));
+						ajouterRace.setBackground(Color.WHITE);
+						ajouterRace.getContentPane().setBackground(Color.WHITE);
+						GridBagLayout gridBagLayout = new GridBagLayout();
+						gridBagLayout.columnWidths = new int[]{20, 0, 29, 0, 26, 0};
+						gridBagLayout.rowHeights = new int[]{46, 0, 24, 0, 21, 0, 0};
+						gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+						gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+						ajouterRace.getContentPane().setLayout(gridBagLayout);
+						
+						JLabel spaceAddRace = new JLabel("");
+						GridBagConstraints gbc_spaceAddRace = new GridBagConstraints();
+						gbc_spaceAddRace.insets = new Insets(0, 0, 5, 5);
+						gbc_spaceAddRace.gridx = 0;
+						gbc_spaceAddRace.gridy = 0;
+						ajouterRace.getContentPane().add(spaceAddRace, gbc_spaceAddRace);
+						
+						JLabel lblAjouterUneRace = new JLabel("Ajouter une race :");
+						lblAjouterUneRace.setForeground(new Color(0, 51, 102));
+						lblAjouterUneRace.setFont(new Font("Gisha", Font.BOLD, 16));
+						GridBagConstraints gbc_lblAjouterUneRace = new GridBagConstraints();
+						gbc_lblAjouterUneRace.insets = new Insets(0, 0, 5, 5);
+						gbc_lblAjouterUneRace.anchor = GridBagConstraints.WEST;
+						gbc_lblAjouterUneRace.gridx = 1;
+						gbc_lblAjouterUneRace.gridy = 1;
+						ajouterRace.getContentPane().add(lblAjouterUneRace, gbc_lblAjouterUneRace);
+						
+						JComboBox<String> selectEspeceCmb = new JComboBox();
+						selectEspeceCmb.setFont(new Font("Gisha", Font.PLAIN, 13));
+						selectEspeceCmb.setForeground(new Color(0, 51, 102));
+						GridBagConstraints gbc_selectEspeceCmb = new GridBagConstraints();
+						gbc_selectEspeceCmb.insets = new Insets(0, 0, 5, 5);
+						gbc_selectEspeceCmb.fill = GridBagConstraints.HORIZONTAL;
+						gbc_selectEspeceCmb.gridx = 3;
+						gbc_selectEspeceCmb.gridy = 1;
+						ajouterRace.getContentPane().add(selectEspeceCmb, gbc_selectEspeceCmb);
+						// REMPLISSAGE DE LA CMB ESPECE
+						listeEspece = new ArrayList<String>();
+						listeEspece = ctrl.getEspeces();
+						if (listeEspece.isEmpty()) {
+							selectEspeceCmb.setSelectedIndex(-1);
+						} else {
+							selectEspeceCmb.setModel(
+									new DefaultComboBoxModel<String>(listeEspece.toArray(new String[listeEspece.size()])));
+						}
+						
+						JLabel spaceAddRace3 = new JLabel("");
+						GridBagConstraints gbc_spaceAddRace3 = new GridBagConstraints();
+						gbc_spaceAddRace3.insets = new Insets(0, 0, 5, 5);
+						gbc_spaceAddRace3.gridx = 2;
+						gbc_spaceAddRace3.gridy = 2;
+						ajouterRace.getContentPane().add(spaceAddRace3, gbc_spaceAddRace3);
+						
+						JTextField textField_1 = new JTextField();
+						textField_1.setFont(new Font("Gisha", Font.PLAIN, 14));
+						textField_1.setForeground(new Color(0, 51, 102));
+						textField_1.setColumns(10);
+						GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+						gbc_textField_1.insets = new Insets(0, 0, 5, 5);
+						gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+						gbc_textField_1.gridx = 3;
+						gbc_textField_1.gridy = 3;
+						ajouterRace.getContentPane().add(textField_1, gbc_textField_1);
+						
+						JLabel spaceAddRace4 = new JLabel("");
+						GridBagConstraints gbc_spaceAddRace4 = new GridBagConstraints();
+						gbc_spaceAddRace4.insets = new Insets(0, 0, 5, 5);
+						gbc_spaceAddRace4.gridx = 2;
+						gbc_spaceAddRace4.gridy = 4;
+						ajouterRace.getContentPane().add(spaceAddRace4, gbc_spaceAddRace4);
+						
+						JLabel warningLblEspece = new JLabel("Merci de renseigner tous les champs");
+						warningLblEspece.setForeground(new Color(153, 51, 0));
+						GridBagConstraints gbc_warningLblEspece = new GridBagConstraints();
+						gbc_warningLblEspece.insets = new Insets(0, 0, 5, 5);
+						gbc_warningLblEspece.gridx = 3;
+						gbc_warningLblEspece.gridy = 4;
+						ajouterRace.getContentPane().add(warningLblEspece, gbc_warningLblEspece);
+						
+						JButton annulerAddracebtn = new JButton("Annuler");
+						annulerAddracebtn.setFont(new Font("Gisha", Font.PLAIN, 12));
+						annulerAddracebtn.setBackground(new Color(255, 255, 255));
+						annulerAddracebtn.setForeground(new Color(0, 51, 102));
+						GridBagConstraints gbc_annulerAddracebtn = new GridBagConstraints();
+						gbc_annulerAddracebtn.anchor = GridBagConstraints.WEST;
+						gbc_annulerAddracebtn.insets = new Insets(0, 0, 0, 5);
+						gbc_annulerAddracebtn.gridx = 1;
+						gbc_annulerAddracebtn.gridy = 5;
+						ajouterRace.getContentPane().add(annulerAddracebtn, gbc_annulerAddracebtn);
+
+						JButton btnAjouter = new JButton("Ajouter");
+						btnAjouter.setForeground(new Color(0, 51, 102));
+						btnAjouter.setFont(new Font("Gisha", Font.PLAIN, 12));
+						btnAjouter.setBackground(new Color(255, 255, 255));
+						GridBagConstraints gbc_btnAjouter = new GridBagConstraints();
+						gbc_btnAjouter.anchor = GridBagConstraints.EAST;
+						gbc_btnAjouter.insets = new Insets(0, 0, 0, 5);
+						gbc_btnAjouter.gridx = 3;
+						gbc_btnAjouter.gridy = 5;
+						ajouterRace.getContentPane().add(btnAjouter, gbc_btnAjouter);
+						
+						annulerAddracebtn.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								ajouterRace.setVisible(true);
+							}
+						});
+						
+						btnAjouter.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								if(!textField_1.getText().isEmpty())
+								{
+									ctrl.ajouter(listeEspece.get(selectEspeceCmb.getSelectedIndex()),textField_1.getText());
+									warningLblEspece.setVisible(false);
+									ajouterRace.setVisible(false);
+								}
+								else
+								{
+									warningLblEspece.setVisible(true);
+								}
+							}
+						});
+						
+						ajouterRace.setBounds(100, 100, 409, 266);
+						ajouterRace.setResizable(false);
+						ajouterRace.setLocationRelativeTo(null);
+						ajouterRace.setVisible(true);
+						warningLblEspece.setVisible(false);
+					}
+				});
 
 				JLabel especeAnimalLbl = new JLabel("Esp\u00E8ce : ");
 				especeAnimalLbl.setForeground(new Color(16, 40, 99));
@@ -1501,6 +1649,139 @@ public class MainView {
 						}
 					}
 				});
+				
+				JButton addEspeceBtn = new JButton("");
+				addEspeceBtn.setIcon(new ImageIcon(MainView.class.getResource("/fr/eni/veto/IHM/ressources/plus16.png")));
+				GridBagConstraints gbc_addEspeceBtn = new GridBagConstraints();
+				gbc_addEspeceBtn.insets = new Insets(0, 0, 5, 0);
+				gbc_addEspeceBtn.gridx = 6;
+				gbc_addEspeceBtn.gridy = 5;
+				panelAnimal.add(addEspeceBtn, gbc_addEspeceBtn);
+				
+				addEspeceBtn.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						ajouterEspece = new JFrame();
+						ajouterEspece.setTitle("Ajouter une esp\u00E8ce");
+						ajouterEspece.setIconImage(Toolkit.getDefaultToolkit().getImage(MainView.class.getResource("/fr/eni/veto/IHM/ressources/ico_veto.png")));
+						ajouterEspece.setBackground(Color.WHITE);
+						ajouterEspece.getContentPane().setBackground(Color.WHITE);
+						GridBagLayout gridBagLayout = new GridBagLayout();
+						gridBagLayout.columnWidths = new int[]{20, 0, 29, 0, 26, 0};
+						gridBagLayout.rowHeights = new int[]{46, 0, 0, 15, 21, 0, 0};
+						gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+						gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+						ajouterEspece.getContentPane().setLayout(gridBagLayout);
+						
+						JLabel spaceAddRace = new JLabel("");
+						GridBagConstraints gbc_spaceAddRace = new GridBagConstraints();
+						gbc_spaceAddRace.insets = new Insets(0, 0, 5, 5);
+						gbc_spaceAddRace.gridx = 0;
+						gbc_spaceAddRace.gridy = 0;
+						ajouterEspece.getContentPane().add(spaceAddRace, gbc_spaceAddRace);
+						
+						JLabel ajouterEspeceLbl = new JLabel("Ajouter une esp\u00E8ce :");
+						ajouterEspeceLbl.setFont(new Font("Gisha", Font.BOLD, 16));
+						ajouterEspeceLbl.setForeground(new Color(0, 51, 102));
+						GridBagConstraints gbc_ajouterEspeceLbl = new GridBagConstraints();
+						gbc_ajouterEspeceLbl.anchor = GridBagConstraints.EAST;
+						gbc_ajouterEspeceLbl.insets = new Insets(0, 0, 5, 5);
+						gbc_ajouterEspeceLbl.gridx = 1;
+						gbc_ajouterEspeceLbl.gridy = 1;
+						ajouterEspece.getContentPane().add(ajouterEspeceLbl, gbc_ajouterEspeceLbl);
+						
+						JTextField textField = new JTextField();
+						textField.setFont(new Font("Gisha", Font.PLAIN, 14));
+						textField.setForeground(new Color(0, 51, 102));
+						GridBagConstraints gbc_textField = new GridBagConstraints();
+						gbc_textField.insets = new Insets(0, 0, 5, 5);
+						gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+						gbc_textField.gridx = 3;
+						gbc_textField.gridy = 1;
+						ajouterEspece.getContentPane().add(textField, gbc_textField);
+						textField.setColumns(10);
+						
+						JTextField textField_2 = new JTextField();
+						textField_2.setForeground(new Color(0, 51, 102));
+						textField_2.setFont(new Font("Gisha", Font.PLAIN, 14));
+						textField_2.setColumns(10);
+						GridBagConstraints gbc_textField_2 = new GridBagConstraints();
+						gbc_textField_2.insets = new Insets(0, 0, 5, 5);
+						gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+						gbc_textField_2.gridx = 3;
+						gbc_textField_2.gridy = 2;
+						ajouterEspece.getContentPane().add(textField_2, gbc_textField_2);
+						
+						JLabel spaceAddRace2 = new JLabel("");
+						GridBagConstraints gbc_spaceAddRace2 = new GridBagConstraints();
+						gbc_spaceAddRace2.insets = new Insets(0, 0, 5, 0);
+						gbc_spaceAddRace2.gridx = 4;
+						gbc_spaceAddRace2.gridy = 3;
+						ajouterEspece.getContentPane().add(spaceAddRace2, gbc_spaceAddRace2);
+						
+						JLabel warningLblEspece = new JLabel("Merci de remplir tous les champs");
+						warningLblEspece.setForeground(new Color(153, 51, 0));
+						GridBagConstraints gbc_warningLblEspece = new GridBagConstraints();
+						gbc_warningLblEspece.gridwidth = 4;
+						gbc_warningLblEspece.insets = new Insets(0, 0, 5, 5);
+						gbc_warningLblEspece.gridx = 1;
+						gbc_warningLblEspece.gridy = 4;
+						ajouterEspece.getContentPane().add(warningLblEspece, gbc_warningLblEspece);
+						warningLblEspece.setVisible(false);
+						
+						JButton annulerAddracebtn = new JButton("Annuler");
+						annulerAddracebtn.setFont(new Font("Gisha", Font.PLAIN, 12));
+						annulerAddracebtn.setBackground(new Color(255, 255, 255));
+						annulerAddracebtn.setForeground(new Color(0, 51, 102));
+						GridBagConstraints gbc_annulerAddracebtn = new GridBagConstraints();
+						gbc_annulerAddracebtn.anchor = GridBagConstraints.WEST;
+						gbc_annulerAddracebtn.insets = new Insets(0, 0, 0, 5);
+						gbc_annulerAddracebtn.gridx = 1;
+						gbc_annulerAddracebtn.gridy = 5;
+						ajouterEspece.getContentPane().add(annulerAddracebtn, gbc_annulerAddracebtn);
+						
+						JButton btnAjouter = new JButton("Ajouter");
+						btnAjouter.setForeground(new Color(0, 51, 102));
+						btnAjouter.setFont(new Font("Gisha", Font.PLAIN, 12));
+						btnAjouter.setBackground(new Color(255, 255, 255));
+						GridBagConstraints gbc_btnAjouter = new GridBagConstraints();
+						gbc_btnAjouter.anchor = GridBagConstraints.EAST;
+						gbc_btnAjouter.insets = new Insets(0, 0, 0, 5);
+						gbc_btnAjouter.gridx = 3;
+						gbc_btnAjouter.gridy = 5;
+						ajouterEspece.getContentPane().add(btnAjouter, gbc_btnAjouter);
+						ajouterEspece.setBounds(100, 100, 409, 228);
+						ajouterEspece.setResizable(false);
+						ajouterEspece.setLocationRelativeTo(null);
+						
+						btnAjouter.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								if(textField.getText().isEmpty()||textField_2.getText().isEmpty())
+								{
+									warningLblEspece.setVisible(true);
+								}
+								else
+								{
+									ctrl.ajouter(textField.getText(),textField_2.getText());
+									warningLblEspece.setVisible(false);
+									ajouterEspece.setVisible(false);
+								}
+							}
+						});
+						
+						annulerAddracebtn.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								ajouterEspece.setVisible(false);
+							}
+						});
+						
+						ajouterEspece.setVisible(true);
+					}
+				});
+				
+				
 
 				JLabel label_2 = new JLabel("");
 				GridBagConstraints gbc_label_2 = new GridBagConstraints();
@@ -1916,8 +2197,8 @@ public class MainView {
 				ajouterAnimalBtn.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Animaux newAnimal = new Animaux(nomAnimalTxt.getText(), sexeAnimalCmb.toString(),
-								couleurAnimalTxt.getText(), raceAnimalCmb.toString(), especeAnimalCmb.toString(),
+						Animaux newAnimal = new Animaux(nomAnimalTxt.getText(), (String)sexeAnimalCmb.getSelectedItem(),
+								couleurAnimalTxt.getText(), (String)raceAnimalCmb.getSelectedItem(), (String)especeAnimalCmb.getSelectedItem(),
 								listModelClient.get(indexClient).getCodeClient(), tatouageAnimalTxt.getText(),
 								antecedantAnimalTxt.getText(), false);
 						try {
@@ -1933,8 +2214,8 @@ public class MainView {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						Animaux dltAnimal = new Animaux(Integer.parseInt(numeroAnimalTxt.getText()),
-								nomAnimalTxt.getText(), sexeAnimalCmb.toString(), couleurAnimalTxt.getText(),
-								raceAnimalCmb.toString(), especeAnimalCmb.toString(),
+								nomAnimalTxt.getText(), (String)sexeAnimalCmb.getSelectedItem(),
+								couleurAnimalTxt.getText(), (String)raceAnimalCmb.getSelectedItem(), (String)especeAnimalCmb.getSelectedItem(),
 								listModelClient.get(indexClient).getCodeClient(), tatouageAnimalTxt.getText(),
 								antecedantAnimalTxt.getText(), false);
 						try {
@@ -2444,13 +2725,13 @@ public class MainView {
 		tabbedPane.setBackgroundAt(2, new Color(255, 255, 255));
 
 		// FIN BOUTON AJOUTER CLIENT
-		// }
+		}
 
 		/**
 		 * PERSONNELS PANEL
 		 */
 
-		// if (droitVisibility == "ADM") {
+		if (droitVisibility == "ADM") {
 		JPanel panelPersonnels = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				g.drawImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ressources/bannerv2.png")), 0,
@@ -3167,7 +3448,7 @@ public class MainView {
 			}
 		});
 		idPanel.setOpaque(false);
-		// }
+		}
 
 		// Gestion de l'heure
 

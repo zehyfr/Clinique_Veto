@@ -53,7 +53,7 @@ public class EspecesDAOImpl implements EspecesDAO{
 	public void ajouter(String espece, String race) throws DALException {
 		Connection connec = null;
 		PreparedStatement stmt = null;
-		String sql = "INSERT INTO Races Espece, Race values (?, ?);";
+		String sql = "INSERT INTO Races (Espece, Race) values (?, ?);";
 		try {
 			connec = jdbc.getConnection();
 			stmt = connec.prepareStatement(sql);
