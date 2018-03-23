@@ -413,7 +413,7 @@ public class MainView {
 				validerMotdepasseNew.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						if (!ancienMdrTxt.equals("") || !nouveauMdp.equals("") || !nouveauMdp2.equals("")) {
+						if (!ancienMdrTxt.getText().equals("") && !nouveauMdp.getText().equals("") && !nouveauMdp2.getText().equals("")) {
 							if ((ctrl.validation(String.valueOf(codePersonnel), ancienMdrTxt.getText()) != "0")
 									&& (nouveauMdp.getText().equals(nouveauMdp2.getText()))) {
 								try {
@@ -481,8 +481,12 @@ public class MainView {
 									e1.printStackTrace();
 								}
 							} else {
+								lblAncienMotDe_1.setText("Ancien mot de passe incorrect.");
 								lblAncienMotDe_1.setVisible(true);
 							}
+						} else {
+							lblAncienMotDe_1.setText("Un ou plusieurs champs sont vides.");
+							lblAncienMotDe_1.setVisible(true);
 						}
 					}
 				});
