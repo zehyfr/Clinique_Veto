@@ -1916,8 +1916,8 @@ public class MainView {
 				ajouterAnimalBtn.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Animaux newAnimal = new Animaux(nomAnimalTxt.getText(), sexeAnimalCmb.toString(),
-								couleurAnimalTxt.getText(), raceAnimalCmb.toString(), especeAnimalCmb.toString(),
+						Animaux newAnimal = new Animaux(nomAnimalTxt.getText(), (String)sexeAnimalCmb.getSelectedItem(),
+								couleurAnimalTxt.getText(), (String)raceAnimalCmb.getSelectedItem(), (String)especeAnimalCmb.getSelectedItem(),
 								listModelClient.get(indexClient).getCodeClient(), tatouageAnimalTxt.getText(),
 								antecedantAnimalTxt.getText(), false);
 						try {
@@ -1933,8 +1933,8 @@ public class MainView {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						Animaux dltAnimal = new Animaux(Integer.parseInt(numeroAnimalTxt.getText()),
-								nomAnimalTxt.getText(), sexeAnimalCmb.toString(), couleurAnimalTxt.getText(),
-								raceAnimalCmb.toString(), especeAnimalCmb.toString(),
+								nomAnimalTxt.getText(), (String)sexeAnimalCmb.getSelectedItem(),
+								couleurAnimalTxt.getText(), (String)raceAnimalCmb.getSelectedItem(), (String)especeAnimalCmb.getSelectedItem(),
 								listModelClient.get(indexClient).getCodeClient(), tatouageAnimalTxt.getText(),
 								antecedantAnimalTxt.getText(), false);
 						try {
